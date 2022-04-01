@@ -1,0 +1,7 @@
+{
+  "dataBasePort": 0,
+  "dataBaseIP": "localhost",
+  "dataBaseName": "nombre",
+  "userName": "usuario",
+  "password": "contraseña"
+}
