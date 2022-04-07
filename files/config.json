@@ -1,7 +1,7 @@
 {
-  "dataBasePort": 0,
+  "dataBasePort": 3306,
   "dataBaseIP": "localhost",
-  "dataBaseName": "nombre",
-  "userName": "usuario",
-  "password": "contraseña"
+  "dataBaseName": "espotifay",
+  "userName": "dreamteam",
+  "password": "dreamteam"
 }
