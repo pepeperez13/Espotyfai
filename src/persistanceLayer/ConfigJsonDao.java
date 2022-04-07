@@ -1,6 +1,6 @@
-package PersistanceLayer;
+package persistanceLayer;
 
-import BusinessLayer.Entities.Config;
+import businessLayer.entities.Config;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.nio.file.Files;

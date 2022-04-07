@@ -1,4 +1,4 @@
-package BusinessLayer.Entities;
+package businessLayer.entities;
 
 public class Config {
 
