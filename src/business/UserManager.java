@@ -1,4 +1,4 @@
-package businessLayer;
+package business;
 
 public class UserManager {
 }

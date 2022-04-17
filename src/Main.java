@@ -1,4 +1,4 @@
-import persistanceLayer.ConfigJsonDao;
+import persistance.ConfigJsonDao;
 
 public class Main {
     public static void main(String[] args) {

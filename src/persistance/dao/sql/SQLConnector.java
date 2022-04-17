@@ -1,4 +1,4 @@
-package persistanceLayer.dao.sql;
+package persistance.dao.sql;
 
 import java.sql.*;
 

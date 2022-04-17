@@ -1,4 +1,4 @@
-package businessLayer.entities;
+package business.entities;
 
 public class Song {
     private String title;
