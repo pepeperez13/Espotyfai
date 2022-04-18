@@ -3,10 +3,10 @@ package presentation;
 import javax.swing.*;
 import java.awt.*;
 
-public class ConfigurationMenu {
+public class ConfigurationMenu extends JFrame{
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-    public  ConfigurationMenu () {
+    public ConfigurationMenu () {
         JFrame f = new JFrame("SPOTIFAI");
 
         //Configuración del frame
@@ -20,7 +20,7 @@ public class ConfigurationMenu {
         createMenuPanelFront();
         createContentPanel();
 
-        //pack();
+        pack();
     }
 
     public void createMenuPanelFront () {
@@ -66,7 +66,7 @@ public class ConfigurationMenu {
         menuPanel.add(botonInicio);
         menuPanel.add(subPanel);
 
-        //getContentPane().add(menuPanel);
+        getContentPane().add(menuPanel);
     }
 
     public void createContentPanel () {
@@ -74,6 +74,11 @@ public class ConfigurationMenu {
         content.setBackground(new Color(255, 255, 255));
         content.setBounds(0, 0, screenSize.width, screenSize.height);
 
-        //getContentPane().add(content);
+        getContentPane().add(content);
+    }
+
+    public static void main (String[] args) {
+        ConfigurationMenu conf = new ConfigurationMenu();
+        conf.setVisible(true);
     }
 }
