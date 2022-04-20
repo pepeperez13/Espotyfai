@@ -1,7 +1,6 @@
 package presentation;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class AddMusic extends JFrame {
     ConfigurationMenu plantilla = new ConfigurationMenu();

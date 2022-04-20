@@ -9,14 +9,15 @@ public class SignUpView extends JFrame {
 
     public SignUpView () {
         setLocationRelativeTo(null);
+        setLocation(0,10);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setSize(1500, 900);
+        setResizable(false);
+        //setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         add(setLogo());
-        JPanel infoPanel = introduceInfoPanel();
-        infoPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(infoPanel);
+        add(introduceInfoPanel());
 
         // Añadimos fondo
         JImagePanel j = new JImagePanel("images/background.jpeg");
@@ -30,7 +31,7 @@ public class SignUpView extends JFrame {
         image = image.getScaledInstance(325, 180, Image.SCALE_DEFAULT);
         logoImage = new ImageIcon(image);
         JLabel logoImageLabel = new JLabel(logoImage);
-        logoImageLabel.setBounds(500, 10, 500, 120);
+        logoImageLabel.setBounds(480, 10, 500, 120);
 
         logoImageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         return logoImageLabel;
@@ -38,9 +39,10 @@ public class SignUpView extends JFrame {
 
     private JPanel introduceInfoPanel () {
         JPanel textIntroPanel = new JPanel();
-        textIntroPanel.setBounds(500, 180, 450, 600);
+        textIntroPanel.setBounds(500, 180, 450, 450);
         textIntroPanel.setForeground(Color.blue);
         textIntroPanel.setLayout(new BoxLayout(textIntroPanel, BoxLayout.Y_AXIS));
+        textIntroPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         textIntroPanel.add(setLabelAndTextField("Username", "User"));
         textIntroPanel.add(setLabelAndTextField("E-Mail", "E-Mail"));
@@ -68,17 +70,6 @@ public class SignUpView extends JFrame {
         return textIntroPanel;
     }
 
-    public void paint (Graphics g) {
-        super.paintComponents(g);
-
-        g.setColor(Color.GREEN);
-        g.drawLine(59, 178, 1400, 178);
-        g.drawLine(59, 179, 1400, 179);
-
-        g.drawLine(59, 850, 1400, 850);
-        g.drawLine(59, 851, 1400, 851);
-    }
-
 
     private JPanel setLabelAndTextField (String label, String tField) {
         JPanel panel = new JPanel();
@@ -98,6 +89,33 @@ public class SignUpView extends JFrame {
         panel.add(fieldText);
 
         return panel;
+    }
+
+    public JPanel setRegisterButton () {
+        JPanel panel = new JPanel();
+
+        JLabel labelText = new JLabel("Register");
+        labelText.setPreferredSize(new Dimension(300, 20));
+        labelText.setAlignmentX(Component.CENTER_ALIGNMENT);
+        return panel;
+    }
+
+    public void paint (Graphics g) {
+        super.paintComponents(g);
+
+        g.setColor(Color.GREEN);
+        // Lineas superior (dos juntas)
+        g.drawLine(59, 178, 1425, 178);
+        g.drawLine(59, 179, 1425, 179);
+
+
+        // Lineas inferiores izd
+        g.drawLine(59, 700, 525, 700);
+        g.drawLine(59, 700, 525, 700);
+        // Lineas inferiores dcha
+        g.drawLine(925, 700, 1400, 700);
+        g.drawLine(925, 700, 1400, 700);
+
     }
 
 
