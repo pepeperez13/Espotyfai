@@ -1,4 +1,6 @@
-package presentation;
+package presentation.controller;
+
+import presentation.view.SignUpView;
 
 public class SignUpViewController {
 

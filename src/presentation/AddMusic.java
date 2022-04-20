@@ -8,7 +8,7 @@ public class AddMusic extends JFrame {
     BarReproduccion barraReproduccion = new BarReproduccion();
 
     public AddMusic () {
-        //plantilla.add(barraReproduccion);
+        plantilla.add(barraReproduccion);
     }
 
     public static void main (String[] args) {
