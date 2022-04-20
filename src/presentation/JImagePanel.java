@@ -23,6 +23,7 @@ public class JImagePanel extends JPanel {
         }
     }
 
+
     // IMPORTANT: WE override this to scale the image in layouts that stretch it horizontally while respecting its preferred vertical size
     // THIS WILL NOT WORK IF YOU HAVE OTHER GOALS, DON'T REUSE WITHOUT THINKING
     @Override

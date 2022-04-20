@@ -1,4 +1,6 @@
-package presentation;
+package presentation.view;
+
+import presentation.JImagePanel;
 
 import javax.swing.*;
 import java.awt.*;
