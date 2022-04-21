@@ -1,16 +1,19 @@
 package presentation.controller;
 
-import presentation.view.MainView;
+import presentation.view.MainConfigurationView;
+import presentation.view.ManageAccountView;
+import presentation.view.SideMenuPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainViewController implements ActionListener  {
+public class MainConfigurationViewController implements ActionListener  {
 
-    private MainView view;
+    private MainConfigurationView view;
 
-    public MainViewController(MainView view) {
+    public MainConfigurationViewController(MainConfigurationView view) {
         this.view = view;
+
     }
 
     /**
@@ -21,7 +24,7 @@ public class MainViewController implements ActionListener  {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()){
-            case MainView.MANAGE_ACCOUNT:
+            case MainConfigurationView.MANAGE_ACCOUNT:
                     view.showManageAccountContent();
                 break;
 

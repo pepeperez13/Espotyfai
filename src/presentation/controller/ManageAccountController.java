@@ -1,5 +1,6 @@
 package presentation.controller;
 
+import presentation.view.MainConfigurationView;
 import presentation.view.ManageAccountView;
 
 import java.awt.event.ActionEvent;
@@ -10,11 +11,12 @@ public class ManageAccountController implements ActionListener {
 
     private final ManageAccountView logOutView;
 
-    public ManageAccountController(ManageAccountView logOutView){
-            this.logOutView = logOutView;
-        }
 
-    
+
+    public ManageAccountController(ManageAccountView logOutView) {
+        this.logOutView = logOutView;
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
