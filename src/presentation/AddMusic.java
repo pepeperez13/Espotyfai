@@ -1,9 +1,11 @@
 package presentation;
 
+import presentation.view.MainView;
+
 import javax.swing.*;
 
 public class AddMusic extends JFrame {
-    ConfigurationMenu plantilla = new ConfigurationMenu();
+    MainView plantilla = new MainView();
     BarReproduccion barraReproduccion = new BarReproduccion();
 
     public AddMusic () {
@@ -11,7 +13,7 @@ public class AddMusic extends JFrame {
     }
 
     public static void main (String[] args) {
-        ConfigurationMenu add = new ConfigurationMenu();
+        MainView add = new MainView();
         add.setVisible(true);
     }
 }
