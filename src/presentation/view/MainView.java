@@ -4,6 +4,7 @@ import presentation.controller.MainViewController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class MainView extends JFrame {
 
@@ -15,7 +16,7 @@ public class MainView extends JFrame {
 
     private MainViewController controller;
 
-    public MainView() {
+    public MainView() throws IOException {
 
 
         final JPanel pane = new JPanel(new BorderLayout());
@@ -46,7 +47,7 @@ public class MainView extends JFrame {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         MainView conf = new MainView();
         conf.setVisible(true);
     }

@@ -1,18 +1,19 @@
-package presentation;
+package presentation.view;
+
+import presentation.BarReproduccion;
 
 import javax.swing.*;
-import java.awt.*;
 
-public class AddMusic extends JFrame {
-    ConfigurationMenu plantilla = new ConfigurationMenu();
+public class AddMusicView extends JFrame {
+    /*ConfigurationMenu plantilla = new ConfigurationMenu();
     BarReproduccion barraReproduccion = new BarReproduccion();
 
-    public AddMusic () {
+    public AddMusicView() {
         //plantilla.add(barraReproduccion);
     }
 
     public static void main (String[] args) {
         ConfigurationMenu add = new ConfigurationMenu();
         add.setVisible(true);
-    }
+    }*/
 }
