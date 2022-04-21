@@ -11,11 +11,10 @@ public class ManageAccountView extends JPanel {
     public static final String BACK_BUTTON = "BACK_BUTTON";
     public static final String LOGOUT_BUTTON = "LOGOUT_BUTTON";
     public static final String DELETE_ACCOUNT_BUTTON = "DELETE_ACCOUNT_BUTTON";
-    private MainView configurationMenu;
+    private MainConfigurationView logOutView;
     private ManageAccountController controller;
 
     public ManageAccountView() {
-        controller = new ManageAccountController(this);
         createView(controller);
     }
 

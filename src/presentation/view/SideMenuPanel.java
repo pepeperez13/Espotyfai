@@ -1,10 +1,14 @@
 package presentation.view;
 
 import presentation.JImagePanel;
+import presentation.controller.MainConfigurationViewController;
+import presentation.controller.ManageAccountController;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -14,10 +18,11 @@ import javax.swing.event.ListSelectionListener;
 
 public class SideMenuPanel extends JPanel {
 
+    public static final String MANAGE_ACCOUNT = "MANAGE_ACCOUNT";
 
     /** The constraints for the layout. */
     private GridBagConstraints constraint;
-
+    private MainConfigurationViewController controller;
 
     public SideMenuPanel() {
 
@@ -47,7 +52,7 @@ public class SideMenuPanel extends JPanel {
             //JPanel subPanel = new JPanel();
             JLabel nuestroLogo = new JLabel();
             JLabel botonInicio = new JLabel();
-            JLabel gestionarCuenta = new JLabel();
+            JButton gestionarCuenta = new JButton();
             JLabel gestionarMusica = new JLabel();
             JLabel misEstadisticas = new JLabel();
             JSeparator lineSeparador1 = new JSeparator();
@@ -74,6 +79,10 @@ public class SideMenuPanel extends JPanel {
             //lineSeparador2.setSize(200, 1);
             lineSeparador3.setOrientation(SwingConstants.HORIZONTAL);
             //lineSeparador3.setSize(200, 1);
+
+            gestionarCuenta.setActionCommand(MANAGE_ACCOUNT);
+            gestionarCuenta.addActionListener(controller);
+
 
             menuPanel.add(nuestroLogo);
             menuPanel.add(botonInicio);
