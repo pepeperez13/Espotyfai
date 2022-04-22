@@ -1,28 +1,24 @@
 package presentation.view;
 
 import presentation.JImagePanel;
-import presentation.controller.LogOutController;
+import presentation.controller.ManageAccountController;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class LogOutView extends JFrame {
+public class ManageAccountView extends JPanel {
 
     public static final String BACK_BUTTON = "BACK_BUTTON";
     public static final String LOGOUT_BUTTON = "LOGOUT_BUTTON";
     public static final String DELETE_ACCOUNT_BUTTON = "DELETE_ACCOUNT_BUTTON";
+    private MainConfigurationView logOutView;
+    private ManageAccountController controller;
 
-    public LogOutView(LogOutController logOutController) {
-        createView(logOutController);
+    public ManageAccountView() {
+        createView(controller);
     }
 
-    public LogOutView() {
-
-    }
-
-    public void createView(LogOutController logOutController){
-        setSize(1400,900);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public void createView(ManageAccountController logOutController){
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         JButton logoutButton=new JButton();
@@ -59,13 +55,11 @@ public class LogOutView extends JFrame {
         p.add(Box.createRigidArea(new Dimension(0, 10)));
         p.add(backButton);
         p.add(Box.createVerticalGlue());
-
-
+        add(jImagePanel);
         add(p);
 
 
 
-        setLocationRelativeTo(null);
         setVisible(true);
     }
     private JLabel setLogo () {
