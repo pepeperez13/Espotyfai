@@ -2,7 +2,7 @@ package presentation.controller;
 
 import business.UserManager;
 import persistance.dao.sql.SQLConnector;
-import presentation.view.signUp.SignUpView;
+import presentation.view.SignUpView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

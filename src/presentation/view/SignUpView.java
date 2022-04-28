@@ -1,4 +1,4 @@
-package presentation.view.signUp;
+package presentation.view;
 
 import presentation.JImagePanel;
 import presentation.controller.SignUpViewController;
@@ -24,7 +24,7 @@ public class SignUpView extends JFrame {
         setLocationRelativeTo(null);
         setLocation(0,10);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+
         this.controller = controller;
         setSize(1500, 900);
         setResizable(false);
@@ -34,12 +34,12 @@ public class SignUpView extends JFrame {
         add(setLogo(), BorderLayout.NORTH);
         add(introduceInfoPanel(), BorderLayout.CENTER);
         add(setEndButtons(), BorderLayout.SOUTH);
-        //add(setAccountAlready(), BorderLayout.SOUTH);
+
 
         // Añadimos fondo
         JImagePanel j = new JImagePanel("images/background.jpeg");
         j.getPreferredSize();
-        //add(j, BorderLayout.CENTER);
+
     }
 
     private JLabel setLogo () {
@@ -48,7 +48,6 @@ public class SignUpView extends JFrame {
         image = image.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
         logoImage = new ImageIcon(image);
         JLabel logoImageLabel = new JLabel(logoImage);
-        //logoImageLabel.setBounds(480, 10, 500, 120);
 
         logoImageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         return logoImageLabel;
@@ -56,7 +55,6 @@ public class SignUpView extends JFrame {
 
     private JPanel introduceInfoPanel () {
         JPanel textIntroPanel = new JPanel();
-        //textIntroPanel.setBounds(500, 180, 450, 450);
         textIntroPanel.setLayout(new BoxLayout(textIntroPanel, BoxLayout.Y_AXIS));
         textIntroPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         textIntroPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
@@ -94,8 +92,6 @@ public class SignUpView extends JFrame {
 
     private JPanel setLabelAndField(String label, String tField) {
         JPanel panel = new JPanel();
-        //panel.setSize(new Dimension(450, 100));
-        //panel.setLayout(new GridLayout(2, 1));
 
         JLabel labelText = new JLabel(label);
         labelText.setPreferredSize(new Dimension(300, 20));
@@ -137,7 +133,6 @@ public class SignUpView extends JFrame {
 
     public JPanel setEndButtons () {
         JPanel panel = new JPanel();
-        //panel.setBounds(550, 650, 330, 70);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         JButton registerButton = new JButton("         Register         ");
@@ -152,7 +147,6 @@ public class SignUpView extends JFrame {
         panel.add(registerButton);
 
         JPanel panel2 = new JPanel();
-        //panel.setBounds(530, 750, 390, 50);
         panel2.setLayout(new GridLayout(1, 2));
         panel2.setAlignmentY(Component.CENTER_ALIGNMENT);
 
