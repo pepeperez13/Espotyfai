@@ -1,15 +1,43 @@
 package business;
 
-public class UserManager {
+import business.entities.User;
+import persistance.dao.sql.SQLConnector;
 
-    //TODO
-    public boolean checkUsernameExistance (String name) {
-        return false;
+import java.util.LinkedList;
+
+public class UserManager {
+    private SQLConnector sql;
+
+    public UserManager (SQLConnector sql) {
+        this.sql = sql;
     }
 
-    //TODO
+    public void insertNewUser (String name, String email, String password) {
+        sql.InsertDataUser(name, email, password);
+    }
+
+    public boolean checkUsernameExistance (String name) {
+        boolean exists = false;
+        LinkedList<User> users = sql.SelectDataUser();
+        for (User user: users) {
+            if (user.getName().equals(name)) {
+                exists = true;
+                break;
+            }
+        }
+        return exists;
+    }
+
     public boolean checkEmailExistance (String email) {
-        return false;
+        boolean exists = false;
+        LinkedList<User> users = sql.SelectDataUser();
+        for (User user: users) {
+            if (user.getEmail().equals(email)) {
+                exists = true;
+                break;
+            }
+        }
+        return exists;
     }
 
     public boolean checkEmailFormat (String email) {

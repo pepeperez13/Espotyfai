@@ -1,16 +1,19 @@
 package persistance.dao.sql;
 
+import business.entities.User;
+
 import java.sql.*;
+import java.util.LinkedList;
 
 public class SQLConnector {
 
 
-    private static String dbURL = "jdbc:mysql://localhost:3306/espotifai";
+    private static String dbURL = "jdbc:mysql://localhost:3306/espotifay";
     private static String username = "root";
     private static String password = "";
     private static Connection conn;
 
-    public static void InsertDataUser() {
+    public void InsertDataUser(String user, String email, String pass) {
 
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
@@ -18,9 +21,9 @@ public class SQLConnector {
             String sql = "INSERT INTO user (USER_NAME,USER_EMAIL,USER_PASSWORD) VALUES (?, ?, ?)";
 
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, "bill");
-            statement.setString(2, "bill@gmail.com");
-            statement.setString(3, "Bill Gates");
+            statement.setString(1, user);
+            statement.setString(2, email);
+            statement.setString(3, pass);
 
 
             int rowsInserted = statement.executeUpdate();
@@ -273,7 +276,9 @@ public class SQLConnector {
         }
 
     }
-    public static void SelectDataUser(){
+    public LinkedList<User> SelectDataUser(){
+        String user, emails, pass;
+        LinkedList<User> users = new LinkedList<>();
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
@@ -282,22 +287,24 @@ public class SQLConnector {
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next())
             {
-                String user = rs.getString("USER_NAME");
-                String emails = rs.getString("USER_EMAIL");
-                String pass = rs.getString("USER_PASSWORD");
 
+                user = rs.getString("USER_NAME");
+                emails = rs.getString("USER_EMAIL");
+                pass = rs.getString("USER_PASSWORD");
+                User newUser = new User(user, emails, pass);
+                users.add(newUser);
 
                 // print the results
                 System.out.format("%s, %s, %s\n", user,emails,pass);
             }
             statement.close();
+            return users;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return null;
         }
-
-
-
     }
+
     public static void SelectDataSong(){
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 

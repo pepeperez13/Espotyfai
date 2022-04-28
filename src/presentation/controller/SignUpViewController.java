@@ -1,6 +1,7 @@
 package presentation.controller;
 
 import business.UserManager;
+import persistance.dao.sql.SQLConnector;
 import presentation.view.signUp.SignUpView;
 
 import java.awt.event.ActionEvent;
@@ -19,13 +20,13 @@ public class SignUpViewController implements ActionListener{
     // Luego esto irá en el main (es de prueba). La cosa es vincular el controller con la vista para que funcionen
     // los listeners. Mirar solución AC6
     public static void main (String[] args) {
+        SQLConnector sql = new SQLConnector();
         SignUpViewController controller = new SignUpViewController();
         SignUpView signUpView = new SignUpView(controller);
-        manager = new UserManager();
+        manager = new UserManager(sql);
         view = signUpView;
         signUpView.setVisible(true);
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -33,7 +34,7 @@ public class SignUpViewController implements ActionListener{
             System.out.println("HOLAAAAAAA");
 
             if (checkDataCorrect()) {
-                // navegar a la página principal
+                manager.insertNewUser(view.getUserName(), view.getEmail(), view.getPassword());
                 System.out.println("Todo ok");
             } else {
                 view.showErrorMessage(USER_EXISTS_ERROR, EMAIL_EXISTS_ERROR, EMAIL_FORMAT_ERROR, PASSWORD_FORMAT_ERROR, PASSWORD_CONFIRMATION_ERROR);
@@ -46,27 +47,17 @@ public class SignUpViewController implements ActionListener{
     // Clase que comprobará que todos los parámetros de login sean correctos
     public boolean checkDataCorrect() {
 
-        if (manager.checkUsernameExistance(view.getUserName())) {
-            USER_EXISTS_ERROR = true;
-        }
+        USER_EXISTS_ERROR = manager.checkUsernameExistance(view.getUserName());
 
-        if (manager.checkEmailExistance(view.getEmail())) {
-            EMAIL_EXISTS_ERROR = true;
-        }
+        EMAIL_EXISTS_ERROR = manager.checkEmailExistance(view.getEmail());
 
-        if (manager.checkEmailFormat(view.getEmail())) {
-            EMAIL_FORMAT_ERROR = true;
-        }
+        EMAIL_FORMAT_ERROR = manager.checkEmailFormat(view.getEmail());
 
-        if (manager.checkPasswordFormat(view.getPassword())) {
-            PASSWORD_FORMAT_ERROR = true;
-        }
+        PASSWORD_FORMAT_ERROR = manager.checkPasswordFormat(view.getPassword());
 
-        if (!view.getPassword().equals(view.getConfirmation())) {
-            PASSWORD_CONFIRMATION_ERROR = true;
-        }
+        PASSWORD_CONFIRMATION_ERROR = !view.getPassword().equals(view.getConfirmation());
 
-        return false;
+        return !USER_EXISTS_ERROR && !EMAIL_EXISTS_ERROR && !EMAIL_FORMAT_ERROR && !PASSWORD_FORMAT_ERROR && !PASSWORD_CONFIRMATION_ERROR;
     }
 
 }
