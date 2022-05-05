@@ -3,15 +3,16 @@ package presentation.view;
 import presentation.JImagePanel;
 import presentation.controller.ManageAccountController;
 
+
 import javax.swing.*;
 import java.awt.*;
 
 public class ManageAccountView extends JPanel {
 
-    public static final String BACK_BUTTON = "BACK_BUTTON";
+
     public static final String LOGOUT_BUTTON = "LOGOUT_BUTTON";
     public static final String DELETE_ACCOUNT_BUTTON = "DELETE_ACCOUNT_BUTTON";
-    //private MainConfigurationView logOutView;
+
     private ManageAccountController controller;
 
     public ManageAccountView() {
@@ -19,59 +20,80 @@ public class ManageAccountView extends JPanel {
     }
 
     public void createView(ManageAccountController logOutController){
-        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        ImageIcon logoImage = new ImageIcon("images/fondoBlanco.jpg");
+        Image image = logoImage.getImage();
+        image = image.getScaledInstance(800, 300, Image.SCALE_DEFAULT);
+        logoImage = new ImageIcon(image);
+        JLabel logoImageLabel = new JLabel(logoImage);
+        logoImageLabel.setBackground(Color.white);
+        logoImageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton logoutButton=new JButton();
         JButton deleteButton=new JButton();
-        JButton backButton=new JButton();
-        JImagePanel jImagePanel=new JImagePanel("images/background.jpeg");
 
-        logoutButton.setText("LogOut");
+        logoutButton.setText("Logout");
         deleteButton.setText("Delete account");
-        backButton.setText("Back");
+        logoutButton.setFont(new Font("Dialog", Font.BOLD,20));
+        deleteButton.setFont(new Font("Dialog", Font.BOLD,20));
+
+        logoutButton.setForeground(Color.black);
+        logoutButton.setBackground(Color.CYAN);
+
+        deleteButton.setForeground(Color.black);
+        deleteButton.setBackground(Color.CYAN);
+
+        logoutButton.setBorderPainted(false);
+        deleteButton.setBorderPainted(false);
 
 
-        logoutButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        deleteButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        backButton.setActionCommand(BACK_BUTTON);
+
+
         logoutButton.setActionCommand(LOGOUT_BUTTON);
         deleteButton.setActionCommand(DELETE_ACCOUNT_BUTTON);
 
-        backButton.addActionListener(logOutController);
+
         logoutButton.addActionListener(logOutController);
         deleteButton.addActionListener(logOutController);
 
+
+
+        JPanel panelbox= new JPanel();
         JPanel p = new JPanel();
-        p.setLayout(new BoxLayout(p,BoxLayout.Y_AXIS));
+        GridLayout gridLayout= new GridLayout(2,2);
+        p.setLayout(gridLayout);
+        panelbox.setLayout(new BoxLayout(panelbox,BoxLayout.Y_AXIS));
+//        JPanel blanco= new JPanel();
+//        blanco.setBackground(Color.black);
+//        blanco.setMinimumSize(new Dimension(500,500));
+//        blanco.setSize(5000,5000);
 
-        p.add(Box.createVerticalGlue());
-        p.add(setLogo());
-        p.add(Box.createRigidArea(new Dimension(0, 10)));
+        gridLayout.setVgap(30);
+        gridLayout.setHgap(30);
+        p.setBackground(new Color(255,255,255));
+
+        JLabel askLogout = new JLabel();
+        JLabel askDeleteAccount = new JLabel();
+
+        askLogout.setFont(new Font("Dialog",Font.BOLD,20));
+        askDeleteAccount.setFont(new Font("Dialog", Font.BOLD,20));
+
+        askLogout.setText("Do you want to logout?");
+        askDeleteAccount.setText("Do you want to delete your account?");
+        p.add(askLogout);
         p.add(logoutButton);
-        p.add(Box.createRigidArea(new Dimension(0, 10)));
+        p.add(askDeleteAccount);
         p.add(deleteButton);
-        p.add(Box.createRigidArea(new Dimension(0, 10)));
-        p.add(backButton);
-        p.add(Box.createVerticalGlue());
-        add(jImagePanel);
-        add(p);
+        this.setBackground(new Color(255,255,255));
+        p.setAlignmentX(JPanel.CENTER_ALIGNMENT);
 
-
+        panelbox.add(logoImageLabel);
+        panelbox.add(p);
+        add(panelbox);
 
         setVisible(true);
-    }
-    private JLabel setLogo () {
-        ImageIcon logoImage = new ImageIcon("images/spotiLogo.png");
-        Image image = logoImage.getImage();
-        image = image.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-        logoImage = new ImageIcon(image);
-        JLabel logoImageLabel = new JLabel(logoImage);
-        logoImageLabel.setBounds(500, 10, 500, 120);
 
-        logoImageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        return logoImageLabel;
-    }
 
+    }
 }
