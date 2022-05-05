@@ -1,4 +1,5 @@
 import persistance.ConfigJsonDao;
+import presentation.view.MainView;
 
 
 public class Main {
@@ -6,6 +7,8 @@ public class Main {
         ConfigJsonDao configJsonDao= new ConfigJsonDao();
         configJsonDao.readConfig();
 
+        MainView menuPrincipal = new MainView();
+        menuPrincipal.setVisible (true);
     }
 
 

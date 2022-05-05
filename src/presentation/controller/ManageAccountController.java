@@ -1,6 +1,5 @@
 package presentation.controller;
 
-import presentation.view.MainConfigurationView;
 import presentation.view.ManageAccountView;
 
 import java.awt.event.ActionEvent;
