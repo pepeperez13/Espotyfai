@@ -2,6 +2,7 @@ package presentation.controller;
 
 import business.UserManager;
 import persistance.dao.sql.SQLConnector;
+
 import presentation.view.SignUpView;
 
 import java.awt.event.ActionEvent;

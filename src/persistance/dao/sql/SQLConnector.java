@@ -1,5 +1,7 @@
+
 package persistance.dao.sql;
 
+import business.entities.Playlist;
 import business.entities.User;
 
 import java.sql.*;
@@ -200,7 +202,7 @@ public class SQLConnector {
 
     }
 
-    public static void DeleteDataArtist(){
+    public  void DeleteDataArtist(){
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
@@ -219,7 +221,7 @@ public class SQLConnector {
         }
 
     }
-    public static void DeleteDataPlaylist(){
+    public void DeleteDataPlaylist(Playlist playlist){
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
@@ -257,14 +259,14 @@ public class SQLConnector {
         }
 
     }
-    public static void DeleteDataUser(){
+    public  void DeleteDataUser(User userToDelete){
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
             String sql = "DELETE FROM user WHERE USER_NAME=?";
 
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, "Elpepe");
+            statement.setString(1, userToDelete.getEmail());
 
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
@@ -276,6 +278,11 @@ public class SQLConnector {
         }
 
     }
+
+    public void LogoutUser(User userToDelete){
+
+    }
+
     public LinkedList<User> SelectDataUser(){
         String user, emails, pass;
         LinkedList<User> users = new LinkedList<>();
@@ -334,7 +341,9 @@ public class SQLConnector {
 
     }
 
-    public static void SelectDataPlaylist(){
+    public LinkedList<Playlist> SelectDataPlaylist(){
+        LinkedList<Playlist> playlists = new LinkedList<>();
+
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
@@ -345,19 +354,21 @@ public class SQLConnector {
             {
                 String pname = rs.getString("PLAYLIST_NAME");
                 String powner = rs.getString("PLAYLIST_OWNER");
-
+                Playlist playlist= new Playlist(pname,powner);
+                playlists.add(playlist);
 
 
                 // print the results
                 System.out.format("%s, %s\n", pname,powner);
             }
             statement.close();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
 
-
+        return playlists;
     }
 
     public static void SelectDataArtist(){
