@@ -81,7 +81,7 @@ public class SQLConnector {
             ex.printStackTrace();
         }
     }
-    public static void InsertDataSong() {
+    public void InsertDataSong(String title, String Genre, String album, String artist, String path) {
 
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
@@ -89,17 +89,17 @@ public class SQLConnector {
             String sql = "INSERT INTO song (SONG_TITLE,SONG_GENRE,SONG_ALBUM,SONG_ARTIST,SONG_PATH,SONG_OWNER) VALUES (?, ?, ?,?,?,?)";
 
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, "Euphoria");
-            statement.setString(2, "Techno");
-            statement.setString(3, "Euphoria Attract");
-            statement.setString(4, "David el jeta");
-            statement.setString(5, "c/users/borja/desktop/music");
+            statement.setString(1, title);
+            statement.setString(2, Genre);
+            statement.setString(3, album);
+            statement.setString(4, artist);
+            statement.setString(5, path);
             statement.setString(6, "Billy");
 
 
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("A new user was inserted successfully!");
+                System.out.println("A new song was inserted successfully!");
             }
 
         } catch (SQLException ex) {

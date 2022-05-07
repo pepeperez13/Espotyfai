@@ -1,5 +1,8 @@
 package presentation.view;
 
+import business.SongManager;
+import persistance.dao.sql.SQLConnector;
+import presentation.controller.AddMusicController;
 import presentation.controller.ConfMusicController;
 
 import javax.swing.*;
@@ -20,14 +23,14 @@ public class SideBarView extends JPanel{
     private ConfMusicPanelView confMusicPanelView = new ConfMusicPanelView();
     private ConfMusicController confMusicController;
     private StaticsPanelView staticsPanel = new StaticsPanelView();
-    private AddMusicPanelView addMusicPanel = new AddMusicPanelView();
+    private AddMusicPanelView addMusicPanel;
     private ShowMusicPanelView showMusicPanel = new ShowMusicPanelView();
     private DeleteMusicPanelView deleteMusicPanel = new DeleteMusicPanelView();
     private JPanel cardPanel = new JPanel();
     private CardLayout c = new CardLayout();
     private final GridBagConstraints constraint = new GridBagConstraints();
 
-    public SideBarView () {
+    public SideBarView (SQLConnector sqlConnector) {
         Dimension dimension = getPreferredSize();
         dimension.width = 200;
         setPreferredSize(dimension);
@@ -36,6 +39,8 @@ public class SideBarView extends JPanel{
         setBackground(new Color(191, 105, 240));
 
         constraint.fill = GridBagConstraints.NONE;
+
+        addMusicPanel = new AddMusicPanelView(sqlConnector);
 
         configureMenuFrontal();
     }
