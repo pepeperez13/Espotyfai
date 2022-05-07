@@ -9,8 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SignUpViewController implements ActionListener{
-    private static SignUpView view;
-    private static UserManager manager;
+    private SignUpView view;
+    private UserManager manager;
 
     private static boolean USER_EXISTS_ERROR;
     private static boolean EMAIL_EXISTS_ERROR;
@@ -20,13 +20,17 @@ public class SignUpViewController implements ActionListener{
 
     // Luego esto irá en el main (es de prueba). La cosa es vincular el controller con la vista para que funcionen
     // los listeners. Mirar solución AC6
-    public static void main (String[] args) {
+    /*public static void main (String[] args) {
         SQLConnector sql = new SQLConnector();
         SignUpViewController controller = new SignUpViewController();
         SignUpView signUpView = new SignUpView(controller);
         manager = new UserManager(sql);
         view = signUpView;
         signUpView.setVisible(true);
+    }*/
+    public SignUpViewController (SignUpView signUpView, UserManager userManager) {
+        this.view = signUpView;
+        this.manager = userManager;
     }
 
     @Override
