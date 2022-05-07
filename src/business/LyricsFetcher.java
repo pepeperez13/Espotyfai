@@ -1,5 +1,8 @@
 package business;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
@@ -9,9 +12,9 @@ public class LyricsFetcher {
 
     public static void main (String[] args) {
         String lyrics = getSongLyrics("Coldplay", "Adventure of a Lifetime");
-        System.out.println(lyrics);
+        //System.out.println(lyrics);
         lyrics = getSongLyrics("Black Eyed Peas", "The Time");
-        System.out.println(lyrics);
+        //System.out.println(lyrics);
 
     }
 
@@ -41,10 +44,15 @@ public class LyricsFetcher {
                     info.append(scanner.nextLine());
                 }
 
-                String stringInfo = info.toString();
-                String[] frases = stringInfo.split(":");
+                JsonObject jsonObject = (JsonObject) JsonParser.parseString(info.toString());
+                String lyrics = String.valueOf(jsonObject.get("lyrics"));
 
-                return frases[1].replace("\\n",  System.lineSeparator());
+                // Hacemos los cambios para rreglar el formato del texto
+                lyrics = lyrics.replace("\\n\\n", System.lineSeparator());
+                lyrics = lyrics.replace("\\n", System.lineSeparator());
+                lyrics = lyrics.replace("\\r", "");
+                System.out.println(lyrics);
+                return lyrics;
             }
 
         } catch (Exception e){
@@ -52,8 +60,5 @@ public class LyricsFetcher {
         }
         return  "Lyrics for the song could not be found.";
     }
-
-
-
 
 }
