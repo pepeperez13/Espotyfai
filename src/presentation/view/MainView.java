@@ -12,7 +12,7 @@ public class MainView extends JFrame {
     public static final String CONF = "CONF";
 
     private final SQLConnector sqlConnector = new SQLConnector();
-    private final CardLayout cardLayout = new CardLayout();
+    //private final CardLayout cardLayout = new CardLayout();
 
     public MainView() {
         setTitle("SPOTIFAI");
@@ -30,16 +30,17 @@ public class MainView extends JFrame {
 
     private JPanel setView () {
         JPanel content = new JPanel();
+        content.setLayout(new BorderLayout());
 
-        SideBarView sideBarView = new SideBarView(sqlConnector);
+        //SideBarView sideBarView = new SideBarView(sqlConnector);
         SignUpView signUpView = new SignUpView(sqlConnector);
-        LoginView loginView = new LoginView(sqlConnector);
+        //LoginView loginView = new LoginView(sqlConnector);
 
-        content.setLayout(cardLayout);
+        //content.setLayout(cardLayout);
 
-        content.add(signUpView, 1);
-        content.add(loginView, 2);
-        content.add(sideBarView, 3);
+        content.add(signUpView, BorderLayout.CENTER);
+        //content.add(loginView, 2);
+        //content.add(sideBarView, 3);
 
         //Falta comunicacion entre los controllers para que informen a la vista Main lo que tiene que mostrar
 

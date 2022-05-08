@@ -29,6 +29,11 @@ public class SignUpViewController implements ActionListener{
         signUpView.setVisible(true);
     }*/
 
+    public SignUpViewController (SignUpView signUpView, UserManager userManager) {
+        this.view = signUpView;
+        this.manager = userManager;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(SignUpView.REGISTER_BUTTON)) {
