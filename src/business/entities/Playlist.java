@@ -24,4 +24,11 @@ public class Playlist {
     public void setOwner(String owner) {
         this.owner = owner;
     }
+
+    @Override
+    public String toString() {
+        return "Playlist{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

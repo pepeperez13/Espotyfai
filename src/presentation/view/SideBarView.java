@@ -15,27 +15,31 @@ public class SideBarView extends JPanel{
     public static final String GO_CONFIG_MUSIC = "GO_CONFIG_MUSIC";
     public static final String GO_CONFIG_USER = "GO_CONFIG_USER";
     public static final String GO_STATICS = "GO_STATICS";
+    public static final String GO_INIT = "GO_INIT";
+    public static final String GO_CONFIG_PLAYLIST = "CO_CONFIG_PLAYLIST";
     public int numView;
-    private SideBarController sideBarController;
     private JButton inicio;
+    private JButton jbInit;
+    private JButton jbconfigPlaylist;
     private JButton jbconfMusic;
     private JButton jbconfUsuario;
     private JButton jbconfEstadisticas;
+
     private ManageAccountView manageAccountView = new ManageAccountView();
     private ConfMusicPanelView confMusicPanelView = new ConfMusicPanelView();
     private ConfMusicController confMusicController;
     private StaticsPanelView staticsPanel = new StaticsPanelView();
-    private AddMusicPanelView addMusicPanel;
+    private AddMusicPanelView addMusicPanel = new AddMusicPanelView();
     private ShowMusicPanelView showMusicPanel = new ShowMusicPanelView();
     private DeleteMusicPanelView deleteMusicPanel = new DeleteMusicPanelView();
+    private InitView initView = new InitView();
+    private ConfigPlaylistView cfgPlaylistView = new ConfigPlaylistView();
+
     private JPanel cardPanel = new JPanel();
-    private JPanel menuFrontal = new JPanel();
     private CardLayout c = new CardLayout();
     private final GridBagConstraints constraint = new GridBagConstraints();
 
-    public SideBarView (SQLConnector sqlConnector) {
-        setLayout(new BorderLayout());
-
+    public SideBarView () {
         Dimension dimension = getPreferredSize();
         dimension.width = 200;
         setPreferredSize(dimension);
@@ -45,16 +49,10 @@ public class SideBarView extends JPanel{
 
         constraint.fill = GridBagConstraints.NONE;
 
-        sideBarController = new SideBarController(this);
-        addMusicPanel = new AddMusicPanelView(sqlConnector);
-
-        menuFrontal = configureMenuFrontal();
-        cardPanel = configureCardPanel();
-        add(menuFrontal, BorderLayout.WEST);
-        add(cardPanel, BorderLayout.CENTER);
+        configureMenuFrontal();
     }
 
-    private JPanel configureMenuFrontal () {
+    private void configureMenuFrontal () {
         ImageIcon logoSimbol = new ImageIcon("Images/logo.png");
         Image image1 = logoSimbol.getImage();
         image1 = image1.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
@@ -73,6 +71,15 @@ public class SideBarView extends JPanel{
         inicio.setActionCommand(INICIO_COMMAND);
         //inicio.addActionListener(this);
 
+        jbInit = new JButton();
+        jbInit.setText("INIT");
+        jbInit.setFont(new Font("Arial", Font.BOLD, 18));
+        jbInit.setForeground(new Color(255, 255, 255));
+        jbInit.setBackground(new Color(191, 105, 240));
+        jbInit.setBorderPainted(false);
+        jbInit.setActionCommand(GO_INIT);
+        //jbconfMusic.addActionListener(this);
+
         jbconfMusic = new JButton();
         jbconfMusic.setText("Gestionar música");
         jbconfMusic.setFont(new Font("Arial", Font.BOLD, 18));
@@ -81,6 +88,14 @@ public class SideBarView extends JPanel{
         jbconfMusic.setBorderPainted(false);
         jbconfMusic.setActionCommand(GO_CONFIG_MUSIC);
         //jbconfMusic.addActionListener(this);
+
+        jbconfigPlaylist = new JButton();
+        jbconfigPlaylist.setText("Gestionar playlist");
+        jbconfigPlaylist.setFont(new Font("Arial", Font.BOLD, 18));
+        jbconfigPlaylist.setForeground(new Color(255, 255, 255));
+        jbconfigPlaylist.setBackground(new Color(191, 105, 240));
+        jbconfigPlaylist.setBorderPainted(false);
+        jbconfigPlaylist.setActionCommand(GO_CONFIG_PLAYLIST);
 
         jbconfUsuario = new JButton();
         jbconfUsuario.setText("Gestionar cuenta");
@@ -100,66 +115,74 @@ public class SideBarView extends JPanel{
         jbconfEstadisticas.setActionCommand(GO_STATICS);
         //jbconfEstadisticas.addActionListener(this);
 
+        JSeparator separator0 = new JSeparator();
+        separator0.setOrientation(SwingConstants.HORIZONTAL);
         JSeparator separator1 = new JSeparator();
         separator1.setOrientation(SwingConstants.HORIZONTAL);
         JSeparator separator2 = new JSeparator();
         separator2.setOrientation(SwingConstants.HORIZONTAL);
         JSeparator separator3 = new JSeparator();
         separator3.setOrientation(SwingConstants.HORIZONTAL);
+        JSeparator separator4 = new JSeparator();
+        separator4.setOrientation(SwingConstants.HORIZONTAL);
 
         JPanel groupBotones = new JPanel();
         groupBotones.setBackground(new Color(191, 105,240));
         groupBotones.setLayout(new BoxLayout(groupBotones, BoxLayout.Y_AXIS));
 
-        registerController(sideBarController);
-
+        groupBotones.add(jbInit);
+        groupBotones.add(separator0);
         groupBotones.add(jbconfMusic);
         groupBotones.add(separator1);
-        groupBotones.add(jbconfUsuario);
+        groupBotones.add(jbconfigPlaylist);
         groupBotones.add(separator2);
-        groupBotones.add(jbconfEstadisticas);
+        groupBotones.add(jbconfUsuario);
         groupBotones.add(separator3);
+        groupBotones.add(jbconfEstadisticas);
+        groupBotones.add(separator4);
 
         //Colocamos el Icono de la app
         constraint.gridx = 0;
         constraint.gridy = 0;
 
-        menuFrontal.add(logoApp, constraint);
+        add(logoApp, constraint);
         constraint.gridx = 0;
         constraint.gridy = 1;
-        menuFrontal.add(inicio, constraint);
+        add(inicio, constraint);
         //Colocamos los botones
         constraint.gridx = 0;
         constraint.gridy = 2;
-        menuFrontal.add(groupBotones, constraint);
-
-        return menuFrontal;
+        add(groupBotones, constraint);
     }
 
-    private void registerController(ActionListener listener) {
+    public void registerController(ActionListener listener) {
+        jbInit.addActionListener(listener);
         jbconfUsuario.addActionListener(listener);
         jbconfMusic.addActionListener(listener);
+        jbconfigPlaylist.addActionListener(listener);
         jbconfEstadisticas.addActionListener(listener);
     }
     public void changueView (int num) {
         numView = num;
-        configureCardPanel();
+        createPanel();
         c.show(cardPanel, String.valueOf(numView));
 
     }
 
-    private JPanel configureCardPanel () {
+    public JPanel createPanel () {
         cardPanel.setLayout(c);
 
         confMusicController = new ConfMusicController(confMusicPanelView, this);
         confMusicPanelView.registerController(confMusicController);
 
-        cardPanel.add(confMusicPanelView, "1");
-        cardPanel.add(manageAccountView, "2");
-        cardPanel.add(staticsPanel, "3");
-        cardPanel.add(addMusicPanel, "4");
-        cardPanel.add(showMusicPanel, "5");
-        cardPanel.add(deleteMusicPanel, "6");
+        cardPanel.add(initView, "1");
+        cardPanel.add(confMusicPanelView, "2");
+        cardPanel.add(manageAccountView, "3");
+        cardPanel.add(staticsPanel, "4");
+        cardPanel.add(addMusicPanel, "5");
+        cardPanel.add(cfgPlaylistView, "6");
+        cardPanel.add(showMusicPanel, "7");
+        cardPanel.add(deleteMusicPanel, "8");
 
         return cardPanel;
     }

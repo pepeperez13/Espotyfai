@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
 
-public class SignUpView extends JFrame {
+public class SignUpView extends JPanel {
 
     private JTextField nameField;
     private JTextField emailField;
@@ -25,16 +25,13 @@ public class SignUpView extends JFrame {
     private SignUpViewController controller;
 
     public SignUpView (SQLConnector sqlConnector) {
-        setLocationRelativeTo(null);
         setLocation(0,10);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //this.controller = controller;
         manager = new UserManager(sqlConnector);
         controller = new SignUpViewController(this, manager);
 
         setSize(1500, 900);
-        setResizable(false);
         setVisible(true);
         setLayout(new BorderLayout(0, 50));
 

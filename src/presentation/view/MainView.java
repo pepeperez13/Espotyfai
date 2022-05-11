@@ -1,25 +1,22 @@
 package presentation.view;
 
-import persistance.dao.sql.SQLConnector;
+import presentation.controller.SideBarController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MainView extends JFrame {
-
-    public static final String SIGN_UP = "SIGN_UP";
-    public static final String REGISTER = "REGISTER";
-    public static final String CONF = "CONF";
-
-    private final SQLConnector sqlConnector = new SQLConnector();
-    //private final CardLayout cardLayout = new CardLayout();
-
+    private SideBarView menuFrontal;
+    private SideBarController menuFrontalControler;
     public MainView() {
         setTitle("SPOTIFAI");
+        //Seteamos el Manager Layout de la pagina del menu principal
         setLayout(new BorderLayout());
 
-        JPanel content = setView();
-        add(content);
+        menuFrontal = new SideBarView();
+        menuFrontalControler = new SideBarController(menuFrontal);
+        menuFrontal.registerController(menuFrontalControler);
+        setView();
 
         setSize(1500, 900);
         setResizable(true);
@@ -28,22 +25,11 @@ public class MainView extends JFrame {
         setVisible(true);
     }
 
-    private JPanel setView () {
+    private void setView () {
         JPanel content = new JPanel();
-        content.setLayout(new BorderLayout());
+        content = menuFrontal.createPanel();
 
-        //SideBarView sideBarView = new SideBarView(sqlConnector);
-        SignUpView signUpView = new SignUpView(sqlConnector);
-        //LoginView loginView = new LoginView(sqlConnector);
-
-        //content.setLayout(cardLayout);
-
-        content.add(signUpView, BorderLayout.CENTER);
-        //content.add(loginView, 2);
-        //content.add(sideBarView, 3);
-
-        //Falta comunicacion entre los controllers para que informen a la vista Main lo que tiene que mostrar
-
-        return content;
+        getContentPane().add(menuFrontal, BorderLayout.WEST);
+        getContentPane().add(content, BorderLayout.CENTER);
     }
 }
