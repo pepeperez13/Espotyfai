@@ -1,5 +1,7 @@
+
 package persistance.dao.sql;
 
+import business.entities.Playlist;
 import business.entities.User;
 
 import java.sql.*;
@@ -79,7 +81,7 @@ public class SQLConnector {
             ex.printStackTrace();
         }
     }
-    public static void InsertDataSong() {
+    public void InsertDataSong(String title, String Genre, String album, String artist, String path) {
 
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
@@ -87,17 +89,17 @@ public class SQLConnector {
             String sql = "INSERT INTO song (SONG_TITLE,SONG_GENRE,SONG_ALBUM,SONG_ARTIST,SONG_PATH,SONG_OWNER) VALUES (?, ?, ?,?,?,?)";
 
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, "Euphoria");
-            statement.setString(2, "Techno");
-            statement.setString(3, "Euphoria Attract");
-            statement.setString(4, "David el jeta");
-            statement.setString(5, "c/users/borja/desktop/music");
+            statement.setString(1, title);
+            statement.setString(2, Genre);
+            statement.setString(3, album);
+            statement.setString(4, artist);
+            statement.setString(5, path);
             statement.setString(6, "Billy");
 
 
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("A new user was inserted successfully!");
+                System.out.println("A new song was inserted successfully!");
             }
 
         } catch (SQLException ex) {
@@ -200,7 +202,7 @@ public class SQLConnector {
 
     }
 
-    public static void DeleteDataArtist(){
+    public  void DeleteDataArtist(){
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
@@ -219,7 +221,7 @@ public class SQLConnector {
         }
 
     }
-    public static void DeleteDataPlaylist(){
+    public void DeleteDataPlaylist(Playlist playlist){
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
@@ -257,14 +259,14 @@ public class SQLConnector {
         }
 
     }
-    public static void DeleteDataUser(){
+    public  void DeleteDataUser(User userToDelete){
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
             String sql = "DELETE FROM user WHERE USER_NAME=?";
 
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, "Elpepe");
+            statement.setString(1, userToDelete.getEmail());
 
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
@@ -276,6 +278,11 @@ public class SQLConnector {
         }
 
     }
+
+    public void LogoutUser(User userToDelete){
+
+    }
+
     public LinkedList<User> SelectDataUser(){
         String user, emails, pass;
         LinkedList<User> users = new LinkedList<>();
@@ -334,7 +341,9 @@ public class SQLConnector {
 
     }
 
-    public static void SelectDataPlaylist(){
+    public LinkedList<Playlist> SelectDataPlaylist(){
+        LinkedList<Playlist> playlists = new LinkedList<>();
+
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
@@ -345,19 +354,21 @@ public class SQLConnector {
             {
                 String pname = rs.getString("PLAYLIST_NAME");
                 String powner = rs.getString("PLAYLIST_OWNER");
-
+                Playlist playlist= new Playlist(pname,powner);
+                playlists.add(playlist);
 
 
                 // print the results
                 System.out.format("%s, %s\n", pname,powner);
             }
             statement.close();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
 
-
+        return playlists;
     }
 
     public static void SelectDataArtist(){

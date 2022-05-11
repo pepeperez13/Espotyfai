@@ -1,8 +1,11 @@
 package business;
 
+import business.entities.Playlist;
 import business.entities.User;
 import persistance.dao.sql.SQLConnector;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.LinkedList;
 
 public class UserManager {
@@ -13,6 +16,23 @@ public class UserManager {
     }
 
     public void insertNewUser (String name, String email, String password) {
+        byte[] psw = password.getBytes();
+        byte[] hash = null;
+
+        // Convertimos la contraseña mediante el algoritmo MD5
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            hash = md.digest(psw);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        StringBuilder strBuilder = new StringBuilder();
+
+        for(byte b:hash) {
+            strBuilder.append(String.format("%02x", b));
+        }
+        password = strBuilder.toString();
+        System.out.println("La contraseña con el hash es: " + password);
         sql.InsertDataUser(name, email, password);
     }
 
@@ -63,8 +83,26 @@ public class UserManager {
         if (upperFlag && lowerFlag && numberFlag && password.length() >= 8) {
             return false;
         } else {
-          return true;
+            return true;
         }
 
+    }
+
+    public void deleteUser(){
+        User userToDelete = Store.LOGGED_USER;
+        LinkedList<Playlist> playlists= sql.SelectDataPlaylist();
+        for (Playlist playlist : playlists) {
+            if (playlist.getOwner().equals(userToDelete.getEmail())) {
+                sql.DeleteDataPlaylist(playlist);
+            }
+        }
+        sql.DeleteDataUser(userToDelete);
+
+
+    }
+    public void logout(){
+        User userToLogout = Store.LOGGED_USER;
+        sql.LogoutUser(userToLogout);
+        Store.LOGGED_USER = null;
     }
 }

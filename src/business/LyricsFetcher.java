@@ -1,21 +1,32 @@
 package business;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
 public class LyricsFetcher {
+    private static final String genericURL = "https://api.lyrics.ovh/v1/";
 
-    public void /*String*/ getSongLyrics (String artist, String name) {
-
+    public static void main (String[] args) {
+        String lyrics = getSongLyrics("Coldplay", "Adventure of a Lifetime");
+        //System.out.println(lyrics);
+        lyrics = getSongLyrics("Black Eyed Peas", "The Time");
+        //System.out.println(lyrics);
 
     }
 
-    public static void main (String[] args) {
-
+    public static String getSongLyrics (String artist, String song) {
         try {
 
-            URL url = new URL("https://api.lyrics.ovh/v1/Coldplay/Adventure%20of%20a%20Lifetime");
+            // Ponemos las frases en formato correcto
+            artist = artist.replaceAll(" ", "%20");
+            song = song.replaceAll(" ", "%20");
+            String urlString = genericURL + artist + "/" + song;
+
+            URL url = new URL(urlString);
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -24,7 +35,7 @@ public class LyricsFetcher {
             int responseCode = connection.getResponseCode();
 
             if (responseCode != 200) {
-                throw new RuntimeException();
+                return "Lyrics for the song could not be found";
             }else{
                 StringBuilder info = new StringBuilder();
                 Scanner scanner = new Scanner(url.openStream());
@@ -33,28 +44,21 @@ public class LyricsFetcher {
                     info.append(scanner.nextLine());
                 }
 
-                //System.out.println(info);
+                JsonObject jsonObject = (JsonObject) JsonParser.parseString(info.toString());
+                String lyrics = String.valueOf(jsonObject.get("lyrics"));
 
-                String stringInfo = info.toString();
-                String[] frases = stringInfo.split(":");
-
-                System.out.println(frases[1]);
-                String definitiva = frases[1].replaceAll("\n\n", "");
-
-                //for (String frase: frases) {
-                  //  System.out.println(frase);
-                //}
-                System.out.println("hola\na todos como estais");
-                System.out.println(definitiva);
+                // Hacemos los cambios para rreglar el formato del texto
+                lyrics = lyrics.replace("\\n\\n", System.lineSeparator());
+                lyrics = lyrics.replace("\\n", System.lineSeparator());
+                lyrics = lyrics.replace("\\r", "");
+                System.out.println(lyrics);
+                return lyrics;
             }
-
-
 
         } catch (Exception e){
             e.printStackTrace();
         }
-
+        return  "Lyrics for the song could not be found.";
     }
-
 
 }

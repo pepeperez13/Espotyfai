@@ -1,8 +1,16 @@
 package presentation.view;
+import business.SongManager;
+import persistance.dao.sql.SQLConnector;
+import presentation.controller.AddMusicController;
+
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.nio.file.Path;
 
 public class AddMusicPanelView extends JPanel {
     public static final String SAVE_TITULO = "SAVE_TITULO";
