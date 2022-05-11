@@ -1,6 +1,10 @@
 package presentation.view;
 
+import business.SongManager;
+import persistance.dao.sql.SQLConnector;
+import presentation.controller.AddMusicController;
 import presentation.controller.ConfMusicController;
+import presentation.controller.SideBarController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +16,7 @@ public class SideBarView extends JPanel{
     public static final String GO_CONFIG_USER = "GO_CONFIG_USER";
     public static final String GO_STATICS = "GO_STATICS";
     public int numView;
+    private SideBarController sideBarController;
     private JButton inicio;
     private JButton jbconfMusic;
     private JButton jbconfUsuario;
@@ -20,14 +25,17 @@ public class SideBarView extends JPanel{
     private ConfMusicPanelView confMusicPanelView = new ConfMusicPanelView();
     private ConfMusicController confMusicController;
     private StaticsPanelView staticsPanel = new StaticsPanelView();
-    private AddMusicPanelView addMusicPanel = new AddMusicPanelView();
+    private AddMusicPanelView addMusicPanel;
     private ShowMusicPanelView showMusicPanel = new ShowMusicPanelView();
     private DeleteMusicPanelView deleteMusicPanel = new DeleteMusicPanelView();
     private JPanel cardPanel = new JPanel();
+    private JPanel menuFrontal = new JPanel();
     private CardLayout c = new CardLayout();
     private final GridBagConstraints constraint = new GridBagConstraints();
 
-    public SideBarView () {
+    public SideBarView (SQLConnector sqlConnector) {
+        setLayout(new BorderLayout());
+
         Dimension dimension = getPreferredSize();
         dimension.width = 200;
         setPreferredSize(dimension);
@@ -37,10 +45,16 @@ public class SideBarView extends JPanel{
 
         constraint.fill = GridBagConstraints.NONE;
 
-        configureMenuFrontal();
+        sideBarController = new SideBarController(this);
+        addMusicPanel = new AddMusicPanelView(sqlConnector);
+
+        menuFrontal = configureMenuFrontal();
+        cardPanel = configureCardPanel();
+        add(menuFrontal, BorderLayout.WEST);
+        add(cardPanel, BorderLayout.CENTER);
     }
 
-    private void configureMenuFrontal () {
+    private JPanel configureMenuFrontal () {
         ImageIcon logoSimbol = new ImageIcon("Images/logo.png");
         Image image1 = logoSimbol.getImage();
         image1 = image1.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
@@ -97,6 +111,8 @@ public class SideBarView extends JPanel{
         groupBotones.setBackground(new Color(191, 105,240));
         groupBotones.setLayout(new BoxLayout(groupBotones, BoxLayout.Y_AXIS));
 
+        registerController(sideBarController);
+
         groupBotones.add(jbconfMusic);
         groupBotones.add(separator1);
         groupBotones.add(jbconfUsuario);
@@ -108,29 +124,31 @@ public class SideBarView extends JPanel{
         constraint.gridx = 0;
         constraint.gridy = 0;
 
-        add(logoApp, constraint);
+        menuFrontal.add(logoApp, constraint);
         constraint.gridx = 0;
         constraint.gridy = 1;
-        add(inicio, constraint);
+        menuFrontal.add(inicio, constraint);
         //Colocamos los botones
         constraint.gridx = 0;
         constraint.gridy = 2;
-        add(groupBotones, constraint);
+        menuFrontal.add(groupBotones, constraint);
+
+        return menuFrontal;
     }
 
-    public void registerController(ActionListener listener) {
+    private void registerController(ActionListener listener) {
         jbconfUsuario.addActionListener(listener);
         jbconfMusic.addActionListener(listener);
         jbconfEstadisticas.addActionListener(listener);
     }
     public void changueView (int num) {
         numView = num;
-        createPanel();
+        configureCardPanel();
         c.show(cardPanel, String.valueOf(numView));
 
     }
 
-    public JPanel createPanel () {
+    private JPanel configureCardPanel () {
         cardPanel.setLayout(c);
 
         confMusicController = new ConfMusicController(confMusicPanelView, this);

@@ -10,8 +10,5 @@ public class Main {
         MainView menuPrincipal = new MainView();
         menuPrincipal.setVisible (true);
     }
-
-
-
 }
 

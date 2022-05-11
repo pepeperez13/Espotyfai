@@ -1,34 +1,38 @@
 package presentation.view;
+import business.SongManager;
+import persistance.dao.sql.SQLConnector;
+import presentation.controller.AddMusicController;
+
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.io.File;
+import java.nio.file.Path;
 
 public class AddMusicPanelView extends JPanel {
-    public static final String SAVE_TITULO = "SAVE_TITULO";
-    public static final String SAVE_ALBUM = "SAVE_ALBUM";
-    public static final String SAVE_GENERO = "SAVE_GENERO";
-    public static final String SAVE_AUTOR = "SAVE_AUTOR";
-    public static final String UPLOAD_MUSIC = "UPLOAD_MUSIC";
-    private JTextField textTitulo;
-    private JTextField textAlbum;
-    private JTextField textGenero;
-    private JTextField textAutor;
-    private JButton uploadIcon;
+    public static final String ADD_PATH = "ADD_PATH";
+    public static final String ADD_SONG = "ADD_SONG";
+    private final JTextField textTitulo = new JTextField();
+    private final JTextField textAlbum = new JTextField();
+    private final JTextField textGenero = new JTextField();
+    private final JTextField textAutor = new JTextField();
+    private JFileChooser fileChooser = new JFileChooser();
     private final GridBagConstraints gc = new GridBagConstraints();
 
-    public AddMusicPanelView () {
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("wav", "mp3");
-
+    public AddMusicPanelView (SQLConnector sqlConnector) {
         setLayout(new GridBagLayout());
         gc.fill = GridBagConstraints.NONE;
 
         setBackground(new Color(255, 255, 255));
 
-        configurePanel();
+        SongManager songManager = new SongManager(sqlConnector);
+        AddMusicController addMusicController = new AddMusicController(songManager, this);
+        configurePanel(addMusicController);
     }
 
-    private void configurePanel () {
+    private void configurePanel (AddMusicController addMusicController) {
         JLabel labelAdd = new JLabel();
         labelAdd.setText("Añadir canción");
         labelAdd.setFont(new Font("Arial Black", Font.BOLD, 25));
@@ -46,19 +50,17 @@ public class AddMusicPanelView extends JPanel {
         labelTitulo.setText("Título");
         labelTitulo.setFont(new Font("Arial", Font.BOLD, 18));
 
-        textTitulo = new JTextField();
         textTitulo.setName("Título");
+        textTitulo.setPreferredSize(new Dimension(200, 20));
         textTitulo.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        textTitulo.setActionCommand(SAVE_TITULO);
 
         JLabel labelAlbum = new JLabel();
         labelAlbum.setText("Album");
         labelAlbum.setFont(new Font("Arial", Font.BOLD, 18));
 
-        textAlbum = new JTextField();
         textAlbum.setName("Album");
+        textAlbum.setPreferredSize(new Dimension(200, 20));
         textAlbum.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        textAlbum.setActionCommand(SAVE_ALBUM);
 
         JLabel labelFichero = new JLabel();
         labelFichero.setText("Fichero MP3/WAV");
@@ -66,29 +68,36 @@ public class AddMusicPanelView extends JPanel {
 
         ImageIcon logoSimbol = new ImageIcon("Images/upload.png");
         Image img = logoSimbol.getImage();
-        img = img.getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        img = img.getScaledInstance(40, 40, Image.SCALE_DEFAULT);
         logoSimbol = new ImageIcon(img);
-        uploadIcon = new JButton(logoSimbol);
+        JButton uploadIcon = new JButton(logoSimbol);
+        uploadIcon.setPreferredSize(new Dimension(50, 50));
         uploadIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
-        uploadIcon.setActionCommand(UPLOAD_MUSIC);
+        uploadIcon.setActionCommand(ADD_PATH);
+        uploadIcon.addActionListener(addMusicController);
 
         JLabel labelGenero = new JLabel();
         labelGenero.setText("Género musical");
         labelGenero.setFont(new Font("Arial", Font.BOLD, 18));
 
-        textGenero = new JTextField();
         textGenero.setName("Género musical");
+        textGenero.setPreferredSize(new Dimension(200 , 20));
         textGenero.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        textGenero.setActionCommand(SAVE_GENERO);
 
         JLabel labelAutor = new JLabel();
         labelAutor.setText("Autor");
         labelAutor.setFont(new Font("Arial", Font.BOLD, 18));
 
-        textAutor = new JTextField();
         textAutor.setName("Autor");
+        textAutor.setPreferredSize(new Dimension(200, 20));
         textAutor.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        textAutor.setActionCommand(SAVE_AUTOR);
+
+        JButton okay = new JButton("Añadir canción");
+        okay.setFont(new Font("Arial", Font.BOLD, 18));
+        okay.setBackground(new Color(152, 245, 214));
+        okay.setBorderPainted(false);
+        okay.setActionCommand(ADD_SONG);
+        okay.addActionListener(addMusicController);
 
         gc.gridx = 0;
         gc.gridy = 0;
@@ -123,21 +132,39 @@ public class AddMusicPanelView extends JPanel {
         gc.gridx = 1;
         gc.gridy = 5;
         add(textAutor, gc);
+        gc.gridx = 1;
+        gc.gridy = 6;
+        add(okay, gc);
+
     }
 
-    public void registerController(ActionListener listener) {
-        textTitulo.addActionListener(listener);
-        textAlbum.addActionListener(listener);
-        uploadIcon.addActionListener(listener);
-        textGenero.addActionListener(listener);
-        textAutor.addActionListener(listener);
+    public String getAlbum () {
+        return textAlbum.getText();
     }
+    public String getAutor () {
+        return textAutor.getText();
+    }
+    public String getGenero () {
+        return textGenero.getText();
+    }
+    public String getTitulo () {
+        return textTitulo.getText();
+    }
+    public String getPath () {
+        return openFile();
+    }
+    public String openFile () {
+        String path = null;
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
-    public static void main (String[] args) {
-        AddMusicPanelView menuPrincipal = new AddMusicPanelView();
-        JFrame f = new JFrame();
-        f.add(menuPrincipal);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setVisible (true);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("WAV & MP3", ".mp3", ".wav");
+        fileChooser.setFileFilter(filter);
+
+        int result = fileChooser.showOpenDialog(this);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            path = fileChooser.getSelectedFile().getPath();
+        }
+        return path;
     }
 }

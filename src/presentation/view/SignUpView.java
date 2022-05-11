@@ -1,5 +1,7 @@
 package presentation.view;
 
+import business.UserManager;
+import persistance.dao.sql.SQLConnector;
 import presentation.JImagePanel;
 import presentation.controller.SignUpViewController;
 
@@ -18,14 +20,19 @@ public class SignUpView extends JFrame {
     public static final String OTHER = "OTHER_COMMAND";
     public static final String REGISTER_BUTTON = "REGISTER_BUTTON";
 
+    private UserManager manager;
+
     private SignUpViewController controller;
 
-    public SignUpView (SignUpViewController controller) {
+    public SignUpView (SQLConnector sqlConnector) {
         setLocationRelativeTo(null);
         setLocation(0,10);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.controller = controller;
+        //this.controller = controller;
+        manager = new UserManager(sqlConnector);
+        controller = new SignUpViewController(this, manager);
+
         setSize(1500, 900);
         setResizable(false);
         setVisible(true);
