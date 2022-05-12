@@ -10,15 +10,8 @@ import java.util.Scanner;
 public class LyricsFetcher {
     private static final String genericURL = "https://api.lyrics.ovh/v1/";
 
-    public static void main (String[] args) {
-        String lyrics = getSongLyrics("Coldplay", "Adventure of a Lifetime");
-        //System.out.println(lyrics);
-        lyrics = getSongLyrics("Black Eyed Peas", "The Time");
-        //System.out.println(lyrics);
 
-    }
-
-    public static String getSongLyrics (String artist, String song) {
+    public String getSongLyrics (String artist, String song) {
         try {
 
             // Ponemos las frases en formato correcto

@@ -5,8 +5,11 @@ import persistance.dao.sql.SQLConnector;
 
 import presentation.view.SignUpView;
 
+import javax.management.modelmbean.ModelMBean;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class SignUpViewController implements ActionListener{
     private static SignUpView view;
