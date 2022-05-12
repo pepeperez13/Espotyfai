@@ -2,16 +2,19 @@ package business;
 
 import business.entities.Playlist;
 import business.entities.User;
-import persistance.dao.sql.SQLConnector;
+
+import persistance.dao.sql.SQLConnectorPlaylist;
+import persistance.dao.sql.SQLConnectorUser;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.LinkedList;
 
 public class UserManager {
-    private SQLConnector sql;
+    private SQLConnectorUser sql;
+    private SQLConnectorPlaylist sqlP;
 
-    public UserManager (SQLConnector sql) {
+    public UserManager (SQLConnectorUser sql) {
         this.sql = sql;
     }
 
@@ -90,10 +93,10 @@ public class UserManager {
 
     public void deleteUser(){
         User userToDelete = Store.LOGGED_USER;
-        LinkedList<Playlist> playlists= sql.SelectDataPlaylist();
+        LinkedList<Playlist> playlists= sqlP.SelectDataPlaylist();
         for (Playlist playlist : playlists) {
             if (playlist.getOwner().equals(userToDelete.getEmail())) {
-                sql.DeleteDataPlaylist(playlist);
+                sqlP.DeleteDataPlaylist(playlist);
             }
         }
         sql.DeleteDataUser(userToDelete);
