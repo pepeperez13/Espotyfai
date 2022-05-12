@@ -114,23 +114,6 @@ public class DetailedSongView extends JFrame {
         JPanel playPanel = new JPanel();
         playPanel.setLayout(new GridLayout(1, 2));
 
-        /*
-        ImageIcon playImage = new ImageIcon("images/playButton.png");
-        Image image = playImage.getImage();
-        image = image.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
-        playImage = new ImageIcon(image);
-        JLabel playImageLabel = new JLabel(playImage);
-        playImageLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
-
-
-        ImageIcon pauseImage = new ImageIcon("images/pauseButton.png");
-        Image image2 = pauseImage.getImage();
-        image2 = image2.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
-        pauseImage = new ImageIcon(image2);
-        JLabel pauseImageLabel = new JLabel(pauseImage);
-        pauseImageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        */
-
         JButton playButton = new JButton("         Play         ");
         playButton.setPreferredSize(new Dimension(100, 60));
         playButton.setFont(new Font("Tahoma", Font.BOLD, 22));

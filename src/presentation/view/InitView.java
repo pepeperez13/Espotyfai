@@ -1,6 +1,7 @@
 package presentation.view;
 
 import persistance.dao.sql.SQLConnector;
+import persistance.dao.sql.SQLConnectorUser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +12,7 @@ public class InitView extends JPanel {
     public static final String REGISTER = "REGISTER";
     public static final String CONF = "CONF";
 
-    private final SQLConnector sqlConnector = new SQLConnector();
+    private final SQLConnectorUser sqlConnector = new SQLConnectorUser();
     //private final CardLayout cardLayout = new CardLayout();
 
     public InitView() {

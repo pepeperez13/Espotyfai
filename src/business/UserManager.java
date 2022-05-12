@@ -96,16 +96,16 @@ public class UserManager {
         LinkedList<Playlist> playlists= sqlP.SelectDataPlaylist();
         for (Playlist playlist : playlists) {
             if (playlist.getOwner().equals(userToDelete.getEmail())) {
-                sqlP.DeleteDataPlaylist(playlist);
+                sqlP.DeleteDataPlaylist(playlist.getName());
             }
         }
-        sql.DeleteDataUser(userToDelete);
+        sql.DeleteDataUser(userToDelete.getName());
 
 
     }
     public void logout(){
         User userToLogout = Store.LOGGED_USER;
-        sql.LogoutUser(userToLogout);
+        //sql.LogoutUser(userToLogout);
         Store.LOGGED_USER = null;
     }
 }

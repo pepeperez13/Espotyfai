@@ -2,6 +2,7 @@ package presentation.view;
 
 import business.UserManager;
 import persistance.dao.sql.SQLConnector;
+import persistance.dao.sql.SQLConnectorUser;
 import presentation.JImagePanel;
 import presentation.controller.SignUpViewController;
 
@@ -24,7 +25,7 @@ public class SignUpView extends JPanel {
 
     private SignUpViewController controller;
 
-    public SignUpView (SQLConnector sqlConnector) {
+    public SignUpView (SQLConnectorUser sqlConnector) {
         setLocation(0,10);
 
         //this.controller = controller;
