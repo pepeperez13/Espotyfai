@@ -17,7 +17,7 @@ public class SQLConnectorSong implements SongDAO {
 
 
 
-    public void InsertDataSong(String title,String genre,String album, String artist,String path,String owner) {
+    public void InsertDataSong(String title, String genre, String album, String artist, String path, String owner) {
 
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
@@ -118,6 +118,47 @@ public class SQLConnectorSong implements SongDAO {
 
             statement.close();
             return songs;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+
+
+
+    }
+    //Metodo que te permite obtener toda la informacion de una cancion dado el nombre de la cancion.
+    public LinkedList<Song> SelectSong(String name){
+        LinkedList<Song> song = new LinkedList<>();
+        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
+
+            System.out.println("Successful connection...");
+            String sql = "SELECT * FROM song";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery(sql);
+            String title = null;
+            while (rs.next()) {
+
+                title = rs.getString("SONG_TITLE");
+                String genre = rs.getString("SONG_GENRE");
+                String album = rs.getString("SONG_ALBUM");
+                String artist = rs.getString("SONG_ARTIST");
+                String path = rs.getString("SONG_PATH");
+                String owner = rs.getString("SONG_OWNER");
+                System.out.println(name);
+                System.out.println(title);
+                if (title.equals(name)) {
+                    Song newSong = new Song(title, genre, album, artist, path, owner);
+                    song.add(newSong);
+
+
+                    System.out.format("%s, %s, %s, %s, %s, %s\n", title, genre, album, artist, path, owner);
+                }else{
+                    System.out.println("Mal");
+                }
+
+            }
+            statement.close();
+            return song;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return null;

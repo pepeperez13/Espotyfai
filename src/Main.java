@@ -1,3 +1,4 @@
+import business.SongManager;
 import persistance.ConfigJsonDao;
 import presentation.view.InitView;
 import presentation.view.MainView;
@@ -10,6 +11,7 @@ public class Main {
 
         MainView pagPrincipal = new MainView();
         pagPrincipal.setVisible (true);
+
     }
 }
 
