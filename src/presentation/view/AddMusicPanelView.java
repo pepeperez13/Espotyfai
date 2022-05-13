@@ -17,13 +17,13 @@ public class AddMusicPanelView extends JPanel {
     private final JFileChooser fileChooser = new JFileChooser();
     private final GridBagConstraints gc = new GridBagConstraints();
 
-    public AddMusicPanelView (SQLConnectorSong sqlConnector) {
+    public AddMusicPanelView () {
         setLayout(new GridBagLayout());
         gc.fill = GridBagConstraints.NONE;
 
         setBackground(new Color(255, 255, 255));
 
-        SongManager songManager = new SongManager(sqlConnector);
+        SongManager songManager = new SongManager();
         AddMusicController addMusicController = new AddMusicController(songManager, this);
         configurePanel(addMusicController);
     }

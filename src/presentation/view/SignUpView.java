@@ -23,6 +23,7 @@ public class SignUpView extends JPanel {
 
     private final SignUpViewController controller;
 
+
     public SignUpView () {
         //setLocation(0,10);
 
@@ -31,22 +32,27 @@ public class SignUpView extends JPanel {
         setSize(1500, 900);
         //setLayout(new BorderLayout(0, 50));
 
-        setLayout(new BorderLayout());
+        setLayout(new GridLayout(3, 1));
 
-        add(setLogo(), BorderLayout.NORTH);
-        add(introduceInfoPanel(), BorderLayout.CENTER);
-        add(setEndButtons(), BorderLayout.SOUTH);
+        add(setLogo());
+        add(introduceInfoPanel());
+        add(setEndButtons());
     }
 
-    private JLabel setLogo () {
-        ImageIcon logoImage = new ImageIcon("images/spotiLogo.png");
+    private JPanel setLogo () {
+
+        ImageIcon logoImage = new ImageIcon("images/logo.png");
         Image image = logoImage.getImage();
-        image = image.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+        image = image.getScaledInstance(175, 175, Image.SCALE_DEFAULT);
         logoImage = new ImageIcon(image);
         JLabel logoImageLabel = new JLabel(logoImage);
 
         logoImageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        return logoImageLabel;
+
+        JPanel panel = new JPanel();
+        panel.add(logoImageLabel);
+        panel.setVisible(true);
+        return panel;
     }
 
     private JPanel introduceInfoPanel () {
@@ -54,6 +60,8 @@ public class SignUpView extends JPanel {
         textIntroPanel.setLayout(new BoxLayout(textIntroPanel, BoxLayout.Y_AXIS));
         textIntroPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         textIntroPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
+
+
 
         // Añadimos todos los label y textFields
         textIntroPanel.add(setLabelAndField("Username", "User"));
@@ -78,9 +86,11 @@ public class SignUpView extends JPanel {
         ButtonGroup group = new ButtonGroup();
         group.add(jrb1); group.add(jrb2);  group.add(jrb3);
 
+
         JPanel auxiliar = new JPanel();
         auxiliar.add(jrb1); auxiliar.add(jrb2);  auxiliar.add(jrb3);
         textIntroPanel.add(auxiliar);
+
 
         return textIntroPanel;
     }
@@ -97,28 +107,28 @@ public class SignUpView extends JPanel {
         switch (label) {
             case "Username" -> {
                 nameField = new JTextField(35);
-                //nameField.setPreferredSize(new Dimension(300, 40));
+                nameField.setPreferredSize(new Dimension(300, 40));
                 nameField.setText(tField);
                 nameField.setAlignmentX(Component.CENTER_ALIGNMENT);
                 panel.add(nameField);
             }
             case "E-Mail" -> {
                 emailField = new JTextField(35);
-                //emailField.setPreferredSize(new Dimension(300, 40));
+                emailField.setPreferredSize(new Dimension(300, 40));
                 emailField.setText(tField);
                 emailField.setAlignmentX(Component.CENTER_ALIGNMENT);
                 panel.add(emailField);
             }
             case "Account password" -> {
                 passwordField = new JPasswordField(35);
-                //passwordField.setPreferredSize(new Dimension(300, 40));
+                passwordField.setPreferredSize(new Dimension(300, 40));
                 passwordField.setText(tField);
                 passwordField.setAlignmentX(Component.CENTER_ALIGNMENT);
                 panel.add(passwordField);
             }
             case "Confirmation password" -> {
                 confirmField = new JPasswordField(35);
-                //confirmField.setPreferredSize(new Dimension(300, 40));
+                confirmField.setPreferredSize(new Dimension(300, 40));
                 confirmField.setText(tField);
                 confirmField.setAlignmentX(Component.CENTER_ALIGNMENT);
                 panel.add(confirmField);

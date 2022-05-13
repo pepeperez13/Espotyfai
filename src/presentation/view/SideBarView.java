@@ -44,8 +44,7 @@ public class SideBarView extends JPanel{ /**Cambiar a JPanel*/
         setBackground(new Color(191, 105, 240));
 
         sideBarController = new SideBarController(this);
-        SQLConnectorSong sqlConnectorSong = new SQLConnectorSong();
-        addMusicPanel = new AddMusicPanelView(sqlConnectorSong);
+        addMusicPanel = new AddMusicPanelView();
 
         menuFrontal = configureMenuFrontal();
         cardPanel = configureCardPanel();
