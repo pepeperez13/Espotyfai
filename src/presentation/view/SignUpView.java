@@ -1,9 +1,6 @@
 package presentation.view;
 
 import business.UserManager;
-import persistance.dao.sql.SQLConnector;
-import persistance.dao.sql.SQLConnectorUser;
-import presentation.JImagePanel;
 import presentation.controller.SignUpViewController;
 
 import javax.swing.*;
@@ -21,30 +18,24 @@ public class SignUpView extends JPanel {
     public static final String OTHER = "OTHER_COMMAND";
     public static final String REGISTER_BUTTON = "REGISTER_BUTTON";
 
+    private int numView;
     private UserManager manager;
 
-    private SignUpViewController controller;
+    private final SignUpViewController controller;
 
-    public SignUpView (SQLConnectorUser sqlConnector) {
-        setLocation(0,10);
+    public SignUpView () {
+        //setLocation(0,10);
 
-        //this.controller = controller;
-        manager = new UserManager(sqlConnector);
         controller = new SignUpViewController(this, manager);
 
         setSize(1500, 900);
-        setVisible(true);
-        setLayout(new BorderLayout(0, 50));
+        //setLayout(new BorderLayout(0, 50));
+
+        setLayout(new BorderLayout());
 
         add(setLogo(), BorderLayout.NORTH);
         add(introduceInfoPanel(), BorderLayout.CENTER);
         add(setEndButtons(), BorderLayout.SOUTH);
-
-
-        // Añadimos fondo
-        JImagePanel j = new JImagePanel("images/background.jpeg");
-        j.getPreferredSize();
-
     }
 
     private JLabel setLogo () {
@@ -106,28 +97,28 @@ public class SignUpView extends JPanel {
         switch (label) {
             case "Username" -> {
                 nameField = new JTextField(35);
-                nameField.setPreferredSize(new Dimension(300, 40));
+                //nameField.setPreferredSize(new Dimension(300, 40));
                 nameField.setText(tField);
                 nameField.setAlignmentX(Component.CENTER_ALIGNMENT);
                 panel.add(nameField);
             }
             case "E-Mail" -> {
                 emailField = new JTextField(35);
-                emailField.setPreferredSize(new Dimension(300, 40));
+                //emailField.setPreferredSize(new Dimension(300, 40));
                 emailField.setText(tField);
                 emailField.setAlignmentX(Component.CENTER_ALIGNMENT);
                 panel.add(emailField);
             }
             case "Account password" -> {
                 passwordField = new JPasswordField(35);
-                passwordField.setPreferredSize(new Dimension(300, 40));
+                //passwordField.setPreferredSize(new Dimension(300, 40));
                 passwordField.setText(tField);
                 passwordField.setAlignmentX(Component.CENTER_ALIGNMENT);
                 panel.add(passwordField);
             }
             case "Confirmation password" -> {
                 confirmField = new JPasswordField(35);
-                confirmField.setPreferredSize(new Dimension(300, 40));
+                //confirmField.setPreferredSize(new Dimension(300, 40));
                 confirmField.setText(tField);
                 confirmField.setAlignmentX(Component.CENTER_ALIGNMENT);
                 panel.add(confirmField);
@@ -226,5 +217,12 @@ public class SignUpView extends JPanel {
         return Arrays.toString(confirmField.getPassword());
     }
 
+    public int goLogin (int num) {
+        this.numView = num;
+        return num;
+    }
 
+    public int getNumView () {
+        return numView;
+    }
 }

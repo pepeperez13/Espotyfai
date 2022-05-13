@@ -13,17 +13,11 @@ public class SideBarController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(SideBarView.GO_CONFIG_MUSIC)) {
-            menuFrontal.changueView(2);
-        } else if (e.getActionCommand().equals(SideBarView.GO_CONFIG_USER)) {
-            menuFrontal.changueView(3);
-        } else if (e.getActionCommand().equals(SideBarView.GO_STATICS)) {
-            menuFrontal.changueView(4);
-        } else if (e.getActionCommand().equals(SideBarView.GO_INIT)) {
             menuFrontal.changueView(1);
+        } else if (e.getActionCommand().equals(SideBarView.GO_CONFIG_USER)) {
+            menuFrontal.changueView(2);
+        } else if (e.getActionCommand().equals(SideBarView.GO_STATICS)) {
+            menuFrontal.changueView(3);
         }
-        else if (e.getActionCommand().equals(SideBarView.GO_CONFIG_PLAYLIST)) {
-            menuFrontal.changueView(6);
-        }
-
     }
 }

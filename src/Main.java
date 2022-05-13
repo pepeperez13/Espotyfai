@@ -1,7 +1,6 @@
 import business.SongManager;
 import persistance.ConfigJsonDao;
 import presentation.view.InitView;
-import presentation.view.MainView;
 
 
 public class Main {
@@ -9,8 +8,8 @@ public class Main {
         ConfigJsonDao configJsonDao= new ConfigJsonDao();
         configJsonDao.readConfig();
 
-        MainView pagPrincipal = new MainView();
-        pagPrincipal.setVisible (true);
+        InitView initView = new InitView();
+        initView.setVisible (true);
 
     }
 }

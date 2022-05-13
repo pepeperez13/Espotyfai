@@ -15,11 +15,9 @@ public class AddMusicController implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        /*if (e.getActionCommand().equals(AddMusicPanelView.ADD_SONG)) {
-            songManager.addSong(addMusicPanelView.getTitulo(), addMusicPanelView.getGenero(), addMusicPanelView.getAlbum(), addMusicPanelView.getAutor(), addMusicPanelView.getPath());
+        if (e.getActionCommand().equals(AddMusicPanelView.ADD_SONG)) {
+            songManager.addSong(addMusicPanelView.getTitulo(), addMusicPanelView.getGenero(), addMusicPanelView.getAlbum(), addMusicPanelView.getAutor(), addMusicPanelView.getPath(), "Falta por definir");
             System.out.println(addMusicPanelView.getTitulo() + addMusicPanelView.getGenero() + addMusicPanelView.getAlbum() + addMusicPanelView.getAutor() + addMusicPanelView.getPath());
-        } else if (e.getActionCommand().equals(AddMusicPanelView.ADD_PATH)) {
-            addMusicPanelView.getPath();
-        }*/
+        }
     }
 }

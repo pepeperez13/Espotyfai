@@ -21,17 +21,6 @@ public class SignUpViewController implements ActionListener{
     private boolean passwordFormatError;
     private boolean passwordConfirmationError;
 
-    // Luego esto irá en el main (es de prueba). La cosa es vincular el controller con la vista para que funcionen
-    // los listeners. Mirar solución AC6
-    /*public static void main (String[] args) {
-        SQLConnector sql = new SQLConnector();
-        SignUpViewController controller = new SignUpViewController();
-        SignUpView signUpView = new SignUpView(controller);
-        manager = new UserManager(sql);
-        view = signUpView;
-        signUpView.setVisible(true);
-    }*/
-
     public SignUpViewController (SignUpView signUpView, UserManager userManager) {
         this.view = signUpView;
         this.manager = userManager;
@@ -44,7 +33,7 @@ public class SignUpViewController implements ActionListener{
 
             if (checkDataCorrect()) {
                 manager.insertNewUser(view.getUserName(), view.getEmail(), view.getPassword());
-                System.out.println("Todo ok");
+                view.goLogin(2);
             } else {
                 view.showErrorMessage(userExistsError, emailExistsError, emailFormatError, passwordFormatError, passwordConfirmationError);
                 System.out.println("Hay error");

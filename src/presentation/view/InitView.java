@@ -1,46 +1,52 @@
 package presentation.view;
 
-import persistance.dao.sql.SQLConnector;
-import persistance.dao.sql.SQLConnectorUser;
+import presentation.controller.InicioController;
+import presentation.controller.InitController;
+import presentation.controller.LoginController;
+import presentation.controller.SignUpViewController;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class InitView extends JPanel {
+public class InitView extends JFrame {
+    private final CardLayout cardLayout = new CardLayout();
+    private final InicioController inicioController = new InicioController();
+    //private final SignUpViewController signUpViewController = new SignUpViewController();
+    //private final LoginController loginController = new LoginController();
 
-    public static final String SIGN_UP = "SIGN_UP";
-    public static final String REGISTER = "REGISTER";
-    public static final String CONF = "CONF";
+    private InitController initController;
 
-    private final SQLConnectorUser sqlConnector = new SQLConnectorUser();
-    //private final CardLayout cardLayout = new CardLayout();
-
-    public InitView() {
+    public InitView () {
+        setTitle("SPOTIFAI");
         setLayout(new BorderLayout());
+
+        //initController = new InitController();
 
         JPanel content = setView();
         add(content);
 
         setSize(1500, 900);
-
-        setVisible(true);
+        setResizable(true);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setVisible(true);
     }
 
     private JPanel setView () {
         JPanel content = new JPanel();
-        content.setLayout(new BorderLayout());
 
-        //SideBarView sideBarView = new SideBarView(sqlConnector);
-        SignUpView signUpView = new SignUpView(sqlConnector);
-        //LoginView loginView = new LoginView(sqlConnector);
+        InicioView inicioView = new InicioView();
+        SignUpView signUpView = new SignUpView();
+        LoginView loginView = new LoginView();
 
-        //content.setLayout(cardLayout);
+        content.setLayout(cardLayout);
 
-        content.add(signUpView, BorderLayout.CENTER);
-        //content.add(loginView, 2);
-        //content.add(sideBarView, 3);
+        content.add(signUpView, "1");
+        content.add(loginView, "2");
+        //content.add(inicioView, "3");
 
         //Falta comunicacion entre los controllers para que informen a la vista Main lo que tiene que mostrar
+        cardLayout.show(content, "1");
 
         return content;
     }
