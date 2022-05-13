@@ -5,7 +5,6 @@ import presentation.controller.DetailedSongController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.Duration;
 
 public class DetailedSongView extends JFrame {
 
@@ -144,23 +143,6 @@ public class DetailedSongView extends JFrame {
     }
 
     private JButton setCloseLabel () {
-        /*JPanel exitPanel = new JPanel();
-        exitPanel.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        exitPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
-
-        JLabel closeWindow = new JLabel("Close Song Info");
-        closeWindow.setFont(new Font("Tahoma", Font.PLAIN, 36));
-
-        ImageIcon crossImage = new ImageIcon("images/cruz.png");
-        Image image = crossImage.getImage();
-        image = image.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
-        crossImage = new ImageIcon(image);
-        JLabel crossImageLabel = new JLabel(crossImage);
-
-        exitPanel.add(closeWindow, gbc);
-        exitPanel.add(crossImageLabel, gbc);*/
 
         JButton exitButton= new JButton("Close song info");
         exitButton.setFont(new Font("Tahoma", Font.BOLD, 22));
@@ -175,5 +157,25 @@ public class DetailedSongView extends JFrame {
         return exitButton;
     }
 
+    public static class ShowPlaylistsFrame extends JFrame {
+
+        public ShowPlaylistsFrame() {
+
+            setSize(400, 300);
+            setLocation(550, 300);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            Box box= Box.createVerticalBox();
+            for (int i=1; i<=10; i++) {
+                JButton btn= new JButton("Button "+i);
+                btn.setMaximumSize(new Dimension(150, 30));
+                box.add(btn);
+            }
+            box.setAlignmentX(Component.CENTER_ALIGNMENT);
+            JScrollPane scroll= new JScrollPane(box);
+            scroll.setPreferredSize(new Dimension(150, 100));
+            add(scroll);
+
+        }
+    }
 }
 

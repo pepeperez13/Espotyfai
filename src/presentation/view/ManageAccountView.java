@@ -1,6 +1,5 @@
 package presentation.view;
 
-import presentation.JImagePanel;
 import presentation.controller.ManageAccountController;
 
 

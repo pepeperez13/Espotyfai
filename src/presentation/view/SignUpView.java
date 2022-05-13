@@ -23,6 +23,13 @@ public class SignUpView extends JPanel {
 
     private final SignUpViewController controller;
 
+    public static void main (String[] args) {
+        JFrame frame = new JFrame();
+        SignUpView view = new SignUpView();
+        view.setVisible(true);
+        frame.add(view);
+        frame.setVisible(true);
+    }
 
     public SignUpView () {
         //setLocation(0,10);
