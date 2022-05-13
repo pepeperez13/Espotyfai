@@ -16,7 +16,7 @@ public class DetailedSongView extends JFrame {
 
 
     public DetailedSongView () {
-        controller = new DetailedSongController();
+        controller = new DetailedSongController(this);
         setLocation(0,10);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
