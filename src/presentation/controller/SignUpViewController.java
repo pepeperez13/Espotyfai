@@ -1,8 +1,10 @@
 package presentation.controller;
 
 import business.UserManager;
+import persistance.UserDAO;
 import persistance.dao.sql.SQLConnector;
 
+import persistance.dao.sql.SQLConnectorUser;
 import presentation.view.SignUpView;
 
 import javax.management.modelmbean.ModelMBean;
@@ -13,27 +15,28 @@ import java.awt.event.MouseListener;
 
 public class SignUpViewController implements ActionListener{
     private static SignUpView view;
-    private static UserManager manager;
+    private UserDAO userDAO = new SQLConnectorUser();
+    private UserManager manager;
 
     private boolean userExistsError;
     private boolean emailExistsError;
     private boolean emailFormatError;
     private boolean passwordFormatError;
     private boolean passwordConfirmationError;
+    private InitController initController;
 
-    public SignUpViewController (SignUpView signUpView, UserManager userManager) {
+    public SignUpViewController (SignUpView signUpView) {
         this.view = signUpView;
-        this.manager = userManager;
+        manager = new UserManager(userDAO);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(SignUpView.REGISTER_BUTTON)) {
-            System.out.println("HOLAAAAAAA");
 
             if (checkDataCorrect()) {
                 manager.insertNewUser(view.getUserName(), view.getEmail(), view.getPassword());
-                view.goLogin(2);
+                initController.refreshView(2);
             } else {
                 view.showErrorMessage(userExistsError, emailExistsError, emailFormatError, passwordFormatError, passwordConfirmationError);
                 System.out.println("Hay error");

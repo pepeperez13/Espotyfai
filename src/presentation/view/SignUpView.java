@@ -18,9 +18,6 @@ public class SignUpView extends JPanel {
     public static final String OTHER = "OTHER_COMMAND";
     public static final String REGISTER_BUTTON = "REGISTER_BUTTON";
 
-    private int numView;
-    private UserManager manager;
-
     private final SignUpViewController controller;
 
     public static void main (String[] args) {
@@ -34,7 +31,7 @@ public class SignUpView extends JPanel {
     public SignUpView () {
         //setLocation(0,10);
 
-        controller = new SignUpViewController(this, manager);
+        controller = new SignUpViewController(this);
 
         setSize(1500, 900);
         //setLayout(new BorderLayout(0, 50));
@@ -232,14 +229,5 @@ public class SignUpView extends JPanel {
 
     public String getConfirmation () {
         return Arrays.toString(confirmField.getPassword());
-    }
-
-    public int goLogin (int num) {
-        this.numView = num;
-        return num;
-    }
-
-    public int getNumView () {
-        return numView;
     }
 }

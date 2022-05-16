@@ -6,13 +6,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
-public class LoginView extends JPanel implements ActionListener {
+public class LoginView extends JPanel {
 
     public static final String INICIO = "INICIO";
     public static final String SIGN_UP = "SIGN_UP";
-    //private LoginController loginController;
-    private int numView;
+    private JTextField username;
+
+    private JPasswordField password;
+    private LoginController loginController;
     private final JLabel success_message;
 
     public LoginView() {
@@ -21,6 +24,7 @@ public class LoginView extends JPanel implements ActionListener {
         //this.setSize(600, 450);
         //this.setTitle("Espotifai");
         //this.setLocationRelativeTo(null);
+        loginController = new LoginController(this);
         this.setLayout(new BorderLayout());
         this.setBackground(Color.green.brighter());
 
@@ -50,12 +54,12 @@ public class LoginView extends JPanel implements ActionListener {
 
         JLabel label_password = new JLabel("Password");
 
-        JTextField username = new JTextField(20);
+        username = new JTextField(20);
 
-        JPasswordField password = new JPasswordField(20);
+        password = new JPasswordField(20);
 
         JButton signin_button = new JButton("Sign In");
-        signin_button.addActionListener(this);
+        signin_button.addActionListener(loginController);
         signin_button.setActionCommand(INICIO);
 
         success_message = new JLabel("");
@@ -66,6 +70,7 @@ public class LoginView extends JPanel implements ActionListener {
         JButton register_button = new JButton("Register");
         register_button.setSize(25, 25);
         register_button.setActionCommand(SIGN_UP);
+        register_button.addActionListener(loginController);
 
         JLabel imagen = new JLabel();
         imagen.setIcon(new ImageIcon("logop.png"));
@@ -96,31 +101,14 @@ public class LoginView extends JPanel implements ActionListener {
         this.add(center, BorderLayout.CENTER);
         this.add(imagen, BorderLayout.WEST);
         this.add(signin_button, BorderLayout.SOUTH);
-
-        //VISIBILIDAD
-        this.setVisible(true);
     }
 
-    public int changueView (int num) {
-        this.numView = 0;
-        this.numView = num;
-        return num;
+    public String getUserName () {
+        return username.getText();
     }
 
-    public int getNumView() {
-        return numView;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String aux_message = "Login successful!";
-        success_message.setText(aux_message);
-
-        if (e.getActionCommand().equals(LoginView.INICIO)) {
-            this.changueView(3);
-        } else if (e.getActionCommand().equals(LoginView.SIGN_UP)) {
-            this.changueView(1);
-        }
+    public String getPassword () {
+        return Arrays.toString(password.getPassword());
     }
 }
 

@@ -6,15 +6,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
-public class InicioView extends JFrame implements ActionListener {
+public class InicioView extends JPanel implements ActionListener {
 
     InicioView() {
-        //AJUSTES PRINCIPALES DEL FRAME
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setMaximumSize(new Dimension(1500, 900));
-        this.setMinimumSize(new Dimension(900, 500));
-        this.setTitle("Espotifai - Inicio");
-        this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
         this.setBackground(Color.white);
 

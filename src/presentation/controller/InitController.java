@@ -1,19 +1,13 @@
 package presentation.controller;
 
-import presentation.view.LoginView;
-import presentation.view.SignUpView;
+import presentation.view.InitView;
 
 public class InitController {
-    private LoginView loginView;
-    private SignUpView signUpView;
+    private int numView;
+    private InitView initView;
 
-    public InitController(LoginView loginView, SignUpView signUpView) {
-        this.loginView = loginView;
-        this.signUpView = signUpView;
+    public void refreshView (int a) {
+        this.numView = a;
+        initView.changeView(a);
     }
-
-    public int getOperation () {
-        return loginView.getNumView() + signUpView.getNumView();
-    }
-
 }

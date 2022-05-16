@@ -11,6 +11,7 @@ import java.awt.*;
 public class InitView extends JFrame {
     private final CardLayout cardLayout = new CardLayout();
     private final InicioController inicioController = new InicioController();
+    JPanel content = new JPanel();
     //private final SignUpViewController signUpViewController = new SignUpViewController();
     //private final LoginController loginController = new LoginController();
 
@@ -20,7 +21,7 @@ public class InitView extends JFrame {
         setTitle("SPOTIFAI");
         setLayout(new BorderLayout());
 
-        //initController = new InitController();
+        initController = new InitController();
 
         JPanel content = setView();
         add(content);
@@ -29,12 +30,9 @@ public class InitView extends JFrame {
         setResizable(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setVisible(true);
     }
 
     private JPanel setView () {
-        JPanel content = new JPanel();
-
         InicioView inicioView = new InicioView();
         SignUpView signUpView = new SignUpView();
         LoginView loginView = new LoginView();
@@ -43,11 +41,12 @@ public class InitView extends JFrame {
 
         content.add(signUpView, "1");
         content.add(loginView, "2");
-        //content.add(inicioView, "3");
-
-        //Falta comunicacion entre los controllers para que informen a la vista Main lo que tiene que mostrar
-        cardLayout.show(content, "1");
+        content.add(inicioView, "3");
 
         return content;
+    }
+
+    public void changeView (int num) {
+        cardLayout.show(content, String.valueOf(num));
     }
 }

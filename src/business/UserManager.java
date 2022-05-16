@@ -3,6 +3,7 @@ package business;
 import business.entities.Playlist;
 import business.entities.User;
 
+import persistance.UserDAO;
 import persistance.dao.sql.SQLConnectorPlaylist;
 import persistance.dao.sql.SQLConnectorUser;
 
@@ -11,10 +12,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.LinkedList;
 
 public class UserManager {
-    private SQLConnectorUser sql;
+    private UserDAO sql;
     private SQLConnectorPlaylist sqlP;
 
-    public UserManager (SQLConnectorUser sql) {
+    public UserManager (UserDAO sql) {
         this.sql = sql;
     }
 
@@ -39,6 +40,19 @@ public class UserManager {
         sql.InsertDataUser(name, email, password);
     }
 
+    public boolean checkCorrectPassword (String password, String name) {
+        boolean correct = false;
+        User userAux = new User();
+        LinkedList<User> users = sql.SelectDataUser();
+
+        for (User user : users) {
+            if (user.getName().equals(name)) {
+                userAux = user;
+            }
+        }
+
+        return userAux.getPassword().equals(password);
+    }
     public boolean checkUsernameExistance (String name) {
         boolean exists = false;
         LinkedList<User> users = sql.SelectDataUser();
