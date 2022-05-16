@@ -1,16 +1,12 @@
 package presentation.view;
 
-import presentation.controller.InicioController;
 import presentation.controller.InitController;
-import presentation.controller.LoginController;
-import presentation.controller.SignUpViewController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class InitView extends JFrame {
     private final CardLayout cardLayout = new CardLayout();
-    private final InicioController inicioController = new InicioController();
     JPanel content = new JPanel();
     //private final SignUpViewController signUpViewController = new SignUpViewController();
     //private final LoginController loginController = new LoginController();

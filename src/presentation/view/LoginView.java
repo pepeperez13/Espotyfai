@@ -11,20 +11,20 @@ import java.util.Arrays;
 public class LoginView extends JPanel {
 
     public static final String INICIO = "INICIO";
-    public static final String SIGN_UP = "SIGN_UP";
+    public static final String REGISTRO = "REGISTRO";
     private JTextField username;
 
     private JPasswordField password;
     private LoginController loginController;
     private final JLabel success_message;
 
-    public LoginView() {
+    public LoginView (InitView initView) {
         //AJUSTES PRINCIPALES DEL FRAME
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setSize(600, 450);
         //this.setTitle("Espotifai");
         //this.setLocationRelativeTo(null);
-        loginController = new LoginController(this);
+        loginController = new LoginController(this, initView);
         this.setLayout(new BorderLayout());
         this.setBackground(Color.green.brighter());
 
@@ -69,7 +69,7 @@ public class LoginView extends JPanel {
 
         JButton register_button = new JButton("Register");
         register_button.setSize(25, 25);
-        register_button.setActionCommand(SIGN_UP);
+        register_button.setActionCommand(REGISTRO);
         register_button.addActionListener(loginController);
 
         JLabel imagen = new JLabel();

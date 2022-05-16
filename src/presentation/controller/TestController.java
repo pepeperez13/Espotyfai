@@ -21,7 +21,5 @@ public class TestController {
         //SongManager.PlayMusic(path);
         //SongManager.InsertNewSong("Lambskin","ReggTech","boyd","BOYD","C:\\Users\\borja\\V3\\Espotyfai\\files\\SongFiles\\Lambskin.wav","Borja");
         SongManager.SelectSong("Lambskin");
-
-
     }
 }

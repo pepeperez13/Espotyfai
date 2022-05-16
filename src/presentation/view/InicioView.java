@@ -1,14 +1,19 @@
 package presentation.view;
 
+import presentation.controller.InicioController;
+
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
-public class InicioView extends JPanel implements ActionListener {
+public class InicioView extends JPanel {
 
+    private InicioController inicioController;
     InicioView(InitView initView) {
+
+        inicioController = new InicioController(this, initView);
 
         this.setLayout(new BorderLayout());
         this.setBackground(Color.white);
@@ -154,13 +159,4 @@ public class InicioView extends JPanel implements ActionListener {
     }
 
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
-
-   /* public static void main (String[] strings) {
-        InicioView ini = new InicioView();
-        ini.setVisible(true);
-    }*/
 }

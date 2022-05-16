@@ -4,6 +4,7 @@ import business.UserManager;
 import persistance.UserDAO;
 import persistance.dao.sql.SQLConnector;
 import persistance.dao.sql.SQLConnectorUser;
+import presentation.view.InitView;
 import presentation.view.LoginView;
 
 import java.awt.event.ActionEvent;
@@ -17,9 +18,10 @@ public class LoginController implements ActionListener {
     private boolean passwordConfirmationError;
     private UserDAO userDAO = new SQLConnectorUser();
     private InitController initController;
-    public LoginController(LoginView loginView) {
+    public LoginController(LoginView loginView, InitView initView) {
         this.loginView = loginView;
         manager = new UserManager(userDAO);
+        initController = new InitController(initView);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -31,7 +33,7 @@ public class LoginController implements ActionListener {
                 //Mostrar error
             }
 
-        } else if (e.getActionCommand().equals(LoginView.SIGN_UP)) {
+        } else if (e.getActionCommand().equals(LoginView.REGISTRO)) {
             initController.refreshView(1);
         }
     }

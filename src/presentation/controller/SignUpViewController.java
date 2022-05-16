@@ -5,6 +5,7 @@ import persistance.UserDAO;
 import persistance.dao.sql.SQLConnector;
 
 import persistance.dao.sql.SQLConnectorUser;
+import presentation.view.InitView;
 import presentation.view.SignUpView;
 
 import javax.management.modelmbean.ModelMBean;
@@ -25,10 +26,10 @@ public class SignUpViewController implements ActionListener{
     private boolean passwordConfirmationError;
     private InitController initController;
 
-    public SignUpViewController (SignUpView signUpView) {
+    public SignUpViewController (SignUpView signUpView, InitView initView) {
         this.view = signUpView;
         manager = new UserManager(userDAO);
-        initController = new InitController();
+        initController = new InitController(initView);
     }
 
     @Override
@@ -37,7 +38,7 @@ public class SignUpViewController implements ActionListener{
 
             if (checkDataCorrect()) {
                 manager.insertNewUser(view.getUserName(), view.getEmail(), view.getPassword());
-                initController.refreshView(2);
+                initController.refreshView(3);
             } else {
                 view.showErrorMessage(userExistsError, emailExistsError, emailFormatError, passwordFormatError, passwordConfirmationError);
                 System.out.println("Hay error");
