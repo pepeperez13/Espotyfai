@@ -21,7 +21,7 @@ public class InitView extends JFrame {
         setTitle("SPOTIFAI");
         setLayout(new BorderLayout());
 
-        initController = new InitController();
+        initController = new InitController(this);
 
         JPanel content = setView();
         add(content);
@@ -33,9 +33,9 @@ public class InitView extends JFrame {
     }
 
     private JPanel setView () {
-        InicioView inicioView = new InicioView();
-        SignUpView signUpView = new SignUpView();
-        LoginView loginView = new LoginView();
+        InicioView inicioView = new InicioView(this);
+        SignUpView signUpView = new SignUpView(this);
+        LoginView loginView = new LoginView(this);
 
         content.setLayout(cardLayout);
 

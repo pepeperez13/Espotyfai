@@ -28,10 +28,10 @@ public class SignUpView extends JPanel {
         frame.setVisible(true);
     }
 
-    public SignUpView () {
+    public SignUpView (InitView initView) {
         //setLocation(0,10);
 
-        controller = new SignUpViewController(this);
+        controller = new SignUpViewController(this, initView);
 
         setSize(1500, 900);
         //setLayout(new BorderLayout(0, 50));

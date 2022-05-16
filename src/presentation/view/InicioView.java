@@ -8,7 +8,8 @@ import java.io.File;
 
 public class InicioView extends JPanel implements ActionListener {
 
-    InicioView() {
+    InicioView(InitView initView) {
+
         this.setLayout(new BorderLayout());
         this.setBackground(Color.white);
 

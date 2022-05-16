@@ -1,5 +1,6 @@
 package business;
 import business.entities.Song;
+import persistance.SongDAO;
 import persistance.dao.sql.SQLConnectorSong;
 import javax.sound.sampled.*;
 import java.io.File;
@@ -9,31 +10,31 @@ import java.util.Scanner;
 
 public class SongManager<Public> {
 
-    private static SQLConnectorSong sqlsong;
+    private static SongDAO songDAO;
 
 
 
 
     public void addSong (String title, String Genre, String album, String artist, String path,String owner) {
-        sqlsong.InsertDataSong(title, Genre, album, artist, path,owner);
+        songDAO.InsertDataSong(title, Genre, album, artist, path,owner);
     }
     public LinkedList<Song> ListSongs() {
-        sqlsong = new SQLConnectorSong();
+        songDAO = new SQLConnectorSong();
         LinkedList<Song> songs;
-        songs = sqlsong.SelectDataSong();
+        songs = songDAO.SelectDataSong();
         System.out.println(songs);
         return songs;
     }
     public static void InsertNewSong(String title, String genre, String album, String artist, String path, String owner){
-        sqlsong = new SQLConnectorSong();
+        songDAO = new SQLConnectorSong();
 
-        sqlsong.InsertDataSong(title, genre, album, artist, path, owner);
+        songDAO.InsertDataSong(title, genre, album, artist, path, owner);
     }
 
     public static LinkedList<Song> SelectSong(String Song) {
-        sqlsong = new SQLConnectorSong();
+        songDAO = new SQLConnectorSong();
         LinkedList<Song> song;
-        song = sqlsong.SelectSong(Song);
+        song = songDAO.SelectDataSong();
         System.out.println(song);
         return song;
     }

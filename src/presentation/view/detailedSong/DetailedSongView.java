@@ -1,4 +1,4 @@
-package presentation.view;
+package presentation.view.detailedSong;
 
 import business.LyricsFetcher;
 import presentation.controller.DetailedSongController;
@@ -29,7 +29,6 @@ public class DetailedSongView extends JFrame {
         add(setGeneralData("Rock", "Albumsito", "Yoyo", "3:24"), BorderLayout.CENTER);
         add(setCloseLabel(), BorderLayout.SOUTH);
 
-        setVisible(true);
     }
 
     private JLabel setTitleAndAuthor (String title, String author) {
@@ -157,25 +156,5 @@ public class DetailedSongView extends JFrame {
         return exitButton;
     }
 
-    public static class ShowPlaylistsFrame extends JFrame {
-
-        public ShowPlaylistsFrame() {
-
-            setSize(400, 300);
-            setLocation(550, 300);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            Box box= Box.createVerticalBox();
-            for (int i=1; i<=10; i++) {
-                JButton btn= new JButton("Button "+i);
-                btn.setMaximumSize(new Dimension(150, 30));
-                box.add(btn);
-            }
-            box.setAlignmentX(Component.CENTER_ALIGNMENT);
-            JScrollPane scroll= new JScrollPane(box);
-            scroll.setPreferredSize(new Dimension(150, 100));
-            add(scroll);
-
-        }
-    }
 }
 

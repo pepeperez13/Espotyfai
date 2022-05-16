@@ -76,9 +76,6 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
     }
 
 
-
-
-
     public LinkedList<Playlist> SelectDataPlaylist(){
         LinkedList<Playlist> playlists = new LinkedList<>();
         String name;

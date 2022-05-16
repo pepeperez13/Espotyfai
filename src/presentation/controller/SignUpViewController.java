@@ -28,6 +28,7 @@ public class SignUpViewController implements ActionListener{
     public SignUpViewController (SignUpView signUpView) {
         this.view = signUpView;
         manager = new UserManager(userDAO);
+        initController = new InitController();
     }
 
     @Override
