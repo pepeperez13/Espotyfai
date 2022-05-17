@@ -1,5 +1,6 @@
 package presentation.controller;
 
+import business.Store;
 import business.UserManager;
 import persistance.UserDAO;
 import persistance.dao.sql.SQLConnector;
@@ -18,10 +19,12 @@ public class   LoginController implements ActionListener {
     private boolean passwordConfirmationError;
     private UserDAO userDAO = new SQLConnectorUser();
     private InitController initController;
+    private Store store;
     public LoginController(LoginView loginView, InitView initView) {
         this.loginView = loginView;
         manager = new UserManager(userDAO);
         initController = new InitController(initView);
+        store = new Store();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -29,6 +32,8 @@ public class   LoginController implements ActionListener {
 
             if (checkDataCorrect()) {
                 initController.refreshView(3);
+                //Retornar el user current. Buscando con el login introducido y retornando de la base de datos
+                store.setUser(manager.getCurrentUser(loginView.getUserName()));
             } else {
                 //Mostrar error
             }

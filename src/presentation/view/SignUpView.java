@@ -17,6 +17,7 @@ public class SignUpView extends JPanel {
     public static final String FEMALE_COMMAND = "FEMALE_COMMAND";
     public static final String OTHER = "OTHER_COMMAND";
     public static final String REGISTER_BUTTON = "REGISTER_BUTTON";
+    public static final String LOGIN_BUTTON = "LOGIN_BUTTON";
 
     private final SignUpViewController controller;
 
@@ -165,9 +166,15 @@ public class SignUpView extends JPanel {
         accountAlready.setHorizontalAlignment(JLabel.RIGHT);
         accountAlready.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
-        JLabel login = new JLabel("       Log in");
+        //JLabel login = new JLabel("       Log in");
+        JButton login = new JButton("       Log in");
         login.setHorizontalAlignment(JLabel.LEFT);
         login.setFont(new Font("Tahoma", Font.BOLD, 16));
+        login.setBorderPainted(false);
+        login.setPreferredSize(new Dimension(50, 16));
+        login.setBackground(new Color(255, 255, 255));
+        login.setActionCommand(LOGIN_BUTTON);
+        login.addActionListener(controller);
 
         panel2.add(accountAlready);
         panel2.add(login);

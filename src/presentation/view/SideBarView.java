@@ -32,7 +32,7 @@ public class SideBarView extends JPanel{ /**Cambiar a JPanel*/
     private CardLayout c = new CardLayout();
     private final GridBagConstraints constraint = new GridBagConstraints();
 
-    public SideBarView () {
+    public SideBarView (InitView initView) {
         setLayout(new BorderLayout());
 
         Dimension dimension = getPreferredSize();

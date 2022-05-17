@@ -65,6 +65,20 @@ public class UserManager {
         return exists;
     }
 
+    public User getCurrentUser (String login) {
+        User userAux = new User();
+        LinkedList<User> users = sql.SelectDataUser();
+        for (User user: users) {
+            if (user.getName().equals(login)) {
+                userAux = user;
+            } else {
+                //Usuario no existe
+                //¿Frame error?
+            }
+        }
+        return userAux;
+    }
+
     public boolean checkEmailExistance (String email) {
         boolean exists = false;
         LinkedList<User> users = sql.SelectDataUser();

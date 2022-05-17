@@ -32,12 +32,14 @@ public class InitView extends JFrame {
         InicioView inicioView = new InicioView(this);
         SignUpView signUpView = new SignUpView(this);
         LoginView loginView = new LoginView(this);
+        SideBarView sideBarView = new SideBarView(this);
 
         content.setLayout(cardLayout);
 
         content.add(signUpView, "1");
         content.add(loginView, "2");
         content.add(inicioView, "3");
+        content.add(sideBarView, "4");
 
         return content;
     }
