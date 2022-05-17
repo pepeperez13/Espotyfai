@@ -167,17 +167,18 @@ public class SignUpView extends JPanel {
         accountAlready.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
         //JLabel login = new JLabel("       Log in");
-        JButton login = new JButton("       Log in");
-        login.setHorizontalAlignment(JLabel.LEFT);
-        login.setFont(new Font("Tahoma", Font.BOLD, 16));
-        login.setBorderPainted(false);
-        login.setPreferredSize(new Dimension(50, 16));
-        login.setBackground(new Color(255, 255, 255));
-        login.setActionCommand(LOGIN_BUTTON);
-        login.addActionListener(controller);
+        JButton loginButton = new JButton("Log in");
+        loginButton.setPreferredSize(new Dimension(100, 60));
+        loginButton.setFont(new Font("Tahoma", Font.BOLD, 22));
+        loginButton.setHorizontalAlignment((int) JButton.LEFT_ALIGNMENT);
+        loginButton.setBackground(new Color(238, 238, 238));
+        loginButton.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        loginButton.setFocusable(false);
+        loginButton.setActionCommand(LOGIN_BUTTON);
+        loginButton.addActionListener(controller);
 
         panel2.add(accountAlready);
-        panel2.add(login);
+        panel2.add(loginButton);
 
         panel.add(panel2);
         return panel;
