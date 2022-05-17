@@ -4,15 +4,16 @@ import business.entities.User;
 
 public class Store {
     public static User LOGGED_USER;
-    private User currentUser;
+    private User currentUser = new User();
 
-    public void setUser (User loginUser) {
-        //Cuando se inicia sesion, mandar esta info aquí.Será la informacion gestionaremos a tiempo real.
-        currentUser = loginUser;
+    public Store (User user) {
+        this.currentUser = user;
     }
+    public Store () {
 
+    }
     public User getUser () {
-        return currentUser;
+        return this.currentUser;
     }
 
 }

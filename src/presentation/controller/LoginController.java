@@ -24,16 +24,15 @@ public class   LoginController implements ActionListener {
         this.loginView = loginView;
         manager = new UserManager(userDAO);
         initController = new InitController(initView);
-        store = new Store();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(LoginView.INICIO)) {
 
-            if (checkDataCorrect()) {
-                initController.refreshView(3);
+            if (!checkDataCorrect()) {
                 //Retornar el user current. Buscando con el login introducido y retornando de la base de datos
-                store.setUser(manager.getCurrentUser(loginView.getUserName()));
+                store = new Store(manager.getCurrentUser(loginView.getUserName()));
+                initController.refreshView(3);
             } else {
                 //Mostrar error
             }

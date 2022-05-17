@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class SongManager<Public> {
 
-    private static SongDAO songDAO;
+    private static SongDAO songDAO = new SQLConnectorSong();
 
 
 

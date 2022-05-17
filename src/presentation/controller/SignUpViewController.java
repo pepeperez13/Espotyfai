@@ -1,5 +1,6 @@
 package presentation.controller;
 
+import business.Store;
 import business.UserManager;
 import persistance.UserDAO;
 import persistance.dao.sql.SQLConnector;
@@ -18,7 +19,7 @@ public class SignUpViewController implements ActionListener{
     private static SignUpView view;
     private UserDAO userDAO = new SQLConnectorUser();
     private UserManager manager;
-
+    private Store store;
     private boolean userExistsError;
     private boolean emailExistsError;
     private boolean emailFormatError;
@@ -38,6 +39,7 @@ public class SignUpViewController implements ActionListener{
 
             if (checkDataCorrect()) {
                 manager.insertNewUser(view.getUserName(), view.getEmail(), view.getPassword());
+                store = new Store(manager.getCurrentUser(view.getUserName()));
                 initController.refreshView(3);
             } else {
                 view.showErrorMessage(userExistsError, emailExistsError, emailFormatError, passwordFormatError, passwordConfirmationError);

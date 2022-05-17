@@ -10,11 +10,10 @@ import java.awt.event.ActionListener;
 public class AddMusicController implements ActionListener {
     private final SongManager songManager;
     private final AddMusicPanelView addMusicPanelView;
-    private Store store;
+    private Store store = new Store();
     public AddMusicController (SongManager songManager, AddMusicPanelView addMusicPanelView) {
         this.songManager = songManager;
         this.addMusicPanelView = addMusicPanelView;
-        store = new Store();
     }
     @Override
     public void actionPerformed(ActionEvent e) {

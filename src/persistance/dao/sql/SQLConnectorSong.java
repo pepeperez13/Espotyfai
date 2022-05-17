@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.LinkedList;
 
 public class SQLConnectorSong implements SongDAO {
-    private static String dbURL = "jdbc:mysql://localhost:3306/espotifai";
+    private static String dbURL = "jdbc:mysql://localhost:3306/espotifay";
     private static String username = "root";
     private static String password = "";
     private static Connection conn;
