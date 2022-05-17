@@ -8,6 +8,13 @@ import java.awt.*;
 
 public class DetailedSongView extends JFrame {
 
+    private String title;
+    private String genre;
+    private String album;
+    private String artist;
+    private String owner;
+    private String path;
+
     private static final String ADD_TO_PLAYLIST_COMMAND = "ADD_TO_PLAYLIST_COMMAND";
     private static final String PLAY_SONG_COMMAND = "PLAY_SONG_COMMAND";
     private static final String PAUSE_SONG_COMMAND = "PAUSE_SONG_COMMAND";
@@ -156,5 +163,28 @@ public class DetailedSongView extends JFrame {
         return exitButton;
     }
 
+    public String getSongTitle() {
+        return title;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public String getSongArtist() {
+        return artist;
+    }
+
+    public String getSongOwner() {
+        return owner;
+    }
+
+    public String getPath() {
+        return path;
+    }
 }
 

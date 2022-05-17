@@ -1,6 +1,7 @@
 package business;
 
 import business.entities.Playlist;
+import business.entities.Song;
 import persistance.PlaylistDAO;
 import persistance.dao.sql.SQLConnectorPlaylist;
 
@@ -16,5 +17,9 @@ public class PlaylistManager {
 
     public LinkedList<Playlist> getDataPlaylists () {
         return playlistDAO.SelectDataPlaylist();
+    }
+
+    public boolean adSongToPlaylist (String songName, String playlistName){
+        return true;
     }
 }

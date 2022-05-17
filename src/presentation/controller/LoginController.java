@@ -10,7 +10,7 @@ import presentation.view.LoginView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginController implements ActionListener {
+public class   LoginController implements ActionListener {
     private LoginView loginView;
     private UserManager manager;
 

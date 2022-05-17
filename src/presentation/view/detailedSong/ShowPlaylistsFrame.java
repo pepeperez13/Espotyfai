@@ -10,23 +10,39 @@ import java.util.LinkedList;
 
 public class ShowPlaylistsFrame extends JFrame {
 
-    public ShowPlaylistsFrame (DetailedSongView detailedSongView, DetailedSongController controller) {
+    private ShowPlaylistsController controller;
 
-        setSize(400, 300);
-        setLocation(550, 300);
+    public ShowPlaylistsFrame (DetailedSongView detailedSongView) {
+        controller = new ShowPlaylistsController(this, detailedSongView);
+        setSize(600, 400);
+        setLocation(500, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Box box= Box.createVerticalBox();
-        LinkedList<Playlist> playlists = controller.getDataPlaylists();
-        for (int i=1; i<=10; i++) {
-            JButton btn= new JButton(playlists.get(i).getName());
-            btn.setMaximumSize(new Dimension(150, 30));
-            box.add(btn);
+        //LinkedList<Playlist> playlists = controller.getDataPlaylists();
+        Playlist p1 = new Playlist("P1", "popo");
+        Playlist p2 = new Playlist("P1htyhrtyhtygfbfgbfgbfgblfidkbjotiblhblihihbhhyyhty", "popo");
+        Playlist p3 = new Playlist("Pgrtgrt1", "popo");
+        Playlist p4 = new Playlist("P1t", "popo");
+
+        LinkedList<Playlist> playlists = new LinkedList<>();
+        playlists.add(p1); playlists.add(p2); playlists.add(p3); playlists.add(p4);
+
+
+        for (int i= 0; i < playlists.size(); i++) {
+            JButton button = new JButton(playlists.get(i).getName());
+            button.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            button.setAlignmentX(Component.CENTER_ALIGNMENT);
+            button.setFocusable(false);
+            button.setActionCommand(playlists.get(i).getName());
+            button.addActionListener(controller);
+            box.add(button);
         }
-        box.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         JScrollPane scroll= new JScrollPane(box);
-        scroll.setPreferredSize(new Dimension(150, 100));
+        //scroll.setPreferredSize(new Dimension(150, 100));
         add(scroll);
+
 
     }
 }

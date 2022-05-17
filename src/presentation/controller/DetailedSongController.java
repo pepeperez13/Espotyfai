@@ -27,7 +27,7 @@ public class DetailedSongController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("ADD_TO_PLAYLIST_COMMAND")); {
             System.out.println("HOLAAAAAAA");
-            ShowPlaylistsFrame showPlaylistsFrame = new ShowPlaylistsFrame(detailedSongView, this);
+            ShowPlaylistsFrame showPlaylistsFrame = new ShowPlaylistsFrame(detailedSongView);
             showPlaylistsFrame.setVisible(true);
         }
     }
