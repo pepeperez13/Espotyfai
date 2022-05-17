@@ -1,15 +1,15 @@
 package presentation.controller;
 
 import presentation.view.ConfMusicPanelView;
-import presentation.view.SideBarView;
+import presentation.view.ConfigAccountView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ConfMusicController implements ActionListener {
     private ConfMusicPanelView confMusicPanel;
-    private SideBarView menuFrontal;
-    public ConfMusicController (ConfMusicPanelView confMusicPanel, SideBarView menuFrontal) {
+    private ConfigAccountView menuFrontal;
+    public ConfMusicController (ConfMusicPanelView confMusicPanel, ConfigAccountView menuFrontal) {
         this.confMusicPanel = confMusicPanel;
         this.menuFrontal = menuFrontal;
     }

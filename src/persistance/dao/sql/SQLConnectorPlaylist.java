@@ -76,6 +76,36 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
     }
 
 
+    public LinkedList<Playlist> SelectPlaylistsOfUser(User user)
+    {
+        LinkedList<Playlist> playlists = new LinkedList<>();
+        String name = user.getName();
+        String owner = user.getEmail();
+
+        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
+
+            System.out.println("Successful connection...");
+            String sql = "SELECT * FROM PLAYLIST WHERE PLAYLIST_OWNER=?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1,owner);
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next())
+            {
+                name = rs.getString("PLAYLIST_NAME");
+                owner = rs.getString("PLAYLIST_OWNER");
+                Playlist newPlaylist = new Playlist(name, owner);
+                playlists.add(newPlaylist);
+                // print the results
+                System.out.format("%s, %s\n", name,owner);
+            }
+            statement.close();
+            return playlists;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+
     public LinkedList<Playlist> SelectDataPlaylist(){
         LinkedList<Playlist> playlists = new LinkedList<>();
         String name;

@@ -18,7 +18,7 @@ public class SQLConnectorArtist implements ArtistDAO {
     public void InsertDataArtist(String name) {
 
 
-        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
+        try (Connection conn = DriverManager.getConnection(SQLConfig.dbURL, username, password)) {
 
             System.out.println("Successful connection...");
             String sql = "INSERT INTO artist (ARTIST_NAME) VALUES (?)";

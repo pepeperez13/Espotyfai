@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class SideBarView extends JPanel{ /**Cambiar a JPanel*/
+public class ConfigAccountView extends JPanel{ /**Cambiar a JPanel*/
     public static final String INICIO_COMMAND = "INICIO_COMMAND";
     public static final String GO_CONFIG_MUSIC = "GO_CONFIG_MUSIC";
     public static final String GO_CONFIG_USER = "GO_CONFIG_USER";
@@ -30,9 +30,10 @@ public class SideBarView extends JPanel{ /**Cambiar a JPanel*/
     private JPanel cardPanel = new JPanel();
     private JPanel menuFrontal = new JPanel();
     private CardLayout c = new CardLayout();
+
     private final GridBagConstraints constraint = new GridBagConstraints();
 
-    public SideBarView (InitView initView) {
+    public ConfigAccountView() {
         setLayout(new BorderLayout());
 
         Dimension dimension = getPreferredSize();

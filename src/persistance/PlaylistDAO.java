@@ -2,17 +2,20 @@ package persistance;
 
 
 import business.entities.Playlist;
+import business.entities.User;
 
 import java.util.LinkedList;
 
 public interface PlaylistDAO {
 
-    public void InsertDataPlaylist(String name,String owner);
+     void InsertDataPlaylist(String name,String owner);
 
-    public void DeleteDataPlaylist(String name);
+     void DeleteDataPlaylist(String name);
 
-    public void UpdateDataPlaylist(String name1,String owner, String name2);
+     LinkedList<Playlist> SelectPlaylistsOfUser(User user);
 
-    public LinkedList<Playlist> SelectDataPlaylist();
+     void UpdateDataPlaylist(String name1,String owner, String name2);
+
+     LinkedList<Playlist> SelectDataPlaylist();
 
 }

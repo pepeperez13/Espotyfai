@@ -1,5 +1,6 @@
 package presentation.view;
 
+import presentation.controller.ConfMusicController;
 import presentation.controller.InicioController;
 
 import javax.swing.*;
@@ -15,8 +16,11 @@ public class InicioView extends JPanel {
     private JButton go_inicio;
     private JButton go_search;
     private JButton go_list;
-    InicioView(InitView initView) {
-        inicioController = new InicioController(this, initView);
+    private JPanel cardPanel = new JPanel();
+    private CardLayout c = new CardLayout();
+    public int numView;
+    InicioView() {
+        inicioController = new InicioController(this);
 
         this.setLayout(new BorderLayout());
         add(configureMenuFrontal (), BorderLayout.WEST);
@@ -253,6 +257,27 @@ public class InicioView extends JPanel {
         menuFrontal.add(groupBotones, constraint);
 
         return menuFrontal;
+    }
+    public void changueView (int num) {
+        numView = num;
+        configureCardPanel();
+        c.show(cardPanel, String.valueOf(numView));
+    }
+
+    private JPanel configureCardPanel () {
+        cardPanel.setLayout(c);
+
+
+         ConfigPlaylistView configPlaylistView= new ConfigPlaylistView();
+         ConfigAccountView configAccountView= new ConfigAccountView();
+
+        cardPanel.add(this, "1");
+        //cardPanel.add(, "2");
+        cardPanel.add(configPlaylistView, "3");
+        cardPanel.add(configAccountView, "4");
+
+
+        return cardPanel;
     }
 
 

@@ -31,8 +31,7 @@ public class PlayListRender extends JPanel implements ListCellRenderer<Playlist>
     }
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends Playlist> list,
-                                                  Playlist playlist, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList<? extends Playlist> list, Playlist playlist, int index, boolean isSelected, boolean cellHasFocus) {
 
         ImageIcon img = new ImageIcon("Images/logo.png");
         Image image1 = img.getImage();
