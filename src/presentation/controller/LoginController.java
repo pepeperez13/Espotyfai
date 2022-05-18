@@ -29,12 +29,12 @@ public class   LoginController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(LoginView.INICIO)) {
 
-            if (!checkDataCorrect()) {
+            if (checkDataCorrect()) {
                 //Retornar el user current. Buscando con el login introducido y retornando de la base de datos
                 store = new Store(manager.getCurrentUser(loginView.getUserName()));
                 initController.refreshView(3);
             } else {
-                //Mostrar error
+                loginView.showErrorMessage(userExistsError, passwordConfirmationError);
             }
 
         } else if (e.getActionCommand().equals(LoginView.REGISTRO)) {
@@ -44,9 +44,9 @@ public class   LoginController implements ActionListener {
 
     // Clase que comprobará que todos los parámetros de login sean correctos
     public boolean checkDataCorrect() {
-        userExistsError = manager.checkUsernameExistance(loginView.getUserName());
+        userExistsError = !manager.checkUsernameExistance(loginView.getUserName());
         if (!userExistsError) {
-            passwordConfirmationError = manager.checkCorrectPassword(loginView.getPassword(), loginView.getUserName());
+            passwordConfirmationError = !manager.checkCorrectPassword(loginView.getPassword(), loginView.getUserName());
         }
         return !userExistsError && !passwordConfirmationError;
     }

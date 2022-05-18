@@ -105,6 +105,19 @@ public class LoginView extends JPanel {
         this.add(signin_button, BorderLayout.SOUTH);
     }
 
+    public void showErrorMessage (boolean userExistsError, boolean passwordError) {
+        String message = "";
+
+        if (userExistsError) {
+            message = "No account is registered for that name. Please sign up.\n";
+        }
+        if (passwordError) {
+            message = message + "Incorrect password\n";
+        }
+
+        JOptionPane.showMessageDialog(this, message, "Following errors were found", JOptionPane.WARNING_MESSAGE);
+    }
+
     public String getUserName () {
         return username.getText();
     }

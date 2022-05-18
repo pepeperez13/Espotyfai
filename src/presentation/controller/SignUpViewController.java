@@ -43,7 +43,6 @@ public class SignUpViewController implements ActionListener{
                 initController.refreshView(3);
             } else {
                 view.showErrorMessage(userExistsError, emailExistsError, emailFormatError, passwordFormatError, passwordConfirmationError);
-                System.out.println("Hay error");
             }
         } else if (e.getActionCommand().equals(SignUpView.LOGIN_BUTTON)) {
             initController.refreshView(2);

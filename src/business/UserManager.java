@@ -45,23 +45,48 @@ public class UserManager {
         User userAux = new User();
         LinkedList<User> users = sql.SelectDataUser();
 
+        byte[] psw = password.getBytes();
+        byte[] hash = null;
+
+        // Convertimos la contraseña mediante el algoritmo MD5
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            hash = md.digest(psw);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        StringBuilder strBuilder = new StringBuilder();
+
+        for(byte b:hash) {
+            strBuilder.append(String.format("%02x", b));
+        }
+        password = strBuilder.toString();
+
         for (User user : users) {
             if (user.getName().equals(name)) {
                 userAux = user;
             }
         }
-
-        return userAux.getPassword().equals(password);
+        System.out.println(userAux.getPassword());
+        System.out.println(password);
+        correct = userAux.getPassword().equals(password);
+        return correct;
     }
     public boolean checkUsernameExistance (String name) {
         boolean exists = false;
         LinkedList<User> users = sql.SelectDataUser();
-        for (User user: users) {
-            if (user.getName().equals(name)) {
-                exists = true;
-                break;
+        try {
+            for (User user : users) {
+                if (user.getName().equals(name)) {
+                    exists = true;
+                    break;
+                }
             }
+        }catch (NullPointerException e) {
+            // Si la base de datos esta vacia (users vale null), no existe ningun usuario
+            return false;
         }
+
         return exists;
     }
 
