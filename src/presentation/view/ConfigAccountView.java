@@ -1,6 +1,5 @@
 package presentation.view;
 
-import persistance.dao.sql.SQLConnector;
 import persistance.dao.sql.SQLConnectorSong;
 import presentation.controller.ConfMusicController;
 import presentation.controller.SideBarController;

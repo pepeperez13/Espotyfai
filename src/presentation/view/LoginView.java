@@ -1,6 +1,8 @@
 package presentation.view;
-import persistance.dao.sql.SQLConnector;
+import persistance.dao.sql.SQLConnectorUser;
+import persistance.dao.sql.SQLConnectorSong;
 import presentation.controller.LoginController;
+import persistance.dao.sql.SQLConnectorSongPlaylist;
 
 import javax.swing.*;
 import java.awt.*;

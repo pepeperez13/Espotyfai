@@ -14,11 +14,10 @@ public class SongManager<Public> {
 
 
 
-
-    public void addSong (String title, String Genre, String album, String artist, String path,String owner) {
+    public static void addSong (String title, String Genre, String album, String artist, String path,String owner) {
         songDAO.InsertDataSong(title, Genre, album, artist, path,owner);
     }
-    public LinkedList<Song> ListSongs() {
+    public static LinkedList<Song> ListSongs() {
         songDAO = new SQLConnectorSong();
         LinkedList<Song> songs;
         songs = songDAO.SelectDataSong();
@@ -39,35 +38,35 @@ public class SongManager<Public> {
         return song;
     }
     //Metodo que permite dado un path reproducir archivos de music a .wav
-    public static void PlayMusic(String path) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public static void PlayMusic(String path,int index) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
         //sqlsong = new SQLConnectorSong();
         //LinkedList<Song> song1 = null;
         //sqlsong.SelectSong(name) = song1;
 
 
-            Scanner scanner = new Scanner(System.in);
+
             File file = new File(path);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
-            String response = "";
+            int response = 0;
 
         //Switch que controla si se le da a play, pause, se rebobina al principio o se para termina el proceso de reproduccion
-        while(!response.equals("E")) {
-            System.out.println("Play (P) Button --- Stop (S) Button --- Reset (R) Button --- Exit");
+        while(response !=4) {
+            System.out.println("Play (1) Button --- Stop (2) Button --- Reset (3) Button --- Exit");
         //Sistema solo de prueba para hacer funcionar la reproduccion, en un fururo se controlara mediante la interfaz grafica del sistema.
-            response = scanner.next();
-            response = response.toUpperCase();
+
+
 
             switch(response) {
-                case ("P"): clip.start();
+                case (1): clip.start();
                     break;
-                case ("S"): clip.stop();
+                case (2): clip.stop();
                     break;
-                case ("R"): clip.setMicrosecondPosition(0);
+                case (3): clip.setMicrosecondPosition(0);
                     break;
-                case ("Ee"): clip.close();
+                case (4): clip.close();
                     break;
 
                 default: System.out.println("----");

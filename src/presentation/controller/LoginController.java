@@ -3,7 +3,7 @@ package presentation.controller;
 import business.Store;
 import business.UserManager;
 import persistance.UserDAO;
-import persistance.dao.sql.SQLConnector;
+
 import persistance.dao.sql.SQLConnectorUser;
 import presentation.view.InitView;
 import presentation.view.LoginView;
