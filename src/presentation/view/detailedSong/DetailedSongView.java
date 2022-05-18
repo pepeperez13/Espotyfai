@@ -18,6 +18,7 @@ public class DetailedSongView extends JFrame {
     private static final String ADD_TO_PLAYLIST_COMMAND = "ADD_TO_PLAYLIST_COMMAND";
     private static final String PLAY_SONG_COMMAND = "PLAY_SONG_COMMAND";
     private static final String PAUSE_SONG_COMMAND = "PAUSE_SONG_COMMAND";
+    private static final String CLOSE_PANEL_COMMAND = "CLOSE_PANEL_COMMAND";
     private DetailedSongController controller;
     private LyricsFetcher lyricsFetcher;
 
@@ -157,7 +158,7 @@ public class DetailedSongView extends JFrame {
         exitButton.setBackground(Color.GRAY);
         exitButton.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
         exitButton.setFocusable(false);
-        exitButton.setActionCommand(PLAY_SONG_COMMAND);
+        exitButton.setActionCommand(CLOSE_PANEL_COMMAND);
         exitButton.addActionListener(controller);
 
         return exitButton;

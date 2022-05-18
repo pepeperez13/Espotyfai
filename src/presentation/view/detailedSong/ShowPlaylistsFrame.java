@@ -16,7 +16,7 @@ public class ShowPlaylistsFrame extends JFrame {
         controller = new ShowPlaylistsController(this, detailedSongView);
         setSize(600, 400);
         setLocation(500, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         Box box= Box.createVerticalBox();
         //LinkedList<Playlist> playlists = controller.getDataPlaylists();

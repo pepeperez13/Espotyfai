@@ -23,5 +23,7 @@ public class ShowPlaylistsController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         playlistManager.adSongToPlaylist(detailedSongView.getSongTitle(), e.getActionCommand());
+        System.out.println("Song added");
+        showPlaylistsFrame.dispose();
     }
 }
