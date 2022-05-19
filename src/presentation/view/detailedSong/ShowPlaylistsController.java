@@ -1,6 +1,7 @@
 package presentation.view.detailedSong;
 
 import business.PlaylistManager;
+import business.SongPlaylistManager;
 import persistance.PlaylistDAO;
 import persistance.dao.sql.SQLConnectorPlaylist;
 
@@ -12,6 +13,7 @@ public class ShowPlaylistsController implements ActionListener {
     private ShowPlaylistsFrame showPlaylistsFrame;
     private DetailedSongView detailedSongView;
     private PlaylistManager playlistManager;
+    private SongPlaylistManager songPlaylistManager;
 
 
 
@@ -22,8 +24,9 @@ public class ShowPlaylistsController implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        playlistManager.adSongToPlaylist(detailedSongView.getSongTitle(), e.getActionCommand());
-        System.out.println("Song added");
+        SongPlaylistManager.InsertNewSongPlaylist(detailedSongView.getSongTitle(), e.getActionCommand());
+
+        System.out.println("Added song " + detailedSongView.getSongTitle() + " to playlist " + e.getActionCommand());
         showPlaylistsFrame.dispose();
     }
 }

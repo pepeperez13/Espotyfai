@@ -11,6 +11,7 @@ import java.util.LinkedList;
 public class ShowPlaylistsFrame extends JFrame {
 
     private ShowPlaylistsController controller;
+    private String songName;
 
     public ShowPlaylistsFrame (DetailedSongView detailedSongView) {
         controller = new ShowPlaylistsController(this, detailedSongView);

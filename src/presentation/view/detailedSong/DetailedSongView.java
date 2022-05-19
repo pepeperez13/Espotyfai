@@ -1,12 +1,17 @@
 package presentation.view.detailedSong;
 
 import business.LyricsFetcher;
+import business.entities.Playlist;
+import business.entities.Song;
 import presentation.controller.DetailedSongController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class DetailedSongView extends JFrame {
+
+    private Song song;
+    private Playlist chosenPlaylist;
 
     private String title;
     private String genre;
@@ -165,6 +170,7 @@ public class DetailedSongView extends JFrame {
     }
 
     public String getSongTitle() {
+        title = "The Time";
         return title;
     }
 
@@ -186,6 +192,10 @@ public class DetailedSongView extends JFrame {
 
     public String getPath() {
         return path;
+    }
+
+    public Song getSong () {
+        return song;
     }
 }
 
