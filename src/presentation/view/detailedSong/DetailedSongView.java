@@ -169,6 +169,12 @@ public class DetailedSongView extends JFrame {
         return exitButton;
     }
 
+    public void showErrorMessage () {
+        String message = "Song is already contained in selected playlist and can not be added again.";
+
+        JOptionPane.showMessageDialog(this, message, "Following errors were found", JOptionPane.WARNING_MESSAGE);
+    }
+
     public String getSongTitle() {
         title = "The Time";
         return title;

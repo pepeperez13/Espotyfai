@@ -11,9 +11,6 @@ import persistance.dao.sql.SQLConnectorSong;
 import persistance.dao.sql.SQLConnectorSongPlaylist;
 
 import java.util.LinkedList;
-import java.io.*;
-
-
 
 
 public class SongPlaylistManager<Public> {
@@ -21,8 +18,12 @@ public class SongPlaylistManager<Public> {
     private static PlaylistDAO playlistDAO;
     private static SongDAO songDAO;
 
+
     public static void InsertNewSongPlaylist(String title, String name) {
+        boolean exists = false;
         songPDAO = new SQLConnectorSongPlaylist();
+
+
         songPDAO.InsertDataSongP(title, name);
     }
     public static void DeleteNewSongPlaylist(String title) {
@@ -47,13 +48,27 @@ public class SongPlaylistManager<Public> {
         for(int i = 0; i < PSongs.size(); i++) {
             System.out.println(PSongs.get(i).getTitle());
 
-
             songs.add(songDAO.SelectSong(PSongs.get(i).getTitle())) ;
-
 
         }
 
         return songs;
+    }
+
+    public boolean songExistsInPlaylist (String songTitle, String playlistName) {
+        LinkedList<Song> songs = ListPlaylistSongs(playlistName);
+        boolean exists = false;
+
+        try {
+            for (Song song : songs) {
+                if (song.getTitle().equals(songTitle)) {
+                    exists = true;
+                }
+            }
+        } catch (NullPointerException e) {
+            exists = false;
+        }
+        return exists;
     }
 
 

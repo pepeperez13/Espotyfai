@@ -20,13 +20,16 @@ public class ShowPlaylistsController implements ActionListener {
     public ShowPlaylistsController (ShowPlaylistsFrame showPlaylistsFrame, DetailedSongView detailedSongView) {
         this.showPlaylistsFrame = showPlaylistsFrame;
         this.playlistManager = new PlaylistManager();
+        this.songPlaylistManager = new SongPlaylistManager();
         this.detailedSongView = detailedSongView;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        SongPlaylistManager.InsertNewSongPlaylist(detailedSongView.getSongTitle(), e.getActionCommand());
-
-        System.out.println("Added song " + detailedSongView.getSongTitle() + " to playlist " + e.getActionCommand());
+        if (songPlaylistManager.songExistsInPlaylist(detailedSongView.getSongTitle(), e.getActionCommand())) {
+            detailedSongView.showErrorMessage();
+        }else{
+            SongPlaylistManager.InsertNewSongPlaylist(detailedSongView.getSongTitle(), e.getActionCommand());
+        }
         showPlaylistsFrame.dispose();
     }
 }

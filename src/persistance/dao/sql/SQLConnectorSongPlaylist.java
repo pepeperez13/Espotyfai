@@ -14,8 +14,6 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
     private static Connection conn;
 
 
-
-
     public void InsertDataSongP(String title, String name) {
 
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
