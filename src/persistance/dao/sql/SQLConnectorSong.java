@@ -145,7 +145,7 @@ public class SQLConnectorSong implements SongDAO {
 
                 if (title.equals(name)) {
                     newSong = new Song(title, genre, album, artist, path, owner);
-
+                    System.out.println(title);
 
                 }
 

@@ -39,7 +39,7 @@ public class SongManager<Public> {
         Song songs;
         songs = songDAO.SelectSong(Song);
 
-        System.out.println(songs.getTitle());
+        System.out.println(songs.getGenre());
 
         return songs;
     }

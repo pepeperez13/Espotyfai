@@ -8,7 +8,7 @@ public class Song {
     private String owner;
     private String path;
 
-    public Song(String title1, String s, String album, String artist, String title, String genre) {
+    public Song(String title, String genre, String album, String artist, String path, String owner) {
         this.title = title;
         this.genre = genre;
         this.album = album;

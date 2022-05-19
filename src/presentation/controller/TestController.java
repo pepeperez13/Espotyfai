@@ -19,10 +19,10 @@ public class TestController {
         SongPlaylistManager songPlaylistManager = new SongPlaylistManager();
 
         //SQLConnectorSong sqlConnectorSong = sql.InsertDataSong("Lambskin","ReggTech","boyd","BOYD","C:\\Users\\borja\\V3\\Espotyfai\\files\\SongFiles\\Lambskin.wav","Borja");
-        String path = "SongFiles\\Lambskin.wav";
-        SongManager.PlayMusic(path,1);
+        //String path = "SongFiles\\Lambskin.wav";
+        //SongManager.PlayMusic(path,1);
         //SongManager.InsertNewSong("ME REHUSO","REGG","AGUA","DANNY MARES","C:\\Users\\borja\\V3\\Espotyfai\\files\\SongFiles\\MEREHUSO.wav","Borja");
-        //SongManager.SelectSong("Lambskin");
+        SongManager.SelectSong("Lambskin");
         //SongManager.addSong("SUPERNUEVO","SOD","SA","DANNY HOLA","C:\\Users\\borja\\V3\\Espotyfai\\files\\SongFiles\\MEREHUSO.wav","Borja");
 
         //SongPlaylistManager.InsertNewSongPlaylist("","top50");
