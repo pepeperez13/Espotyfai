@@ -5,12 +5,16 @@ import business.entities.Song;
 import business.entities.User;
 import persistance.PlaylistDAO;
 import persistance.dao.sql.SQLConnectorPlaylist;
+import persistance.dao.sql.SQLConnectorSong;
+import persistance.dao.sql.SQLConnectorSongPlaylist;
 
 import java.util.LinkedList;
 
 public class PlaylistManager {
 
-    private PlaylistDAO playlistDAO;
+    private static SQLConnectorPlaylist playlistDAO;
+    private static SQLConnectorSongPlaylist songPlaylistDAO;
+
 
     public PlaylistManager() {
         this.playlistDAO = new SQLConnectorPlaylist();
@@ -24,7 +28,15 @@ public class PlaylistManager {
         return playlistDAO.SelectPlaylistsOfUser(user);
     }
 
-    public boolean adSongToPlaylist (String songName, String playlistName){
-        return true;
+
+    public static void DeletePlaylist(String name){
+        playlistDAO = new SQLConnectorPlaylist();
+        playlistDAO.DeleteDataPlaylist(name);
+        songPlaylistDAO.DeleteDataSongP(name);
     }
+    public static void CreatePlaylist(String name,String owner){
+        playlistDAO.InsertDataPlaylist(name,owner);
+    }
+
+
 }

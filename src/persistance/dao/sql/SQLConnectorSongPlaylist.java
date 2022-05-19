@@ -59,14 +59,14 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     }
 
-    public void DeleteDataSongP(String title){
+    public void DeleteDataSongP(String name){
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
             String sql = "DELETE FROM song_playlist WHERE SONG_TITLE=?";
 
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, title);
+            statement.setString(1, name);
 
             int rowsDeleted = statement.executeUpdate();
 
