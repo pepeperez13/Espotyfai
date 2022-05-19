@@ -1,10 +1,7 @@
 package persistance.dao.sql;
 
-import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.SongPlaylist;
-import business.entities.User;
-import persistance.SongDAO;
 import persistance.SongPlaylistDAO;
 
 import java.sql.*;
@@ -98,8 +95,8 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
                 SongPlaylist newSong = new SongPlaylist(title, name);
                 songsP.add(newSong);
 
-                // print the results
-                System.out.format("%s, %s\n", title,name);
+
+
             }
 
             statement.close();
@@ -113,8 +110,8 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     }
     //Metodo que te permite obtener toda la informacion de una cancion dado el nombre de la cancion.
-    public LinkedList<Song> SelectSongP(String name){
-        LinkedList<Song> song = new LinkedList<>();
+    public LinkedList<SongPlaylist> SelectSongsP(String pName){
+        LinkedList<SongPlaylist> songP = new LinkedList<>();
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
@@ -125,26 +122,21 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
             while (rs.next()) {
 
                 title = rs.getString("SONG_TITLE");
-                String genre = rs.getString("SONG_GENRE");
-                String album = rs.getString("SONG_ALBUM");
-                String artist = rs.getString("SONG_ARTIST");
-                String path = rs.getString("SONG_PATH");
-                String owner = rs.getString("SONG_OWNER");
-                System.out.println(name);
-                System.out.println(title);
-                if (title.equals(name)) {
-                    Song newSong = new Song(title, genre, album, artist, path, owner);
-                    song.add(newSong);
+                String pNameSQL = rs.getString("PLAYLIST_NAME");
 
 
-                    System.out.format("%s, %s, %s, %s, %s, %s\n", title, genre, album, artist, path, owner);
+                if (pNameSQL.equals(pName)) {
+                    SongPlaylist newSongP = new SongPlaylist(title, pName);
+                    songP.add(newSongP);
+                    /*System.out.println("bien");
+                    System.out.println(songP);*/
                 }else{
-                    System.out.println("Mal");
+                    //System.out.println("Mal");
                 }
 
             }
             statement.close();
-            return song;
+            return songP;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return null;

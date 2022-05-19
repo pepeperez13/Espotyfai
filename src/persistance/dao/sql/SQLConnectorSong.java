@@ -1,15 +1,13 @@
 package persistance.dao.sql;
 
-import business.entities.Playlist;
 import business.entities.Song;
-import business.entities.User;
 import persistance.SongDAO;
 
 import java.sql.*;
 import java.util.LinkedList;
 
 public class SQLConnectorSong implements SongDAO {
-    private static String dbURL = "jdbc:mysql://localhost:3306/espotifay";
+    private static String dbURL = "jdbc:mysql://localhost:3306/espotifai";
     private static String username = "root";
     private static String password = "";
     private static Connection conn;
@@ -109,7 +107,7 @@ public class SQLConnectorSong implements SongDAO {
                 String path = rs.getString("SONG_PATH");
                 String owner = rs.getString("SONG_OWNER");
 
-                Song newSong = new Song(title, genre, album,artist,path,owner);
+                Song newSong = new Song(title, genre, album, artist, path, owner);
                 songs.add(newSong);
 
                 // print the results
@@ -127,8 +125,8 @@ public class SQLConnectorSong implements SongDAO {
 
     }
     //Metodo que te permite obtener toda la informacion de una cancion dado el nombre de la cancion.
-    public LinkedList<Song> SelectSong(String name){
-        LinkedList<Song> song = new LinkedList<>();
+    public Song SelectSong(String name){
+        Song newSong = null;
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
@@ -144,21 +142,16 @@ public class SQLConnectorSong implements SongDAO {
                 String artist = rs.getString("SONG_ARTIST");
                 String path = rs.getString("SONG_PATH");
                 String owner = rs.getString("SONG_OWNER");
-                System.out.println(name);
-                System.out.println(title);
+
                 if (title.equals(name)) {
-                    Song newSong = new Song(title, genre, album, artist, path, owner);
-                    song.add(newSong);
+                    newSong = new Song(title, genre, album, artist, path, owner);
 
 
-                    System.out.format("%s, %s, %s, %s, %s, %s\n", title, genre, album, artist, path, owner);
-                }else{
-                    System.out.println("Mal");
                 }
 
             }
             statement.close();
-            return song;
+            return newSong;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return null;

@@ -11,4 +11,8 @@ public class SongPlaylist {
         this.name = name;
 
     }
+    public String getTitle() {
+        return title;
+    }
+
 }

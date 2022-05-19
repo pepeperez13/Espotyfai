@@ -12,4 +12,7 @@ public interface SongPlaylistDAO {
     public void UpdateDataSongP(String title1,String name,String title2);
 
     public LinkedList<SongPlaylist> SelectDataSongP();
+
+    public LinkedList<SongPlaylist> SelectSongsP(String name);
+
 }

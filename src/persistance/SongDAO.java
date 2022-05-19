@@ -15,4 +15,5 @@ public interface SongDAO {
 
     public LinkedList<Song> SelectDataSong();
 
+    public Song SelectSong(String song);
 }

@@ -24,7 +24,10 @@ public class TestController {
         //SongManager.PlayMusic(ipath);
         //SongManager.InsertNewSong("ME REHUSO","REGG","AGUA","DANNY MARES","C:\\Users\\borja\\V3\\Espotyfai\\files\\SongFiles\\MEREHUSO.wav","Borja");
         //SongManager.SelectSong("Lambskin");
-        //SongManager.addSong("ME REHUSO","REGG","AGUA","DANNY MARES","C:\\Users\\borja\\V3\\Espotyfai\\files\\SongFiles\\MEREHUSO.wav","Borja");
-        SongPlaylistManager.InsertNewSongPlaylist("Lola","Las Flores");
+        //SongManager.addSong("SUPERNUEVO","SOD","SA","DANNY HOLA","C:\\Users\\borja\\V3\\Espotyfai\\files\\SongFiles\\MEREHUSO.wav","Borja");
+
+        //SongPlaylistManager.InsertNewSongPlaylist("","top50");
+        SongPlaylistManager.ListPlaylistSongs("top50");
+
     }
 }

@@ -1,7 +1,11 @@
 package business;
 import business.entities.Song;
+import business.entities.SongPlaylist;
 import persistance.SongDAO;
+import persistance.SongPlaylistDAO;
 import persistance.dao.sql.SQLConnectorSong;
+import persistance.dao.sql.SQLConnectorSongPlaylist;
+
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +15,7 @@ import java.util.Scanner;
 public class SongManager<Public> {
 
     private static SongDAO songDAO = new SQLConnectorSong();
-
+    private static SongPlaylistDAO songPDAO = new SQLConnectorSongPlaylist();
 
 
     public static void addSong (String title, String Genre, String album, String artist, String path,String owner) {
@@ -30,13 +34,22 @@ public class SongManager<Public> {
         songDAO.InsertDataSong(title, genre, album, artist, path, owner);
     }
 
-    public static LinkedList<Song> SelectSong(String Song) {
+    public static Song SelectSong(String Song) {
+        songDAO = new SQLConnectorSong();
+        Song songs;
+        songs = songDAO.SelectSong(Song);
+
+        System.out.println(songs.getTitle());
+
+        return songs;
+    }
+    /*public static LinkedList<Song> SelectSong(String Song) {
         songDAO = new SQLConnectorSong();
         LinkedList<Song> song;
         song = songDAO.SelectDataSong();
         System.out.println(song);
         return song;
-    }
+    }*/
     //Metodo que permite dado un path reproducir archivos de music a .wav
     public static void PlayMusic(String path,int index) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
@@ -76,6 +89,7 @@ public class SongManager<Public> {
         }
 
         }
+
 
 
 
