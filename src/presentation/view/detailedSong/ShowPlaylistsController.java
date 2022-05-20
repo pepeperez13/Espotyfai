@@ -10,15 +10,13 @@ import java.awt.event.ActionListener;
 
 public class ShowPlaylistsController implements ActionListener {
 
-    private ShowPlaylistsFrame showPlaylistsFrame;
     private DetailedSongView detailedSongView;
     private PlaylistManager playlistManager;
     private SongPlaylistManager songPlaylistManager;
 
 
 
-    public ShowPlaylistsController (ShowPlaylistsFrame showPlaylistsFrame, DetailedSongView detailedSongView) {
-        this.showPlaylistsFrame = showPlaylistsFrame;
+    public ShowPlaylistsController ( DetailedSongView detailedSongView) {
         this.playlistManager = new PlaylistManager();
         this.songPlaylistManager = new SongPlaylistManager();
         this.detailedSongView = detailedSongView;
@@ -30,6 +28,5 @@ public class ShowPlaylistsController implements ActionListener {
         }else{
             SongPlaylistManager.InsertNewSongPlaylist(detailedSongView.getSongTitle(), e.getActionCommand());
         }
-        showPlaylistsFrame.dispose();
     }
 }

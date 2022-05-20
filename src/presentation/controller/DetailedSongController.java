@@ -5,7 +5,6 @@ import business.entities.Playlist;
 import persistance.PlaylistDAO;
 import persistance.dao.sql.SQLConnectorPlaylist;
 import presentation.view.detailedSong.DetailedSongView;
-import presentation.view.detailedSong.ShowPlaylistsFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,8 +25,9 @@ public class DetailedSongController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("ADD_TO_PLAYLIST_COMMAND")) {
-            ShowPlaylistsFrame showPlaylistsFrame = new ShowPlaylistsFrame(detailedSongView);
-            showPlaylistsFrame.setVisible(true);
+            //ShowPlaylistsFrame showPlaylistsFrame = new ShowPlaylistsFrame(detailedSongView);
+            //showPlaylistsFrame.setVisible(true);
+            detailedSongView.showPlaylists();
         }
         if (e.getActionCommand().equals("CLOSE_PANEL_COMMAND")) {
             detailedSongView.dispose();

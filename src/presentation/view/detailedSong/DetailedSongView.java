@@ -7,6 +7,7 @@ import presentation.controller.DetailedSongController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
 
 public class DetailedSongView extends JFrame {
 
@@ -25,6 +26,7 @@ public class DetailedSongView extends JFrame {
     private static final String PAUSE_SONG_COMMAND = "PAUSE_SONG_COMMAND";
     private static final String CLOSE_PANEL_COMMAND = "CLOSE_PANEL_COMMAND";
     private DetailedSongController controller;
+    private ShowPlaylistsController showPlaylistsController;
     private LyricsFetcher lyricsFetcher;
 
 
@@ -178,6 +180,39 @@ public class DetailedSongView extends JFrame {
     public String getSongTitle() {
         title = "The Time";
         return title;
+    }
+
+    public void showPlaylists () {
+        JPanel playlistsPanel = new JPanel();
+        showPlaylistsController = new ShowPlaylistsController(this);
+
+        Box box= Box.createVerticalBox();
+        //LinkedList<Playlist> playlists = controller.getDataPlaylists();
+        Playlist p1 = new Playlist("Playlist 1", "popo");
+        Playlist p2 = new Playlist("Playlist 2", "popo");
+        Playlist p3 = new Playlist("Perreo duro durisimo hermano", "carlos");
+        Playlist p4 = new Playlist("Cosas tranquilitas", "pepe");
+        Playlist p5 = new Playlist("Gym", "mario");
+        Playlist p6 = new Playlist("Locurote", "popo");
+
+        LinkedList<Playlist> playlists = new LinkedList<>();
+        playlists.add(p1); playlists.add(p2); playlists.add(p3); playlists.add(p4); playlists.add(p5); playlists.add(p6);;
+
+
+        for (int i= 0; i < playlists.size(); i++) {
+            JButton button = new JButton(playlists.get(i).getName());
+            button.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            button.setAlignmentX(Component.CENTER_ALIGNMENT);
+            button.setFocusable(false);
+            button.setActionCommand(playlists.get(i).getName());
+            button.addActionListener(showPlaylistsController);
+            box.add(button);
+        }
+
+        JScrollPane scroll= new JScrollPane(box);
+        //scroll.setPreferredSize(new Dimension(150, 100));
+        playlistsPanel.add(scroll);
+        JOptionPane.showMessageDialog(this, playlistsPanel, "Select a playlist to add the song", JOptionPane.PLAIN_MESSAGE);
     }
 
     public String getGenre() {
