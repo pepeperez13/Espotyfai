@@ -9,14 +9,13 @@ public class Song {
     private String path;
     private int pos;
 
-    public Song(String title, String genre, String album, String artist, String path, String owner, int pos) {
+    public Song(String title, String genre, String album, String artist, String path, String owner) {
         this.title = title;
         this.genre = genre;
         this.album = album;
         this.artist = artist;
         this.owner = owner;
         this.path = path;
-        this.pos = pos;
     }
 
     public String getTitle() {
