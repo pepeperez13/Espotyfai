@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.LinkedList;
 
 public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
-    private static String dbURL = "jdbc:mysql://localhost:3306/espotifay";
+    private static String dbURL = "jdbc:mysql://localhost:3306/espotifai";
     private static String username = "root";
     private static String password = "";
     private static Connection conn;
@@ -36,7 +36,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
     }
 
 
-    public void UpdateDataSongP(String title1,String name,String title2){
+    /*public void UpdateDataSongP(String title1,String name,String title2){
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
@@ -56,6 +56,9 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
         }
 
     }
+    */
+
+
 
     public void DeleteDataSongP(String name){
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {

@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.LinkedList;
 
 public class SQLConnectorSong implements SongDAO {
-    private static String dbURL = "jdbc:mysql://localhost:3306/espotifay";
+    private static String dbURL = "jdbc:mysql://localhost:3306/espotifai";
     private static String username = "root";
     private static String password = "";
     private static Connection conn;
@@ -15,12 +15,12 @@ public class SQLConnectorSong implements SongDAO {
 
 
 
-    public void InsertDataSong(String title, String genre, String album, String artist, String path, String owner) {
+    public void InsertDataSong(String title, String genre, String album, String artist, String path, String owner,int pos) {
 
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
-            String sql = "INSERT INTO song (SONG_TITLE,SONG_GENRE,SONG_ALBUM,SONG_ARTIST,SONG_PATH,SONG_OWNER) VALUES (?, ?, ?,?,?,?)";
+            String sql = "INSERT INTO song (SONG_TITLE,SONG_GENRE,SONG_ALBUM,SONG_ARTIST,SONG_PATH,SONG_OWNER,POS) VALUES (?, ?, ?,?,?,?,?)";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, title);
@@ -29,6 +29,7 @@ public class SQLConnectorSong implements SongDAO {
             statement.setString(4, artist);
             statement.setString(5, path);
             statement.setString(6, owner);
+            statement.setInt(7, pos);
 
 
             int rowsInserted = statement.executeUpdate();
@@ -42,11 +43,11 @@ public class SQLConnectorSong implements SongDAO {
     }
 
 
-    public void UpdateDataSong(String title1,String genre,String album, String artist,String path,String owner,String title2){
+    public void UpdateDataSong(String title1,String genre,String album, String artist,String path,String owner,String title2,int pos){
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
-            String sql = "UPDATE song SET SONG_TITLE=?,SONG_GENRE=?,SONG_ALBUM = ?,SONG_ARTIST = ?,SONG_PATH = ?,SONG_OWNER = ? WHERE SONG_TITLE=?";
+            String sql = "UPDATE song SET SONG_TITLE=?,SONG_GENRE=?,SONG_ALBUM = ?,SONG_ARTIST = ?,SONG_PATH = ?,SONG_OWNER = ?,POS = ? WHERE SONG_TITLE=?";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, title1);
@@ -56,6 +57,7 @@ public class SQLConnectorSong implements SongDAO {
             statement.setString(5, path);
             statement.setString(6, owner);
             statement.setString(7, title2);
+            statement.setInt(8,pos);
 
 
             int rowsUpdated = statement.executeUpdate();
@@ -106,12 +108,12 @@ public class SQLConnectorSong implements SongDAO {
                 String artist = rs.getString("SONG_ARTIST");
                 String path = rs.getString("SONG_PATH");
                 String owner = rs.getString("SONG_OWNER");
+                int pos = rs.getInt("POS");
 
-                Song newSong = new Song(title, genre, album, artist, path, owner);
+                Song newSong = new Song(title, genre, album, artist, path, owner, pos);
                 songs.add(newSong);
 
-                // print the results
-                System.out.format("%s, %s, %s, %s, %s, %s\n", title,genre,album,artist,path,owner);
+
             }
 
             statement.close();
@@ -142,9 +144,10 @@ public class SQLConnectorSong implements SongDAO {
                 String artist = rs.getString("SONG_ARTIST");
                 String path = rs.getString("SONG_PATH");
                 String owner = rs.getString("SONG_OWNER");
+                int pos = rs.getInt("POS");
 
                 if (title.equals(name)) {
-                    newSong = new Song(title, genre, album, artist, path, owner);
+                    newSong = new Song(title, genre, album, artist, path, owner, pos);
                     System.out.println(title);
 
                 }

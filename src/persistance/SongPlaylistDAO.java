@@ -9,7 +9,7 @@ public interface SongPlaylistDAO {
 
     public void DeleteDataSongP(String title);
 
-    public void UpdateDataSongP(String title1,String name,String title2);
+    //public void UpdateDataSongP(String title1,String name,String title2);
 
     public LinkedList<SongPlaylist> SelectDataSongP();
 
