@@ -3,7 +3,9 @@ package presentation.view;
 import business.BuscadorManager;
 import business.entities.Song;
 import presentation.controller.BuscadorViewController;
+import presentation.controller.DetailedSongController;
 import presentation.controller.MainViewController;
+import presentation.view.detailedSong.DetailedSongView;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -32,6 +34,8 @@ public class MainView extends JPanel {
     private MainViewController mainViewController;
     private ConfigAccountView configAccountView;
     private PlaylistView playlistView;
+    private DetailedSongView detailedSongView;
+    private DetailedSongController detailedSongController;
     private JPanel cardPanel = new JPanel();
     private JPanel sideMenuBar = new JPanel();
     private CardLayout c = new CardLayout();
@@ -222,11 +226,14 @@ public class MainView extends JPanel {
         buscadorView.registerController(buscadorViewController);
         playlistView = new PlaylistView();
         configAccountView = new ConfigAccountView();
+        detailedSongView = new DetailedSongView();
+        detailedSongController = new DetailedSongController(detailedSongView);
 
         cardPanel.add(this, "1");
         cardPanel.add(buscadorView, "2");
         cardPanel.add(playlistView, "3");
         cardPanel.add(configAccountView, "4");
+        cardPanel.add(detailedSongView, "5");
 
         c.first(cardPanel);
 

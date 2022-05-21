@@ -5,16 +5,15 @@ import java.awt.*;
 
 public class BottomBarPanel extends JPanel {
 
-    public JPanel bottomBarPanel () {
+    public BottomBarPanel () {
         /*this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setMaximumSize(new Dimension(1500, 900));
         this.setMinimumSize(new Dimension(900, 500));
         this.setTitle("Espotifai - Buscar");
         this.setLocationRelativeTo(null)*/
 
-        JPanel song_player = new JPanel(new BorderLayout());
+        JPanel song_player = new JPanel(new GridBagLayout());
 
-        song_player.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         JLabel song_info_label = new JLabel("nombre de la cancion - artista");
@@ -63,9 +62,8 @@ public class BottomBarPanel extends JPanel {
         c.gridy = 2;       //third row
         song_player.add(full_screen, c);
 
-        this.add(song_player, BorderLayout.SOUTH);
+        this.add(song_player);
 
         //this.setVisible(true);
-        return this;
     }
 }

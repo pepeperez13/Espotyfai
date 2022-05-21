@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 
-public class DetailedSongView extends JFrame {
+public class DetailedSongView extends JPanel {
 
     private Song song;
     private Playlist chosenPlaylist;
@@ -32,17 +32,15 @@ public class DetailedSongView extends JFrame {
 
     public DetailedSongView () {
         controller = new DetailedSongController(this);
-        setLocation(0,10);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        setSize(1500, 900);
-        setResizable(true);
 
         setLayout(new BorderLayout(0, 50));
 
         add(setTitleAndAuthor("The Time", "The Black Eyed Peas"), BorderLayout.NORTH);
         add(setGeneralData("Rock", "Albumsito", "Yoyo", "3:24"), BorderLayout.CENTER);
         add(setCloseLabel(), BorderLayout.SOUTH);
+    }
+
+    public void recibirCancion(Song cancion_encontrada)  {
 
     }
 
@@ -68,7 +66,6 @@ public class DetailedSongView extends JFrame {
         generalPanel.add(setInfoPanel("Duration", duration));
         generalPanel.add(setLyricsPanel());
         generalPanel.add(setInteractionsPanel());
-
 
         return generalPanel;
     }

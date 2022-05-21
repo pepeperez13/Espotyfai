@@ -1,6 +1,8 @@
 package presentation.view;
 
 import business.entities.Song;
+import presentation.controller.DetailedSongController;
+import presentation.view.detailedSong.DetailedSongView;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -17,6 +19,10 @@ public class BuscadorView extends JPanel {
     private JLabel info_title_song, info_artist_song, info_genre_song, info_album_song, info_owner_song;
     private JLabel mensaje_resultados;
     private JTextField buscador_text_field;
+    private JPanel cardPanel = new JPanel();
+    private DetailedSongView detailedSongView;
+    private DetailedSongController detailedSongController;
+    private CardLayout c = new CardLayout();
 
     public BuscadorView () {
         //AJUSTES PRINCIPALES DEL FRAME
@@ -211,5 +217,25 @@ public class BuscadorView extends JPanel {
             genre_text.setText(cancion_encontrada.getGenre());
             owner_text.setText(cancion_encontrada.getOwner());
         }
+    }
+
+    public void changeView(String name) {
+        c.show(cardPanel, name);
+    }
+
+    private void configureCardPanel () {
+        cardPanel.setLayout(c);
+        cardPanel.setOpaque(true);
+
+        detailedSongView = new DetailedSongView();
+        detailedSongController = new DetailedSongController(detailedSongView);
+
+        ///inicioView.iniViewController(inicioViewController);
+
+        cardPanel.add(detailedSongView, "cero");
+
+
+        c.first(cardPanel);
+
     }
 }
