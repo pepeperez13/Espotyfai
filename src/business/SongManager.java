@@ -18,8 +18,8 @@ public class SongManager<Public> {
     private static SongPlaylistDAO songPDAO = new SQLConnectorSongPlaylist();
 
 
-    public static void addSong (String title, String Genre, String album, String artist, String path,String owner) {
-        songDAO.InsertDataSong(title, Genre, album, artist, path,owner);
+    public static void addSong (String title, String Genre, String album, String artist, String path,String owner,int pos) {
+        songDAO.InsertDataSong(title, Genre, album, artist, path,owner,pos);
     }
     public static LinkedList<Song> ListSongs() {
         songDAO = new SQLConnectorSong();
@@ -28,10 +28,10 @@ public class SongManager<Public> {
         System.out.println(songs);
         return songs;
     }
-    public static void InsertNewSong(String title, String genre, String album, String artist, String path, String owner){
+    public static void InsertNewSong(String title, String genre, String album, String artist, String path, String owner,int pos){
         songDAO = new SQLConnectorSong();
 
-        songDAO.InsertDataSong(title, genre, album, artist, path, owner);
+        songDAO.InsertDataSong(title, genre, album, artist, path, owner,pos);
     }
 
     public static Song SelectSong(String Song) {
@@ -57,22 +57,16 @@ public class SongManager<Public> {
         //LinkedList<Song> song1 = null;
         //sqlsong.SelectSong(name) = song1;
 
-
-
-            File file = new File(path);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioStream);
-            int response = 0;
+        File file = new File(path);
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioStream);
 
         //Switch que controla si se le da a play, pause, se rebobina al principio o se para termina el proceso de reproduccion
-        while(response !=4) {
-            System.out.println("Play (1) Button --- Stop (2) Button --- Reset (3) Button --- Exit");
-        //Sistema solo de prueba para hacer funcionar la reproduccion, en un fururo se controlara mediante la interfaz grafica del sistema.
+        while(index !=4) {
+            //Sistema solo de prueba para hacer funcionar la reproduccion, en un fururo se controlara mediante la interfaz grafica del sistema.
 
-
-
-            switch(response) {
+            switch(index) {
                 case (1): clip.start();
                     break;
                 case (2): clip.stop();
@@ -88,12 +82,11 @@ public class SongManager<Public> {
 
         }
 
-        }
+    }
 
 
-
-
-
+    public void addSong(String titulo, String genero, String album, String autor, String path, String name) {
+    }
 }
 
 

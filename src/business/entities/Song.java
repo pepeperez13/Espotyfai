@@ -7,23 +7,16 @@ public class Song {
     private String artist;
     private String owner;
     private String path;
-    private int posicion;
+    private int pos;
 
-    public Song(String title, String genre, String album, String artist, String path, String owner) {
+    public Song(String title, String genre, String album, String artist, String path, String owner, int pos) {
         this.title = title;
         this.genre = genre;
         this.album = album;
         this.artist = artist;
         this.owner = owner;
         this.path = path;
-    }
-
-    public int getPosicion() {
-        return posicion;
-    }
-
-    public void setPosicion(int posicion) {
-        this.posicion = posicion;
+        this.pos = pos;
     }
 
     public String getTitle() {
@@ -50,6 +43,10 @@ public class Song {
         return path;
     }
 
+    public int getPos() {
+        return pos;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -72,5 +69,9 @@ public class Song {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
     }
 }

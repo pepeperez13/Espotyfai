@@ -150,6 +150,7 @@ public class UserManager {
         for (Playlist playlist : playlists) {
             if (playlist.getOwner().equals(userToDelete.getEmail())) {
                 sqlP.DeleteDataPlaylist(playlist.getName());
+
             }
         }
         sql.DeleteDataUser(userToDelete.getName());

@@ -31,10 +31,10 @@ public class SongPlaylistManager<Public> {
         songPDAO.DeleteDataSongP(title);
     }
 
-    public void updateSongPlaylist(String title1,String name, String title2){
+   /* public void updateSongPlaylist(String title1,String name, String title2){
         songPDAO = new SQLConnectorSongPlaylist();
         songPDAO.UpdateDataSongP(title1,name,title2);
-    }
+    }*/
 
     public static LinkedList<Song> ListPlaylistSongs(String name){
         songPDAO = new SQLConnectorSongPlaylist();
