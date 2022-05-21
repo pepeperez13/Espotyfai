@@ -1,77 +1,115 @@
 package presentation.view;
 
 import business.BuscadorManager;
+import business.entities.Song;
 import presentation.controller.BuscadorViewController;
-import presentation.controller.InicioViewController;
-import presentation.controller.SideMenuBarController;
+import presentation.controller.MainViewController;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
-//package presentation.view;
-//import persistance.dao.sql.SQLConnector;
-//import persistance.dao.sql.SQLConnectorSong;
-//import presentation.controller.ConfMusicController;
-//import presentation.controller.SideBarController;
+import java.io.File;
+import java.util.LinkedList;
 
-public class SideMenuBarView extends JFrame {
+public class MainView extends JPanel {
+    JTable songs_table;
+    Song song;
+
     public static final String GO_INICIO = "GO_INICIO";
     public static final String GO_BUSCADOR = "GO_BUSCADOR";
     public static final String GO_MISLISTAS = "GO_MISLISTAS";
     public static final String GO_SETTINGS = "GO_SETTINGS";
     public int numView;
-    private SideMenuBarController sideMenuBarController;
-    private JButton inicio;
     private JButton jbconfMusic;
     private JButton jbconfBuscar;
     private JButton jbconfListas;
     private JButton jbconfSettings;
     private BuscadorView buscadorView;
     private BuscadorViewController buscadorViewController;
-    private InicioView inicioView;
-    private InicioViewController inicioViewController;
+    private MainViewController mainViewController;
+    private ConfigAccountView configAccountView;
     private PlaylistView playlistView;
-    private BottomBarPanel bottomBarPanel;
     private JPanel cardPanel = new JPanel();
     private JPanel sideMenuBar = new JPanel();
-    private JPanel reproductor_panel = new JPanel();
     private CardLayout c = new CardLayout();
     private final GridBagConstraints constraint = new GridBagConstraints();
 
-    public SideMenuBarView() {
-    }
-
-    public void sideMenuBarView () {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setMaximumSize(new Dimension(1500, 900));
-        this.setMinimumSize(new Dimension(900, 500));
-        this.setTitle("Espotifai - Buscar");
-        this.setLocationRelativeTo(null);
+    public MainView() {
         this.setLayout(new BorderLayout());
-        this.setBackground(Color.white);
-
-        setLayout(new BorderLayout());
-
-        Dimension dimension = getPreferredSize();
-        dimension.width = 200;
-        setPreferredSize(dimension);
-
-        setLayout(new BorderLayout());
-        //setLayout(new GridBagLayout());
-        setBackground(new Color(191, 105, 240));
-
-        sideMenuBarController = new SideMenuBarController(this);
+        this.setBackground(Color.PINK);
+        //this.setOpaque(true);
+        mainViewController = new MainViewController(this);
 
         sideMenuBar = configureSideMenuBar();
         add(sideMenuBar, BorderLayout.WEST);
-        c = new CardLayout();
-        configureCardPanel();
-        cardPanel.setBackground(Color.PINK.brighter());
-        add(cardPanel, BorderLayout.CENTER);
 
-        setSize(1500, 900);
+        //MODEL
+        File carpeta = new File("songs");
+        File[] lista = carpeta.listFiles();
+        //System.out.println("\n Hay " +  lista.length + " elementos");
 
-        this.setVisible(true);
+        File canciones = carpeta.getAbsoluteFile();
+
+        // Data to be displayed in the JTable
+        String[][] data = {
+                { "1", "As it was", "Harry Styles", "pop-rock", "3,35" },
+                { "2", "As it was", "Harry Styles", "pop-rock", "3,35" },
+                { "3", "As it was", "Harry Styles", "pop-rock", "3,35" },
+                { "4", "As it was", "Harry Styles", "pop-rock", "3,35" },
+
+        };
+
+        //Prueba ArrayList Songs
+        LinkedList list_songs = new LinkedList<Song>();
+        Song song1 = new Song("As it was", "Pop", "AsItWas", "Harry Styles", "path", "Aleserra");
+        Song song2 = new Song("Bam Bam", "Pop-Rock", "BAMBAM", "Camila Cabello", "path", "Abraham");
+        Song song3 = new Song("Heat Waves", "Electro-Pop", "HeatWaves", "Glass Animal", "path","Borja");
+        Song song4 = new Song("Pantisyto", "Reggeaton", "ReggeaAlbum", "Feid", "path","Pepe");
+        Song song5 = new Song("Cayo la noche", "Reggeaton - Trap", "Cayo la night", "path","Quevedo, Bad Bunny", "Lachner");
+
+        list_songs.add(song1);
+        list_songs.add(song2);
+        list_songs.add(song3);
+        list_songs.add(song4);
+        list_songs.add(song5);
+
+        //String[][] table_list_of_songs = list_songs.toArray();
+
+
+        //Columnas
+        String[] columnNames = { "Title", "Genre", "Album", "Artist", "Owner" };
+
+        // Initializing the JTable
+        songs_table = new JTable(data, columnNames);
+        JScrollPane scrollPane = new JScrollPane(songs_table);
+        //songs_table.setBounds(30, 40, 200, 300);
+
+        // adding it to JScrollPane
+        JScrollPane sp = new JScrollPane(songs_table);
+
+        //PANELES
+        JPanel home_panel = new JPanel();
+        JPanel songs_list = new JPanel(new BorderLayout());
+
+        //BORDES HOME
+        Border borde_home_panel = new TitledBorder(new EtchedBorder(), "HOME ");
+        home_panel.setBorder(borde_home_panel);
+
+        Border borde_lista_canciones_home = new TitledBorder(new EtchedBorder(), "CANCIONES: ");
+        songs_list.setBorder(borde_lista_canciones_home);
+
+        songs_list.add(sp, BorderLayout.CENTER);
+        songs_list.add(songs_table.getTableHeader(), BorderLayout.NORTH);
+        songs_list.add(songs_table, BorderLayout.CENTER);
+
+        home_panel.add(songs_list, BorderLayout.CENTER);
+
+        this.add(home_panel, BorderLayout.CENTER);
+
+        //this.setVisible(true);
     }
 
     private JPanel configureSideMenuBar () {
@@ -155,7 +193,7 @@ public class SideMenuBarView extends JFrame {
         constraint.gridy = 1;
         sideMenuBar.add(groupBotones, constraint);
 
-        registerController(sideMenuBarController);
+        registerController(mainViewController);
 
         //reproductor_panel = reproductorBarView.ReproductorBarView();
 
@@ -168,28 +206,27 @@ public class SideMenuBarView extends JFrame {
         jbconfListas.addActionListener(listener);
         jbconfSettings.addActionListener(listener);
     }
-    public void changeView(String name) {
-        c.show(cardPanel, name);
+    public void changeView(int num) {
+        numView = num;
+        configureCardPanel();
+        c.show(cardPanel, String.valueOf(numView));
     }
 
     private void configureCardPanel () {
         cardPanel.setLayout(c);
-        cardPanel.setOpaque(true);
+        //cardPanel.setOpaque(true);
 
-        inicioView = new InicioView();
-        inicioViewController = new InicioViewController(inicioView);
+        mainViewController = new MainViewController(this);
         buscadorView = new BuscadorView();
         buscadorViewController = new BuscadorViewController(buscadorView, new BuscadorManager());
         buscadorView.registerController(buscadorViewController);
         playlistView = new PlaylistView();
+        configAccountView = new ConfigAccountView();
 
-        inicioView.iniViewController(inicioViewController);
-        JPanel grin = new JPanel();
-        grin.setBackground(Color.PINK);
-        cardPanel.add(inicioView, "cero");
-        cardPanel.add(buscadorView, "uno");
-        cardPanel.add(playlistView, "dos");
-        cardPanel.add(grin, "tres");
+        cardPanel.add(this, "1");
+        cardPanel.add(buscadorView, "2");
+        cardPanel.add(playlistView, "3");
+        cardPanel.add(configAccountView, "4");
 
         c.first(cardPanel);
 

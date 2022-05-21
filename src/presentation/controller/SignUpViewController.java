@@ -17,18 +17,18 @@ import java.awt.event.MouseListener;
 
 public class SignUpViewController implements ActionListener{
     private static SignUpView view;
-    private UserDAO userDAO = new SQLConnectorUser();
-    private UserManager manager;
+    private final UserManager manager;
     private Store store;
     private boolean userExistsError;
     private boolean emailExistsError;
     private boolean emailFormatError;
     private boolean passwordFormatError;
     private boolean passwordConfirmationError;
-    private InitController initController;
+    private final InitController initController;
 
     public SignUpViewController (SignUpView signUpView, InitView initView) {
-        this.view = signUpView;
+        view = signUpView;
+        UserDAO userDAO = new SQLConnectorUser();
         manager = new UserManager(userDAO);
         initController = new InitController(initView);
     }
@@ -39,7 +39,8 @@ public class SignUpViewController implements ActionListener{
 
             if (checkDataCorrect()) {
                 manager.insertNewUser(view.getUserName(), view.getEmail(), view.getPassword());
-                store = new Store(manager.getCurrentUser(view.getUserName()));
+                //store = new Store(manager.getCurrentUser(view.getUserName()));
+                store.setUser(manager.getCurrentUser(view.getUserName()));
                 initController.refreshView(3);
             } else {
                 view.showErrorMessage(userExistsError, emailExistsError, emailFormatError, passwordFormatError, passwordConfirmationError);

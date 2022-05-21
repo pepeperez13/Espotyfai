@@ -1,6 +1,5 @@
 package presentation.view;
 import business.SongManager;
-import persistance.dao.sql.SQLConnectorSong;
 import presentation.controller.AddMusicController;
 
 import javax.swing.*;
@@ -23,8 +22,7 @@ public class AddMusicPanelView extends JPanel {
 
         setBackground(new Color(255, 255, 255));
 
-        SongManager songManager = new SongManager();
-        AddMusicController addMusicController = new AddMusicController(songManager, this);
+        AddMusicController addMusicController = new AddMusicController(this);
         configurePanel(addMusicController);
     }
 

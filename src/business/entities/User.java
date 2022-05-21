@@ -12,7 +12,6 @@ public class User {
     }
 
     public User () {
-        //Me la comeis
     }
 
     public String getName() {

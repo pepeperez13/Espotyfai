@@ -29,18 +29,15 @@ public class InitView extends JFrame {
     }
 
     private JPanel setView () {
-        InicioView inicioView = new InicioView();
+        MainView mainView = new MainView();
         SignUpView signUpView = new SignUpView(this);
         LoginView loginView = new LoginView(this);
-
-
 
         content.setLayout(cardLayout);
 
         content.add(signUpView, "1");
         content.add(loginView, "2");
-        content.add(inicioView, "3");
-
+        content.add(mainView, "3");
 
         return content;
     }

@@ -12,16 +12,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class   LoginController implements ActionListener {
-    private LoginView loginView;
-    private UserManager manager;
+    private final LoginView loginView;
+    private final UserManager manager;
 
     private boolean userExistsError;
     private boolean passwordConfirmationError;
-    private UserDAO userDAO = new SQLConnectorUser();
-    private InitController initController;
-    private Store store;
+    private final InitController initController;
+    private final Store store = new Store();
+    //private Store store;
     public LoginController(LoginView loginView, InitView initView) {
         this.loginView = loginView;
+        UserDAO userDAO = new SQLConnectorUser();
         manager = new UserManager(userDAO);
         initController = new InitController(initView);
     }
@@ -31,7 +32,8 @@ public class   LoginController implements ActionListener {
 
             if (checkDataCorrect()) {
                 //Retornar el user current. Buscando con el login introducido y retornando de la base de datos
-                store = new Store(manager.getCurrentUser(loginView.getUserName()));
+                //store = new Store();
+                store.setUser(manager.getCurrentUser(loginView.getUserName()));
                 initController.refreshView(3);
             } else {
                 loginView.showErrorMessage(userExistsError, passwordConfirmationError);

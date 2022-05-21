@@ -7,10 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ConfMusicController implements ActionListener {
-    private ConfMusicPanelView confMusicPanel;
     private ConfigAccountView menuFrontal;
-    public ConfMusicController (ConfMusicPanelView confMusicPanel, ConfigAccountView menuFrontal) {
-        this.confMusicPanel = confMusicPanel;
+    public ConfMusicController (ConfigAccountView menuFrontal) {
         this.menuFrontal = menuFrontal;
     }
     @Override

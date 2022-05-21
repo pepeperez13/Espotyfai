@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class ConfigAccountView extends JPanel{ /**Cambiar a JPanel*/
+public class ConfigAccountView extends JFrame{ /**Cambiar a JPanel*/
     public static final String INICIO_COMMAND = "INICIO_COMMAND";
     public static final String GO_CONFIG_MUSIC = "GO_CONFIG_MUSIC";
     public static final String GO_CONFIG_USER = "GO_CONFIG_USER";
@@ -22,7 +22,7 @@ public class ConfigAccountView extends JPanel{ /**Cambiar a JPanel*/
     private ManageAccountView manageAccountView = new ManageAccountView();
     private ConfMusicPanelView confMusicPanelView = new ConfMusicPanelView();
     private ConfMusicController confMusicController;
-    private StaticsPanelView staticsPanel = new StaticsPanelView();
+    //private StaticsPanelView staticsPanel = new StaticsPanelView();
     private AddMusicPanelView addMusicPanel;
     private ShowMusicPanelView showMusicPanel = new ShowMusicPanelView();
     private DeleteMusicPanelView deleteMusicPanel = new DeleteMusicPanelView();
@@ -156,12 +156,12 @@ public class ConfigAccountView extends JPanel{ /**Cambiar a JPanel*/
     private JPanel configureCardPanel () {
         cardPanel.setLayout(c);
 
-        confMusicController = new ConfMusicController(confMusicPanelView, this);
+        confMusicController = new ConfMusicController(this);
         confMusicPanelView.registerController(confMusicController);
 
         cardPanel.add(confMusicPanelView, "1");
         cardPanel.add(manageAccountView, "2");
-        cardPanel.add(staticsPanel, "3");
+        //cardPanel.add(staticsPanel, "3");
         cardPanel.add(addMusicPanel, "4");
         cardPanel.add(showMusicPanel, "5");
         cardPanel.add(deleteMusicPanel, "6");
@@ -170,8 +170,8 @@ public class ConfigAccountView extends JPanel{ /**Cambiar a JPanel*/
         return cardPanel;
     }
 
-    /*public static void main (String[] strings) {
-        SideBarView sideBarView = new SideBarView();
+    public static void main (String[] strings) {
+        ConfigAccountView sideBarView = new ConfigAccountView();
         sideBarView.setVisible(true);
-    }*/
+    }
 }

@@ -62,4 +62,6 @@ public class ConfMusicPanelView extends JPanel {
         jbShow.addActionListener(listener);
         jbDel.addActionListener(listener);
     }
+
+
 }
