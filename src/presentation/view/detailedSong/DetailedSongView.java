@@ -32,16 +32,22 @@ public class DetailedSongView extends JPanel {
 
     public DetailedSongView () {
         controller = new DetailedSongController(this);
-
+        //song = new Song("aux", "aux", "aux", "aux", "aux", "aux");
         setLayout(new BorderLayout(0, 50));
 
+        /*
         add(setTitleAndAuthor(), BorderLayout.NORTH);
         add(setGeneralData(), BorderLayout.CENTER);
         add(setCloseLabel(), BorderLayout.SOUTH);
+         */
     }
 
     public void recibirCancion(Song cancion_encontrada)  {
         this.song = cancion_encontrada;
+
+        add(setTitleAndAuthor(), BorderLayout.NORTH);
+        add(setGeneralData(), BorderLayout.CENTER);
+        add(setCloseLabel(), BorderLayout.SOUTH);
     }
 
     private JLabel setTitleAndAuthor () {

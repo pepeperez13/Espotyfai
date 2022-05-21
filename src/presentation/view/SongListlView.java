@@ -60,9 +60,11 @@ public class SongListlView extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        for(Song s: sorted){
+        /*for(Song s: sorted){
             panel.add(new SongListRender(s, controller));
         }
+        */
+
 
         jScrollPane.setViewportView(panel);
     }

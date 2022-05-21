@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class ConfigAccountView extends JFrame{ /**Cambiar a JPanel*/
+public class ConfigAccountView extends JPanel{ /**Cambiar a JPanel*/
     public static final String INICIO_COMMAND = "INICIO_COMMAND";
     public static final String GO_CONFIG_MUSIC = "GO_CONFIG_MUSIC";
     public static final String GO_CONFIG_USER = "GO_CONFIG_USER";
