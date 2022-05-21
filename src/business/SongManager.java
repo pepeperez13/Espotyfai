@@ -18,8 +18,8 @@ public class SongManager<Public> {
     private static SongPlaylistDAO songPDAO = new SQLConnectorSongPlaylist();
 
 
-    public static void addSong (String title, String Genre, String album, String artist, String path,String owner,int pos) {
-        songDAO.InsertDataSong(title, Genre, album, artist, path,owner,pos);
+    public static void addSong (String title, String Genre, String album, String artist, String path,String owner) {
+        songDAO.InsertDataSong(title, Genre, album, artist, path,owner);
     }
     public static LinkedList<Song> ListSongs() {
         songDAO = new SQLConnectorSong();
@@ -28,10 +28,10 @@ public class SongManager<Public> {
         System.out.println(songs);
         return songs;
     }
-    public static void InsertNewSong(String title, String genre, String album, String artist, String path, String owner,int pos){
+    public static void InsertNewSong(String title, String genre, String album, String artist, String path, String owner){
         songDAO = new SQLConnectorSong();
 
-        songDAO.InsertDataSong(title, genre, album, artist, path, owner,pos);
+        songDAO.InsertDataSong(title, genre, album, artist, path, owner);
     }
 
     public static Song SelectSong(String Song) {
@@ -85,8 +85,7 @@ public class SongManager<Public> {
     }
 
 
-    public void addSong(String titulo, String genero, String album, String autor, String path, String name) {
-    }
+
 }
 
 

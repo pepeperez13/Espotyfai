@@ -40,8 +40,8 @@ public class SongListlView extends JFrame {
         // create List model
         ArrayList<Song> model = new ArrayList<>();
         // add item to model
-        model.add(new Song("Song 1","gen1","","Artist1","","test@test.com",1));
-        model.add(new Song("Song 2","gen1","","Artist2","","test@test.com",2));
+        model.add(new Song("Song 1","gen1","","Artist1","","test@test.com"));
+        model.add(new Song("Song 2","gen1","","Artist2","","test@test.com"));
 
 
         JPanel panel = new JPanel();
@@ -55,7 +55,7 @@ public class SongListlView extends JFrame {
     }
 
     public void loadSongs(List<Song> songs) {
-        List<Song> sorted = songs.stream().sorted(Comparator.comparing(Song::getPos)) .collect(Collectors.toList());
+        //List<Song> sorted = songs.stream().sorted(Comparator.comparing(Song::get)) .collect(Collectors.toList());
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

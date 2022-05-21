@@ -19,12 +19,11 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
-            String sql = "INSERT INTO song_playlist (SONG_TITLE,PLAYLIST_NAME) VALUES (?, ?)";
+            String sql = "INSERT INTO song_playlist (SONG_TITLE,PLAYLIST_NAME) VALUES (?, ?, ?)";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, title);
             statement.setString(2, name);
-
 
 
             int rowsInserted = statement.executeUpdate();
@@ -91,9 +90,10 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
             {
                 String title = rs.getString("SONG_TITLE");
                 String name = rs.getString("PLAYLIST_NAME");
+                int pos = rs.getInt("POS");
 
 
-                SongPlaylist newSong = new SongPlaylist(title, name);
+                SongPlaylist newSong = new SongPlaylist(title, name, pos);
                 songsP.add(newSong);
 
 
@@ -124,10 +124,11 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
                 title = rs.getString("SONG_TITLE");
                 String pNameSQL = rs.getString("PLAYLIST_NAME");
+                int pos = rs.getInt("POS");
 
 
                 if (pNameSQL.equals(pName)) {
-                    SongPlaylist newSongP = new SongPlaylist(title, pName);
+                    SongPlaylist newSongP = new SongPlaylist(title, pName, pos);
                     songP.add(newSongP);
                     /*System.out.println("bien");
                     System.out.println(songP);*/
