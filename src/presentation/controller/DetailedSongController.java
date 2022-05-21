@@ -1,6 +1,7 @@
 package presentation.controller;
 
 import business.PlaylistManager;
+import business.SongManager;
 import business.entities.Playlist;
 import persistance.PlaylistDAO;
 import persistance.dao.sql.SQLConnectorPlaylist;
@@ -15,11 +16,13 @@ public class DetailedSongController implements ActionListener {
     private DetailedSongView detailedSongView;
     private PlaylistManager playlistManager;
     private PlaylistDAO playlistDAO;
+    private SongManager songManager;
 
     public DetailedSongController(DetailedSongView detailedSongView) {
         this.detailedSongView = detailedSongView;
         this.playlistDAO = new SQLConnectorPlaylist();
         this.playlistManager = new PlaylistManager();
+        this.songManager = new SongManager();
     }
 
     @Override
@@ -30,10 +33,11 @@ public class DetailedSongController implements ActionListener {
             detailedSongView.showPlaylists();
         }
         if (e.getActionCommand().equals("CLOSE_PANEL_COMMAND")) {
-            detailedSongView.dispose();
+            //detailedSongView.dispose();
         }
         if (e.getActionCommand().equals("PLAY_SONG_COMMAND")) {
             System.out.println("PLAY");
+            //SongManager.PlayMusic(detailedSongView.getPath(), 1);
         }
         if (e.getActionCommand().equals("PAUSE_SONG_COMMAND")) {
             System.out.println("PAUSE");

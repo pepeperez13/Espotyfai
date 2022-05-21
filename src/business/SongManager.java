@@ -51,16 +51,25 @@ public class SongManager<Public> {
         return song;
     }*/
     //Metodo que permite dado un path reproducir archivos de music a .wav
-    public static void PlayMusic(String path,int index) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public static void PlayMusic (String path,int index) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
         //sqlsong = new SQLConnectorSong();
         //LinkedList<Song> song1 = null;
         //sqlsong.SelectSong(name) = song1;
 
-        File file = new File(path);
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
         Clip clip = AudioSystem.getClip();
-        clip.open(audioStream);
+        try {
+            File file = new File(path);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            clip = AudioSystem.getClip();
+            clip.open(audioStream);
+        } catch (UnsupportedAudioFileException unsupportedAudioFileException) {
+            System.out.println("error1");
+        } catch (IOException ioException) {
+            System.out.println("error2");
+        } catch (LineUnavailableException lineUnavailableException) {
+            System.out.println("error3");
+        }
 
         //Switch que controla si se le da a play, pause, se rebobina al principio o se para termina el proceso de reproduccion
         while(index !=4) {
@@ -76,7 +85,6 @@ public class SongManager<Public> {
                 case (4): clip.close();
                     break;
 
-                default: System.out.println("----");
             }
 
 

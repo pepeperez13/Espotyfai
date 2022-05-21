@@ -35,17 +35,17 @@ public class DetailedSongView extends JPanel {
 
         setLayout(new BorderLayout(0, 50));
 
-        add(setTitleAndAuthor("The Time", "The Black Eyed Peas"), BorderLayout.NORTH);
-        add(setGeneralData("Rock", "Albumsito", "Yoyo", "3:24"), BorderLayout.CENTER);
+        add(setTitleAndAuthor(), BorderLayout.NORTH);
+        add(setGeneralData(), BorderLayout.CENTER);
         add(setCloseLabel(), BorderLayout.SOUTH);
     }
 
     public void recibirCancion(Song cancion_encontrada)  {
-
+        this.song = cancion_encontrada;
     }
 
-    private JLabel setTitleAndAuthor (String title, String author) {
-        JLabel text = new JLabel(title + " - " + author);
+    private JLabel setTitleAndAuthor () {
+        JLabel text = new JLabel(song.getTitle() + " - " + song.getArtist());
         text.setPreferredSize(new Dimension(100, 60));
         text.setFont(new Font("Tahoma", Font.BOLD, 36));
         text.setHorizontalAlignment(JLabel.CENTER);
@@ -56,14 +56,14 @@ public class DetailedSongView extends JPanel {
         return text;
     }
 
-    private JPanel setGeneralData (String genre, String album, String owner, String duration) {
+    private JPanel setGeneralData () {
         JPanel generalPanel = new JPanel();
         generalPanel.setLayout(new GridLayout(3, 2));
 
-        generalPanel.add(setInfoPanel("Genre", genre));
-        generalPanel.add(setInfoPanel("Album", album));
-        generalPanel.add(setInfoPanel("Owner", owner));
-        generalPanel.add(setInfoPanel("Duration", duration));
+        generalPanel.add(setInfoPanel("Genre", song.getGenre()));
+        generalPanel.add(setInfoPanel("Album", song.getAlbum()));
+        generalPanel.add(setInfoPanel("Owner", song.getOwner()));
+        generalPanel.add(setInfoPanel("Duration", "3:24"));
         generalPanel.add(setLyricsPanel());
         generalPanel.add(setInteractionsPanel());
 
@@ -97,7 +97,7 @@ public class DetailedSongView extends JPanel {
         textArea.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
         lyricsFetcher = new LyricsFetcher();
-        textArea.setText(lyricsFetcher.getSongLyrics("Black Eyed Peas", "The Time"));
+        textArea.setText(lyricsFetcher.getSongLyrics(song.getArtist(), song.getTitle()));
 
         lyricsPanel.add(generalTitle);
         lyricsPanel.add(scrollPane);
@@ -184,30 +184,19 @@ public class DetailedSongView extends JPanel {
         showPlaylistsController = new ShowPlaylistsController(this);
 
         Box box= Box.createVerticalBox();
-        //LinkedList<Playlist> playlists = controller.getDataPlaylists();
-        Playlist p1 = new Playlist("Playlist 1", "popo");
-        Playlist p2 = new Playlist("Playlist 2", "popo");
-        Playlist p3 = new Playlist("Perreo duro durisimo hermano", "carlos");
-        Playlist p4 = new Playlist("Cosas tranquilitas", "pepe");
-        Playlist p5 = new Playlist("Gym", "mario");
-        Playlist p6 = new Playlist("Locurote", "popo");
+        LinkedList<Playlist> playlists = controller.getDataPlaylists();
 
-        LinkedList<Playlist> playlists = new LinkedList<>();
-        playlists.add(p1); playlists.add(p2); playlists.add(p3); playlists.add(p4); playlists.add(p5); playlists.add(p6);;
-
-
-        for (int i= 0; i < playlists.size(); i++) {
-            JButton button = new JButton(playlists.get(i).getName());
+        for (Playlist playlist : playlists) {
+            JButton button = new JButton(playlist.getName());
             button.setFont(new Font("Tahoma", Font.PLAIN, 14));
             button.setAlignmentX(Component.CENTER_ALIGNMENT);
             button.setFocusable(false);
-            button.setActionCommand(playlists.get(i).getName());
+            button.setActionCommand(playlist.getName());
             button.addActionListener(showPlaylistsController);
             box.add(button);
         }
 
         JScrollPane scroll= new JScrollPane(box);
-        //scroll.setPreferredSize(new Dimension(150, 100));
         playlistsPanel.add(scroll);
         JOptionPane.showMessageDialog(this, playlistsPanel, "Select a playlist to add the song", JOptionPane.PLAIN_MESSAGE);
     }
