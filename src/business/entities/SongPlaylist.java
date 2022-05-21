@@ -2,17 +2,16 @@ package business.entities;
 
 public class SongPlaylist {
 
-    private String title;
-    private String name;
+    private String songTitle;
+    private String playlistName;
 
 
-    public SongPlaylist(String title, String name) {
-        this.title = title;
-        this.name = name;
-
+    public SongPlaylist(String songTitle, String playlistName) {
+        this.songTitle = songTitle;
+        this.playlistName = playlistName;
     }
     public String getTitle() {
-        return title;
+        return songTitle;
     }
 
 }

@@ -2,6 +2,8 @@ package persistance.dao.sql;
 
 import business.entities.Playlist;
 
+import business.entities.Song;
+import business.entities.SongPlaylist;
 import business.entities.User;
 import persistance.PlaylistDAO;
 
@@ -89,6 +91,7 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1,owner);
             ResultSet rs = statement.executeQuery(sql);
+            // obtengo todas las playlists pero sin canciones
             while (rs.next())
             {
                 name = rs.getString("PLAYLIST_NAME");
@@ -99,6 +102,26 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
                 System.out.format("%s, %s\n", name,owner);
             }
             statement.close();
+
+            // para cada playlist obtenida, recupero sus canciones
+            SQLConnectorSong sqlSong = new SQLConnectorSong();
+            for(Playlist p: playlists){
+                sql = "SELECT * FROM songs_playlist WHERE PLAYLIST_NAME = ?";
+                statement = conn.prepareStatement(sql);
+                statement.setString(1,p.getName());
+                rs = statement.executeQuery(sql);
+                while (rs.next())
+                {
+                    String song_title = rs.getString("SONG_TITLE");
+                    Song song = sqlSong.SelectSong(song_title);
+                    p.getSongs().add(song);
+                }
+
+                statement.close();
+            }
+
+
+
             return playlists;
         } catch (SQLException throwables) {
             throwables.printStackTrace();

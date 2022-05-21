@@ -166,6 +166,7 @@ public class ConfigAccountView extends JPanel{ /**Cambiar a JPanel*/
         cardPanel.add(showMusicPanel, "5");
         cardPanel.add(deleteMusicPanel, "6");
 
+
         return cardPanel;
     }
 

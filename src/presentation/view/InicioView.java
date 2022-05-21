@@ -1,6 +1,5 @@
 package presentation.view;
 
-import presentation.controller.ConfMusicController;
 import presentation.controller.InicioController;
 
 import javax.swing.*;
@@ -268,12 +267,12 @@ public class InicioView extends JPanel {
         cardPanel.setLayout(c);
 
 
-         ConfigPlaylistView configPlaylistView= new ConfigPlaylistView();
+         PlaylistView playlistView = new PlaylistView();
          ConfigAccountView configAccountView= new ConfigAccountView();
 
         cardPanel.add(this, "1");
         //cardPanel.add(, "2");
-        cardPanel.add(configPlaylistView, "3");
+        cardPanel.add(playlistView, "3");
         cardPanel.add(configAccountView, "4");
 
 
