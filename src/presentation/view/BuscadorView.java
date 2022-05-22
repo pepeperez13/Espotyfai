@@ -33,7 +33,7 @@ public class BuscadorView extends JPanel {
         this.setLocationRelativeTo(null);*/
         this.setLayout(new BorderLayout());
         this.setBackground(Color.PINK.brighter());
-        this.setOpaque(true);
+        //this.setOpaque(true);
 
         JPanel panel_buscador_general = new JPanel(new BorderLayout(2, 1));
         JPanel barra_buscador_panel = new JPanel(new GridBagLayout());
@@ -238,4 +238,6 @@ public class BuscadorView extends JPanel {
         c.first(cardPanel);
 
     }
+
+
 }

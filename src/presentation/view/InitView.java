@@ -29,7 +29,7 @@ public class InitView extends JFrame {
     }
 
     private JPanel setView () {
-        MainView mainView = new MainView();
+        MainManagerView mainManagerView = new MainManagerView();
         SignUpView signUpView = new SignUpView(this);
         LoginView loginView = new LoginView(this);
 
@@ -37,7 +37,7 @@ public class InitView extends JFrame {
 
         content.add(signUpView, "1");
         content.add(loginView, "2");
-        content.add(mainView, "3");
+        content.add(mainManagerView, "3");
 
         return content;
     }

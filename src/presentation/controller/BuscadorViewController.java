@@ -3,7 +3,7 @@ package presentation.controller;
 import business.BuscadorManager;
 import business.entities.Song;
 import presentation.view.BuscadorView;
-import presentation.view.MainView;
+import presentation.view.MainManagerView;
 import presentation.view.detailedSong.DetailedSongView;
 
 import java.awt.event.ActionEvent;
@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 public class BuscadorViewController implements ActionListener {
     private final BuscadorManager buscadorManager;
     private final BuscadorView buscadorView;
-    private MainView mainView;
+    private MainManagerView mainManagerView;
     private DetailedSongView detailedSongView;
     private Song song;
     private Song cancion_encontrada;
@@ -30,7 +30,7 @@ public class BuscadorViewController implements ActionListener {
         } else {
             if (e.getActionCommand().equals(buscadorView.DETAIL_SONG)) {
                 detailedSongView.recibirCancion(cancion_encontrada);
-                mainView.changeView(5);
+                mainManagerView.changeView(5);
             }
         }
     }

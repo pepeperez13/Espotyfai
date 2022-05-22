@@ -50,6 +50,7 @@ public class ConfigAccountView extends JPanel{ /**Cambiar a JPanel*/
         cardPanel = configureCardPanel();
         add(menuFrontal, BorderLayout.WEST);
         add(cardPanel, BorderLayout.CENTER);
+        //add(barra,BorderLayout.SOUTH);
 
         setSize(1500, 900);
         /*setResizable(true);
