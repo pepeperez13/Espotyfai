@@ -1,16 +1,15 @@
 package presentation.view;
 
+import presentation.controller.BottomBarPanelController;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class BottomBarPanel extends JPanel {
+    private BottomBarPanelController controller;
 
     public BottomBarPanel () {
-        /*this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setMaximumSize(new Dimension(1500, 900));
-        this.setMinimumSize(new Dimension(900, 500));
-        this.setTitle("Espotifai - Buscar");
-        this.setLocationRelativeTo(null)*/
+        controller = new BottomBarPanelController();
 
         JPanel song_player = new JPanel(new GridBagLayout());
 
@@ -33,13 +32,17 @@ public class BottomBarPanel extends JPanel {
         c.gridx = 0;
         c.gridy = 1;
         song_player.add(back_song, c);
+        back_song.setActionCommand("PREVIOUS_SONG");
+        back_song.addActionListener(controller);
 
-        JButton stop = new JButton("||");
+        JButton pause = new JButton("||");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = 1;
         c.gridy = 1;
-        song_player.add(stop, c);
+        song_player.add(pause, c);
+        pause.setActionCommand("PAUSE_SONG");
+        pause.addActionListener(controller);
 
         JButton play = new JButton(">");
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -47,6 +50,8 @@ public class BottomBarPanel extends JPanel {
         c.gridx = 2;
         c.gridy = 1;
         song_player.add(play, c);
+        play.setActionCommand("PLAY_SONG");
+        play.addActionListener(controller);
 
         JButton next_song = new JButton(">>");
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -54,6 +59,8 @@ public class BottomBarPanel extends JPanel {
         c.gridx = 3;
         c.gridy = 1;
         song_player.add(next_song, c);
+        next_song.setActionCommand("NEXT_SONG");
+        next_song.addActionListener(controller);
 
         JButton full_screen = new JButton("Details");
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -61,6 +68,8 @@ public class BottomBarPanel extends JPanel {
         c.gridx = 3;       //aligned with button 2
         c.gridy = 2;       //third row
         song_player.add(full_screen, c);
+        full_screen.setActionCommand("DETAILED_VIEW");
+        full_screen.addActionListener(controller);
 
         this.add(song_player);
 

@@ -5,7 +5,7 @@ import business.SongManager;
 import business.entities.Playlist;
 import persistance.PlaylistDAO;
 import persistance.dao.sql.SQLConnectorPlaylist;
-import presentation.view.detailedSong.DetailedSongView;
+import presentation.view.DetailedSongView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
