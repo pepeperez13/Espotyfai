@@ -18,6 +18,7 @@ public class MainManagerView extends JPanel {
     private BuscadorView buscadorView;
     private BuscadorViewController buscadorViewController;
     private PlaylistView playlistView;
+    private SongListlView songListlView;
     private DetailedSongView detailedSongView;
     private DetailedSongController detailedSongController;
     private MainMenu mainMenu;
@@ -34,12 +35,15 @@ public class MainManagerView extends JPanel {
     private final CardLayout c = new CardLayout();
     private final CardLayout c2 = new CardLayout();
     private MainView mainView;
+    private MainViewController mainViewController;
 
     public MainManagerView() {
         this.setLayout(new BorderLayout());
         //this.setBackground(Color.PINK);
         //this.setOpaque(true);
+
         mainMenu = new MainMenu(this);
+        mainViewController= new MainViewController(mainMenu,this);
         configMenu = new ConfigMenu(this);
         detailedSongView = new DetailedSongView();
 
@@ -55,6 +59,16 @@ public class MainManagerView extends JPanel {
         numViewMenuCardPanel = numMenuPanel;
         configureCardPanel();
         configureMenuCardPanel();
+        switch(numCardPanel){
+            case 3:
+                this.playlistView.bringPlaylists();
+                break;
+            case 12:
+                this.songListlView.loadSongs();
+                break;
+            default:
+                break;
+        }
         c.show(cardPanel, String.valueOf(numCardPanel));
         c2.show(menuCardPanel, String.valueOf(numViewMenuCardPanel));
     }
@@ -64,11 +78,14 @@ public class MainManagerView extends JPanel {
 
         buscadorView = new BuscadorView();
         playlistView = new PlaylistView();
+        songListlView= new SongListlView();
 
         detailedSongController = new DetailedSongController(detailedSongView);
         buscadorViewController = new BuscadorViewController(buscadorView, new BuscadorManager(), detailedSongView, this);
         buscadorView.registerController(buscadorViewController);
         confMusicPanelView = new ConfMusicPanelView(this);
+        playlistView.registerController(mainViewController);
+        songListlView.registerController(mainViewController);
         mainView= new MainView();
 
         /*LinkedList<Song> l = new LinkedList<>();
@@ -94,6 +111,7 @@ public class MainManagerView extends JPanel {
         cardPanel.add(addMusicPanel, "9");
         cardPanel.add(showMusicPanel, "10");
         cardPanel.add(deleteMusicPanel, "11");
+        cardPanel.add(songListlView,"12");
 
         c.first(cardPanel);
 
