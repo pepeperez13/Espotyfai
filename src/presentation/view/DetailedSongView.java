@@ -1,9 +1,10 @@
-package presentation.view.detailedSong;
+package presentation.view;
 
 import business.LyricsFetcher;
 import business.entities.Playlist;
 import business.entities.Song;
 import presentation.controller.DetailedSongController;
+import presentation.controller.ShowPlaylistsController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,22 +33,24 @@ public class DetailedSongView extends JPanel {
 
     public DetailedSongView () {
         controller = new DetailedSongController(this);
-        //song = new Song("aux", "aux", "aux", "aux", "aux", "aux");
-        setLayout(new BorderLayout(0, 50));
+        //this.song = song;
 
-        /*
+        setLayout(new BorderLayout(0, 50));
+/*
         add(setTitleAndAuthor(), BorderLayout.NORTH);
         add(setGeneralData(), BorderLayout.CENTER);
         add(setCloseLabel(), BorderLayout.SOUTH);
-         */
+*/
+
     }
 
-    public void recibirCancion(Song cancion_encontrada)  {
-        this.song = cancion_encontrada;
+    public void updateSong (Song song)  {
+        this.song = song;
 
         add(setTitleAndAuthor(), BorderLayout.NORTH);
         add(setGeneralData(), BorderLayout.CENTER);
         add(setCloseLabel(), BorderLayout.SOUTH);
+
     }
 
     private JLabel setTitleAndAuthor () {

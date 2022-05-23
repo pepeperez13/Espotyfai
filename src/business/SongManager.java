@@ -52,7 +52,7 @@ public class SongManager<Public> {
         return song;
     }*/
     //Metodo que permite dado un path reproducir archivos de music a .wav
-    public void PlayMusic(String path, int index) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public static void PlayMusic(String path, int index) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
         String error = "";
 
