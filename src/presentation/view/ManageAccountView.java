@@ -11,15 +11,19 @@ public class ManageAccountView extends JPanel {
 
     public static final String LOGOUT_BUTTON = "LOGOUT_BUTTON";
     public static final String DELETE_ACCOUNT_BUTTON = "DELETE_ACCOUNT_BUTTON";
+    public static final String YES_BUTTON_LOGOUT="YES_BUTTON_LOGOUT";
+    public static final String NO_BUTTON_LOGOUT="NO_BUTTON_LOGOUT";
+    public static final String NO_BUTTON_DELETE="NO_BUTTON_DELETE";
+    public static final String YES_BUTTON_DELETE="YES_BUTTON_DELETE";
 
     private ManageAccountController controller;
 
     public ManageAccountView() {
-        createView(controller);
+        ManageAccountController manageAccountController= new ManageAccountController(this);
+        createView(manageAccountController);
     }
 
-    public void createView(ManageAccountController logOutController){
-
+    public void createView(ManageAccountController manageAccountController){
         ImageIcon logoImage = new ImageIcon("images/fondoBlanco.jpg");
         Image image = logoImage.getImage();
         image = image.getScaledInstance(800, 300, Image.SCALE_DEFAULT);
@@ -50,8 +54,8 @@ public class ManageAccountView extends JPanel {
         deleteButton.setActionCommand(DELETE_ACCOUNT_BUTTON);
 
 
-        logoutButton.addActionListener(logOutController);
-        deleteButton.addActionListener(logOutController);
+        logoutButton.addActionListener(manageAccountController);
+        deleteButton.addActionListener(manageAccountController);
 
 
 
@@ -91,5 +95,51 @@ public class ManageAccountView extends JPanel {
         setVisible(true);
 
 
+    }
+    public void showLogoutMessage(){
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1,2));
+
+        JButton jYes= new JButton("Yes");
+        JButton jNo= new JButton("No");
+
+        jNo.setActionCommand(NO_BUTTON_LOGOUT);
+        jNo.addActionListener(controller);
+
+        jYes.setActionCommand(YES_BUTTON_LOGOUT);
+        jYes.addActionListener(controller);
+
+        panel.add(jYes);
+        panel.add(jNo);
+
+
+
+        //showPlaylistsController = new ShowPlaylistsController(this);
+
+
+        JOptionPane.showConfirmDialog(this, panel, "Are you sure ?", JOptionPane.PLAIN_MESSAGE);
+    }
+    public void showDeleteMessage(){
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1,2));
+
+        JButton jYes= new JButton("Yes");
+        JButton jNo= new JButton("No");
+
+        jNo.setActionCommand(NO_BUTTON_DELETE);
+        jNo.addActionListener(controller);
+
+        jYes.setActionCommand(YES_BUTTON_DELETE);
+        jYes.addActionListener(controller);
+
+        panel.add(jYes);
+        panel.add(jNo);
+
+        //showPlaylistsController = new ShowPlaylistsController(this);
+
+
+
+
+        JOptionPane.showMessageDialog(this, panel, "Are you sure ?", JOptionPane.PLAIN_MESSAGE);
     }
 }
