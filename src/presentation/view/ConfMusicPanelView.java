@@ -1,5 +1,7 @@
 package presentation.view;
 
+import presentation.controller.ConfMusicController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -11,8 +13,11 @@ public class ConfMusicPanelView extends JPanel {
     private JButton jbAdd;
     private JButton jbShow;
     private JButton jbDel;
+    private ConfMusicController confMusicController;
     private final GridBagConstraints gc = new GridBagConstraints();
-    public ConfMusicPanelView() {
+    public ConfMusicPanelView(MainManagerView mainManagerView) {
+        confMusicController = new ConfMusicController(this, mainManagerView);
+
         setBackground(new Color(255, 255, 255));
         setLayout(new GridBagLayout());
 
@@ -43,6 +48,8 @@ public class ConfMusicPanelView extends JPanel {
         jbDel.setBackground(new Color(230,101, 101));
         jbDel.setBorderPainted(false);
         jbDel.setActionCommand(GO_DELETE_MUSIC);
+
+        registerController(confMusicController);
 
         gc.gridx = 0;
         gc.gridy = 0;

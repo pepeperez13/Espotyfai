@@ -18,7 +18,7 @@ public class SQLConnectorSong implements SongDAO {
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
-            String sql = "INSERT INTO song (SONG_TITLE,SONG_GENRE,SONG_ALBUM,SONG_ARTIST,SONG_PATH,SONG_OWNER,POS) VALUES (?, ?, ?,?,?,?)";
+            String sql = "INSERT INTO song (SONG_TITLE,SONG_GENRE,SONG_ALBUM,SONG_ARTIST,SONG_PATH,SONG_OWNER) VALUES (?, ?, ?,?,?,?)";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, title);

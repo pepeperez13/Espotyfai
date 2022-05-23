@@ -1,66 +1,29 @@
 package presentation.view;
 
-import persistance.dao.sql.SQLConnectorSong;
-import presentation.controller.ConfMusicController;
 import presentation.controller.SideBarController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class ConfigAccountView extends JPanel{ /**Cambiar a JPanel*/
-    public static final String INICIO_COMMAND = "INICIO_COMMAND";
+public class ConfigMenu extends JPanel {
+    public static final String GO_INICIO = "GO_INICIO";
     public static final String GO_CONFIG_MUSIC = "GO_CONFIG_MUSIC";
     public static final String GO_CONFIG_USER = "GO_CONFIG_USER";
     public static final String GO_STATICS = "GO_STATICS";
-    public int numView;
-    private SideBarController sideBarController;
-    private JButton inicio;
+    private JButton jbInicio;
     private JButton jbconfMusic;
     private JButton jbconfUsuario;
     private JButton jbconfEstadisticas;
-    private ManageAccountView manageAccountView = new ManageAccountView();
-    private ConfMusicPanelView confMusicPanelView = new ConfMusicPanelView();
-    private ConfMusicController confMusicController;
-    //private StaticsPanelView staticsPanel = new StaticsPanelView();
-    private AddMusicPanelView addMusicPanel;
-    private ShowMusicPanelView showMusicPanel = new ShowMusicPanelView();
-    private DeleteMusicPanelView deleteMusicPanel = new DeleteMusicPanelView();
-    private JPanel cardPanel = new JPanel();
-    private JPanel menuFrontal = new JPanel();
-    private CardLayout c = new CardLayout();
-
+    private SideBarController sideBarController;
     private final GridBagConstraints constraint = new GridBagConstraints();
 
-    public ConfigAccountView() {
-        setLayout(new BorderLayout());
+    public ConfigMenu (MainManagerView mainManagerView) {
 
-        Dimension dimension = getPreferredSize();
-        dimension.width = 200;
-        setPreferredSize(dimension);
+        sideBarController = new SideBarController(this, mainManagerView);
 
-        setLayout(new BorderLayout());
-        //setLayout(new GridBagLayout());
         setBackground(new Color(191, 105, 240));
-
-        sideBarController = new SideBarController(this);
-        addMusicPanel = new AddMusicPanelView();
-
-        menuFrontal = configureMenuFrontal();
-        cardPanel = configureCardPanel();
-        add(menuFrontal, BorderLayout.WEST);
-        add(cardPanel, BorderLayout.CENTER);
-        //add(barra,BorderLayout.SOUTH);
-
-        setSize(1500, 900);
-        /*setResizable(true);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
-    }
-
-    private JPanel configureMenuFrontal () {
-        menuFrontal.setBackground(new Color(191, 105, 240));
-        menuFrontal.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
         constraint.fill = GridBagConstraints.NONE;
 
         ImageIcon logoSimbol = new ImageIcon("Images/logo.png");
@@ -71,15 +34,13 @@ public class ConfigAccountView extends JPanel{ /**Cambiar a JPanel*/
         logoApp.setBounds(0, 0, 100, 100);
         logoApp.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-
-        Icon inicioSimbol = new ImageIcon("Images/icons8-casa-24.png");
-        inicio = new JButton(inicioSimbol);
-        inicio.setBorder(BorderFactory.createEmptyBorder());
-        inicio.setOpaque(false);
-        inicio.setContentAreaFilled(false);
-        inicio.setBorderPainted(false);
-        inicio.setActionCommand(INICIO_COMMAND);
-        //inicio.addActionListener(this);
+        jbInicio = new JButton();
+        jbInicio.setText("Inicio");
+        jbInicio.setFont(new Font("Arial", Font.BOLD, 18));
+        jbInicio.setForeground(new Color(255, 255, 255));
+        jbInicio.setBackground(new Color(191, 105, 240));
+        jbInicio.setBorderPainted(false);
+        jbInicio.setActionCommand(GO_INICIO);
 
         jbconfMusic = new JButton();
         jbconfMusic.setText("Gestionar música");
@@ -119,8 +80,6 @@ public class ConfigAccountView extends JPanel{ /**Cambiar a JPanel*/
         groupBotones.setBackground(new Color(191, 105,240));
         groupBotones.setLayout(new BoxLayout(groupBotones, BoxLayout.Y_AXIS));
 
-        registerController(sideBarController);
-
         groupBotones.add(jbconfMusic);
         groupBotones.add(separator1);
         groupBotones.add(jbconfUsuario);
@@ -131,48 +90,21 @@ public class ConfigAccountView extends JPanel{ /**Cambiar a JPanel*/
         //Colocamos el Icono de la app
         constraint.gridx = 0;
         constraint.gridy = 0;
-        menuFrontal.add(logoApp, constraint);
+        add(logoApp, constraint);
         constraint.gridx = 0;
         constraint.gridy = 1;
-        menuFrontal.add(inicio, constraint);
+        add(jbInicio, constraint);
         //Colocamos los botones
         constraint.gridx = 0;
         constraint.gridy = 2;
-        menuFrontal.add(groupBotones, constraint);
+        add(groupBotones, constraint);
 
-        return menuFrontal;
+        registerController(sideBarController);
     }
-
     private void registerController(ActionListener listener) {
+        jbInicio.addActionListener(listener);
         jbconfUsuario.addActionListener(listener);
         jbconfMusic.addActionListener(listener);
         jbconfEstadisticas.addActionListener(listener);
-    }
-    public void changueView (int num) {
-        numView = num;
-        configureCardPanel();
-        c.show(cardPanel, String.valueOf(numView));
-    }
-
-    private JPanel configureCardPanel () {
-        cardPanel.setLayout(c);
-
-        confMusicController = new ConfMusicController(this);
-        confMusicPanelView.registerController(confMusicController);
-
-        cardPanel.add(confMusicPanelView, "1");
-        cardPanel.add(manageAccountView, "2");
-        //cardPanel.add(staticsPanel, "3");
-        cardPanel.add(addMusicPanel, "4");
-        cardPanel.add(showMusicPanel, "5");
-        cardPanel.add(deleteMusicPanel, "6");
-
-
-        return cardPanel;
-    }
-
-    public static void main (String[] strings) {
-        ConfigAccountView sideBarView = new ConfigAccountView();
-        sideBarView.setVisible(true);
     }
 }

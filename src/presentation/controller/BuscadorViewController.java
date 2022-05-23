@@ -32,7 +32,7 @@ public class BuscadorViewController implements ActionListener {
         } else {
             if (e.getActionCommand().equals(buscadorView.DETAIL_SONG)) {
                 detailedSongView.updateSong(cancion_encontrada);
-                mainManagerView.changeView(5);
+                mainManagerView.changeView(5, 1);
             }
         }
     }

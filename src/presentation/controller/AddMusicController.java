@@ -2,7 +2,6 @@ package presentation.controller;
 
 import business.SongManager;
 import business.Store;
-import business.entities.User;
 import presentation.view.AddMusicPanelView;
 
 import javax.swing.*;

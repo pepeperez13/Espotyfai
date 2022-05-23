@@ -1,24 +1,30 @@
 package business;
+
 import business.entities.Song;
-import business.entities.SongPlaylist;
 import persistance.SongDAO;
 import persistance.SongPlaylistDAO;
 import persistance.dao.sql.SQLConnectorSong;
 import persistance.dao.sql.SQLConnectorSongPlaylist;
 
 import javax.sound.sampled.*;
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class SongManager<Public> {
 
     private static SongDAO songDAO = new SQLConnectorSong();
     private static SongPlaylistDAO songPDAO = new SQLConnectorSongPlaylist();
 
-
+    /**
+     * Este método añade una canción
+     * @param title Título de la canción
+     * @param Genre Genero de la canción
+     * @param album
+     * @param artist
+     * @param path
+     * @param owner
+     */
     public static void addSong (String title, String Genre, String album, String artist, String path,String owner) {
         songDAO.InsertDataSong(title, Genre, album, artist, path,owner);
     }

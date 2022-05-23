@@ -4,9 +4,6 @@ import business.entities.Song;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.LinkedList;
 
 public class StaticsPanelView extends JPanel {
@@ -21,14 +18,14 @@ public class StaticsPanelView extends JPanel {
     public static final String REGGAETON = "REGGAETON";
     public static final String REGGAE = "REGGAE";
     public static final String LATIN = "LATIN";
+    private final int ESPACIO = 60;
     private final int[] contadoresGenero = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    private final String[] generos;
+    //private static final int Regg = 1;
+    //private String[] generos;
     private LinkedList<Song> listaCanciones = new LinkedList<>();
-    public StaticsPanelView (String[] generos, LinkedList<Song> listaCanciones /** De donde vamos a sacar los valores*/) {
-        this.generos = generos;
-        
-        //Valor * numeroPixeles/MayorValor
+    public StaticsPanelView (LinkedList<Song> listaCanciones /** De donde vamos a sacar los valores*/) {
         this.listaCanciones = listaCanciones;
+        //Valor * numeroPixeles/MayorValor
         for (int i = 0; i < listaCanciones.size(); i++) {
             if (listaCanciones.get(i).getGenre().equals(KPOP)) {
                 contadoresGenero[0]++;
@@ -52,13 +49,13 @@ public class StaticsPanelView extends JPanel {
                 contadoresGenero[9]++;
             }
         }
-
-
     }
+
+    @Override
     public void paintComponent (Graphics g) {
         super.paintComponent(g);
         if (listaCanciones == null) {
-            return;
+            JOptionPane.showMessageDialog(this, "NO SONGS", "Following errors were found", JOptionPane.WARNING_MESSAGE);
         } else {
             double minValue = 0;
             double maxValue = 0;
@@ -70,35 +67,73 @@ public class StaticsPanelView extends JPanel {
                     maxValue = contadoresGenero[i];
                 }
             }
+
+            //System.out.println(minValue+"minValue"+"\n"+maxValue+"maxValue");
+            //int west = labelFontMetrics.getHeight();
             Dimension d = getSize();
             int clientWidth = d.width;
             int clientHeight = d.height;
-            //int barWidth = clientHeight / 10;
-            int barWidth = 10;
+            int barWidth = 12;
 
             Font labelFont = new Font("SansSerif", Font.PLAIN, 10);
             FontMetrics labelFontMetrics = g.getFontMetrics(labelFont);
 
             int x = labelFontMetrics.getAscent();
-            int y = clientHeight / 10;
+            int y = clientHeight / 100;
             g.setFont(labelFont);
+            y += ESPACIO;
+            x += ESPACIO;
             g.drawString("K-Pop", x, y);
+            g.setColor(new Color(76, 131, 187));
+            //System.out.println(((contadoresGenero[0]*clientWidth)/maxValue));
+            g.fillRect(x+ESPACIO, y, (int) ((contadoresGenero[0]*clientWidth)/maxValue - 100), barWidth - 2);
+            g.drawRect(x+ESPACIO, y, (int) ((contadoresGenero[0]*clientWidth)/maxValue - 100), barWidth - 2);
+            y += ESPACIO;
             g.drawString("Jazz", x, y);
+            g.setColor(new Color(194, 85, 76));
+            g.fillRect(x+ESPACIO, y, (int) ((contadoresGenero[1]*clientWidth)/maxValue - 100), barWidth - 2);
+            g.drawRect(x+ESPACIO, y, (int) ((contadoresGenero[1]*clientWidth)/maxValue - 100), barWidth - 2);
+            y += ESPACIO;
             g.drawString("Rock", x, y);
+            g.setColor(new Color(156, 187, 92));
+            g.fillRect(x+ESPACIO, y, (int) ((contadoresGenero[2]*clientWidth)/maxValue - 100), barWidth - 2);
+            g.drawRect(x+ESPACIO, y, (int) ((contadoresGenero[2]*clientWidth)/maxValue - 100), barWidth - 2);
+            y += ESPACIO;
             g.drawString("Electronic Dance Music", x, y);
+            g.setColor(new Color(76, 172, 196));
+            g.fillRect(x+ESPACIO, y, (int) ((contadoresGenero[3]*clientWidth)/maxValue - 100), barWidth - 2);
+            g.drawRect(x+ESPACIO, y, (int) ((contadoresGenero[3]*clientWidth)/maxValue - 100), barWidth - 2);
+            y += ESPACIO;
             g.drawString("Death Metal", x, y);
+            g.setColor(new Color(242, 151, 75));
+            g.fillRect(x+ESPACIO, y, (int) ((contadoresGenero[4]*clientWidth)/maxValue - 100), barWidth - 2);
+            g.drawRect(x+ESPACIO, y, (int) ((contadoresGenero[4]*clientWidth)/maxValue - 100), barWidth - 2);
+            y += ESPACIO;
             g.drawString("Hip-Hop", x, y);
+            g.setColor(new Color(129, 100, 157));
+            g.fillRect(x+ESPACIO, y, (int) ((contadoresGenero[5]*clientWidth)/maxValue - 100), barWidth - 2);
+            g.drawRect(x+ESPACIO, y, (int) ((contadoresGenero[5]*clientWidth)/maxValue - 100), barWidth - 2);
+            y += ESPACIO;
             g.drawString("Europop", x, y);
+            g.setColor(new Color(148, 177, 211));
+            g.fillRect(x+ESPACIO, y, (int) ((contadoresGenero[6]*clientWidth)/maxValue - 100), barWidth - 2);
+            g.drawRect(x+ESPACIO, y, (int) ((contadoresGenero[6]*clientWidth)/maxValue - 100), barWidth - 2);
+            y += ESPACIO;
             g.drawString("Reggaeton", x, y);
+            g.setColor(new Color(148, 255, 211));
+            g.fillRect(x+ESPACIO, y, (int) ((contadoresGenero[7]*clientWidth)/maxValue - 100), barWidth - 2);
+            g.drawRect(x+ESPACIO, y, (int) ((contadoresGenero[7]*clientWidth)/maxValue - 100), barWidth - 2);
+            y += ESPACIO;
             g.drawString("Reggae", x, y);
+            g.setColor(new Color(148, 177, 255));
+            g.fillRect(x+ESPACIO, y, (int) ((contadoresGenero[8]*clientWidth)/maxValue - 100), barWidth - 2);
+            g.drawRect(x+ESPACIO, y, (int) ((contadoresGenero[8]*clientWidth)/maxValue - 100), barWidth - 2);
+            y += ESPACIO;
             g.drawString("Latin Music", x, y);
-
-            int west = labelFontMetrics.getHeight();
-
-            if (maxValue == minValue) {
-                return;
-            } else {
-                double scale = (clientWidth - west) / (maxValue - minValue);
+            g.setColor(new Color(255, 255, 100));
+            g.fillRect(x+ESPACIO, y, (int) ((contadoresGenero[9]*clientWidth)/maxValue - 100), barWidth - 2);
+            g.drawRect(x+ESPACIO, y, (int) ((contadoresGenero[9]*clientWidth)/maxValue - 100), barWidth - 2);
+                /*double scale = (clientWidth - west) / (maxValue - minValue);
                 y = clientHeight - labelFontMetrics.getAscent();
                 g.setFont(labelFont);
 
@@ -112,51 +147,31 @@ public class StaticsPanelView extends JPanel {
                         valueX = (int) (maxValue * scale);
                         height = -height;
                     }
-                    g.setColor(Color.GREEN);
-                    g.fillRect(valueX, valueY, barWidth - 2,height);
-                    g.setColor(Color.cyan);
-                    g.drawRect(valueX, valueY, barWidth - 2, height);
-                    int labelWidth = labelFontMetrics.stringWidth(generos[i]);
-                    x  = i * barWidth + (barWidth - labelWidth) / 2;
-                    g.drawString(generos[i], x, y);
-                }
-            }
+                    //Sacar el tamañobien
+                    //g.setColor(Color.GREEN);
+                    //g.fillRect(valueX, valueY, height, barWidth - 2);
+                    //g.drawRect(valueX, valueY, height, barWidth - 2);
+                    //int labelWidth = labelFontMetrics.stringWidth(generos[i]);
+                    //x  = i * barWidth + (barWidth - labelWidth) / 2;
+                    //g.drawString(generos[i], x, y);
+                }*/
+
         }
     }
 
-    public static void main (String[] argv) {
-        JFrame jFrame = new JFrame();
-        jFrame.setSize(400, 400);
-    
-        String[] generos = {"KPOP", "JAZZ", "ROCK", "ELECTRONIC", "METAL", "HIPHOP", "POP", "REGGAETON", "REGGAE", "LATIN"};
-        Song s1 = new Song("titulo1", "KPOP", "kl", "s", "dasdsadasdasd.dsadas", "yo");
-        Song s2 = new Song("titulo1", "KPOP", "kl", "s", "dasdsadasdasd.dsadas", "yo");
-        Song s3 = new Song("titulo1", "KPOP", "kl", "s", "dasdsadasdasd.dsadas", "yo");
-        Song s4 = new Song("titulo1", "KPOP", "kl", "s", "dasdsadasdasd.dsadas", "yo");
-        Song s5 = new Song("titulo1", "ROCK", "kl", "s", "dasdsadasdasd.dsadas", "yo");
-        Song s6 = new Song("titulo1", "ROCK", "kl", "s", "dasdsadasdasd.dsadas", "yo");
-        Song s7 = new Song("titulo1", "LATIN", "kl", "s", "dasdsadasdasd.dsadas", "yo");
-        Song s8 = new Song("titulo1", "LATIN", "kl", "s", "dasdsadasdasd.dsadas", "yo");
+    /*public static void main(String[] args) {
+        LinkedList<Song> l = new LinkedList<>();
+        l.add(new Song("sasas", KPOP, "ASA", "S", "PSA", "ASAS"));
+        l.add(new Song("sasas", REGGAE, "ASA", "S", "PSA", "ASAS"));
+        l.add(new Song("sasas", REGGAE, "ASA", "S", "PSA", "ASAS"));
+        l.add(new Song("sasas", REGGAE, "ASA", "S", "PSA", "ASAS"));
+        l.add(new Song("sasas", KPOP, "ASA", "S", "PSA", "ASAS"));
+        l.add(new Song("sasas", KPOP, "ASA", "S", "PSA", "ASAS"));
+        l.add(new Song("sasas", LATIN, "ASA", "S", "PSA", "ASAS"));
+        l.add(new Song("sasas", LATIN, "ASA", "S", "PSA", "ASAS"));
 
-        LinkedList<Song> songs = new LinkedList<>();
-        songs.add(s1);
-        songs.add(s2);
-        songs.add(s3);
-        songs.add(s4);
-        songs.add(s5);
-        songs.add(s6);
-        songs.add(s7);
-        songs.add(s8);
+        StaticsPanelView s = new StaticsPanelView(l);
 
-        jFrame.getContentPane().add(new StaticsPanelView(generos, songs));
-
-        WindowListener wndCloser = new WindowAdapter() {
-            public void  windowClosing (WindowEvent e) {
-                System.exit(0);
-            }
-        };
-
-        jFrame.addWindowListener(wndCloser);
-        jFrame.setVisible(true);
-    }
+        s.setVisible(true);
+    }*/
 }

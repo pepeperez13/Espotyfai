@@ -1,196 +1,112 @@
 package presentation.view;
 
 import business.BuscadorManager;
+import business.SongManager;
 import business.entities.Song;
 import presentation.controller.BuscadorViewController;
+import presentation.controller.ConfMusicController;
 import presentation.controller.DetailedSongController;
 import presentation.controller.MainViewController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 public class MainManagerView extends JPanel {
-    JTable songs_table;
-    Song song;
-
-    public static final String GO_INICIO = "GO_INICIO";
-    public static final String GO_BUSCADOR = "GO_BUSCADOR";
-    public static final String GO_MISLISTAS = "GO_MISLISTAS";
-    public static final String GO_SETTINGS = "GO_SETTINGS";
-    public int numView;
-    private JButton jbconfMusic;
-    private JButton jbconfBuscar;
-    private JButton jbconfListas;
-    private JButton jbconfSettings;
+    public int numViewCardPanel;
+    public int numViewMenuCardPanel;
     private BuscadorView buscadorView;
     private BuscadorViewController buscadorViewController;
-    private MainViewController mainViewController;
-    private ConfigAccountView configAccountView;
     private PlaylistView playlistView;
-    private SongListlView songListlView;
     private DetailedSongView detailedSongView;
     private DetailedSongController detailedSongController;
+    private MainMenu mainMenu;
+    private ConfigMenu configMenu;
+    private ManageAccountView manageAccountView = new ManageAccountView();
+    private ConfMusicPanelView confMusicPanelView;
+    private ConfMusicController confMusicController;
+    private StaticsPanelView staticsPanel;
+    private AddMusicPanelView addMusicPanel;
+    private ShowMusicPanelView showMusicPanel = new ShowMusicPanelView();
+    private DeleteMusicPanelView deleteMusicPanel = new DeleteMusicPanelView();
     private JPanel cardPanel = new JPanel();
-    private JPanel sideMenuBar = new JPanel();
+    private JPanel menuCardPanel = new JPanel();
     private final CardLayout c = new CardLayout();
-    private final GridBagConstraints constraint = new GridBagConstraints();
+    private final CardLayout c2 = new CardLayout();
     private MainView mainView;
-    private BottomBarPanel bottomBarPanel;
+
     public MainManagerView() {
         this.setLayout(new BorderLayout());
-        this.setBackground(Color.PINK);
+        //this.setBackground(Color.PINK);
         //this.setOpaque(true);
-        mainViewController = new MainViewController(this);
-        bottomBarPanel=new BottomBarPanel();
-        sideMenuBar = configureSideMenuBar();
-        add(sideMenuBar, BorderLayout.WEST);
-        add(cardPanel,  BorderLayout.CENTER);
-        add(bottomBarPanel,BorderLayout.SOUTH);
-
+        mainMenu = new MainMenu(this);
+        configMenu = new ConfigMenu(this);
         detailedSongView = new DetailedSongView();
+
+        cardPanel = configureCardPanel();
+        menuCardPanel = configureMenuCardPanel();
+
+        add(menuCardPanel, BorderLayout.WEST);
+        add(cardPanel,  BorderLayout.CENTER);
+
     }
-
-    private JPanel configureSideMenuBar () {
-        sideMenuBar.setBackground(new Color(191, 105, 240));
-        sideMenuBar.setLayout(new GridBagLayout());
-        constraint.fill = GridBagConstraints.NONE;
-
-        ImageIcon logoSimbol = new ImageIcon("logo.png");
-        Image image1 = logoSimbol.getImage();
-        image1 = image1.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
-        logoSimbol = new ImageIcon(image1);
-        JLabel logoApp = new JLabel(logoSimbol);
-        logoApp.setBounds(0, 0, 100, 100);
-        logoApp.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        jbconfMusic = new JButton();
-        jbconfMusic.setText("Inicio");
-        jbconfMusic.setFont(new Font("Arial", Font.BOLD, 18));
-        jbconfMusic.setForeground(new Color(255, 255, 255));
-        jbconfMusic.setBackground(new Color(191, 105, 240));
-        jbconfMusic.setBorderPainted(false);
-        jbconfMusic.setActionCommand(GO_INICIO);
-
-        jbconfBuscar = new JButton();
-        jbconfBuscar.setText("Buscar música");
-        jbconfBuscar.setFont(new Font("Arial", Font.BOLD, 18));
-        jbconfBuscar.setForeground(new Color(255, 255, 255));
-        jbconfBuscar.setBackground(new Color(191, 105, 240));
-        jbconfBuscar.setBorderPainted(false);
-        jbconfBuscar.setActionCommand(GO_BUSCADOR);
-        //jbconfMusic.addActionListener(this);
-
-        jbconfListas = new JButton();
-        jbconfListas.setText("Mis Listas");
-        jbconfListas.setFont(new Font("Arial", Font.BOLD, 18));
-        jbconfListas.setForeground(new Color(255, 255, 255));
-        jbconfListas.setBackground(new Color(191, 105, 240));
-        jbconfListas.setBorderPainted(false);
-        jbconfListas.setActionCommand(GO_MISLISTAS);
-        //jbconfUsuario.addActionListener(this);
-
-        jbconfSettings = new JButton();
-        jbconfSettings.setText("Settings");
-        jbconfSettings.setFont(new Font("Arial", Font.BOLD, 18));
-        jbconfSettings.setForeground(new Color(255, 255, 255));
-        jbconfSettings.setBackground(new Color(191, 105, 240));
-        jbconfSettings.setBorderPainted(false);
-        jbconfSettings.setActionCommand(GO_SETTINGS);
-        //jbconfUsuario.addActionListener(this);
-
-
-        JSeparator separator1 = new JSeparator();
-        separator1.setOrientation(SwingConstants.HORIZONTAL);
-        JSeparator separator2 = new JSeparator();
-        separator2.setOrientation(SwingConstants.HORIZONTAL);
-        JSeparator separator3 = new JSeparator();
-        separator3.setOrientation(SwingConstants.HORIZONTAL);
-        JSeparator separator4 = new JSeparator();
-        separator4.setOrientation(SwingConstants.HORIZONTAL);
-
-        JPanel groupBotones = new JPanel();
-        groupBotones.setBackground(new Color(191, 105,240));
-        groupBotones.setLayout(new BoxLayout(groupBotones, BoxLayout.Y_AXIS));
-
-        groupBotones.add(jbconfMusic);
-        groupBotones.add(separator1);
-        groupBotones.add(jbconfBuscar);
-        groupBotones.add(separator2);
-        groupBotones.add(jbconfListas);
-        groupBotones.add(separator3);
-        groupBotones.add(jbconfSettings);
-        groupBotones.add(separator4);
-
-        //Colocamos el Icono de la app
-        constraint.gridx = 0;
-        constraint.gridy = 0;
-        sideMenuBar.add(logoApp, constraint);
-
-        //Colocamos los botones
-        constraint.gridx = 0;
-        constraint.gridy = 1;
-        sideMenuBar.add(groupBotones, constraint);
-
-        registerController(mainViewController);
-
-        //reproductor_panel = reproductorBarView.ReproductorBarView();
-
-        return sideMenuBar;
-    }
-
-    private void registerController(ActionListener listener) {
-        jbconfMusic.addActionListener(listener);
-        jbconfBuscar.addActionListener(listener);
-        jbconfListas.addActionListener(listener);
-        jbconfSettings.addActionListener(listener);
-    }
-    public void changeView(int num) {
-
-
-
-        numView = num;
+    public void changeView(int numCardPanel, int numMenuPanel) {
+        numViewCardPanel = numCardPanel;
+        numViewMenuCardPanel = numMenuPanel;
         configureCardPanel();
-        switch(num){
-            case 3:
-                this.playlistView.bringPlaylists();
-                break;
-            case 6:
-                    this.songListlView.loadSongs();
-                    break;
-            default:
-                break;
-        }
-        c.show(cardPanel, String.valueOf(numView));
+        configureMenuCardPanel();
+        c.show(cardPanel, String.valueOf(numCardPanel));
+        c2.show(menuCardPanel, String.valueOf(numViewMenuCardPanel));
     }
 
-    private void configureCardPanel () {
+    private JPanel configureCardPanel () {
         cardPanel.setLayout(c);
-        //cardPanel.setOpaque(true);
 
-        mainViewController = new MainViewController(this);
         buscadorView = new BuscadorView();
         playlistView = new PlaylistView();
-        songListlView = new SongListlView();
-        configAccountView = new ConfigAccountView();
 
         detailedSongController = new DetailedSongController(detailedSongView);
         buscadorViewController = new BuscadorViewController(buscadorView, new BuscadorManager(), detailedSongView, this);
         buscadorView.registerController(buscadorViewController);
-        playlistView.registerController(mainViewController);
-        songListlView.registerController(mainViewController);
-
+        confMusicPanelView = new ConfMusicPanelView(this);
         mainView= new MainView();
+
+        /*LinkedList<Song> l = new LinkedList<>();
+        l.add(new Song("sasas", "KPOP", "ASA", "S", "PSA", "ASAS"));
+        l.add(new Song("sasas", "REGGAE", "ASA", "S", "PSA", "ASAS"));
+        l.add(new Song("sasas", "REGGAE", "ASA", "S", "PSA", "ASAS"));
+        l.add(new Song("sasas", "REGGAE", "ASA", "S", "PSA", "ASAS"));
+        l.add(new Song("sasas", "KPOP", "ASA", "S", "PSA", "ASAS"));
+        l.add(new Song("sasas", "KPOP", "ASA", "S", "PSA", "ASAS"));
+        l.add(new Song("sasas", "LATIN", "ASA", "S", "PSA", "ASAS"));
+        l.add(new Song("sasas", "LATIN", "ASA", "S", "PSA", "ASAS"));*/
+
+        staticsPanel= new StaticsPanelView(SongManager.ListSongs());
+        addMusicPanel = new AddMusicPanelView();
 
         cardPanel.add(mainView, "1");
         cardPanel.add(buscadorView, "2");
         cardPanel.add(playlistView, "3");
-        cardPanel.add(configAccountView, "4");
         cardPanel.add(detailedSongView, "5");
-        cardPanel.add(songListlView, "6");
+        cardPanel.add(confMusicPanelView, "6");
+        cardPanel.add(manageAccountView, "7");
+        cardPanel.add(staticsPanel, "8");
+        cardPanel.add(addMusicPanel, "9");
+        cardPanel.add(showMusicPanel, "10");
+        cardPanel.add(deleteMusicPanel, "11");
 
         c.first(cardPanel);
 
+        return cardPanel;
+    }
+
+    private JPanel configureMenuCardPanel () {
+        menuCardPanel.setLayout(c2);
+
+        menuCardPanel.add(mainMenu, "1");
+        menuCardPanel.add(configMenu, "2");
+
+        return menuCardPanel;
     }
 
 }
