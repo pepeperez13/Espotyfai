@@ -1,7 +1,11 @@
 package presentation.controller;
 
+import business.entities.Playlist;
+import presentation.render.PlayListRender;
 import presentation.view.MainManagerView;
+import presentation.view.SongListlView;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,6 +30,11 @@ public class MainViewController implements ActionListener {
         } else if (e.getActionCommand().equals(MainManagerView.GO_SETTINGS)) {
             menuBarView.changeView(4);
             System.out.println(4);
+        }
+        else if (e.getActionCommand().equals(PlayListRender.EDIT_BUTTON)){
+            Playlist parameterPlayList = (Playlist) ((JButton)e.getSource()).getClientProperty( "PLAYLIST" );
+            SongListlView.selectedPlaylist = parameterPlayList;
+            menuBarView.changeView(6);
         }
     }
 

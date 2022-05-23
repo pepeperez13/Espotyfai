@@ -2,10 +2,11 @@ package presentation.render;
 
 import business.entities.Playlist;
 import business.entities.Song;
-import presentation.controller.ConfigPlaylistController;
+
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class SongListRender extends JPanel {
     private JLabel lbIcon = new JLabel();
@@ -14,13 +15,13 @@ public class SongListRender extends JPanel {
     private JButton btSubir = new JButton();
     private JButton btBajar = new JButton();
     private JButton btEliminar = new JButton();
-    private ConfigPlaylistController controller;
+    private ActionListener controller;
     public static final String UP_BUTTON = "SL_UP_BUTTON";
     public static final String DOWN_BUTTON = "SL_DOWN_BUTTON";
     public static final String DELETE_BUTTON = "SL_DELETE_BUTTON";
     private Song song;
 
-    public SongListRender(Song song,ConfigPlaylistController controller) {
+    public SongListRender(Song song, ActionListener controller) {
         this.song = song;
         this.controller = controller;
         setLayout(new BorderLayout(5, 5));

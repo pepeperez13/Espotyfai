@@ -2,13 +2,12 @@ package business;
 
 import business.entities.User;
 
-public class Store {
-    public static User LOGGED_USER;
-    private User currentUser;
-    public User getUser () {
-        return this.currentUser;
+public final class Store {
+    private static User currentUser;
+    public static User getUser () {
+        return currentUser;
     }
-    public void setUser (User user) {
-        this.currentUser = user;
+    public static void setUser (User user) {
+        currentUser = user;
     }
 }

@@ -28,6 +28,7 @@ public class MainManagerView extends JPanel {
     private MainViewController mainViewController;
     private ConfigAccountView configAccountView;
     private PlaylistView playlistView;
+    private SongListlView songListlView;
     private DetailedSongView detailedSongView;
     private DetailedSongController detailedSongController;
     private JPanel cardPanel = new JPanel();
@@ -144,8 +145,21 @@ public class MainManagerView extends JPanel {
         jbconfSettings.addActionListener(listener);
     }
     public void changeView(int num) {
+
+
+
         numView = num;
         configureCardPanel();
+        switch(num){
+            case 3:
+                this.playlistView.bringPlaylists();
+                break;
+            case 6:
+                    this.songListlView.loadSongs();
+                    break;
+            default:
+                break;
+        }
         c.show(cardPanel, String.valueOf(numView));
     }
 
@@ -156,11 +170,15 @@ public class MainManagerView extends JPanel {
         mainViewController = new MainViewController(this);
         buscadorView = new BuscadorView();
         playlistView = new PlaylistView();
+        songListlView = new SongListlView();
         configAccountView = new ConfigAccountView();
 
         detailedSongController = new DetailedSongController(detailedSongView);
         buscadorViewController = new BuscadorViewController(buscadorView, new BuscadorManager(), detailedSongView, this);
         buscadorView.registerController(buscadorViewController);
+        playlistView.registerController(mainViewController);
+        songListlView.registerController(mainViewController);
+
         mainView= new MainView();
 
         cardPanel.add(mainView, "1");
@@ -168,6 +186,7 @@ public class MainManagerView extends JPanel {
         cardPanel.add(playlistView, "3");
         cardPanel.add(configAccountView, "4");
         cardPanel.add(detailedSongView, "5");
+        cardPanel.add(songListlView, "6");
 
         c.first(cardPanel);
 

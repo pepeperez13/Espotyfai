@@ -18,7 +18,6 @@ public class   LoginController implements ActionListener {
     private boolean userExistsError;
     private boolean passwordConfirmationError;
     private final InitController initController;
-    private final Store store = new Store();
     //private Store store;
     public LoginController(LoginView loginView, InitView initView) {
         this.loginView = loginView;
@@ -33,7 +32,7 @@ public class   LoginController implements ActionListener {
             if (checkDataCorrect()) {
                 //Retornar el user current. Buscando con el login introducido y retornando de la base de datos
                 //store = new Store();
-                store.setUser(manager.getCurrentUser(loginView.getUserName()));
+                Store.setUser(manager.getCurrentUser(loginView.getUserName()));
                 initController.refreshView(3);
             } else {
                 loginView.showErrorMessage(userExistsError, passwordConfirmationError);
