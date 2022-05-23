@@ -1,9 +1,8 @@
-package presentation.view.detailedSong;
+package presentation.controller;
 
 import business.PlaylistManager;
 import business.SongPlaylistManager;
-import persistance.PlaylistDAO;
-import persistance.dao.sql.SQLConnectorPlaylist;
+import presentation.view.DetailedSongView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

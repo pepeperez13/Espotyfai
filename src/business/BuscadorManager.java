@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class BuscadorManager {
     private Song song;
+    private SongManager songManager;
     //private Conexion conexion;
 
     public LinkedList<Song> listaCancionesPrueba (LinkedList<Song> list_songs) {
@@ -30,7 +31,7 @@ public class BuscadorManager {
     }
 
     public Song buscarCancion (String song_name) {
-        LinkedList<Song> list_songs = new LinkedList<>();
+        LinkedList<Song> list_songs = SongManager.ListSongs();
 
         Song cancion_encontrada = null;
         Scanner scanner = new Scanner(System.in);
