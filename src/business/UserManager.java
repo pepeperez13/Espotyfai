@@ -145,7 +145,7 @@ public class UserManager {
     }
 
     public void deleteUser(){
-        User userToDelete = Store.LOGGED_USER;
+        User userToDelete = Store.getUser();
         LinkedList<Playlist> playlists= sqlP.SelectDataPlaylist();
         for (Playlist playlist : playlists) {
             if (playlist.getOwner().equals(userToDelete.getEmail())) {
@@ -158,8 +158,8 @@ public class UserManager {
 
     }
     public void logout(){
-        User userToLogout = Store.LOGGED_USER;
+        User userToLogout = Store.getUser();
         //sql.LogoutUser(userToLogout);
-        Store.LOGGED_USER = null;
+        Store.setUser(null);
     }
 }

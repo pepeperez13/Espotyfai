@@ -8,6 +8,7 @@ import business.entities.User;
 import persistance.PlaylistDAO;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class SQLConnectorPlaylist implements PlaylistDAO {
@@ -81,39 +82,43 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
     public LinkedList<Playlist> SelectPlaylistsOfUser(User user)
     {
         LinkedList<Playlist> playlists = new LinkedList<>();
-        String name = user.getName();
-        String owner = user.getEmail();
+        String owner = user.getName();
+        String playlistname = "";
 
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
-            String sql = "SELECT * FROM PLAYLIST WHERE PLAYLIST_OWNER=?";
+            String sql = "SELECT * FROM PLAYLIST WHERE PLAYLIST_OWNER = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1,owner);
-            ResultSet rs = statement.executeQuery(sql);
+            ResultSet rs = statement.executeQuery();
             // obtengo todas las playlists pero sin canciones
             while (rs.next())
             {
-                name = rs.getString("PLAYLIST_NAME");
+                playlistname = rs.getString("PLAYLIST_NAME");
                 owner = rs.getString("PLAYLIST_OWNER");
-                Playlist newPlaylist = new Playlist(name, owner);
+                Playlist newPlaylist = new Playlist(playlistname, owner);
                 playlists.add(newPlaylist);
                 // print the results
-                System.out.format("%s, %s\n", name,owner);
+                System.out.format("%s, %s\n", playlistname,owner);
             }
             statement.close();
 
             // para cada playlist obtenida, recupero sus canciones
             SQLConnectorSong sqlSong = new SQLConnectorSong();
             for(Playlist p: playlists){
-                sql = "SELECT * FROM songs_playlist WHERE PLAYLIST_NAME = ?";
+                sql = "SELECT * FROM song_playlist WHERE PLAYLIST_NAME = ?";
                 statement = conn.prepareStatement(sql);
                 statement.setString(1,p.getName());
-                rs = statement.executeQuery(sql);
+                rs = statement.executeQuery();
                 while (rs.next())
                 {
                     String song_title = rs.getString("SONG_TITLE");
+                    int song_pos = rs.getInt("SONG_POS");
+
                     Song song = sqlSong.SelectSong(song_title);
+                    song.setPosition(song_pos);
+                    p.setSongs(new ArrayList<>());
                     p.getSongs().add(song);
                 }
 

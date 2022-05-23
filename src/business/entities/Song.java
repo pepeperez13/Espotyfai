@@ -7,7 +7,7 @@ public class Song {
     private String artist;
     private String owner;
     private String path;
-
+    private int position;
 
     public Song(String title, String genre, String album, String artist, String path, String owner) {
         this.title = title;
@@ -68,5 +68,11 @@ public class Song {
         this.path = path;
     }
 
+    public int getPosition() {
+        return position;
+    }
 
+    public void setPosition(int position) {
+        this.position = position;
+    }
 }

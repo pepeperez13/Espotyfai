@@ -1,10 +1,11 @@
 package presentation.render;
 
 import business.entities.Playlist;
-import presentation.controller.ConfigPlaylistController;
+;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class PlayListRender extends JPanel  {
 
@@ -17,7 +18,7 @@ public class PlayListRender extends JPanel  {
     public static final String DELETE_BUTTON = "PL_DELETE_BUTTON";
     private Playlist playlist = null;
 
-    public PlayListRender(Playlist playlist,ConfigPlaylistController controller) {
+    public PlayListRender(Playlist playlist, ActionListener controller) {
         this.playlist = playlist;
         setLayout(new BorderLayout(5, 5));
         setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
