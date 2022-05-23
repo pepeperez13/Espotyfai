@@ -46,9 +46,6 @@ public class ManageAccountView extends JPanel {
         deleteButton.setBorderPainted(false);
 
 
-
-
-
         logoutButton.setActionCommand(LOGOUT_BUTTON);
         deleteButton.setActionCommand(DELETE_ACCOUNT_BUTTON);
 

@@ -36,16 +36,17 @@ public class MainManagerView extends JPanel {
     private final CardLayout c = new CardLayout();
     private final GridBagConstraints constraint = new GridBagConstraints();
     private MainView mainView;
-
+    private BottomBarPanel bottomBarPanel;
     public MainManagerView() {
         this.setLayout(new BorderLayout());
         this.setBackground(Color.PINK);
         //this.setOpaque(true);
         mainViewController = new MainViewController(this);
-
+        bottomBarPanel=new BottomBarPanel();
         sideMenuBar = configureSideMenuBar();
         add(sideMenuBar, BorderLayout.WEST);
         add(cardPanel,  BorderLayout.CENTER);
+        add(bottomBarPanel,BorderLayout.SOUTH);
 
         detailedSongView = new DetailedSongView();
     }
