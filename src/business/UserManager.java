@@ -1,8 +1,11 @@
 package business;
 
 import business.entities.Playlist;
+import business.entities.Song;
 import business.entities.User;
 
+import persistance.PlaylistDAO;
+import persistance.SongDAO;
 import persistance.UserDAO;
 import persistance.dao.sql.SQLConnectorPlaylist;
 import persistance.dao.sql.SQLConnectorUser;
@@ -13,7 +16,8 @@ import java.util.LinkedList;
 
 public class UserManager {
     private UserDAO sql;
-    private SQLConnectorPlaylist sqlP;
+    private PlaylistDAO sqlP;
+    private SongDAO sqlS;
 
     public UserManager (UserDAO sql) {
         this.sql = sql;
@@ -147,9 +151,16 @@ public class UserManager {
     public void deleteUser(){
         User userToDelete = Store.getUser();
         LinkedList<Playlist> playlists= sqlP.SelectDataPlaylist();
+        LinkedList<Song> songs= sqlS.SelectDataSong();
         for (Playlist playlist : playlists) {
-            if (playlist.getOwner().equals(userToDelete.getEmail())) {
+            if (playlist.getOwner().equals(userToDelete.getName())) {
                 sqlP.DeleteDataPlaylist(playlist.getName());
+
+            }
+        }
+        for (Song song : songs) {
+            if (song.getOwner().equals(userToDelete.getName())) {
+                sqlP.DeleteDataPlaylist(song.getTitle());
 
             }
         }
