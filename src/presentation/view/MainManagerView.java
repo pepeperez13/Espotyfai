@@ -35,6 +35,7 @@ public class MainManagerView extends JPanel {
     private final CardLayout c = new CardLayout();
     private final CardLayout c2 = new CardLayout();
     private MainView mainView;
+    private BottomBarPanel bottomBarPanel;
     private MainViewController mainViewController;
 
     public MainManagerView() {
@@ -46,12 +47,14 @@ public class MainManagerView extends JPanel {
         mainViewController= new MainViewController(mainMenu,this);
         configMenu = new ConfigMenu(this);
         detailedSongView = new DetailedSongView();
+        bottomBarPanel = new BottomBarPanel(detailedSongView, this);
 
         cardPanel = configureCardPanel();
         menuCardPanel = configureMenuCardPanel();
 
         add(menuCardPanel, BorderLayout.WEST);
         add(cardPanel,  BorderLayout.CENTER);
+        add(bottomBarPanel, BorderLayout.SOUTH);
 
     }
     public void changeView(int numCardPanel, int numMenuPanel) {
