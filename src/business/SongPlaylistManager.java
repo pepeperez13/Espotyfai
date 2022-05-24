@@ -20,12 +20,10 @@ public class SongPlaylistManager<Public> {
 
 
     public static void InsertNewSongPlaylist(String title, String name) {
-        boolean exists = false;
         songPDAO = new SQLConnectorSongPlaylist();
-
-
         songPDAO.InsertDataSongP(title, name);
     }
+
     public static void DeleteNewSongPlaylist(String title) {
         songPDAO = new SQLConnectorSongPlaylist();
         songPDAO.DeleteDataSongP(title);

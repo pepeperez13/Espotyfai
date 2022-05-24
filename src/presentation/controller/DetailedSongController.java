@@ -5,6 +5,7 @@ import business.SongManager;
 import business.entities.Playlist;
 import persistance.PlaylistDAO;
 import persistance.dao.sql.SQLConnectorPlaylist;
+import presentation.view.BottomBarPanel;
 import presentation.view.DetailedSongView;
 
 import java.awt.event.ActionEvent;
@@ -17,6 +18,7 @@ public class DetailedSongController implements ActionListener {
     private PlaylistManager playlistManager;
     private PlaylistDAO playlistDAO;
     private SongManager songManager;
+    private BottomBarPanel bottomBarPanel;
 
     public DetailedSongController(DetailedSongView detailedSongView) {
         this.detailedSongView = detailedSongView;
@@ -33,14 +35,17 @@ public class DetailedSongController implements ActionListener {
             detailedSongView.showPlaylists();
         }
         if (e.getActionCommand().equals("CLOSE_PANEL_COMMAND")) {
-            //detailedSongView.dispose();
+            detailedSongView.setVisible(false);
         }
         if (e.getActionCommand().equals("PLAY_SONG_COMMAND")) {
             System.out.println("PLAY");
+            //bottomBarPanel.updateSong(detailedSongView.getSong());
+            SongPlayerController.playSong();
             //SongManager.PlayMusic(detailedSongView.getPath(), 1);
         }
         if (e.getActionCommand().equals("PAUSE_SONG_COMMAND")) {
             System.out.println("PAUSE");
+            SongPlayerController.pauseSong();
         }
     }
 

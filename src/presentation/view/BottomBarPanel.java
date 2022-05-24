@@ -1,22 +1,23 @@
 package presentation.view;
 
 import business.entities.Song;
-import presentation.controller.BottomBarPanelController;
+import presentation.controller.SongPlayerController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class BottomBarPanel extends JPanel {
-    private BottomBarPanelController controller;
+    private SongPlayerController controller;
     private Song song;
+    private JPanel song_player;
+    private GridBagConstraints c;
 
     public BottomBarPanel (DetailedSongView detailedSongView, MainManagerView mainManagerView) {
-        controller = new BottomBarPanelController(this, detailedSongView, mainManagerView);
+        controller = new SongPlayerController(this, detailedSongView, mainManagerView);
 
-        JPanel song_player = new JPanel(new GridBagLayout());
-
-        GridBagConstraints c = new GridBagConstraints();
-
+        song_player = new JPanel(new GridBagLayout());
+        c = new GridBagConstraints();
+/*
         JLabel song_info_label = new JLabel("nombre de la cancion - artista");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.anchor = GridBagConstraints.PAGE_START; //bottom of space
@@ -25,7 +26,7 @@ public class BottomBarPanel extends JPanel {
         c.gridx = 1;
         c.gridy = 0;
         song_player.add(song_info_label, c);
-
+ */
         JButton back_song = new JButton("<<");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
@@ -75,11 +76,25 @@ public class BottomBarPanel extends JPanel {
 
         this.add(song_player);
 
-        //this.setVisible(true);
     }
 
     public void updateSong (Song song) {
         this.song = song;
+
+        song_player.add(setSongInfo(song.getTitle(), song.getArtist()));
+    }
+
+    public JLabel setSongInfo (String title, String artist) {
+        JLabel song_info_label = new JLabel(title + " - " + artist);
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.PAGE_START; //bottom of space
+        c.weightx = 0.5;
+        c.gridwidth = 3;
+        c.gridx = 1;
+        c.gridy = 0;
+
+        return song_info_label;
     }
 
     public Song getSong () {

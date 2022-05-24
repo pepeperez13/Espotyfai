@@ -41,13 +41,12 @@ public class SongPlayer implements Runnable{
     public void run() {
         clip.start();
 
-
         while(index !=4) {
             //Sistema solo de prueba para hacer funcionar la reproduccion, en un fururo se controlara mediante la interfaz grafica del sistema.
 
             switch (index) {
                 case (1):
-                    System.out.println("sonando");
+                    System.out.println("Sonando cancion: " + path);
                     clip.start();
                     break;
                 case (2):
