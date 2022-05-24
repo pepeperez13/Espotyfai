@@ -23,7 +23,8 @@ public class MainManagerView extends JPanel {
     private DetailedSongController detailedSongController;
     private MainMenu mainMenu;
     private ConfigMenu configMenu;
-    private ManageAccountView manageAccountView = new ManageAccountView();
+    private InitView initView;
+    private ManageAccountView manageAccountView;
     private ConfMusicPanelView confMusicPanelView;
     private ConfMusicController confMusicController;
     private StaticsPanelView staticsPanel;
@@ -38,7 +39,7 @@ public class MainManagerView extends JPanel {
     private BottomBarPanel bottomBarPanel;
     private MainViewController mainViewController;
 
-    public MainManagerView() {
+    public MainManagerView(InitView initView) {
         this.setLayout(new BorderLayout());
         //this.setBackground(Color.PINK);
         //this.setOpaque(true);
@@ -48,7 +49,7 @@ public class MainManagerView extends JPanel {
         configMenu = new ConfigMenu(this);
         detailedSongView = new DetailedSongView();
         bottomBarPanel = new BottomBarPanel(detailedSongView, this);
-
+        manageAccountView = new ManageAccountView(initView);
         cardPanel = configureCardPanel();
         menuCardPanel = configureMenuCardPanel();
 

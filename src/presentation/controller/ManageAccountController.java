@@ -3,6 +3,7 @@ package presentation.controller;
 import business.UserManager;
 import persistance.UserDAO;
 import persistance.dao.sql.SQLConnectorUser;
+import presentation.view.InitView;
 import presentation.view.ManageAccountView;
 
 import java.awt.event.ActionEvent;
@@ -12,13 +13,14 @@ public class ManageAccountController implements ActionListener {
 
     private final UserManager userManager;
     private final ManageAccountView manageAccountView;
+    private final InitController initController;
 
 
-
-    public ManageAccountController( ManageAccountView manageAccountView) {
+    public ManageAccountController(ManageAccountView manageAccountView, InitView initView) {
         UserDAO userDAO = new SQLConnectorUser();
         this.userManager = new UserManager(userDAO);
         this.manageAccountView = manageAccountView;
+        initController= new InitController(initView);
     }
 
 
@@ -42,9 +44,11 @@ public class ManageAccountController implements ActionListener {
                 break;
             case ManageAccountView.YES_BUTTON_DELETE:
                 userManager.deleteUser();
+                initController.refreshView(1);
                 break;
             case ManageAccountView.YES_BUTTON_LOGOUT:
                 userManager.logout();
+                initController.refreshView(1);
                 break;
 
         }

@@ -16,10 +16,10 @@ public class ManageAccountView extends JPanel {
     public static final String NO_BUTTON_DELETE="NO_BUTTON_DELETE";
     public static final String YES_BUTTON_DELETE="YES_BUTTON_DELETE";
 
-    private ManageAccountController controller;
+    private ManageAccountController manageAccountController;
 
-    public ManageAccountView() {
-        ManageAccountController manageAccountController= new ManageAccountController(this);
+    public ManageAccountView(InitView initView) {
+         manageAccountController= new ManageAccountController(this,initView);
         createView(manageAccountController);
     }
 
@@ -104,10 +104,11 @@ public class ManageAccountView extends JPanel {
         JButton jNo= new JButton("No");
 
         jNo.setActionCommand(NO_BUTTON_LOGOUT);
-        jNo.addActionListener(controller);
+        jNo.addActionListener(manageAccountController);
 
         jYes.setActionCommand(YES_BUTTON_LOGOUT);
-        jYes.addActionListener(controller);
+        jYes.addActionListener(manageAccountController);
+
 
         panel.add(jYes);
         panel.add(jNo);
@@ -117,7 +118,9 @@ public class ManageAccountView extends JPanel {
         //showPlaylistsController = new ShowPlaylistsController(this);
 
 
-        JOptionPane.showConfirmDialog(this, panel, "Are you sure ?", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showConfirmDialog(this, panel, "Are you sure ?", JOptionPane.DEFAULT_OPTION);
+
+
     }
     public void showDeleteMessage(){
         JPanel panel = new JPanel();
@@ -127,10 +130,10 @@ public class ManageAccountView extends JPanel {
         JButton jNo= new JButton("No");
 
         jNo.setActionCommand(NO_BUTTON_DELETE);
-        jNo.addActionListener(controller);
+        jNo.addActionListener(manageAccountController);
 
         jYes.setActionCommand(YES_BUTTON_DELETE);
-        jYes.addActionListener(controller);
+        jYes.addActionListener(manageAccountController);
 
         panel.add(jYes);
         panel.add(jNo);
@@ -141,5 +144,7 @@ public class ManageAccountView extends JPanel {
 
 
         JOptionPane.showMessageDialog(this, panel, "Are you sure ?", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.getRootFrame().dispose();
+
     }
 }
