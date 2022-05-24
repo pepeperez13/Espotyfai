@@ -13,14 +13,10 @@ import java.util.LinkedList;
 public class DetailedSongView extends JPanel {
 
     private Song song;
-    private Playlist chosenPlaylist;
 
-    private String title;
-    private String genre;
-    private String album;
-    private String artist;
-    private String owner;
-    private String path;
+    private JLabel titleAndAuthor;
+    private JPanel generalData;
+    private JButton closeLabel;
 
     private static final String ADD_TO_PLAYLIST_COMMAND = "ADD_TO_PLAYLIST_COMMAND";
     private static final String PLAY_SONG_COMMAND = "PLAY_SONG_COMMAND";
@@ -47,9 +43,19 @@ public class DetailedSongView extends JPanel {
     public void updateSong (Song song)  {
         this.song = song;
 
-        add(setTitleAndAuthor(), BorderLayout.NORTH);
-        add(setGeneralData(), BorderLayout.CENTER);
-        add(setCloseLabel(), BorderLayout.SOUTH);
+        if (titleAndAuthor != null) {
+            remove(titleAndAuthor);
+            remove(generalData);
+            remove(closeLabel);
+        }
+
+        titleAndAuthor = setTitleAndAuthor();
+        generalData = setGeneralData();
+        closeLabel = setCloseLabel();
+
+        add(titleAndAuthor, BorderLayout.NORTH);
+        add(generalData, BorderLayout.CENTER);
+        add(closeLabel, BorderLayout.SOUTH);
 
     }
 
@@ -186,7 +192,7 @@ public class DetailedSongView extends JPanel {
     public void showOKMessage() {
         String message = "Song was added to the playlist successfully.";
 
-        JOptionPane.showMessageDialog(this, message, "Following errors were found", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(this, message, "", JOptionPane.PLAIN_MESSAGE);
     }
 
     public String getSongTitle() {
@@ -213,26 +219,6 @@ public class DetailedSongView extends JPanel {
         JScrollPane scroll= new JScrollPane(box);
         playlistsPanel.add(scroll);
         JOptionPane.showMessageDialog(this, playlistsPanel, "Select a playlist to add the song", JOptionPane.PLAIN_MESSAGE);
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public String getAlbum() {
-        return album;
-    }
-
-    public String getSongArtist() {
-        return artist;
-    }
-
-    public String getSongOwner() {
-        return owner;
-    }
-
-    public String getPath() {
-        return path;
     }
 
     public Song getSong () {
