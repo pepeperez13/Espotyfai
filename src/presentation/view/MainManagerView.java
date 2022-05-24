@@ -23,7 +23,8 @@ public class MainManagerView extends JPanel {
     private DetailedSongController detailedSongController;
     private MainMenu mainMenu;
     private ConfigMenu configMenu;
-    private ManageAccountView manageAccountView = new ManageAccountView();
+    private InitView initView;
+    private ManageAccountView manageAccountView;
     private ConfMusicPanelView confMusicPanelView;
     private ConfMusicController confMusicController;
     private StaticsPanelView staticsPanel;
@@ -35,9 +36,10 @@ public class MainManagerView extends JPanel {
     private final CardLayout c = new CardLayout();
     private final CardLayout c2 = new CardLayout();
     private MainView mainView;
+    private BottomBarPanel bottomBarPanel;
     private MainViewController mainViewController;
 
-    public MainManagerView() {
+    public MainManagerView(InitView initView) {
         this.setLayout(new BorderLayout());
         //this.setBackground(Color.PINK);
         //this.setOpaque(true);
@@ -46,12 +48,14 @@ public class MainManagerView extends JPanel {
         mainViewController= new MainViewController(mainMenu,this);
         configMenu = new ConfigMenu(this);
         detailedSongView = new DetailedSongView();
-
+        bottomBarPanel = new BottomBarPanel(detailedSongView, this);
+        manageAccountView = new ManageAccountView(initView);
         cardPanel = configureCardPanel();
         menuCardPanel = configureMenuCardPanel();
 
         add(menuCardPanel, BorderLayout.WEST);
         add(cardPanel,  BorderLayout.CENTER);
+        add(bottomBarPanel, BorderLayout.SOUTH);
 
     }
     public void changeView(int numCardPanel, int numMenuPanel) {
@@ -87,16 +91,6 @@ public class MainManagerView extends JPanel {
         playlistView.registerController(mainViewController);
         songListlView.registerController(mainViewController);
         mainView= new MainView();
-
-        /*LinkedList<Song> l = new LinkedList<>();
-        l.add(new Song("sasas", "KPOP", "ASA", "S", "PSA", "ASAS"));
-        l.add(new Song("sasas", "REGGAE", "ASA", "S", "PSA", "ASAS"));
-        l.add(new Song("sasas", "REGGAE", "ASA", "S", "PSA", "ASAS"));
-        l.add(new Song("sasas", "REGGAE", "ASA", "S", "PSA", "ASAS"));
-        l.add(new Song("sasas", "KPOP", "ASA", "S", "PSA", "ASAS"));
-        l.add(new Song("sasas", "KPOP", "ASA", "S", "PSA", "ASAS"));
-        l.add(new Song("sasas", "LATIN", "ASA", "S", "PSA", "ASAS"));
-        l.add(new Song("sasas", "LATIN", "ASA", "S", "PSA", "ASAS"));*/
 
         staticsPanel= new StaticsPanelView(SongManager.ListSongs());
         addMusicPanel = new AddMusicPanelView();
