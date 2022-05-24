@@ -26,6 +26,7 @@ public class ShowPlaylistsController implements ActionListener {
             detailedSongView.showErrorMessage();
         }else{
             SongPlaylistManager.InsertNewSongPlaylist(detailedSongView.getSongTitle(), e.getActionCommand());
+            detailedSongView.showOKMessage();
         }
     }
 }

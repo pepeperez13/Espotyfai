@@ -218,5 +218,10 @@ public class BuscadorView extends JPanel {
         }
     }
 
+    public void cannotShowDetails () {
+        String message = "You must select a song before showing its details";
+        JOptionPane.showMessageDialog(this, message, "Following errors were found", JOptionPane.WARNING_MESSAGE);
+    }
+
 
 }

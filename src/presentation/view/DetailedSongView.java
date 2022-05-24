@@ -183,9 +183,14 @@ public class DetailedSongView extends JPanel {
         JOptionPane.showMessageDialog(this, message, "Following errors were found", JOptionPane.WARNING_MESSAGE);
     }
 
+    public void showOKMessage() {
+        String message = "Song was added to the playlist successfully.";
+
+        JOptionPane.showMessageDialog(this, message, "Following errors were found", JOptionPane.PLAIN_MESSAGE);
+    }
+
     public String getSongTitle() {
-        title = "The Time";
-        return title;
+        return song.getTitle();
     }
 
     public void showPlaylists () {
@@ -233,5 +238,7 @@ public class DetailedSongView extends JPanel {
     public Song getSong () {
         return song;
     }
+
+
 }
 

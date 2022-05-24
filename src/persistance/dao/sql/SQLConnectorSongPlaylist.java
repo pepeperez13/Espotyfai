@@ -14,12 +14,12 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
     private static Connection conn;
 
 
-    public void InsertDataSongP(String title, String name) {
+    public void InsertDataSongP (String title, String name) {
 
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
-            String sql = "INSERT INTO song_playlist (SONG_TITLE,PLAYLIST_NAME) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO song_playlist (SONG_TITLE,PLAYLIST_NAME) VALUES (?, ?)";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, title);
@@ -107,9 +107,8 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
             return null;
         }
 
-
-
     }
+
     //Metodo que te permite obtener toda la informacion de una cancion dado el nombre de la cancion.
     public LinkedList<SongPlaylist> SelectSongsP(String pName){
         LinkedList<SongPlaylist> songP = new LinkedList<>();
@@ -124,7 +123,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
                 title = rs.getString("SONG_TITLE");
                 String pNameSQL = rs.getString("PLAYLIST_NAME");
-                int pos = rs.getInt("POS");
+                int pos = rs.getInt("SONG_POS");
 
 
                 if (pNameSQL.equals(pName)) {
