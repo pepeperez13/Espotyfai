@@ -1,5 +1,6 @@
 package presentation.view;
 
+import business.entities.Song;
 import presentation.controller.BottomBarPanelController;
 
 import javax.swing.*;
@@ -7,9 +8,10 @@ import java.awt.*;
 
 public class BottomBarPanel extends JPanel {
     private BottomBarPanelController controller;
+    private Song song;
 
-    public BottomBarPanel () {
-        controller = new BottomBarPanelController();
+    public BottomBarPanel (DetailedSongView detailedSongView, MainManagerView mainManagerView) {
+        controller = new BottomBarPanelController(this, detailedSongView, mainManagerView);
 
         JPanel song_player = new JPanel(new GridBagLayout());
 
@@ -74,5 +76,13 @@ public class BottomBarPanel extends JPanel {
         this.add(song_player);
 
         //this.setVisible(true);
+    }
+
+    public void updateSong (Song song) {
+        this.song = song;
+    }
+
+    public Song getSong () {
+        return this.song;
     }
 }
