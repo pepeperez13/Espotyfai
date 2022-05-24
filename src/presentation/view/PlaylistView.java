@@ -18,6 +18,7 @@ public class PlaylistView extends JPanel {
     private PlaylistManager manager = new PlaylistManager();
     private ActionListener controller;
     private JScrollPane jScrollPane;
+
     public PlaylistView() {
         this.setBackground(Color.red);
         setSize(1500, 900);
@@ -40,11 +41,14 @@ public class PlaylistView extends JPanel {
         LinkedList<Playlist> model = manager.getPlaylistsOfUser(Store.getUser());
 
         JPanel panel = new JPanel();
+        JButton crearPlaylist= new JButton();
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+        crearPlaylist.setText("Crear Playlist");
 
         for(Playlist p: model){
             panel.add(new PlayListRender(p,controller));
         }
+        panel.add(crearPlaylist);
         this.jScrollPane.setViewportView(panel);
     }
 

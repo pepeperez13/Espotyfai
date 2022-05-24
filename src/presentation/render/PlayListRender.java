@@ -19,6 +19,8 @@ public class PlayListRender extends JPanel  {
     private Playlist playlist = null;
     private JSeparator separator= new JSeparator();
 
+
+
     public PlayListRender(Playlist playlist, ActionListener controller) {
         this.playlist = playlist;
         setLayout(new BorderLayout(5, 5));
@@ -44,6 +46,7 @@ public class PlayListRender extends JPanel  {
         separator.setBackground(Color.black);
         separator.setSize(new Dimension(300,300));
         add(panelText, BorderLayout.CENTER);
+
 
         btEditar.setActionCommand(EDIT_BUTTON);
         btEliminar.setActionCommand(DELETE_BUTTON);
