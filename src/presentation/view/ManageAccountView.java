@@ -144,7 +144,7 @@ public class ManageAccountView extends JPanel {
 
 
         JOptionPane.showMessageDialog(this, panel, "Are you sure ?", JOptionPane.PLAIN_MESSAGE);
-        JOptionPane.getRootFrame().dispose();
+
 
     }
 }

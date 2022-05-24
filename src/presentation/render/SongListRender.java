@@ -20,6 +20,7 @@ public class SongListRender extends JPanel {
     public static final String DOWN_BUTTON = "SL_DOWN_BUTTON";
     public static final String DELETE_BUTTON = "SL_DELETE_BUTTON";
     private Song song;
+    private JSeparator separator= new JSeparator();
 
     public SongListRender(Song song, ActionListener controller) {
         this.song = song;
@@ -32,23 +33,55 @@ public class SongListRender extends JPanel {
         btEliminar.setText("Eliminar");
         btSubir.setSize(100,50);
         btBajar.setSize(100,50);
-        btEliminar.setSize(100,50);
-        JPanel panelText = new JPanel(new GridLayout(2, 2));
+        btEliminar.setSize(100,100);
+        GridLayout gridLayout= new GridLayout(3, 2);
+        GridLayout gridLayout1= new GridLayout(1,2);
+        JPanel panel= new JPanel();
+        panel.setLayout(gridLayout1);
+        JPanel panelText = new JPanel();
+        panelText.setLayout(gridLayout);
+        panelText.setBackground(Color.white);
+        panel.setBackground(Color.white);
+        gridLayout.setVgap(20);
+        gridLayout.setHgap(20);
+        gridLayout1.setVgap(20);
+        gridLayout1.setHgap(20);
+        panel.add(btSubir);
+        panel.add(btBajar);
         panelText.add(lbName);
-        panelText.add(btSubir);
-        panelText.add(btBajar);
+        panelText.add(panel);
         panelText.add(lbAuthor);
         panelText.add(btEliminar);
+        panelText.add(separator);
+        panelText.add(separator);
+
         add(lbIcon, BorderLayout.WEST);
+        separator.setBackground(Color.black);
+        separator.setSize(new Dimension(300,300));
         add(panelText, BorderLayout.CENTER);
 
         btSubir.setActionCommand(UP_BUTTON);
         btBajar.setActionCommand(DOWN_BUTTON);
         btEliminar.setActionCommand(DELETE_BUTTON);
 
+        btSubir.setForeground(Color.black);
+        btSubir.setBackground(Color.CYAN);
+
+        btBajar.setForeground(Color.black);
+        btBajar.setBackground(Color.CYAN);
+
+        btEliminar.setForeground(Color.black);
+        btEliminar.setBackground(Color.CYAN);
+
+        btSubir.setBorderPainted(false);
+        btEliminar.setBorderPainted(false);
+        btBajar.setBorderPainted(false);
+
         btEliminar.addActionListener(controller);
         btSubir.addActionListener(controller);
         btBajar.addActionListener(controller);
+
+        btEliminar.putClientProperty("SONG_ELIMINAR",this.song);
 
         ImageIcon img = new ImageIcon("Images/logo.png");
         Image image1 = img.getImage();
@@ -56,13 +89,18 @@ public class SongListRender extends JPanel {
         ImageIcon logoSimbol = new ImageIcon(image1);
         lbIcon.setIcon(logoSimbol);
         lbName.setText(song.getTitle());
+        lbName.setFont(new Font("Arial", Font.BOLD,18));
         lbAuthor.setText(song.getArtist());
         lbAuthor.setForeground(Color.blue);
+        lbIcon.setBackground(Color.white);
+        lbAuthor.setBackground(Color.white);
+        lbName.setBackground(Color.white);
 
 
         lbName.setOpaque(true);
         lbAuthor.setOpaque(true);
         lbIcon.setOpaque(true);
+        this.setBackground(Color.white);
 
 
     }

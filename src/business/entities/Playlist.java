@@ -14,6 +14,10 @@ public class Playlist {
         this.owner = owner;
     }
 
+    public Playlist() {
+
+    }
+
     public List<Song> getSongs() {
         return songs;
     }

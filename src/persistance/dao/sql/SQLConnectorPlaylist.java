@@ -106,6 +106,7 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
 
             // para cada playlist obtenida, recupero sus canciones
             SQLConnectorSong sqlSong = new SQLConnectorSong();
+            ArrayList<Song> songs= new ArrayList<>();
             for(Playlist p: playlists){
                 sql = "SELECT * FROM song_playlist WHERE PLAYLIST_NAME = ?";
                 statement = conn.prepareStatement(sql);
@@ -118,7 +119,7 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
 
                     Song song = sqlSong.SelectSong(song_title);
                     song.setPosition(song_pos);
-                    p.setSongs(new ArrayList<>());
+                    p.setSongs(songs);
                     p.getSongs().add(song);
                 }
 

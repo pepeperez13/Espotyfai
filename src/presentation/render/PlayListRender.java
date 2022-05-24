@@ -60,10 +60,12 @@ public class PlayListRender extends JPanel  {
         btEditar.setBorderPainted(false);
         btEliminar.setBorderPainted(false);
 
+
         btEditar.addActionListener(controller);
         btEditar.putClientProperty( "PLAYLIST", this.playlist );
 
         btEliminar.addActionListener(controller);
+        btEliminar.putClientProperty("PLAYLIST_ELIMINAR",this.playlist);
 
         ImageIcon img = new ImageIcon("Images/logo.png");
         Image image1 = img.getImage();
