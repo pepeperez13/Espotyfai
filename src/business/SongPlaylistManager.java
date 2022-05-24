@@ -24,7 +24,7 @@ public class SongPlaylistManager<Public> {
         songPDAO.InsertDataSongP(title, name);
     }
 
-    public static void DeleteNewSongPlaylist(String title) {
+    public  void deleteNewSongPlaylist(String title) {
         songPDAO = new SQLConnectorSongPlaylist();
         songPDAO.DeleteDataSongP(title);
     }

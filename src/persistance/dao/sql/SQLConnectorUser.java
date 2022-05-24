@@ -74,7 +74,7 @@ public class SQLConnectorUser implements UserDAO {
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
-            String sql = "DELETE FROM user WHERE USER_NAME=?";
+            String sql = "DELETE FROM user WHERE USER_NAME = ?";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, name);

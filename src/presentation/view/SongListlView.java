@@ -40,14 +40,21 @@ public class SongListlView extends JPanel {
 
 
     public void loadSongs() {
-        List<Song> sorted = selectedPlaylist.getSongs().stream().sorted(Comparator.comparing(Song::getPosition)) .collect(Collectors.toList());
-
+        List<Song> sorted;
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-        for(Song s: sorted){
-            panel.add(new SongListRender(s, controller));
+        try{
+            sorted = selectedPlaylist.getSongs().stream().sorted(Comparator.comparing(Song::getPosition)) .collect(Collectors.toList());
+            for(Song s: sorted){
+                panel.add(new SongListRender(s, controller));
+            }
+        }catch (NullPointerException e){
+            JPanel panel1= new JPanel();
+            JOptionPane.showMessageDialog(panel1,"This Playlist is empty");
         }
+
+
+
 
 
 

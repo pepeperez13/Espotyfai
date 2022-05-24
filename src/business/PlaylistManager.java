@@ -18,6 +18,7 @@ public class PlaylistManager {
 
     public PlaylistManager() {
         this.playlistDAO = new SQLConnectorPlaylist();
+        this.songPlaylistDAO= new SQLConnectorSongPlaylist();
     }
 
     public LinkedList<Playlist> getDataPlaylists () {
@@ -29,12 +30,12 @@ public class PlaylistManager {
     }
 
 
-    public static void DeletePlaylist(String name){
+    public  void deletePlaylist(String name){
         playlistDAO = new SQLConnectorPlaylist();
         playlistDAO.DeleteDataPlaylist(name);
         songPlaylistDAO.DeleteDataSongP(name);
     }
-    public static void CreatePlaylist(String name,String owner){
+    public void createPlaylist(String name,String owner){
         playlistDAO.InsertDataPlaylist(name,owner);
     }
 

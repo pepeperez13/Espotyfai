@@ -19,7 +19,7 @@ public class ManageAccountView extends JPanel {
     private ManageAccountController manageAccountController;
 
     public ManageAccountView(InitView initView) {
-        manageAccountController= new ManageAccountController(this,initView);
+         manageAccountController= new ManageAccountController(this,initView);
         createView(manageAccountController);
     }
 
@@ -109,6 +109,7 @@ public class ManageAccountView extends JPanel {
         jYes.setActionCommand(YES_BUTTON_LOGOUT);
         jYes.addActionListener(manageAccountController);
 
+
         panel.add(jYes);
         panel.add(jNo);
 
@@ -117,7 +118,9 @@ public class ManageAccountView extends JPanel {
         //showPlaylistsController = new ShowPlaylistsController(this);
 
 
-        JOptionPane.showConfirmDialog(this, panel, "Are you sure ?", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showConfirmDialog(this, panel, "Are you sure ?", JOptionPane.DEFAULT_OPTION);
+
+
     }
     public void showDeleteMessage(){
         JPanel panel = new JPanel();
@@ -141,5 +144,7 @@ public class ManageAccountView extends JPanel {
 
 
         JOptionPane.showMessageDialog(this, panel, "Are you sure ?", JOptionPane.PLAIN_MESSAGE);
+
+
     }
 }
