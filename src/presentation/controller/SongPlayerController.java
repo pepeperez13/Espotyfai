@@ -50,11 +50,14 @@ public class SongPlayerController implements ActionListener {
     // Métodos estáticos para que cualquier clase pueda acceder a ellos sin necesidad de instanciar
 
     public static void playSong () {
-        BottomBarPanel.updateSong(detailedSongView.getSong());
-        songPlayer.managePlayer(bottomBarPanel.getSong().getPath(), 1);
+        // Si se le da al play a traves de la vista detallada, hace falta actualizar la barra
+        if (!BottomBarPanel.getSong().getTitle().equals(detailedSongView.getSong().getTitle())) {
+            BottomBarPanel.updateSong(detailedSongView.getSong());
+        }
+        songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1);
     }
 
     public static void pauseSong () {
-        songPlayer.managePlayer(bottomBarPanel.getSong().getPath(), 2);
+        songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 2);
     }
 }

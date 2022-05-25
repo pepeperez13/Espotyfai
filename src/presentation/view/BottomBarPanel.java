@@ -11,6 +11,7 @@ public class BottomBarPanel extends JPanel {
     private static Song song;
     private static JPanel song_player;
     private static GridBagConstraints c;
+    private static JLabel songInfo;
 
     public BottomBarPanel (DetailedSongView detailedSongView, MainManagerView mainManagerView) {
         controller = new SongPlayerController(this, detailedSongView, mainManagerView);
@@ -81,7 +82,13 @@ public class BottomBarPanel extends JPanel {
     public static void updateSong (Song song) {
         BottomBarPanel.song = song;
 
-        song_player.add(setSongInfo(song.getTitle(), song.getArtist()));
+        if (songInfo != null) {
+            song_player.remove(songInfo);
+        }
+
+        songInfo = setSongInfo(song.getTitle(), song.getArtist());
+
+        song_player.add(songInfo);
     }
 
     public static JLabel setSongInfo (String title, String artist) {
@@ -97,7 +104,7 @@ public class BottomBarPanel extends JPanel {
         return song_info_label;
     }
 
-    public Song getSong () {
-        return this.song;
+    public static Song getSong () {
+        return song;
     }
 }
