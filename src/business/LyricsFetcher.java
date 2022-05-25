@@ -3,6 +3,8 @@ package business;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import javax.imageio.IIOException;
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
@@ -31,8 +33,12 @@ public class LyricsFetcher {
                 return "Lyrics for the song could not be found";
             }else{
                 StringBuilder info = new StringBuilder();
-                Scanner scanner = new Scanner(url.openStream());
-
+                Scanner scanner;
+                try {
+                    scanner = new Scanner(url.openStream());
+                } catch (IOException e) {
+                    return "API had an error trying to fetch song lyrics";
+                }
                 while (scanner.hasNext()) {
                     info.append(scanner.nextLine());
                 }

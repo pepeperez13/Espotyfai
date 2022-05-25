@@ -78,7 +78,7 @@ public class DetailedSongView extends JPanel {
         generalPanel.add(setInfoPanel("Genre", song.getGenre()));
         generalPanel.add(setInfoPanel("Album", song.getAlbum()));
         generalPanel.add(setInfoPanel("Owner", song.getOwner()));
-        generalPanel.add(setInfoPanel("Duration", "3:24"));
+        generalPanel.add(setInfoPanel("Duration", song.getSongDurationMinutes(song)));
         generalPanel.add(setLyricsPanel());
         generalPanel.add(setInteractionsPanel());
 
