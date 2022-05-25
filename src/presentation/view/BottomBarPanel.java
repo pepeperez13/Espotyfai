@@ -80,15 +80,19 @@ public class BottomBarPanel extends JPanel {
     }
 
     public static void updateSong (Song song) {
-        BottomBarPanel.song = song;
+        try {
+            BottomBarPanel.song = song;
 
-        if (songInfo != null) {
-            song_player.remove(songInfo);
+            if (songInfo != null) {
+                song_player.remove(songInfo);
+            }
+
+            songInfo = setSongInfo(song.getTitle(), song.getArtist());
+
+            song_player.add(songInfo);
+        } catch (NullPointerException e) {
+            System.out.println("No hay canción para reproducir. No hace falta mostrar nada");
         }
-
-        songInfo = setSongInfo(song.getTitle(), song.getArtist());
-
-        song_player.add(songInfo);
     }
 
     public static JLabel setSongInfo (String title, String artist) {

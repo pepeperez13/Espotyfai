@@ -23,27 +23,31 @@ public class SongPlayerController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("PREVIOUS_SONG")) {
-            songPlayer.managePlayer(bottomBarPanel.getSong().getPath(), 1);
-            System.out.println("Anterior");
-        }
-        if (e.getActionCommand().equals("PAUSE_SONG")) {
-            songPlayer.managePlayer(bottomBarPanel.getSong().getPath(), 2);
-            System.out.println("Parar");
-        }
-        if (e.getActionCommand().equals("PLAY_SONG")) {
-            BottomBarPanel.updateSong(detailedSongView.getSong());
-            songPlayer.managePlayer(bottomBarPanel.getSong().getPath(), 1);
-            System.out.println("Play");
-        }
-        if (e.getActionCommand().equals("NEXT_SONG")) {
-            songPlayer.managePlayer(bottomBarPanel.getSong().getPath(), 1);
-            System.out.println("Next");
-        }
-        if (e.getActionCommand().equals("DETAILED_VIEW")) {
-            detailedSongView.updateSong(bottomBarPanel.getSong());
-            mainManagerView.changeView(5, 1);
-            System.out.println("Detalles");
+        try {
+            if (e.getActionCommand().equals("PREVIOUS_SONG")) {
+                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1);
+                System.out.println("Anterior");
+            }
+            if (e.getActionCommand().equals("PAUSE_SONG")) {
+                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 2);
+                System.out.println("Parar");
+            }
+            if (e.getActionCommand().equals("PLAY_SONG")) {
+                BottomBarPanel.updateSong(detailedSongView.getSong());
+                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1);
+                System.out.println("Play");
+            }
+            if (e.getActionCommand().equals("NEXT_SONG")) {
+                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1);
+                System.out.println("Next");
+            }
+            if (e.getActionCommand().equals("DETAILED_VIEW")) {
+                detailedSongView.updateSong(BottomBarPanel.getSong());
+                mainManagerView.changeView(5, 1);
+                System.out.println("Detalles");
+            }
+        } catch (NullPointerException exception) {
+            System.out.println("Nada que reproducir/parar. No hace falta mostrar mensaje");
         }
     }
 
