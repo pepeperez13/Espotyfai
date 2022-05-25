@@ -1,53 +1,48 @@
-package presentation.view;
-import persistance.dao.sql.SQLConnectorUser;
-import persistance.dao.sql.SQLConnectorSong;
+package presentation.view;//package presentation.view;
+import persistance.RoundedBorder;
 import presentation.controller.LoginController;
-import persistance.dao.sql.SQLConnectorSongPlaylist;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 public class LoginView extends JPanel {
-
     public static final String INICIO = "INICIO";
     public static final String REGISTRO = "REGISTRO";
     private JTextField username;
 
     private JPasswordField password;
     private LoginController loginController;
-    private final JLabel success_message;
+    private JLabel success_message;
 
     public LoginView (InitView initView) {
+
         //AJUSTES PRINCIPALES DEL FRAME
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //this.setSize(600, 450);
-        //this.setTitle("Espotifai");
-        //this.setLocationRelativeTo(null);
+        /*this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(600, 450);
+        this.setTitle("Espotifai");
+        this.setLocationRelativeTo(null);*/
         loginController = new LoginController(this, initView);
         this.setLayout(new BorderLayout());
-        this.setBackground(Color.green.brighter());
+        this.setBackground(new Color(191, 105, 240));
 
         //PANELES
         JPanel username_panel = new JPanel();
+        username_panel.setBackground(new Color(191, 105, 240));
         JPanel password_panel = new JPanel();
+        password_panel.setBackground(new Color(191, 105, 240));
         JPanel top = new JPanel(new BorderLayout());
+        top.setBackground(new Color(191, 105, 240));
         JPanel center = new JPanel(new GridLayout(4,1));
-        JPanel no_account = new JPanel(new GridLayout(1, 2));
-        JPanel register_but = new JPanel(new BorderLayout());
-        JPanel no_account_message = new JPanel(new GridLayout(2, 1));
-
-        //COLORES DE FONDO
-        //this.getContentPane().setBackground(Color.GREEN.darker());
-        username_panel.setBackground(Color.green);
-        password_panel.setBackground(Color.green);
-        center.setBackground(Color.green);
-        no_account.setBackground(Color.green);
+        center.setBackground(new Color(191, 105, 240));
+        JPanel west = new JPanel(new BorderLayout());
+        west.setBackground(new Color(191, 105, 240));
+        JPanel south = new JPanel(new BorderLayout());
+        south.setBackground(new Color(191, 105, 240));
 
         //COMPONENTES
-        JLabel blank = new JLabel("");
+        JLabel blank = new JLabel("         ");
         JLabel welcome_message = new JLabel("Welcome to Espotify");
         welcome_message.setSize(25, 25);
         welcome_message.setFont(new Font("Arial", Font.BOLD,25));
@@ -57,36 +52,59 @@ public class LoginView extends JPanel {
         JLabel label_password = new JLabel("Password");
 
         username = new JTextField(20);
+        username.setBackground(new Color(190, 150, 250));
 
         password = new JPasswordField(20);
+        password.setBackground(new Color(190, 150, 250));
 
         JButton signin_button = new JButton("Sign In");
+        signin_button.setBackground(new Color(160, 100, 230));
+        signin_button.setBorder(new LineBorder(Color.BLUE));
+        signin_button.setBorder(new RoundedBorder(5)); //10 is the radius
+        signin_button.setForeground(Color.BLUE);
+        south.add(signin_button, BorderLayout.CENTER);
         signin_button.addActionListener(loginController);
         signin_button.setActionCommand(INICIO);
 
         success_message = new JLabel("");
 
+        JPanel no_account = new JPanel(new GridBagLayout());
+        GridBagConstraints sd = new GridBagConstraints();
+        no_account.setBackground(new Color(191, 105, 240));
+
         JLabel register_message = new JLabel("You don't have an account?");
-        JLabel new_account = new JLabel("Create an account here!");
+        sd.fill = GridBagConstraints.HORIZONTAL;
+        sd.weightx = 0.0;
+        sd.gridx = 0;
+        sd.gridy = 0;
+        no_account.add(register_message, sd);
 
         JButton register_button = new JButton("Register");
-        register_button.setSize(25, 25);
+        register_button.setBackground(new Color(160, 100, 230));
+        register_button.setBorder(new LineBorder(Color.BLUE));
+        register_button.setBorder(new RoundedBorder(10)); //10 is the radius
+        register_button.setForeground(Color.BLUE);
+        sd.fill = GridBagConstraints.HORIZONTAL;
+        sd.weightx = 0.0;
+        sd.gridx = 0;
+        sd.gridy = 1;
+        no_account.add(register_button, sd);
         register_button.setActionCommand(REGISTRO);
         register_button.addActionListener(loginController);
 
+        JLabel new_account = new JLabel("Create an account here!");
+        sd.fill = GridBagConstraints.HORIZONTAL;
+        sd.weightx = 0.0;
+        sd.gridx = 0;
+        sd.gridy = 1;
+        no_account.add(new_account, sd);
+
         JLabel imagen = new JLabel();
         imagen.setIcon(new ImageIcon("logop.png"));
+        west.add(imagen, BorderLayout.CENTER);
 
         //ADICIONES
         top.add(welcome_message, BorderLayout.CENTER);
-
-        no_account_message.add(register_message);
-        no_account_message.add(new_account);
-
-        register_but.add(register_button, BorderLayout.CENTER);
-
-        no_account.add(no_account_message);
-        no_account.add(register_but);
 
         username_panel.add(label_username);
         username_panel.add(username);
@@ -101,8 +119,9 @@ public class LoginView extends JPanel {
 
         this.add(welcome_message, BorderLayout.NORTH);
         this.add(center, BorderLayout.CENTER);
-        this.add(imagen, BorderLayout.WEST);
-        this.add(signin_button, BorderLayout.SOUTH);
+        this.add(west, BorderLayout.WEST);
+        this.add(south, BorderLayout.SOUTH);
+        //this.setVisible(true);
     }
 
     public void showErrorMessage (boolean userExistsError, boolean passwordError) {
