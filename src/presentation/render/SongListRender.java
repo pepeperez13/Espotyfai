@@ -90,7 +90,7 @@ public class SongListRender extends JPanel {
         lbIcon.setIcon(logoSimbol);
         lbName.setText(song.getTitle());
         lbName.setFont(new Font("Arial", Font.BOLD,18));
-        lbAuthor.setText(song.getArtist());
+        lbAuthor.setText(song.getOwner());
         lbAuthor.setForeground(Color.blue);
         lbIcon.setBackground(Color.white);
         lbAuthor.setBackground(Color.white);

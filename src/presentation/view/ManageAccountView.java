@@ -5,6 +5,7 @@ import presentation.controller.ManageAccountController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class ManageAccountView extends JPanel {
 
@@ -97,53 +98,35 @@ public class ManageAccountView extends JPanel {
 
     }
     public void showLogoutMessage(){
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1,2));
 
-        JButton jYes= new JButton("Yes");
-        JButton jNo= new JButton("No");
+        String[] options = new String[2];
+        options[0] = "Yes";
+        options[1] = "No";
+        int result = JOptionPane.showOptionDialog(this, "Are you sure ?", "Confirmation", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
+        switch (result) {
+            case JOptionPane.YES_OPTION:
+                ActionEvent ae = new ActionEvent(this,0,YES_BUTTON_LOGOUT);
+                this.manageAccountController.actionPerformed(ae);
+                break;
+            case JOptionPane.NO_OPTION:
 
-        jNo.setActionCommand(NO_BUTTON_LOGOUT);
-        jNo.addActionListener(manageAccountController);
-
-        jYes.setActionCommand(YES_BUTTON_LOGOUT);
-        jYes.addActionListener(manageAccountController);
-
-
-        panel.add(jYes);
-        panel.add(jNo);
-
-
-
-        //showPlaylistsController = new ShowPlaylistsController(this);
-
-
-        JOptionPane.showConfirmDialog(this, panel, "Are you sure ?", JOptionPane.DEFAULT_OPTION);
-
-
+                break;
+        }
     }
     public void showDeleteMessage(){
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1,2));
+        String[] options = new String[2];
+        options[0] = "Yes";
+        options[1] = "No";
+        int result = JOptionPane.showOptionDialog(this, "Are you sure ?", "Confirmation", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
+        switch (result) {
+            case JOptionPane.YES_OPTION:
+                ActionEvent ae = new ActionEvent(this,0,YES_BUTTON_DELETE);
+                this.manageAccountController.actionPerformed(ae);
+                break;
+            case JOptionPane.NO_OPTION:
 
-        JButton jYes= new JButton("Yes");
-        JButton jNo= new JButton("No");
-
-        jNo.setActionCommand(NO_BUTTON_DELETE);
-        jNo.addActionListener(manageAccountController);
-
-        jYes.setActionCommand(YES_BUTTON_DELETE);
-        jYes.addActionListener(manageAccountController);
-
-        panel.add(jYes);
-        panel.add(jNo);
-
-        //showPlaylistsController = new ShowPlaylistsController(this);
-
-
-
-
-        JOptionPane.showMessageDialog(this, panel, "Are you sure ?", JOptionPane.PLAIN_MESSAGE);
+                break;
+        }
 
 
     }

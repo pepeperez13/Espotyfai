@@ -14,19 +14,25 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
     private static Connection conn;
 
 
-    public void InsertDataSongP (String title, String name) {
+    public void InsertDataSongP (String title, String name_playlist) {
 
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
-            String sql = "INSERT INTO song_playlist (SONG_TITLE,PLAYLIST_NAME) VALUES (?, ?)";
 
+            String sqlUpdate = "UPDATE song_playlist SET SONG_POS=SONG_POS+1 WHERE PLAYLIST_NAME = ?";
+            PreparedStatement stUpdate = conn.prepareStatement(sqlUpdate);
+            stUpdate.setString(1, name_playlist);
+            stUpdate.executeUpdate();
+
+            String sql = "INSERT INTO song_playlist (SONG_TITLE,PLAYLIST_NAME,SONG_POS) VALUES (?, ?, ?)";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, title);
-            statement.setString(2, name);
+            statement.setString(2, name_playlist);
+            statement.setInt(3, 1);
 
 
-            int rowsInserted = statement.executeUpdate();
+            statement.executeUpdate();
 
 
         } catch (SQLException ex) {

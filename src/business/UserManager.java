@@ -8,6 +8,7 @@ import persistance.PlaylistDAO;
 import persistance.SongDAO;
 import persistance.UserDAO;
 import persistance.dao.sql.SQLConnectorPlaylist;
+import persistance.dao.sql.SQLConnectorSong;
 import persistance.dao.sql.SQLConnectorUser;
 
 import java.security.MessageDigest;
@@ -21,6 +22,8 @@ public class UserManager {
 
     public UserManager (UserDAO sql) {
         this.sql = sql;
+        this.sqlP= new SQLConnectorPlaylist();
+        this.sqlS= new SQLConnectorSong();
     }
 
     public void insertNewUser (String name, String email, String password) {
@@ -150,20 +153,20 @@ public class UserManager {
 
     public void deleteUser(){
         User userToDelete = Store.getUser();
-       /* LinkedList<Playlist> playlists= sqlP.SelectDataPlaylist();
+        LinkedList<Playlist> playlists= sqlP.SelectPlaylistsOfUser(userToDelete);
         LinkedList<Song> songs= sqlS.SelectDataSong();
+
         for (Playlist playlist : playlists) {
-            if (playlist.getOwner().equals(userToDelete.getName())) {
                 sqlP.DeleteDataPlaylist(playlist.getName());
+        }
+
+        for (Song song : songs) {
+            if (song.getOwner().equals(userToDelete.getName())) {
+                sqlS.DeleteDataSong(song.getTitle());
 
             }
         }
-        for (Song song : songs) {
-            if (song.getOwner().equals(userToDelete.getName())) {
-                sqlP.DeleteDataPlaylist(song.getTitle());
 
-            }
-        }*/
         sql.DeleteDataUser(userToDelete.getName());
 
 
