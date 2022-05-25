@@ -44,6 +44,11 @@ public class PlaylistView extends JPanel {
             return nombrePlaylist;
     }
 
+    public static void showErrorPlaylistCreation() {
+        JPanel panel= new JPanel();
+        JOptionPane.showMessageDialog(panel,"Playlist already exists");
+    }
+
     public void registerController(ActionListener controller){
         this.controller = controller;
     }

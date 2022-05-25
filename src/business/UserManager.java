@@ -150,9 +150,9 @@ public class UserManager {
 
     public void deleteUser(){
         User userToDelete = Store.getUser();
-       // LinkedList<Playlist> playlists= sqlP.SelectDataPlaylist();
-       // LinkedList<Song> songs= sqlS.SelectDataSong();
-       /* for (Playlist playlist : playlists) {
+       /* LinkedList<Playlist> playlists= sqlP.SelectDataPlaylist();
+        LinkedList<Song> songs= sqlS.SelectDataSong();
+        for (Playlist playlist : playlists) {
             if (playlist.getOwner().equals(userToDelete.getName())) {
                 sqlP.DeleteDataPlaylist(playlist.getName());
 

@@ -18,26 +18,38 @@ public class PlaylistManager {
 
     public PlaylistManager() {
         this.playlistDAO = new SQLConnectorPlaylist();
-        this.songPlaylistDAO= new SQLConnectorSongPlaylist();
+        this.songPlaylistDAO = new SQLConnectorSongPlaylist();
     }
 
-    public LinkedList<Playlist> getDataPlaylists () {
+    public LinkedList<Playlist> getDataPlaylists() {
         return playlistDAO.SelectDataPlaylist();
     }
 
-    public LinkedList<Playlist> getPlaylistsOfUser(User user){
+    public LinkedList<Playlist> getPlaylistsOfUser(User user) {
         return playlistDAO.SelectPlaylistsOfUser(user);
     }
 
 
-    public  void deletePlaylist(String name){
+    public void deletePlaylist(String name) {
         playlistDAO = new SQLConnectorPlaylist();
         playlistDAO.DeleteDataPlaylist(name);
         songPlaylistDAO.DeleteDataSongP(name);
     }
-    public void createPlaylist(String name,String owner){
-        playlistDAO.InsertDataPlaylist(name,owner);
+
+    public void createPlaylist(String name, String owner) {
+        playlistDAO.InsertDataPlaylist(name, owner);
     }
 
+    public boolean existPlaylist(User user, String nombrePlaylist) {
+        playlistDAO = new SQLConnectorPlaylist();
+        LinkedList<Playlist> playlists = playlistDAO.SelectPlaylistsOfUser(user);
+        for (Playlist playlist : playlists) {
+            if (playlist.getName().equals(nombrePlaylist)) {
+                return true;
+            }
+        }
+            return false;
+        }
 
-}
+    }
+
