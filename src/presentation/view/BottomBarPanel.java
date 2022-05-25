@@ -8,9 +8,9 @@ import java.awt.*;
 
 public class BottomBarPanel extends JPanel {
     private SongPlayerController controller;
-    private Song song;
-    private JPanel song_player;
-    private GridBagConstraints c;
+    private static Song song;
+    private static JPanel song_player;
+    private static GridBagConstraints c;
 
     public BottomBarPanel (DetailedSongView detailedSongView, MainManagerView mainManagerView) {
         controller = new SongPlayerController(this, detailedSongView, mainManagerView);
@@ -78,13 +78,13 @@ public class BottomBarPanel extends JPanel {
 
     }
 
-    public void updateSong (Song song) {
-        this.song = song;
+    public static void updateSong (Song song) {
+        BottomBarPanel.song = song;
 
         song_player.add(setSongInfo(song.getTitle(), song.getArtist()));
     }
 
-    public JLabel setSongInfo (String title, String artist) {
+    public static JLabel setSongInfo (String title, String artist) {
         JLabel song_info_label = new JLabel(title + " - " + artist);
 
         c.fill = GridBagConstraints.HORIZONTAL;

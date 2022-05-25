@@ -39,7 +39,7 @@ public class DetailedSongController implements ActionListener {
         }
         if (e.getActionCommand().equals("PLAY_SONG_COMMAND")) {
             System.out.println("PLAY");
-            //bottomBarPanel.updateSong(detailedSongView.getSong());
+            BottomBarPanel.updateSong(detailedSongView.getSong());
             SongPlayerController.playSong();
             //SongManager.PlayMusic(detailedSongView.getPath(), 1);
         }

@@ -32,6 +32,7 @@ public class SongPlayerController implements ActionListener {
             System.out.println("Parar");
         }
         if (e.getActionCommand().equals("PLAY_SONG")) {
+            BottomBarPanel.updateSong(detailedSongView.getSong());
             songPlayer.managePlayer(bottomBarPanel.getSong().getPath(), 1);
             System.out.println("Play");
         }
@@ -49,7 +50,7 @@ public class SongPlayerController implements ActionListener {
     // Métodos estáticos para que cualquier clase pueda acceder a ellos sin necesidad de instanciar
 
     public static void playSong () {
-        bottomBarPanel.updateSong(detailedSongView.getSong());
+        BottomBarPanel.updateSong(detailedSongView.getSong());
         songPlayer.managePlayer(bottomBarPanel.getSong().getPath(), 1);
     }
 
