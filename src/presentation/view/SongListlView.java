@@ -49,14 +49,8 @@ public class SongListlView extends JPanel {
                 panel.add(new SongListRender(s, controller));
             }
         }catch (NullPointerException e){
-            JPanel panel1= new JPanel();
-            JOptionPane.showMessageDialog(panel1,"This Playlist is empty");
+            JOptionPane.showMessageDialog(this,"This Playlist is empty");
         }
-
-
-
-
-
 
         jScrollPane.setViewportView(panel);
     }
