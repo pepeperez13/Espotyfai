@@ -148,7 +148,7 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
-            String sql = "SELECT * FROM playlist";
+            String sql = "SELECT * FROM PLAYLIST";
             PreparedStatement statement = conn.prepareStatement(sql);
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next())

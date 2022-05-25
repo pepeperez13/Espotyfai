@@ -194,6 +194,11 @@ public class DetailedSongView extends JPanel {
 
         JOptionPane.showMessageDialog(this, message, "", JOptionPane.PLAIN_MESSAGE);
     }
+    public void showErrorUserMessage() {
+        String message = "Cannot add song to a playlist of which you are not the owner.";
+
+        JOptionPane.showMessageDialog(this, message, "Following errors were found", JOptionPane.WARNING_MESSAGE);
+    }
 
     public String getSongTitle() {
         return song.getTitle();
@@ -224,6 +229,7 @@ public class DetailedSongView extends JPanel {
     public Song getSong () {
         return song;
     }
+
 
 
 }

@@ -1,6 +1,7 @@
 package business;
 
 
+import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.SongPlaylist;
 import persistance.PlaylistDAO;
@@ -17,11 +18,22 @@ public class SongPlaylistManager<Public> {
     private static SongPlaylistDAO songPDAO;
     private static PlaylistDAO playlistDAO;
     private static SongDAO songDAO;
+    private static PlaylistManager playlistManager;
 
 
-    public static void InsertNewSongPlaylist(String title, String name) {
+    public static boolean InsertNewSongPlaylist(String songtitle, String playlistname) {
         songPDAO = new SQLConnectorSongPlaylist();
-        songPDAO.InsertDataSongP(title, name);
+        playlistManager= new PlaylistManager();
+        LinkedList<Playlist> playlists=playlistManager.getDataPlaylists();
+        for(Playlist p: playlists){
+            if(p.getName().equals(playlistname)){
+                if(p.getOwner().equals(Store.getUser().getName())){
+                    songPDAO.InsertDataSongP(songtitle, playlistname);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public  void deleteNewSongPlaylist(String title) {

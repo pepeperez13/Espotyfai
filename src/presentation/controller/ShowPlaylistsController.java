@@ -2,6 +2,7 @@ package presentation.controller;
 
 import business.PlaylistManager;
 import business.SongPlaylistManager;
+import business.Store;
 import presentation.view.DetailedSongView;
 
 import java.awt.event.ActionEvent;
@@ -25,8 +26,13 @@ public class ShowPlaylistsController implements ActionListener {
         if (songPlaylistManager.songExistsInPlaylist(detailedSongView.getSongTitle(), e.getActionCommand())) {
             detailedSongView.showErrorMessage();
         }else{
-            SongPlaylistManager.InsertNewSongPlaylist(detailedSongView.getSongTitle(), e.getActionCommand());
-            detailedSongView.showOKMessage();
+            if(SongPlaylistManager.InsertNewSongPlaylist(detailedSongView.getSongTitle(), e.getActionCommand())){
+                detailedSongView.showOKMessage();
+            }else{
+                detailedSongView.showErrorUserMessage();
+            }
+
+
         }
     }
 }
