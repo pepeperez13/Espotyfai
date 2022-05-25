@@ -1,5 +1,4 @@
 package presentation.view;//package presentation.view;
-import persistance.RoundedBorder;
 import presentation.controller.LoginController;
 
 import javax.swing.*;
@@ -60,7 +59,6 @@ public class LoginView extends JPanel {
         JButton signin_button = new JButton("Sign In");
         signin_button.setBackground(new Color(160, 100, 230));
         signin_button.setBorder(new LineBorder(Color.BLUE));
-        signin_button.setBorder(new RoundedBorder(5)); //10 is the radius
         signin_button.setForeground(Color.BLUE);
         south.add(signin_button, BorderLayout.CENTER);
         signin_button.addActionListener(loginController);
@@ -82,7 +80,6 @@ public class LoginView extends JPanel {
         JButton register_button = new JButton("Register");
         register_button.setBackground(new Color(160, 100, 230));
         register_button.setBorder(new LineBorder(Color.BLUE));
-        register_button.setBorder(new RoundedBorder(10)); //10 is the radius
         register_button.setForeground(Color.BLUE);
         sd.fill = GridBagConstraints.HORIZONTAL;
         sd.weightx = 0.0;
