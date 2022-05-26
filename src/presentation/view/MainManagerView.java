@@ -23,10 +23,8 @@ public class MainManagerView extends JPanel {
     private DetailedSongController detailedSongController;
     private MainMenu mainMenu;
     private ConfigMenu configMenu;
-    private InitView initView;
     private ManageAccountView manageAccountView;
     private ConfMusicPanelView confMusicPanelView;
-    private ConfMusicController confMusicController;
     private StaticsPanelView staticsPanel;
     private AddMusicPanelView addMusicPanel;
     private DeleteMusicPanelView deleteMusicPanel;
@@ -86,11 +84,11 @@ public class MainManagerView extends JPanel {
 
         detailedSongController = new DetailedSongController(detailedSongView);
         buscadorViewController = new BuscadorViewController(buscadorView, new BuscadorManager(), detailedSongView, this);
-        buscadorView.registerController(buscadorViewController);
         confMusicPanelView = new ConfMusicPanelView(this);
+        buscadorView.registerController(buscadorViewController);
         playlistView.registerController(mainViewController);
         songListlView.registerController(mainViewController);
-        deleteMusicPanel = new DeleteMusicPanelView(confMusicPanelView, this);
+        deleteMusicPanel = new DeleteMusicPanelView();
         mainView= new MainView();
 
         staticsPanel= new StaticsPanelView(SongManager.ListSongs());

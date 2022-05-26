@@ -1,5 +1,6 @@
 package presentation.view;
 import presentation.controller.ConfMusicController;
+import presentation.controller.DeleteMusicController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,10 +9,10 @@ public class DeleteMusicPanelView extends JPanel {
     private GridBagConstraints gc = new GridBagConstraints();
     private JTextField nameSong = new JTextField();
     public static final String DELETE = "DELETE";
-    private ConfMusicController confMusicController;
+    private DeleteMusicController deleteMusicController;
 
-    public DeleteMusicPanelView (ConfMusicPanelView confMusicPanelView, MainManagerView mainManagerView) {
-        confMusicController = new ConfMusicController(confMusicPanelView, mainManagerView);
+    public DeleteMusicPanelView () {
+        deleteMusicController = new DeleteMusicController(this);
 
         setLayout(new GridBagLayout());
         setBackground(new Color(255, 255, 255));
@@ -40,7 +41,7 @@ public class DeleteMusicPanelView extends JPanel {
         jbdelete.setBackground(new Color(230, 101, 101));
         jbdelete.setBorder(BorderFactory.createEmptyBorder());
         jbdelete.setActionCommand(DELETE);
-        jbdelete.addActionListener(confMusicController);
+        jbdelete.addActionListener(deleteMusicController);
 
         JLabel mensaje = new JLabel("Solo se podrá eliminar la canción si ha sido añadida por usted!");
         mensaje.setFont(new Font("Arial", Font.BOLD, 11));

@@ -14,7 +14,7 @@ public class ConfMusicPanelView extends JPanel {
     private ConfMusicController confMusicController;
     private final GridBagConstraints gc = new GridBagConstraints();
     public ConfMusicPanelView(MainManagerView mainManagerView) {
-        confMusicController = new ConfMusicController(this, mainManagerView);
+        confMusicController = new ConfMusicController(mainManagerView);
 
         setBackground(new Color(255, 255, 255));
         setLayout(new GridBagLayout());
