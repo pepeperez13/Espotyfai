@@ -79,6 +79,7 @@ public class StaticsPanelView extends JPanel {
 
             int x = labelFontMetrics.getAscent();
             int y = clientHeight / 10;
+
             g.setFont(labelFont);
             y += ESPACIO_VERTTICAL;
             g.setColor(new Color(76, 131, 187));
@@ -86,7 +87,7 @@ public class StaticsPanelView extends JPanel {
             //System.out.println(((contadoresGenero[0]*clientWidth)/maxValue));
             g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[0]*clientWidth)/maxValue)-100), barWidth);
             g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[0]*clientWidth)/maxValue)-100), barWidth );
-            //Poner porcentaje de la barra//g.drawString(contadoresGenero[0]*listaCanciones.size(), x, y);
+            //Poner porcentaje de la barra
 
             y += ESPACIO_VERTTICAL;
             g.setColor(new Color(194, 85, 76));
@@ -143,20 +144,5 @@ public class StaticsPanelView extends JPanel {
             g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[9]*clientWidth)/maxValue)-100), barWidth);
             g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[9]*clientWidth)/maxValue)-100), barWidth);
         }
-    }
-    public static void main(String[] args) {
-        LinkedList<Song> l = new LinkedList<>();
-        l.add(new Song("sasas", KPOP, "ASA", "S", "PSA", "ASAS"));
-        l.add(new Song("sasas", REGGAE, "ASA", "S", "PSA", "ASAS"));
-        l.add(new Song("sasas", REGGAE, "ASA", "S", "PSA", "ASAS"));
-        l.add(new Song("sasas", REGGAE, "ASA", "S", "PSA", "ASAS"));
-        l.add(new Song("sasas", KPOP, "ASA", "S", "PSA", "ASAS"));
-        l.add(new Song("sasas", KPOP, "ASA", "S", "PSA", "ASAS"));
-        l.add(new Song("sasas", LATIN, "ASA", "S", "PSA", "ASAS"));
-        l.add(new Song("sasas", LATIN, "ASA", "S", "PSA", "ASAS"));
-
-        StaticsPanelView s = new StaticsPanelView(l);
-
-        s.setVisible(true);
     }
 }
