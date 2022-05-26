@@ -4,15 +4,15 @@ import business.PlaylistManager;
 import business.Store;
 import business.entities.Playlist;
 import business.entities.Song;
+import com.mysql.cj.util.StringUtils;
 import presentation.render.PlayListRender;
 import presentation.render.SongListRender;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
+import java.awt.font.TextAttribute;
+import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,8 +41,14 @@ public class SongListlView extends JPanel {
 
     public void loadSongs() {
         List<Song> sorted;
+        JLabel playlistName= new JLabel();
         JPanel panel = new JPanel();
+        playlistName.setBackground(Color.white);
+        playlistName.setText(""+selectedPlaylist.getName());
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        playlistName.setFont(new Font("Arial", Font.BOLD,20));
+        panel.add(playlistName);
+        panel.setBackground(Color.white);
         try{
             sorted = selectedPlaylist.getSongs().stream().sorted(Comparator.comparing(Song::getPosition)) .collect(Collectors.toList());
             for(Song s: sorted){

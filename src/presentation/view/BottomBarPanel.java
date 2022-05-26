@@ -17,6 +17,7 @@ public class BottomBarPanel extends JPanel {
         controller = new SongPlayerController(this, detailedSongView, mainManagerView);
 
         song_player = new JPanel(new GridBagLayout());
+        song_player.setBackground(new Color(191, 105, 240));
         c = new GridBagConstraints();
 /*
         JLabel song_info_label = new JLabel("nombre de la cancion - artista");
@@ -76,6 +77,7 @@ public class BottomBarPanel extends JPanel {
         full_screen.addActionListener(controller);
 
         this.add(song_player);
+        this.setBackground(new Color(191, 105, 240));
 
     }
 
