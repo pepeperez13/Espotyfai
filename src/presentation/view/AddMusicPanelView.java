@@ -7,7 +7,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 
 public class AddMusicPanelView extends JPanel {
-    //public static final String ADD_PATH = "ADD_PATH";
     public static final String ADD_SONG = "ADD_SONG";
     private final JTextField textTitulo = new JTextField();
     private final JTextField textAlbum = new JTextField();
@@ -59,16 +58,6 @@ public class AddMusicPanelView extends JPanel {
         JLabel labelFichero = new JLabel();
         labelFichero.setText("Fichero MP3/WAV");
         labelFichero.setFont(new Font("Arial", Font.BOLD, 18));
-
-        /*ImageIcon logoSimbol = new ImageIcon("Images/upload.png");
-        Image img = logoSimbol.getImage();
-        img = img.getScaledInstance(40, 40, Image.SCALE_DEFAULT);
-        logoSimbol = new ImageIcon(img);
-        JButton uploadIcon = new JButton(logoSimbol);
-        uploadIcon.setPreferredSize(new Dimension(50, 50));
-        uploadIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
-        uploadIcon.setActionCommand(ADD_PATH);
-        uploadIcon.addActionListener(addMusicController);*/
 
         JLabel labelGenero = new JLabel();
         labelGenero.setText("Género musical");

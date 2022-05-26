@@ -1,12 +1,18 @@
 package presentation.view;
+import presentation.controller.ConfMusicController;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class DeleteMusicPanelView extends JPanel {
     private GridBagConstraints gc = new GridBagConstraints();
+    private JTextField nameSong = new JTextField();
+    public static final String DELETE = "DELETE";
+    private ConfMusicController confMusicController;
 
-    public DeleteMusicPanelView () {
-        //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    public DeleteMusicPanelView (ConfMusicPanelView confMusicPanelView, MainManagerView mainManagerView) {
+        confMusicController = new ConfMusicController(confMusicPanelView, mainManagerView);
+
         setLayout(new GridBagLayout());
         setBackground(new Color(255, 255, 255));
 
@@ -27,18 +33,14 @@ public class DeleteMusicPanelView extends JPanel {
         labelTitulo.setFont(new Font("Arial", Font.BOLD, 18));
         labelTitulo.setBackground(new Color(255, 255, 255));
 
-        JTextArea textTitulo = new JTextArea();
-
-        JLabel labelAlbum = new JLabel("Album");
-        labelAlbum.setFont(new Font("Arial", Font.BOLD, 18));
-        labelAlbum.setBackground(new Color(255, 255, 255));
-
-        JTextArea textAlbum = new JTextArea();
+        nameSong.setPreferredSize(new Dimension(200, 20));
 
         JButton jbdelete = new JButton();
         jbdelete.setText("Eliminar");
         jbdelete.setBackground(new Color(230, 101, 101));
         jbdelete.setBorder(BorderFactory.createEmptyBorder());
+        jbdelete.setActionCommand(DELETE);
+        jbdelete.addActionListener(confMusicController);
 
         JLabel mensaje = new JLabel("Solo se podrá eliminar la canción si ha sido añadida por usted!");
         mensaje.setFont(new Font("Arial", Font.BOLD, 11));
@@ -52,13 +54,7 @@ public class DeleteMusicPanelView extends JPanel {
         add(labelTitulo, gc);
         gc.gridx = 0;
         gc.gridy = 2;
-        add(textTitulo, gc);
-        gc.gridx = 0;
-        gc.gridy = 3;
-        add(labelAlbum, gc);
-        gc.gridx = 0;
-        gc.gridy = 4;
-        add(textAlbum, gc);
+        add(nameSong, gc);
         gc.gridx = 0;
         gc.gridy = 5;
         add(jbdelete, gc);
@@ -67,11 +63,7 @@ public class DeleteMusicPanelView extends JPanel {
         add(mensaje, gc);
     }
 
-    public static void main (String[] args) {
-        DeleteMusicPanelView menuPrincipal = new DeleteMusicPanelView();
-        JFrame f = new JFrame();
-        f.add(menuPrincipal);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setVisible (true);
+    public String getNameSong() {
+        return nameSong.getText();
     }
 }

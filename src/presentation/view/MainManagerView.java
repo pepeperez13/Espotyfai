@@ -29,8 +29,7 @@ public class MainManagerView extends JPanel {
     private ConfMusicController confMusicController;
     private StaticsPanelView staticsPanel;
     private AddMusicPanelView addMusicPanel;
-    private ShowMusicPanelView showMusicPanel = new ShowMusicPanelView();
-    private DeleteMusicPanelView deleteMusicPanel = new DeleteMusicPanelView();
+    private DeleteMusicPanelView deleteMusicPanel;
     private JPanel cardPanel = new JPanel();
     private JPanel menuCardPanel = new JPanel();
     private final CardLayout c = new CardLayout();
@@ -84,12 +83,14 @@ public class MainManagerView extends JPanel {
         playlistView = new PlaylistView();
         songListlView= new SongListlView();
 
+
         detailedSongController = new DetailedSongController(detailedSongView);
         buscadorViewController = new BuscadorViewController(buscadorView, new BuscadorManager(), detailedSongView, this);
         buscadorView.registerController(buscadorViewController);
         confMusicPanelView = new ConfMusicPanelView(this);
         playlistView.registerController(mainViewController);
         songListlView.registerController(mainViewController);
+        deleteMusicPanel = new DeleteMusicPanelView(confMusicPanelView, this);
         mainView= new MainView();
 
         staticsPanel= new StaticsPanelView(SongManager.ListSongs());
@@ -103,7 +104,6 @@ public class MainManagerView extends JPanel {
         cardPanel.add(manageAccountView, "7");
         cardPanel.add(staticsPanel, "8");
         cardPanel.add(addMusicPanel, "9");
-        cardPanel.add(showMusicPanel, "10");
         cardPanel.add(deleteMusicPanel, "11");
         cardPanel.add(songListlView,"12");
 

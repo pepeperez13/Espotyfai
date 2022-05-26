@@ -35,7 +35,7 @@ public class SongManager<Public> {
         System.out.println(songs);
         return songs;
     }
-    public static void InsertNewSong(String title, String genre, String album, String artist, String path, String owner){
+    public static void InsertNewSong (String title, String genre, String album, String artist, String path, String owner){
         songDAO = new SQLConnectorSong();
 
         songDAO.InsertDataSong(title, genre, album, artist, path, owner);
@@ -50,14 +50,11 @@ public class SongManager<Public> {
 
         return songs;
     }
-    /*public static LinkedList<Song> SelectSong(String Song) {
-        songDAO = new SQLConnectorSong();
-        LinkedList<Song> song;
-        song = songDAO.SelectDataSong();
-        System.out.println(song);
-        return song;
-    }*/
 
+    public static void DeleteSong(String song){
+        songDAO.DeleteDataSong(song);
+        songPDAO.DeleteDataSongP(song);
+    }
 }
 
 
