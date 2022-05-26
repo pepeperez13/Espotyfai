@@ -63,8 +63,13 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
-            String sql = "DELETE FROM playlist WHERE PLAYLIST_NAME=?";
 
+            String sqlDeleteRelationships = "DELETE FROM song_playlist WHERE PLAYLIST_NAME= ?";
+            PreparedStatement stDelRelationship = conn.prepareStatement(sqlDeleteRelationships);
+            stDelRelationship.setString(1,name);
+            stDelRelationship.executeUpdate();
+
+            String sql = "DELETE FROM playlist WHERE PLAYLIST_NAME=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, name);
 
@@ -143,7 +148,7 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
-            String sql = "SELECT * FROM playlist";
+            String sql = "SELECT * FROM PLAYLIST";
             PreparedStatement statement = conn.prepareStatement(sql);
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next())
@@ -156,6 +161,27 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
                 System.out.format("%s, %s\n", name,owner);
             }
             statement.close();
+            // para cada playlist obtenida, recupero sus canciones
+            SQLConnectorSong sqlSong = new SQLConnectorSong();
+            ArrayList<Song> songs= new ArrayList<>();
+            for(Playlist p: playlists){
+                sql = "SELECT * FROM song_playlist WHERE PLAYLIST_NAME = ?";
+                 statement = conn.prepareStatement(sql);
+                statement.setString(1,p.getName());
+                rs = statement.executeQuery();
+                while (rs.next())
+                {
+                    String song_title = rs.getString("SONG_TITLE");
+                    int song_pos = rs.getInt("SONG_POS");
+
+                    Song song = sqlSong.SelectSong(song_title);
+                    song.setPosition(song_pos);
+                    p.setSongs(songs);
+                    p.getSongs().add(song);
+                }
+
+                statement.close();
+            }
             return playlists;
         } catch (SQLException throwables) {
             throwables.printStackTrace();

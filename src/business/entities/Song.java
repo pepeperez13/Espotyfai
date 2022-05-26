@@ -1,5 +1,12 @@
 package business.entities;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.File;
+import java.io.IOException;
+
 public class Song {
     private String title;
     private String genre;
@@ -79,4 +86,32 @@ public class Song {
     public void setPosition(int position) {
         this.position = position;
     }
+
+    public double getSongDurationSeconds (Song song) {
+        String error = "";
+        AudioFormat format = null;
+        long frames = 0;
+        try {
+            File file = new File(song.getPath());
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            format = audioStream.getFormat();
+            frames = audioStream.getFrameLength();
+        } catch (UnsupportedAudioFileException unsupportedAudioFileException) {
+            error = "Audio file is not supported by the system";
+            //JOptionPane.showMessageDialog(this, "Audio file is not supported by the system", "Following errors were found", JOptionPane.WARNING_MESSAGE);
+        } catch (IOException ioException) {
+            error = "Song provided could not be found";
+            //JOptionPane.showMessageDialog(this, "Audio file is not supported by the system", "Following errors were found", JOptionPane.WARNING_MESSAGE);
+        }
+
+        return (frames + 0.0) / format.getFrameRate();
+    }
+
+    public String getSongDurationMinutes (Song song) {
+        double time  = getSongDurationSeconds(song);
+        int minutes = (int) (time / (60));
+        int seconds = (int) ((time) % 60);
+        return String.format("%d:%02d", minutes, seconds);
+    }
+
 }

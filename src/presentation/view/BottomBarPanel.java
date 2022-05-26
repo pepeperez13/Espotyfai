@@ -8,9 +8,10 @@ import java.awt.*;
 
 public class BottomBarPanel extends JPanel {
     private SongPlayerController controller;
-    private Song song;
-    private JPanel song_player;
-    private GridBagConstraints c;
+    private static Song song;
+    private static JPanel song_player;
+    private static GridBagConstraints c;
+    private static JLabel songInfo;
 
     public BottomBarPanel (DetailedSongView detailedSongView, MainManagerView mainManagerView) {
         controller = new SongPlayerController(this, detailedSongView, mainManagerView);
@@ -78,13 +79,23 @@ public class BottomBarPanel extends JPanel {
 
     }
 
-    public void updateSong (Song song) {
-        this.song = song;
+    public static void updateSong (Song song) {
+        try {
+            BottomBarPanel.song = song;
 
-        song_player.add(setSongInfo(song.getTitle(), song.getArtist()));
+            if (songInfo != null) {
+                song_player.remove(songInfo);
+            }
+
+            songInfo = setSongInfo(song.getTitle(), song.getArtist());
+
+            song_player.add(songInfo);
+        } catch (NullPointerException e) {
+            System.out.println("No hay canción para reproducir. No hace falta mostrar nada");
+        }
     }
 
-    public JLabel setSongInfo (String title, String artist) {
+    public static JLabel setSongInfo (String title, String artist) {
         JLabel song_info_label = new JLabel(title + " - " + artist);
 
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -97,7 +108,7 @@ public class BottomBarPanel extends JPanel {
         return song_info_label;
     }
 
-    public Song getSong () {
-        return this.song;
+    public static Song getSong () {
+        return song;
     }
 }

@@ -52,7 +52,11 @@ public class MainViewController implements ActionListener {
             mainManagerView.changeView(12, 1);
         }else if(e.getActionCommand().equals(PlaylistView.CREAR_PLAYLIST)){
             String nombrePlaylist=PlaylistView.crearPlaylist();
-            playlistManager.createPlaylist(nombrePlaylist, Store.getUser().getName());
+            if(playlistManager.existPlaylist(Store.getUser(),nombrePlaylist)){
+                PlaylistView.showErrorPlaylistCreation();
+            }else{
+                playlistManager.createPlaylist(nombrePlaylist, Store.getUser().getName());
+            }
         }else if(e.getActionCommand().equals(PlayListRender.DELETE_BUTTON)){
              parameterPlayList = (Playlist) ((JButton)e.getSource()).getClientProperty( "PLAYLIST_ELIMINAR" );
             playlistManager.deletePlaylist(parameterPlayList.getName());

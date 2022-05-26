@@ -1,5 +1,6 @@
 package presentation.render;
 
+import business.Store;
 import business.entities.Playlist;
 ;
 
@@ -26,20 +27,29 @@ public class PlayListRender extends JPanel  {
         setLayout(new BorderLayout(5, 5));
         setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
 
-        btEditar.setText("Editar");
+
         btEliminar.setText("Eliminar");
         btEditar.setSize(100,50);
         btEliminar.setSize(100,50);
         GridLayout gridLayout= new GridLayout(3, 2);
         JPanel panelText = new JPanel();
         panelText.setLayout(gridLayout);
+        if(isMyPlaylist()){
+            btEditar.setText("Editar");
+        }else{
+            btEditar.setText("Ver");
+        }
         panelText.setBackground(Color.white);
         gridLayout.setVgap(30);
         gridLayout.setHgap(30);
         panelText.add(lbName);
         panelText.add(btEditar);
         panelText.add(lbAuthor);
-        panelText.add(btEliminar);
+        panelText.add(separator);
+        if(isMyPlaylist()){
+            panelText.add(btEliminar);
+
+        }
         panelText.add(separator);
         panelText.add(separator);
         add(lbIcon, BorderLayout.WEST);
@@ -77,9 +87,8 @@ public class PlayListRender extends JPanel  {
         lbAuthor.setText(playlist.getOwner());
         lbAuthor.setForeground(Color.blue);
         lbIcon.setBackground(Color.white);
-        lbAuthor.setBackground(Color.white);
         lbName.setBackground(Color.white);
-
+        lbAuthor.setBackground(Color.white);
 
 
         lbName.setOpaque(true);
@@ -87,8 +96,13 @@ public class PlayListRender extends JPanel  {
         lbIcon.setOpaque(true);
         this.setBackground(Color.white);
 
+
+
     }
 
+    private boolean isMyPlaylist(){
+        return playlist.getOwner().equals(Store.getUser().getName());
+    }
 
 
 }

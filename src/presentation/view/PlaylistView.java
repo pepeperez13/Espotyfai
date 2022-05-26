@@ -44,24 +44,67 @@ public class PlaylistView extends JPanel {
             return nombrePlaylist;
     }
 
+    public static void showErrorPlaylistCreation() {
+        JPanel panel= new JPanel();
+        JOptionPane.showMessageDialog(panel,"Playlist already exists");
+    }
+
     public void registerController(ActionListener controller){
         this.controller = controller;
     }
 
     public void bringPlaylists() {
 
-        LinkedList<Playlist> model = manager.getPlaylistsOfUser(Store.getUser());
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+        LinkedList<Playlist> playlistsOfUser = manager.getPlaylistsOfUser(Store.getUser());
+        LinkedList<Playlist> playlists= manager.getDataPlaylists();
+        GridBagLayout gridLayout= new GridBagLayout();
+        JSeparator separatorvertical= new JSeparator();
+        GridBagConstraints c = new GridBagConstraints();
+        separatorvertical.setOrientation(SwingConstants.VERTICAL);
+        separatorvertical.setBackground(Color.black);
+        JPanel panel=new JPanel();
+        JLabel jlabelizq= new JLabel();
+        JLabel jlabelder =new JLabel();
+        jlabelizq.setText("My Playlists");
+        jlabelder.setText("All Playlists");
+        jlabelder.setAlignmentX(SwingConstants.CENTER);
+        jlabelizq.setAlignmentX(SwingConstants.CENTER);
+        jlabelizq.setFont(new Font("Arial", Font.BOLD,20));
+        jlabelder.setFont(new Font("Arial", Font.BOLD,20));
+        panel.setLayout(gridLayout);
+        JPanel panelizq = new JPanel();
+        JPanel panelder = new JPanel();
+        panelizq.setBackground(Color.cyan);
+        panelder.setBackground(Color.cyan);
+        panelizq.setLayout(new BoxLayout(panelizq,BoxLayout.Y_AXIS));
+        panelder.setLayout(new BoxLayout(panelder,BoxLayout.Y_AXIS));
         crearPlaylist.setText("Crear Playlist");
         crearPlaylist.setActionCommand(CREAR_PLAYLIST);
         crearPlaylist.addActionListener(controller);
-
-        for(Playlist p: model){
-            panel.add(new PlayListRender(p,controller));
+        panelizq.add(jlabelizq);
+        panelder.add(jlabelder);
+        for(Playlist pu: playlistsOfUser){
+            panelizq.add(new PlayListRender(pu,controller));
         }
+        for(Playlist pa: playlists){
+            panelder.add(new PlayListRender(pa,controller));
+        }
+        c.gridx = 0;
+        c.gridy = 0;
+        c.fill = GridBagConstraints.VERTICAL;
+        c.anchor = GridBagConstraints.PAGE_END;
+        c.weighty = 1.0;
+        c.weightx=1.0;
+        panel.add(panelizq,c);
+        c.gridx = 1;
+        c.gridy = 0;
+        c.ipady = 40;
+        c.fill = GridBagConstraints.VERTICAL;
+        c.weighty = 1.0;
+        c.weightx=1.0;
+        panel.add(panelder,c);
         panel.add(crearPlaylist);
+        panel.setBackground(Color.white);
         this.jScrollPane.setViewportView(panel);
     }
 
