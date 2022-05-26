@@ -19,7 +19,7 @@ public class TestController {
     public static void main (String[] args) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         //SongManager songManager = new SongManager();
         //SongPlaylistManager songPlaylistManager = new SongPlaylistManager();
-        SongPlayer songPlayer = new SongPlayer();
+        //SongPlayer songPlayer = new SongPlayer();
 
 
         //SQLConnectorSong sqlConnectorSong = sql.InsertDataSong("Lambskin","ReggTech","boyd","BOYD","C:\\Users\\borja\\V3\\Espotyfai\\files\\SongFiles\\Lambskin.wav","Borja");

@@ -1,6 +1,8 @@
 package presentation.controller;
 
+import business.SongManager;
 import business.SongPlayer;
+import business.entities.Song;
 import presentation.view.BottomBarPanel;
 import presentation.view.DetailedSongView;
 import presentation.view.MainManagerView;
@@ -18,7 +20,7 @@ public class SongPlayerController implements ActionListener {
     private MainManagerView mainManagerView;
 
     public SongPlayerController(BottomBarPanel bottomBarPanel, DetailedSongView detailedSongView, MainManagerView mainManagerView) {
-        this.songPlayer = new SongPlayer();
+        this.songPlayer = new SongPlayer(this);
         this.bottomBarPanel = bottomBarPanel;
         this.detailedSongView = detailedSongView;
         this.mainManagerView = mainManagerView;
@@ -41,7 +43,23 @@ public class SongPlayerController implements ActionListener {
                 System.out.println("Play");
             }
             if (e.getActionCommand().equals("NEXT_SONG")) {
-                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1, bottomBarPanel);
+                if (MainViewController.isReproducingPlaylist()) {
+                    Song nextSong = MainViewController.getReproducingPlaylist().getSongs().get(BottomBarPanel.getSong().getPosition());
+                    BottomBarPanel.updateSong(nextSong);
+                    detailedSongView.updateSong(nextSong);
+                    songPlayer.managePlayer(nextSong.getPath(), 1, bottomBarPanel);
+                } else {
+                    Song nextSong = null;
+                    for (int i = 0; i < SongManager.ListSongs().size(); i++) {
+                        if (SongManager.ListSongs().get(i).getTitle().equals(BottomBarPanel.getSong().getTitle())) {
+                            nextSong = SongManager.ListSongs().get(i+1);
+                            break;
+                        }
+                    }
+                    BottomBarPanel.updateSong(nextSong);
+                    detailedSongView.updateSong(nextSong);
+                    songPlayer.managePlayer(nextSong.getPath(), 1, bottomBarPanel);
+                }
                 System.out.println("Next");
             }
             if (e.getActionCommand().equals("DETAILED_VIEW")) {
@@ -69,6 +87,10 @@ public class SongPlayerController implements ActionListener {
             BottomBarPanel.updateSong(detailedSongView.getSong());
         }
         songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1, detailedSongView);
+    }
+
+    public static Song getPlayingSong () {
+        return  BottomBarPanel.getSong();
     }
 
     public static void pauseSong () {

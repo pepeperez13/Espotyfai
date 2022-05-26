@@ -25,8 +25,9 @@ public class MainViewController implements ActionListener {
     private MainManagerView mainManagerView;
     private PlaylistManager playlistManager;
     private SongPlaylistManager songManager;
-    Playlist parameterPlayList= new Playlist();
+    private static Playlist parameterPlayList= new Playlist();
     Song song= new Song();
+    private static boolean reproducingPlaylist;
 
 
     public MainViewController (MainMenu menuBarView, MainManagerView mainManagerView) {
@@ -69,8 +70,24 @@ public class MainViewController implements ActionListener {
             songManager.deleteSongPlaylistSong(parameterPlayList.getName(),song.getTitle());
         }else if(e.getActionCommand().equals(PlayListRender.REPRODUCIR_BUTTON)){
             parameterPlayList = (Playlist) ((JButton)e.getSource()).getClientProperty( "PLAYLIST_REPRODUCIR" );
-
+            reproducingPlaylist = true;
         }
+    }
+
+    public static boolean isReproducingPlaylist () {
+        try {
+            return MainViewController.reproducingPlaylist;
+        } catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public static void setReproducingPlaylist (boolean playing) {
+        MainViewController.reproducingPlaylist = playing;
+    }
+
+    public static Playlist getReproducingPlaylist () {
+            return parameterPlayList;
     }
 
 }

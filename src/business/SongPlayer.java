@@ -1,6 +1,8 @@
 package business;
 
+import business.entities.Playlist;
 import business.entities.Song;
+import presentation.controller.SongPlayerController;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -13,6 +15,11 @@ public class SongPlayer implements Runnable{
     private int index;
     private Clip clip;
     private Thread t;
+    private Playlist playlist;
+
+    public SongPlayer (SongPlayerController songPlayerController) {
+
+    }
 
     public void managePlayer (String path, int index, JPanel parentPanel) {
         // Comprobamos si hay algún cambio en la acción recibida
@@ -35,6 +42,10 @@ public class SongPlayer implements Runnable{
 
             }
         }
+    }
+
+    public void isPlayingFromPlaylist (boolean playingFromPlaylist, Playlist playlist) {
+
     }
 
     // Abre el fichero de audio que se está reproduciendo y gestiona las excepciones
@@ -62,9 +73,11 @@ public class SongPlayer implements Runnable{
     public void run() {
         //clip.start();
 
-        while(index !=4) {
+        // El thread sigue hasta que se acaba la canción (volverá a empezar otro cuando pasemos a la siguiente canción)
+        while(clip.getMicrosecondPosition()*1.0 < SongPlayerController.getPlayingSong().getSongDurationSeconds(SongPlayerController.getPlayingSong())*1000000) {
             //Sistema solo de prueba para hacer funcionar la reproduccion, en un fururo se controlara mediante la interfaz grafica del sistema.
-
+            System.out.println("Duracion total: "+ SongPlayerController.getPlayingSong().getSongDurationSeconds(SongPlayerController.getPlayingSong())*1000000);
+            System.out.println("UBicacion actual: "+ clip.getMicrosecondPosition());
             switch (index) {
                 case (1):
                     clip.start();
@@ -85,6 +98,10 @@ public class SongPlayer implements Runnable{
 
             }
         }
+        clip.close();
+        // Si se ha acabado la canción, cambiamos el path, para que si se quiere volver a dar al play, se reproduzca
+        path = "none";
+
     }
 
 

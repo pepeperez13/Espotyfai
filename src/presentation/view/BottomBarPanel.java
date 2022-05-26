@@ -73,8 +73,8 @@ public class BottomBarPanel extends JPanel {
         c.gridx = 0;
         c.gridy = 2;
         song_player.add(repeatSong, c);
-        next_song.setActionCommand("REPEAT_SONG");
-        next_song.addActionListener(controller);
+        repeatSong.setActionCommand("REPEAT_SONG");
+        repeatSong.addActionListener(controller);
 
         JButton repeatPlaylist = new JButton("Repeat Playlist");
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -82,8 +82,8 @@ public class BottomBarPanel extends JPanel {
         c.gridx = 1;
         c.gridy = 2;
         song_player.add(repeatPlaylist, c);
-        next_song.setActionCommand("REPEAT_PLAYLIST");
-        next_song.addActionListener(controller);
+        repeatPlaylist.setActionCommand("REPEAT_PLAYLIST");
+        repeatPlaylist.addActionListener(controller);
 
         this.add(song_player);
         this.setBackground(new Color(191, 105, 240));

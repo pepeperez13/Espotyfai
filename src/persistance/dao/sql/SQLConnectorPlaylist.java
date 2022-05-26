@@ -13,7 +13,7 @@ import java.util.LinkedList;
 
 public class SQLConnectorPlaylist implements PlaylistDAO {
 
-    private static String dbURL = "jdbc:mysql://localhost:3306/espotifai";
+    private static String dbURL = "jdbc:mysql://localhost:3306/espotifay";
     private static String username = "root";
     private static String password = "";
     private static Connection conn;
@@ -120,7 +120,7 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
                 while (rs.next())
                 {
                     String song_title = rs.getString("SONG_TITLE");
-                    int song_pos = rs.getInt("SONG_POS");
+                    int song_pos = rs.getInt("POS");
 
                     Song song = sqlSong.SelectSong(song_title);
                     song.setPosition(song_pos);
@@ -171,7 +171,7 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
                 while (rs.next())
                 {
                     String song_title = rs.getString("SONG_TITLE");
-                    int song_pos = rs.getInt("SONG_POS");
+                    int song_pos = rs.getInt("POS");
 
                     Song song = sqlSong.SelectSong(song_title);
                     song.setPosition(song_pos);
