@@ -7,10 +7,12 @@ import java.sql.*;
 import java.util.LinkedList;
 
 public class SQLConnectorSong implements SongDAO {
-    private static String dbURL = "jdbc:mysql://localhost:3306/espotifay";
+    private static String dbURL = "jdbc:mysql://localhost:3306/espotifai";
     private static String username = "root";
     private static String password = "";
     private static Connection conn;
+
+
 
 
     public void InsertDataSong(String title, String genre, String album, String artist, String path, String owner) {
@@ -30,9 +32,7 @@ public class SQLConnectorSong implements SongDAO {
 
 
             int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("A new user was inserted successfully!");
-            }
+
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -40,7 +40,7 @@ public class SQLConnectorSong implements SongDAO {
     }
 
 
-    public void UpdateDataSong(String title1, String genre, String album, String artist, String path, String owner, String title2) {
+    public void UpdateDataSong(String title1,String genre,String album, String artist,String path,String owner,String title2){
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
@@ -67,7 +67,7 @@ public class SQLConnectorSong implements SongDAO {
 
     }
 
-    public void DeleteDataSong(String title) {
+    public void DeleteDataSong(String title){
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
@@ -88,7 +88,7 @@ public class SQLConnectorSong implements SongDAO {
     }
 
 
-    public LinkedList<Song> SelectDataSong() {
+    public LinkedList<Song> SelectDataSong(){
         LinkedList<Song> songs = new LinkedList<>();
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
@@ -96,7 +96,8 @@ public class SQLConnectorSong implements SongDAO {
             String sql = "SELECT * FROM song";
             PreparedStatement statement = conn.prepareStatement(sql);
             ResultSet rs = statement.executeQuery(sql);
-            while (rs.next()) {
+            while (rs.next())
+            {
                 String title = rs.getString("SONG_TITLE");
                 String genre = rs.getString("SONG_GENRE");
                 String album = rs.getString("SONG_ALBUM");
@@ -119,20 +120,19 @@ public class SQLConnectorSong implements SongDAO {
         }
 
 
-    }
 
+    }
     //Metodo que te permite obtener toda la informacion de una cancion dado el nombre de la cancion.
-    public Song SelectSong(String name) {
+    public Song SelectSong(String name){
         Song newSong = null;
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
-            String sql = "SELECT * FROM song WHERE SONG_TITLE = ?";
+            String sql = "SELECT * FROM song";
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, name);
-            ResultSet rs = statement.executeQuery();
+            ResultSet rs = statement.executeQuery(sql);
             String title = null;
-            if (rs.next()) {
+            while (rs.next()) {
 
                 title = rs.getString("SONG_TITLE");
                 String genre = rs.getString("SONG_GENRE");
@@ -142,9 +142,11 @@ public class SQLConnectorSong implements SongDAO {
                 String owner = rs.getString("SONG_OWNER");
 
 
-                newSong = new Song(title, genre, album, artist, path, owner);
-                System.out.println(title);
+                if (title.equals(name)) {
+                    newSong = new Song(title, genre, album, artist, path, owner);
+                    System.out.println(title);
 
+                }
 
             }
             statement.close();
@@ -155,14 +157,19 @@ public class SQLConnectorSong implements SongDAO {
         }
 
 
+
     }
+
+
+
+
 
 
     /**
      * Method that closes the inner connection to the database. Ideally, users would disconnect after
      * using the shared instance.
      */
-    public void disconnect() {
+    public void disconnect(){
         try {
             conn.close();
         } catch (SQLException e) {
@@ -170,5 +177,4 @@ public class SQLConnectorSong implements SongDAO {
         }
     }
 }
-
 

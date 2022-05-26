@@ -33,7 +33,7 @@ public class PlaylistManager {
     public void deletePlaylist(String name) {
         playlistDAO = new SQLConnectorPlaylist();
         playlistDAO.DeleteDataPlaylist(name);
-        songPlaylistDAO.DeleteDataSongP(name);
+        //songPlaylistDAO.DeleteDataSongP(name);
     }
 
     public void createPlaylist(String name, String owner) {
@@ -48,8 +48,8 @@ public class PlaylistManager {
                 return true;
             }
         }
-            return false;
-        }
-
+        return false;
     }
+
+}
 
