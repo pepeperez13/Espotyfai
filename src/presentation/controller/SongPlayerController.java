@@ -28,26 +28,33 @@ public class SongPlayerController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             if (e.getActionCommand().equals("PREVIOUS_SONG")) {
-                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1);
+                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1, bottomBarPanel);
                 System.out.println("Anterior");
             }
             if (e.getActionCommand().equals("PAUSE_SONG")) {
-                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 2);
+                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 2, bottomBarPanel);
                 System.out.println("Parar");
             }
             if (e.getActionCommand().equals("PLAY_SONG")) {
                 BottomBarPanel.updateSong(detailedSongView.getSong());
-                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1);
+                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1, bottomBarPanel);
                 System.out.println("Play");
             }
             if (e.getActionCommand().equals("NEXT_SONG")) {
-                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1);
+                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1, bottomBarPanel);
                 System.out.println("Next");
             }
             if (e.getActionCommand().equals("DETAILED_VIEW")) {
                 detailedSongView.updateSong(BottomBarPanel.getSong());
                 mainManagerView.changeView(5, 1);
                 System.out.println("Detalles");
+            }
+            if (e.getActionCommand().equals("REPEAT_SONG")) {
+                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 5, bottomBarPanel);
+                System.out.println("Loop song");
+            }
+            if (e.getActionCommand().equals("REPEAT_PLAYLIST")) {
+
             }
         } catch (NullPointerException exception) {
             System.out.println("Nada que reproducir/parar. No hace falta mostrar mensaje");
@@ -61,11 +68,11 @@ public class SongPlayerController implements ActionListener {
         if (!BottomBarPanel.getSong().getTitle().equals(detailedSongView.getSong().getTitle())) {
             BottomBarPanel.updateSong(detailedSongView.getSong());
         }
-        songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1);
+        songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1, detailedSongView);
     }
 
     public static void pauseSong () {
-        songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 2);
+        songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 2, detailedSongView);
     }
 }
 

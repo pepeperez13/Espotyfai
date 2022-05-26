@@ -3,6 +3,7 @@ package business;
 import business.entities.Song;
 
 import javax.sound.sampled.*;
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
@@ -13,14 +14,7 @@ public class SongPlayer implements Runnable{
     private Clip clip;
     private Thread t;
 
-    /*
-    public SongPlayer () {
-        t = new Thread(this);
-        t.start();
-    }
-     */
-    public void managePlayer (String path, int index) {
-        String error = "";
+    public void managePlayer (String path, int index, JPanel parentPanel) {
         // Comprobamos si hay algún cambio en la acción recibida
         if (!Objects.equals(this.path, path) || this.index != index) {
             // Si sólo se ha cambiado el index (diferente acción sobre la misma canción)
@@ -35,21 +29,16 @@ public class SongPlayer implements Runnable{
                 this.index = index;
                 this.path = path;
 
-                openFile();
+                openFile(parentPanel);
                 Thread t1 = new Thread(this);
                 t1.start();
 
             }
-
-
-
         }
-
-
     }
 
     // Abre el fichero de audio que se está reproduciendo y gestiona las excepciones
-    private void openFile () {
+    private void openFile (JPanel parentPanel) {
         String error;
         try {
             File file = new File(path);
@@ -58,13 +47,13 @@ public class SongPlayer implements Runnable{
             clip.open(audioStream);
         } catch (UnsupportedAudioFileException unsupportedAudioFileException) {
             error = "Audio file is not supported by the system";
-            //JOptionPane.showMessageDialog(this, "Audio file is not supported by the system", "Following errors were found", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(parentPanel, error, "Following errors were found", JOptionPane.WARNING_MESSAGE);
         } catch (IOException ioException) {
             error = "Song provided could not be found";
-            //JOptionPane.showMessageDialog(this, "Audio file is not supported by the system", "Following errors were found", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(parentPanel, error, "Following errors were found", JOptionPane.WARNING_MESSAGE);
         } catch (LineUnavailableException lineUnavailableException) {
             error = "Unknown error occured when trying to reproduce the song";
-            //JOptionPane.showMessageDialog(this, "Audio file is not supported by the system", "Following errors were found", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(parentPanel, error, "Following errors were found", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -86,9 +75,13 @@ public class SongPlayer implements Runnable{
                 case (3):
                     clip.setMicrosecondPosition(0);
                     break;
+                case (5):
+                    clip.loop(Clip.LOOP_CONTINUOUSLY);
+                    break;
                 case (4):
                     clip.close();
                     break;
+
 
             }
         }

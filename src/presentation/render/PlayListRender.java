@@ -15,8 +15,10 @@ public class PlayListRender extends JPanel  {
     private JLabel lbAuthor = new JLabel();
     private JButton btEditar = new JButton();
     private JButton btEliminar = new JButton();
+    private JButton brReproducir= new JButton();
     public static final String EDIT_BUTTON = "PL_EDIT_BUTTON";
     public static final String DELETE_BUTTON = "PL_DELETE_BUTTON";
+    public static final String REPRODUCIR_BUTTON = "REPRODUCIR_BUTTON";
     private Playlist playlist = null;
     private JSeparator separator= new JSeparator();
 
@@ -31,20 +33,21 @@ public class PlayListRender extends JPanel  {
         btEliminar.setText("Eliminar");
         btEditar.setSize(100,50);
         btEliminar.setSize(100,50);
+        brReproducir.setText("Play");
         GridLayout gridLayout= new GridLayout(3, 2);
         JPanel panelText = new JPanel();
         panelText.setLayout(gridLayout);
         if(isMyPlaylist()){
-            btEditar.setText("Editar");
+            btEditar.setText("Edit");
         }else{
-            btEditar.setText("Ver");
+            btEditar.setText("See");
         }
         panelText.setBackground(Color.white);
         gridLayout.setVgap(30);
         gridLayout.setHgap(30);
         panelText.add(lbName);
         panelText.add(btEditar);
-        panelText.add(lbAuthor);
+        panelText.add(brReproducir);
         panelText.add(separator);
         if(isMyPlaylist()){
             panelText.add(btEliminar);
@@ -60,19 +63,28 @@ public class PlayListRender extends JPanel  {
 
         btEditar.setActionCommand(EDIT_BUTTON);
         btEliminar.setActionCommand(DELETE_BUTTON);
+        brReproducir.setActionCommand(REPRODUCIR_BUTTON);
 
         btEditar.setForeground(Color.black);
         btEditar.setBackground(Color.CYAN);
+
+        brReproducir.setForeground(Color.black);
+        brReproducir.setBackground(Color.CYAN);
 
         btEliminar.setForeground(Color.black);
         btEliminar.setBackground(Color.CYAN);
 
         btEditar.setBorderPainted(false);
         btEliminar.setBorderPainted(false);
+        brReproducir.setBorderPainted(false);
+
 
 
         btEditar.addActionListener(controller);
         btEditar.putClientProperty( "PLAYLIST", this.playlist );
+
+        brReproducir.addActionListener(controller);
+        brReproducir.putClientProperty( "PLAYLIST_REPRODUCIR", this.playlist );
 
         btEliminar.addActionListener(controller);
         btEliminar.putClientProperty("PLAYLIST_ELIMINAR",this.playlist);

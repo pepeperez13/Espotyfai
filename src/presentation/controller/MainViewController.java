@@ -51,11 +51,15 @@ public class MainViewController implements ActionListener {
             SongListlView.selectedPlaylist = parameterPlayList;
             mainManagerView.changeView(12, 1);
         }else if(e.getActionCommand().equals(PlaylistView.CREAR_PLAYLIST)){
-            String nombrePlaylist=PlaylistView.crearPlaylist();
-            if(playlistManager.existPlaylist(Store.getUser(),nombrePlaylist)){
-                PlaylistView.showErrorPlaylistCreation();
-            }else{
-                playlistManager.createPlaylist(nombrePlaylist, Store.getUser().getName());
+            try{
+                String nombrePlaylist=PlaylistView.crearPlaylist();
+                if(playlistManager.existPlaylist(Store.getUser(),nombrePlaylist)){
+                    PlaylistView.showErrorPlaylistCreation();
+                }else{
+                    playlistManager.createPlaylist(nombrePlaylist, Store.getUser().getName());
+                }
+            }catch (NullPointerException exception){
+                exception.printStackTrace();
             }
         }else if(e.getActionCommand().equals(PlayListRender.DELETE_BUTTON)){
              parameterPlayList = (Playlist) ((JButton)e.getSource()).getClientProperty( "PLAYLIST_ELIMINAR" );
@@ -63,6 +67,9 @@ public class MainViewController implements ActionListener {
         }else if(e.getActionCommand().equals(SongListRender.DELETE_BUTTON)){
             song=(Song) ((JButton)e.getSource()).getClientProperty( "SONG_ELIMINAR" );
             songManager.deleteNewSongPlaylist(song.getTitle());
+        }else if(e.getActionCommand().equals(PlayListRender.REPRODUCIR_BUTTON)){
+            parameterPlayList = (Playlist) ((JButton)e.getSource()).getClientProperty( "PLAYLIST_REPRODUCIR" );
+
         }
     }
 

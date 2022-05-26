@@ -40,8 +40,7 @@ public class PlaylistView extends JPanel {
             JPanel panel= new JPanel();
             JButton createPlaylist= new JButton("Create Playlist");
             panel.add(createPlaylist);
-            String nombrePlaylist=JOptionPane.showInputDialog( panel, "Enter the name of the new Playlist", JOptionPane.PLAIN_MESSAGE);
-            return nombrePlaylist;
+        return JOptionPane.showInputDialog( panel, "Enter the name of the new Playlist", JOptionPane.PLAIN_MESSAGE);
     }
 
     public static void showErrorPlaylistCreation() {
