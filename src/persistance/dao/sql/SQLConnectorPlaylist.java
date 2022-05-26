@@ -127,7 +127,6 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
                     p.setSongs(songs);
                     p.getSongs().add(song);
                 }
-
                 statement.close();
             }
 
