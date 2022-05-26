@@ -21,25 +21,52 @@ public class SongPlaylistManager<Public> {
     private static PlaylistManager playlistManager;
 
 
-    public static boolean InsertNewSongPlaylist(String songtitle, String playlistname) {
+    public static boolean InsertNewSongPlaylist(String title, String name) {
+        boolean exists = false;
+        int lastPos = 0;
+        playlistManager = new PlaylistManager();
         songPDAO = new SQLConnectorSongPlaylist();
-        playlistManager= new PlaylistManager();
-        LinkedList<Playlist> playlists=playlistManager.getDataPlaylists();
+        LinkedList<Playlist> playlists = playlistManager.getDataPlaylists();
+
+        lastPos = songPDAO.getLastPos(name);
+
         for(Playlist p: playlists){
-            if(p.getName().equals(playlistname)){
+            if(p.getName().equals(name)){
                 if(p.getOwner().equals(Store.getUser().getName())){
-                    songPDAO.InsertDataSongP(songtitle, playlistname);
+                    songPDAO.InsertDataSongP(title, name, lastPos +1);
                     return true;
                 }
             }
         }
         return false;
+
+
+    }
+    //metodo para quitar o eliminar una cancion de una playlist
+    public static void deleteSongPlaylistSong(String name,String title){
+        songPDAO = new SQLConnectorSongPlaylist();
+        songPDAO.DeleteDataSongP(name,title);
+    }
+    public static void deleteSongP(String name, String title){
+        songPDAO = new SQLConnectorSongPlaylist();
+        songPDAO.DeleteDataSongPpt3(title,name);
+    }
+    public static void test(int pos){
+        songPDAO = new SQLConnectorSongPlaylist();
+        songPDAO.DeleteDataSongPpt2(pos);
+
     }
 
-    public  void deleteNewSongPlaylist(String title) {
+
+    public static int getLastPosition(String name){
+        int pos = 0;
         songPDAO = new SQLConnectorSongPlaylist();
-        songPDAO.DeleteDataSongP(title);
+        pos  = songPDAO.getLastPos(name);
+        return pos;
     }
+
+
+
 
    /* public void updateSongPlaylist(String title1,String name, String title2){
         songPDAO = new SQLConnectorSongPlaylist();
@@ -64,6 +91,32 @@ public class SongPlaylistManager<Public> {
 
         return songs;
     }
+    public static void UpdatePosP(String title, String name, int index){
+        LinkedList<SongPlaylist> PSongs2 = null;
+        songPDAO = new SQLConnectorSongPlaylist();
+        int pos = 0;
+
+        switch (index){
+            case (1):
+
+                pos = songPDAO.getPosP(title,name);
+                System.out.println(pos);
+
+
+                songPDAO.UpdatePosPExtraU(name,pos);
+                songPDAO.UpdatePosP(title,name,pos - 1);
+                break;
+            case (2):
+                pos = songPDAO.getPosP(title,name);
+                System.out.println(pos);
+                System.out.println("HOLASSAA");
+
+                songPDAO.UpdatePosPExtraD(name,pos);
+                songPDAO.UpdatePosP(title,name,pos + 1);
+                break;
+        }
+
+    }
 
     public boolean songExistsInPlaylist (String songTitle, String playlistName) {
         LinkedList<Song> songs = ListPlaylistSongs(playlistName);
@@ -85,4 +138,6 @@ public class SongPlaylistManager<Public> {
 
 
 
+
 }
+

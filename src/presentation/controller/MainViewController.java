@@ -47,7 +47,7 @@ public class MainViewController implements ActionListener {
         } else if (e.getActionCommand().equals(MainMenu.GO_SETTINGS)) {
             mainManagerView.changeView(6, 2);
         } else if (e.getActionCommand().equals(PlayListRender.EDIT_BUTTON)){
-             parameterPlayList = (Playlist) ((JButton)e.getSource()).getClientProperty( "PLAYLIST" );
+            parameterPlayList = (Playlist) ((JButton)e.getSource()).getClientProperty( "PLAYLIST" );
             SongListlView.selectedPlaylist = parameterPlayList;
             mainManagerView.changeView(12, 1);
         }else if(e.getActionCommand().equals(PlaylistView.CREAR_PLAYLIST)){
@@ -62,11 +62,11 @@ public class MainViewController implements ActionListener {
                 exception.printStackTrace();
             }
         }else if(e.getActionCommand().equals(PlayListRender.DELETE_BUTTON)){
-             parameterPlayList = (Playlist) ((JButton)e.getSource()).getClientProperty( "PLAYLIST_ELIMINAR" );
+            parameterPlayList = (Playlist) ((JButton)e.getSource()).getClientProperty( "PLAYLIST_ELIMINAR" );
             playlistManager.deletePlaylist(parameterPlayList.getName());
         }else if(e.getActionCommand().equals(SongListRender.DELETE_BUTTON)){
             song=(Song) ((JButton)e.getSource()).getClientProperty( "SONG_ELIMINAR" );
-            songManager.deleteNewSongPlaylist(song.getTitle());
+            songManager.deleteSongPlaylistSong(parameterPlayList.getName(),song.getTitle());
         }else if(e.getActionCommand().equals(PlayListRender.REPRODUCIR_BUTTON)){
             parameterPlayList = (Playlist) ((JButton)e.getSource()).getClientProperty( "PLAYLIST_REPRODUCIR" );
 
