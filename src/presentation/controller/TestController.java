@@ -34,7 +34,7 @@ public class TestController {
         //SongManager.SelectSong("Lambskin");
         //SongManager.addSong("SUPERNUEVO","SOD","SA","DANNY HOLA","C:\\Users\\borja\\V3\\Espotyfai\\files\\SongFiles\\MEREHUSO.wav","Borja");
 
-        SongPlaylistManager.InsertNewSongPlaylist(" ire","top50");
+        //songPlaylistManager.InsertNewSongPlaylist(" ire","top50");
         //SongPlaylistManager.DeleteNewSongPlaylist("ultrasolo");
         //SongPlaylistManager.ListPlaylistSongs("top50");
     }

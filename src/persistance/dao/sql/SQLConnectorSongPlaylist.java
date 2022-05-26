@@ -251,7 +251,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     }
 
-    public LinkedList<SongPlaylist> UpdatePosP(String title, String name,int pos) {
+    public LinkedList<SongPlaylist> updatePosP(String title, String name,int pos) {
         LinkedList<SongPlaylist> songPosP = new LinkedList<>();
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 

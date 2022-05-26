@@ -18,7 +18,7 @@ public interface SongPlaylistDAO {
      public int UpdatePosPExtraD (String name, int pos);
      public int UpdatePosPExtraU (String name, int pos);
      public int getPosP (String title, String name);
-     public LinkedList<SongPlaylist> UpdatePosP(String title, String name,int pos);
+     public LinkedList<SongPlaylist> updatePosP(String title, String name,int pos);
      public void DeleteSongPFull(String title);
      public void DeleteDataSongP(String name,String title);
      public void DeleteDataSongPpt2(int pos);

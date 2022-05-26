@@ -11,7 +11,10 @@ import persistance.dao.sql.SQLConnectorPlaylist;
 import persistance.dao.sql.SQLConnectorSong;
 import persistance.dao.sql.SQLConnectorSongPlaylist;
 
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class SongPlaylistManager<Public> {
@@ -21,7 +24,7 @@ public class SongPlaylistManager<Public> {
     private static PlaylistManager playlistManager;
 
 
-    public static boolean InsertNewSongPlaylist(String title, String name) {
+    public boolean InsertNewSongPlaylist(String title, String name) {
         boolean exists = false;
         int lastPos = 0;
         playlistManager = new PlaylistManager();
@@ -73,7 +76,7 @@ public class SongPlaylistManager<Public> {
         songPDAO.UpdateDataSongP(title1,name,title2);
     }*/
 
-    public static LinkedList<Song> ListPlaylistSongs(String name){
+    public  LinkedList<Song> ListPlaylistSongs(String name){
         songPDAO = new SQLConnectorSongPlaylist();
         songDAO = new SQLConnectorSong();
         playlistDAO = new SQLConnectorPlaylist();
@@ -91,7 +94,7 @@ public class SongPlaylistManager<Public> {
 
         return songs;
     }
-    public static void UpdatePosP(String title, String name, int index){
+    public void updatePosP(String title, String name, int index){
         LinkedList<SongPlaylist> PSongs2 = null;
         songPDAO = new SQLConnectorSongPlaylist();
         int pos = 0;
@@ -104,7 +107,7 @@ public class SongPlaylistManager<Public> {
 
 
                 songPDAO.UpdatePosPExtraU(name,pos);
-                songPDAO.UpdatePosP(title,name,pos - 1);
+                songPDAO.updatePosP(title,name,pos - 1);
                 break;
             case (2):
                 pos = songPDAO.getPosP(title,name);
@@ -112,7 +115,7 @@ public class SongPlaylistManager<Public> {
                 System.out.println("HOLASSAA");
 
                 songPDAO.UpdatePosPExtraD(name,pos);
-                songPDAO.UpdatePosP(title,name,pos + 1);
+                songPDAO.updatePosP(title,name,pos + 1);
                 break;
         }
 
@@ -133,11 +136,5 @@ public class SongPlaylistManager<Public> {
         }
         return exists;
     }
-
-
-
-
-
-
 }
 
