@@ -19,16 +19,7 @@ public class BottomBarPanel extends JPanel {
         song_player = new JPanel(new GridBagLayout());
         song_player.setBackground(new Color(191, 105, 240));
         c = new GridBagConstraints();
-/*
-        JLabel song_info_label = new JLabel("nombre de la cancion - artista");
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.anchor = GridBagConstraints.PAGE_START; //bottom of space
-        c.weightx = 0.5;
-        c.gridwidth = 3;
-        c.gridx = 1;
-        c.gridy = 0;
-        song_player.add(song_info_label, c);
- */
+
         JButton back_song = new JButton("<<");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
@@ -75,6 +66,24 @@ public class BottomBarPanel extends JPanel {
         song_player.add(full_screen, c);
         full_screen.setActionCommand("DETAILED_VIEW");
         full_screen.addActionListener(controller);
+
+        JButton repeatSong = new JButton("Repeat Song");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 0;
+        c.gridy = 2;
+        song_player.add(repeatSong, c);
+        next_song.setActionCommand("REPEAT_SONG");
+        next_song.addActionListener(controller);
+
+        JButton repeatPlaylist = new JButton("Repeat Playlist");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 1;
+        c.gridy = 2;
+        song_player.add(repeatPlaylist, c);
+        next_song.setActionCommand("REPEAT_PLAYLIST");
+        next_song.addActionListener(controller);
 
         this.add(song_player);
         this.setBackground(new Color(191, 105, 240));
