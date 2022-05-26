@@ -18,11 +18,10 @@ public class StaticsPanelView extends JPanel {
     public static final String REGGAETON = "Reggaeton";
     public static final String REGGAE = "Reggae";
     public static final String LATIN = "Latin";
-    private final int ESPACIO = 60;
+    private final int ESPACIO_VERTTICAL = 60;
+    private final int ESPACIO_HORIZONTAL = 350;
     private final int[] contadoresGenero = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    //private static final int Regg = 1;
-    //private String[] generos;
-    private LinkedList<Song> listaCanciones = new LinkedList<>();
+    private LinkedList<Song> listaCanciones;
     public StaticsPanelView (LinkedList<Song> listaCanciones /** De donde vamos a sacar los valores*/) {
         this.listaCanciones = listaCanciones;
         //Valor * numeroPixeles/MayorValor
@@ -71,95 +70,81 @@ public class StaticsPanelView extends JPanel {
             //System.out.println(minValue+"minValue"+"\n"+maxValue+"maxValue");
             //int west = labelFontMetrics.getHeight();
             Dimension d = getSize();
-            int clientWidth = d.width;
+            int clientWidth = d.width - 400;
             int clientHeight = d.height;
             int barWidth = 12;
 
-            Font labelFont = new Font("SansSerif", Font.PLAIN, 10);
+            Font labelFont = new Font("Arial", Font.BOLD, 25);
             FontMetrics labelFontMetrics = g.getFontMetrics(labelFont);
 
             int x = labelFontMetrics.getAscent();
-            int y = clientHeight / 100;
+            int y = clientHeight / 10;
             g.setFont(labelFont);
-            y += ESPACIO;
-            x += ESPACIO;
-            g.drawString("K-Pop", x, y);
+            y += ESPACIO_VERTTICAL;
             g.setColor(new Color(76, 131, 187));
+            g.drawString("K-Pop", x, y);
             //System.out.println(((contadoresGenero[0]*clientWidth)/maxValue));
-            g.fillRect(x+ESPACIO, y, ((int) ((contadoresGenero[0]*clientWidth)/maxValue)-100), barWidth - 2);
-            g.drawRect(x+ESPACIO, y, ((int) ((contadoresGenero[0]*clientWidth)/maxValue)-100), barWidth - 2);
-            y += ESPACIO;
-            g.drawString("Jazz", x, y);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[0]*clientWidth)/maxValue)-100), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[0]*clientWidth)/maxValue)-100), barWidth );
+            //Poner porcentaje de la barra//g.drawString(contadoresGenero[0]*listaCanciones.size(), x, y);
+
+            y += ESPACIO_VERTTICAL;
             g.setColor(new Color(194, 85, 76));
-            g.fillRect(x+ESPACIO, y, ((int) ((contadoresGenero[1]*clientWidth)/maxValue)-100), barWidth - 2);
-            g.drawRect(x+ESPACIO, y, ((int) ((contadoresGenero[1]*clientWidth)/maxValue)-100), barWidth - 2);
-            y += ESPACIO;
-            g.drawString("Rock", x, y);
+            g.drawString("Jazz", x, y);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[1]*clientWidth)/maxValue)-100), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[1]*clientWidth)/maxValue)-100), barWidth);
+
+            y += ESPACIO_VERTTICAL;
             g.setColor(new Color(156, 187, 92));
-            g.fillRect(x+ESPACIO, y, ((int) ((contadoresGenero[2]*clientWidth)/maxValue)-100), barWidth - 2);
-            g.drawRect(x+ESPACIO, y, ((int) ((contadoresGenero[2]*clientWidth)/maxValue)-100), barWidth - 2);
-            y += ESPACIO;
-            g.drawString("Electronic Dance Music", x, y);
+            g.drawString("Rock", x, y);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[2]*clientWidth)/maxValue)-100), -barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[2]*clientWidth)/maxValue)-100), -barWidth);
+
+            y += ESPACIO_VERTTICAL;
             g.setColor(new Color(76, 172, 196));
-            g.fillRect(x+ESPACIO, y, ((int) ((contadoresGenero[3]*clientWidth)/maxValue)-100), barWidth - 2);
-            g.drawRect(x+ESPACIO, y, ((int) ((contadoresGenero[3]*clientWidth)/maxValue)-100), barWidth - 2);
-            y += ESPACIO;
-            g.drawString("Death Metal", x, y);
+            g.drawString("Electronic Dance Music", x, y);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[3]*clientWidth)/maxValue)-100), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[3]*clientWidth)/maxValue)-100), barWidth);
+
+            y += ESPACIO_VERTTICAL;
             g.setColor(new Color(242, 151, 75));
-            g.fillRect(x+ESPACIO, y, ((int) ((contadoresGenero[4]*clientWidth)/maxValue)-100), barWidth - 2);
-            g.drawRect(x+ESPACIO, y, ((int) ((contadoresGenero[4]*clientWidth)/maxValue)-100), barWidth - 2);
-            y += ESPACIO;
-            g.drawString("Hip-Hop", x, y);
+            g.drawString("Death Metal", x, y);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[4]*clientWidth)/maxValue)-100), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[4]*clientWidth)/maxValue)-100), barWidth);
+
+            y += ESPACIO_VERTTICAL;
             g.setColor(new Color(129, 100, 157));
-            g.fillRect(x+ESPACIO, y, ((int) ((contadoresGenero[5]*clientWidth)/maxValue)-100), barWidth - 2);
-            g.drawRect(x+ESPACIO, y, ((int) ((contadoresGenero[5]*clientWidth)/maxValue)-100), barWidth - 2);
-            y += ESPACIO;
-            g.drawString("Europop", x, y);
+            g.drawString("Hip-Hop", x, y);
+            g.drawLine(x, y, x+20, y+20);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[5]*clientWidth)/maxValue)-100), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[5]*clientWidth)/maxValue)-100), barWidth);
+
+            y += ESPACIO_VERTTICAL;
             g.setColor(new Color(148, 177, 211));
-            g.fillRect(x+ESPACIO, y, ((int) ((contadoresGenero[6]*clientWidth)/maxValue)-100), barWidth - 2);
-            g.drawRect(x+ESPACIO, y, ((int) ((contadoresGenero[6]*clientWidth)/maxValue)-100), barWidth - 2);
-            y += ESPACIO;
-            g.drawString("Reggaeton", x, y);
+            g.drawString("Europop", x, y);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[6]*clientWidth)/maxValue)-100), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[6]*clientWidth)/maxValue)-100), barWidth);
+
+            y += ESPACIO_VERTTICAL;
             g.setColor(new Color(148, 255, 211));
-            g.fillRect(x+ESPACIO, y, ((int) ((contadoresGenero[7]*clientWidth)/maxValue)-100), barWidth - 2);
-            g.drawRect(x+ESPACIO, y, ((int) ((contadoresGenero[7]*clientWidth)/maxValue)-100), barWidth - 2);
-            y += ESPACIO;
-            g.drawString("Reggae", x, y);
+            g.drawString("Reggaeton", x, y);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[7]*clientWidth)/maxValue)-100), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[7]*clientWidth)/maxValue)-100), barWidth);
+
+            y += ESPACIO_VERTTICAL;
             g.setColor(new Color(148, 177, 255));
-            g.fillRect(x+ESPACIO, y, ((int) ((contadoresGenero[8]*clientWidth)/maxValue)-100), barWidth - 2);
-            g.drawRect(x+ESPACIO, y, ((int) ((contadoresGenero[8]*clientWidth)/maxValue)-100), barWidth - 2);
-            y += ESPACIO;
-            g.drawString("Latin Music", x, y);
+            g.drawString("Reggae", x, y);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[8]*clientWidth)/maxValue)-100), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[8]*clientWidth)/maxValue)-100), barWidth);
+
+            y += ESPACIO_VERTTICAL;
             g.setColor(new Color(255, 255, 100));
-            g.fillRect(x+ESPACIO, y, ((int) ((contadoresGenero[9]*clientWidth)/maxValue)-100), barWidth - 2);
-            g.drawRect(x+ESPACIO, y, ((int) ((contadoresGenero[9]*clientWidth)/maxValue)-100), barWidth - 2);
-                /*double scale = (clientWidth - west) / (maxValue - minValue);
-                y = clientHeight - labelFontMetrics.getAscent();
-                g.setFont(labelFont);
-
-                for (int i = 0; i < 10; i++) {
-                    int valueX = i * barWidth + 1;
-                    int valueY = 10; //Falta por ver
-                    int height = (int) (contadoresGenero[i]*scale);
-                    if (contadoresGenero[i] >= 0) {
-                        valueX += (int) ((maxValue - contadoresGenero[i]) * scale);
-                    } else {
-                        valueX = (int) (maxValue * scale);
-                        height = -height;
-                    }
-                    //Sacar el tamañobien
-                    //g.setColor(Color.GREEN);
-                    //g.fillRect(valueX, valueY, height, barWidth - 2);
-                    //g.drawRect(valueX, valueY, height, barWidth - 2);
-                    //int labelWidth = labelFontMetrics.stringWidth(generos[i]);
-                    //x  = i * barWidth + (barWidth - labelWidth) / 2;
-                    //g.drawString(generos[i], x, y);
-                }*/
-
+            g.drawString("Latin Music", x, y);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[9]*clientWidth)/maxValue)-100), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[9]*clientWidth)/maxValue)-100), barWidth);
         }
     }
-
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         LinkedList<Song> l = new LinkedList<>();
         l.add(new Song("sasas", KPOP, "ASA", "S", "PSA", "ASAS"));
         l.add(new Song("sasas", REGGAE, "ASA", "S", "PSA", "ASAS"));
@@ -173,5 +158,5 @@ public class StaticsPanelView extends JPanel {
         StaticsPanelView s = new StaticsPanelView(l);
 
         s.setVisible(true);
-    }*/
+    }
 }
