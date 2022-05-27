@@ -16,7 +16,14 @@ public class DetailedSongView extends JPanel {
 
     private JLabel titleAndAuthor;
     private JPanel generalData;
-    private JButton closeLabel;
+    private JButton closeButton;
+
+    private JLabel genreSpecificTitle;
+    private JLabel albumSpecificTitle;
+    private JLabel ownerSpecificTitle;
+    private JLabel durationSpecificTitle;
+    private JTextArea lyricsTextArea;
+
 
     private static final String ADD_TO_PLAYLIST_COMMAND = "ADD_TO_PLAYLIST_COMMAND";
     private static final String PLAY_SONG_COMMAND = "PLAY_SONG_COMMAND";
@@ -29,115 +36,135 @@ public class DetailedSongView extends JPanel {
 
     public DetailedSongView () {
         controller = new DetailedSongController(this);
-        //this.song = song;
+        lyricsFetcher = new LyricsFetcher();
 
         setLayout(new BorderLayout(0, 50));
-/*
-        add(setTitleAndAuthor(), BorderLayout.NORTH);
-        add(setGeneralData(), BorderLayout.CENTER);
-        add(setCloseLabel(), BorderLayout.SOUTH);
-*/
+
+        // Creamos y configuramos los componentes de la vista
+        configureTitleAndAuthor();
+        configureGeneralData();
+        add(configureCloseButton(), BorderLayout.SOUTH);
 
     }
 
-    public void updateSong (Song song)  {
-        this.song = song;
+    private void configureTitleAndAuthor () {
+        titleAndAuthor = new JLabel();
+        titleAndAuthor.setPreferredSize(new Dimension(100, 60));
+        titleAndAuthor.setFont(new Font("Tahoma", Font.BOLD, 36));
+        titleAndAuthor.setHorizontalAlignment(JLabel.CENTER);
+        titleAndAuthor.setBackground(new Color(52, 166, 244));
+        titleAndAuthor.setForeground(Color.BLUE);
+        titleAndAuthor.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        titleAndAuthor.setFocusable(false);
+    }
 
-        if (titleAndAuthor != null) {
-            remove(titleAndAuthor);
-            remove(generalData);
-            remove(closeLabel);
-        }
+    private void configureGeneralData () {
+        generalData = new JPanel();
+        generalData.setLayout(new GridLayout(3, 2));
 
-        titleAndAuthor = setTitleAndAuthor();
-        generalData = setGeneralData();
-        closeLabel = setCloseLabel();
-
-        add(titleAndAuthor, BorderLayout.NORTH);
-        add(generalData, BorderLayout.CENTER);
-        add(closeLabel, BorderLayout.SOUTH);
+        generalData.add(configureGenrePanel());
+        generalData.add(configureAlbumPanel());
+        generalData.add(configureOwnerPanel());
+        generalData.add(configureDurationPanel());
+        generalData.add(configureLyricsPanel());
+        generalData.add(configureInteractionsPanel());
 
     }
 
-    private JLabel setTitleAndAuthor () {
-        JLabel text = new JLabel(song.getTitle() + " - " + song.getArtist());
-        text.setPreferredSize(new Dimension(100, 60));
-        text.setFont(new Font("Tahoma", Font.BOLD, 36));
-        text.setHorizontalAlignment(JLabel.CENTER);
-        text.setBackground(new Color(52, 166, 244));
-        text.setForeground(Color.BLUE);
-        text.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-        text.setFocusable(false);
-        return text;
+    private JPanel configureGenrePanel() {
+        // Componentes que deben ser creados, y posteriormente actualizados (nos ahorramos crear nuevos componentes cada
+        // vez que se actualizan
+        JPanel genreInfoPanel = new JPanel(new GridLayout(1, 2));
+        JLabel genreGeneralTitle = new JLabel("Genre: ");
+        genreGeneralTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
+        genreGeneralTitle.setHorizontalAlignment(JLabel.CENTER);
+        genreSpecificTitle = new JLabel();
+        genreSpecificTitle.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        genreSpecificTitle.setHorizontalAlignment(JLabel.LEFT);
+        genreInfoPanel.add(genreGeneralTitle);
+        genreInfoPanel.add(genreSpecificTitle);
+        return genreInfoPanel;
     }
 
-    private JPanel setGeneralData () {
-        JPanel generalPanel = new JPanel();
-        generalPanel.setLayout(new GridLayout(3, 2));
-
-        generalPanel.add(setInfoPanel("Genre", song.getGenre()));
-        generalPanel.add(setInfoPanel("Album", song.getAlbum()));
-        generalPanel.add(setInfoPanel("Owner", song.getOwner()));
-        generalPanel.add(setInfoPanel("Duration", song.getSongDurationMinutes(song)));
-        generalPanel.add(setLyricsPanel());
-        generalPanel.add(setInteractionsPanel());
-
-        return generalPanel;
+    private JPanel configureAlbumPanel() {
+        JPanel albumInfoPanel = new JPanel(new GridLayout(1, 2));
+        JLabel albumGeneralTitle = new JLabel("Album: ");
+        albumGeneralTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
+        albumGeneralTitle.setHorizontalAlignment(JLabel.CENTER);
+        albumSpecificTitle = new JLabel();
+        albumSpecificTitle.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        albumSpecificTitle.setHorizontalAlignment(JLabel.LEFT);
+        albumInfoPanel.add(albumGeneralTitle);
+        albumInfoPanel.add(albumSpecificTitle);
+        return albumInfoPanel;
     }
 
-    private JPanel setInfoPanel (String title, String content) {
-        JPanel panel = new JPanel(new GridLayout(1, 2));
-        JLabel generalTitle = new JLabel(title);
-        generalTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
-        generalTitle.setHorizontalAlignment(JLabel.CENTER);
-        JLabel specificLabel = new JLabel(content);
-        specificLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        specificLabel.setHorizontalAlignment(JLabel.LEFT);
-        panel.add(generalTitle);
-        panel.add(specificLabel);
+    private JPanel configureOwnerPanel () {
+        JPanel ownerInfoPanel = new JPanel(new GridLayout(1, 2));
+        JLabel ownerGeneralTitle = new JLabel("Owner: ");
+        ownerGeneralTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
+        ownerGeneralTitle.setHorizontalAlignment(JLabel.CENTER);
+        ownerSpecificTitle = new JLabel();
+        ownerSpecificTitle.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        ownerSpecificTitle.setHorizontalAlignment(JLabel.LEFT);
+        ownerInfoPanel.add(ownerGeneralTitle);
+        ownerInfoPanel.add(ownerSpecificTitle);
 
-        return panel;
+        return ownerInfoPanel;
     }
 
-    private JPanel setLyricsPanel () {
+    private JPanel configureDurationPanel () {
+        JPanel durationInfoPanel = new JPanel(new GridLayout(1, 2));
+        JLabel durationGeneralTitle = new JLabel("Duration: ");
+        durationGeneralTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
+        durationGeneralTitle.setHorizontalAlignment(JLabel.CENTER);
+        durationSpecificTitle = new JLabel();
+        durationSpecificTitle.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        durationSpecificTitle.setHorizontalAlignment(JLabel.LEFT);
+        durationInfoPanel.add(durationGeneralTitle);
+        durationInfoPanel.add(durationSpecificTitle);
+
+        return durationInfoPanel;
+    }
+
+    private JPanel configureLyricsPanel () {
         JPanel lyricsPanel = new JPanel(new GridLayout(1, 2));
 
-        JLabel generalTitle = new JLabel("Lyrics");
-        generalTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
-        generalTitle.setHorizontalAlignment(JLabel.CENTER);
+        JLabel lyricsGeneralTitle = new JLabel("Lyrics: ");
+        lyricsGeneralTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lyricsGeneralTitle.setHorizontalAlignment(JLabel.CENTER);
 
-        JTextArea textArea = new JTextArea();
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        textArea.setEditable(false);
-        textArea.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lyricsTextArea = new JTextArea();
+        JScrollPane lyricsScrollPane = new JScrollPane(lyricsTextArea);
+        lyricsTextArea.setEditable(false);
+        lyricsTextArea.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
         lyricsFetcher = new LyricsFetcher();
-        textArea.setText(lyricsFetcher.getSongLyrics(song.getArtist(), song.getTitle()));
 
-        lyricsPanel.add(generalTitle);
-        lyricsPanel.add(scrollPane);
+        lyricsPanel.add(lyricsGeneralTitle);
+        lyricsPanel.add(lyricsScrollPane);
+
         return lyricsPanel;
     }
 
-    private JPanel setInteractionsPanel () {
+    private JPanel configureInteractionsPanel () {
+        JPanel interactionsGeneralPanel = new JPanel();
+        interactionsGeneralPanel.setLayout(new BoxLayout(interactionsGeneralPanel, BoxLayout.Y_AXIS));
 
-        JPanel generalPanel = new JPanel();
-        generalPanel.setLayout(new BoxLayout(generalPanel, BoxLayout.Y_AXIS));
+        JButton addToPlaylistButton = new JButton("         Add to playlist         ");
+        addToPlaylistButton.setPreferredSize(new Dimension(100, 60));
+        addToPlaylistButton.setFont(new Font("Tahoma", Font.BOLD, 22));
+        addToPlaylistButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        addToPlaylistButton.setBackground(new Color(52, 166, 244));
+        addToPlaylistButton.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        addToPlaylistButton.setFocusable(false);
+        addToPlaylistButton.setActionCommand(ADD_TO_PLAYLIST_COMMAND);
+        addToPlaylistButton.addActionListener(controller);
 
-        JButton playlistButton = new JButton("         Add to playlist         ");
-        playlistButton.setPreferredSize(new Dimension(100, 60));
-        playlistButton.setFont(new Font("Tahoma", Font.BOLD, 22));
-        playlistButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        playlistButton.setBackground(new Color(52, 166, 244));
-        playlistButton.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-        playlistButton.setFocusable(false);
-        playlistButton.setActionCommand(ADD_TO_PLAYLIST_COMMAND);
-        playlistButton.addActionListener(controller);
+        interactionsGeneralPanel.add(addToPlaylistButton);
 
-        generalPanel.add(playlistButton);
-
-        JPanel playPanel = new JPanel();
-        playPanel.setLayout(new GridLayout(1, 2));
+        JPanel playPausePanel = new JPanel();
+        playPausePanel.setLayout(new GridLayout(1, 2));
 
         JButton playButton = new JButton("         Play         ");
         playButton.setPreferredSize(new Dimension(100, 60));
@@ -159,28 +186,58 @@ public class DetailedSongView extends JPanel {
         pauseButton.setActionCommand(PAUSE_SONG_COMMAND);
         pauseButton.addActionListener(controller);
 
+        playPausePanel.add(playButton);
+        playPausePanel.add(pauseButton);
 
-        playPanel.add(playButton);
-        playPanel.add(pauseButton);
+        interactionsGeneralPanel.add(playPausePanel);
 
-        generalPanel.add(playPanel);
-
-        return generalPanel;
+        return interactionsGeneralPanel;
     }
 
-    private JButton setCloseLabel () {
+    private JButton configureCloseButton() {
+        closeButton = new JButton("Close song info");
+        closeButton.setFont(new Font("Tahoma", Font.BOLD, 22));
+        closeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        closeButton.setAlignmentY(Component.CENTER_ALIGNMENT);
+        closeButton.setBackground(Color.GRAY);
+        closeButton.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        closeButton.setFocusable(false);
+        closeButton.setActionCommand(CLOSE_PANEL_COMMAND);
+        closeButton.addActionListener(controller);
 
-        JButton exitButton= new JButton("Close song info");
-        exitButton.setFont(new Font("Tahoma", Font.BOLD, 22));
-        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        exitButton.setAlignmentY(Component.CENTER_ALIGNMENT);
-        exitButton.setBackground(Color.GRAY);
-        exitButton.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-        exitButton.setFocusable(false);
-        exitButton.setActionCommand(CLOSE_PANEL_COMMAND);
-        exitButton.addActionListener(controller);
+        return closeButton;
+    }
 
-        return exitButton;
+
+    public void updateSong (Song song)  {
+        this.song = song;
+
+        if (titleAndAuthor != null) {
+            remove(titleAndAuthor);
+            remove(generalData);
+        }
+
+        titleAndAuthor = updateTitleAndAuthor();
+        generalData = updateGeneralData();
+
+        add(titleAndAuthor, BorderLayout.NORTH);
+        add(generalData, BorderLayout.CENTER);
+
+    }
+
+    private JLabel updateTitleAndAuthor() {
+        titleAndAuthor.setText(song.getTitle() + " - " + song.getArtist());
+        return titleAndAuthor;
+    }
+
+    private JPanel updateGeneralData() {
+        genreSpecificTitle.setText(song.getGenre());
+        albumSpecificTitle.setText(song.getAlbum());
+        ownerSpecificTitle.setText(song.getOwner());
+        durationSpecificTitle.setText(song.getSongDurationMinutes(song));
+        lyricsTextArea.setText(lyricsFetcher.getSongLyrics(song.getArtist(), song.getTitle()));
+
+        return generalData;
     }
 
     public void showErrorMessage () {
@@ -229,8 +286,6 @@ public class DetailedSongView extends JPanel {
     public Song getSong () {
         return song;
     }
-
-
 
 }
 
