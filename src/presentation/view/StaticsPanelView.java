@@ -19,7 +19,7 @@ public class StaticsPanelView extends JPanel {
     public static final String REGGAE = "Reggae";
     public static final String LATIN = "Latin";
     private final int ESPACIO_VERTTICAL = 60;
-    private final int ESPACIO_HORIZONTAL = 350;
+    private final int ESPACIO_HORIZONTAL = 320;
     private final int[] contadoresGenero = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private LinkedList<Song> listaCanciones;
     public StaticsPanelView (LinkedList<Song> listaCanciones /** De donde vamos a sacar los valores*/) {
@@ -84,65 +84,72 @@ public class StaticsPanelView extends JPanel {
             y += ESPACIO_VERTTICAL;
             g.setColor(new Color(76, 131, 187));
             g.drawString("K-Pop", x, y);
-            //System.out.println(((contadoresGenero[0]*clientWidth)/maxValue));
-            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[0]*clientWidth)/maxValue)-100), barWidth);
-            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[0]*clientWidth)/maxValue)-100), barWidth );
-            //Poner porcentaje de la barra
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[0]*clientWidth/maxValue), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[0]*clientWidth/maxValue), barWidth );
+            g.drawString(String.valueOf(contadoresGenero[0]*100/listaCanciones.size()) + '%', ESPACIO_HORIZONTAL + (int) (contadoresGenero[0]*clientWidth/maxValue) + 10, y);
 
             y += ESPACIO_VERTTICAL;
             g.setColor(new Color(194, 85, 76));
             g.drawString("Jazz", x, y);
-            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[1]*clientWidth)/maxValue)-100), barWidth);
-            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[1]*clientWidth)/maxValue)-100), barWidth);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[1]*clientWidth/maxValue), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[1]*clientWidth/maxValue), barWidth);
+            g.drawString(String.valueOf(contadoresGenero[1]*100/listaCanciones.size()) + '%', ESPACIO_HORIZONTAL + (int) (contadoresGenero[1]*clientWidth/maxValue) + 10, y);
 
             y += ESPACIO_VERTTICAL;
             g.setColor(new Color(156, 187, 92));
             g.drawString("Rock", x, y);
-            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[2]*clientWidth)/maxValue)-100), -barWidth);
-            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[2]*clientWidth)/maxValue)-100), -barWidth);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[2]*clientWidth/maxValue), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[2]*clientWidth/maxValue), barWidth);
+            g.drawString(String.valueOf(contadoresGenero[2]*100/listaCanciones.size()) + '%', ESPACIO_HORIZONTAL + (int) (contadoresGenero[2]*clientWidth/maxValue) + 10, y);
 
             y += ESPACIO_VERTTICAL;
             g.setColor(new Color(76, 172, 196));
             g.drawString("Electronic Dance Music", x, y);
-            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[3]*clientWidth)/maxValue)-100), barWidth);
-            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[3]*clientWidth)/maxValue)-100), barWidth);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[3]*clientWidth/maxValue), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[3]*clientWidth/maxValue), barWidth);
+            g.drawString(String.valueOf(contadoresGenero[3]*100/listaCanciones.size()) + '%', ESPACIO_HORIZONTAL + (int) (contadoresGenero[3]*clientWidth/maxValue) + 10, y);
 
             y += ESPACIO_VERTTICAL;
             g.setColor(new Color(242, 151, 75));
             g.drawString("Death Metal", x, y);
-            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[4]*clientWidth)/maxValue)-100), barWidth);
-            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[4]*clientWidth)/maxValue)-100), barWidth);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[4]*clientWidth/maxValue), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[4]*clientWidth/maxValue), barWidth);
+            g.drawString(String.valueOf(contadoresGenero[4]*100/listaCanciones.size()) + '%', ESPACIO_HORIZONTAL + (int) (contadoresGenero[4]*clientWidth/maxValue) + 10, y);
 
             y += ESPACIO_VERTTICAL;
             g.setColor(new Color(129, 100, 157));
             g.drawString("Hip-Hop", x, y);
-            g.drawLine(x, y, x+20, y+20);
-            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[5]*clientWidth)/maxValue)-100), barWidth);
-            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[5]*clientWidth)/maxValue)-100), barWidth);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[5]*clientWidth/maxValue), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[5]*clientWidth/maxValue), barWidth);
+            g.drawString(String.valueOf(contadoresGenero[5]*100/listaCanciones.size()) + '%', ESPACIO_HORIZONTAL + (int) (contadoresGenero[5]*clientWidth/maxValue) + 10, y);
 
             y += ESPACIO_VERTTICAL;
             g.setColor(new Color(148, 177, 211));
             g.drawString("Europop", x, y);
-            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[6]*clientWidth)/maxValue)-100), barWidth);
-            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[6]*clientWidth)/maxValue)-100), barWidth);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[6]*clientWidth/maxValue), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[6]*clientWidth/maxValue), barWidth);
+            g.drawString(String.valueOf(contadoresGenero[6]*100/listaCanciones.size()) + '%', ESPACIO_HORIZONTAL + (int) (contadoresGenero[6]*clientWidth/maxValue) + 10, y);
 
             y += ESPACIO_VERTTICAL;
             g.setColor(new Color(148, 255, 211));
             g.drawString("Reggaeton", x, y);
-            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[7]*clientWidth)/maxValue)-100), barWidth);
-            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[7]*clientWidth)/maxValue)-100), barWidth);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[7]*clientWidth/maxValue), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[7]*clientWidth/maxValue), barWidth);
+            g.drawString(String.valueOf(contadoresGenero[7]*100/listaCanciones.size()) + '%', ESPACIO_HORIZONTAL + (int) (contadoresGenero[7]*clientWidth/maxValue) + 10, y);
 
             y += ESPACIO_VERTTICAL;
             g.setColor(new Color(148, 177, 255));
             g.drawString("Reggae", x, y);
-            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[8]*clientWidth)/maxValue)-100), barWidth);
-            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[8]*clientWidth)/maxValue)-100), barWidth);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[8]*clientWidth/maxValue), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[8]*clientWidth/maxValue), barWidth);
+            g.drawString(String.valueOf(contadoresGenero[8]*100/listaCanciones.size()) + '%', ESPACIO_HORIZONTAL + (int) (contadoresGenero[8]*clientWidth/maxValue) + 10, y);
 
             y += ESPACIO_VERTTICAL;
             g.setColor(new Color(255, 255, 100));
             g.drawString("Latin Music", x, y);
-            g.fillRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[9]*clientWidth)/maxValue)-100), barWidth);
-            g.drawRect(ESPACIO_HORIZONTAL, y - 13, ((int) ((contadoresGenero[9]*clientWidth)/maxValue)-100), barWidth);
+            g.fillRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[9]*clientWidth/maxValue), barWidth);
+            g.drawRect(ESPACIO_HORIZONTAL, y - 13, (int) (contadoresGenero[9]*clientWidth/maxValue), barWidth);
+            g.drawString(String.valueOf(contadoresGenero[9]*100/listaCanciones.size()) + '%', ESPACIO_HORIZONTAL + (int) (contadoresGenero[9]*clientWidth/maxValue) + 10, y);
         }
     }
 }
