@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
-    private static String dbURL = "jdbc:mysql://localhost:3306/espotifai";
+    private static String dbURL = "jdbc:mysql://localhost:3306/espotifay";
     private static String username = "root";
     private static String password = "";
     private static Connection conn;
@@ -109,7 +109,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             int posInit = getPosP(title,name);
-            String sql = "SELECT * FROM song_playlist WHERE PLAYLIST_NAME like 'top50' AND POS > '"+posInit+"'";
+            String sql = "SELECT * FROM song_playlist WHERE PLAYLIST_NAME like '"+name+"'AND POS > '"+posInit+"'";
             Statement statement = conn.createStatement();
 
             ResultSet rs = statement.executeQuery(sql);
@@ -251,7 +251,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     }
 
-    public LinkedList<SongPlaylist> UpdatePosP(String title, String name,int pos) {
+    public LinkedList<SongPlaylist> updatePosP(String title, String name,int pos) {
         LinkedList<SongPlaylist> songPosP = new LinkedList<>();
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 

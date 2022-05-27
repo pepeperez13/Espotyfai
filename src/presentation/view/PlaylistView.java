@@ -1,9 +1,11 @@
 package presentation.view;
 
 import business.PlaylistManager;
+import business.SongPlaylistManager;
 import business.Store;
 import business.entities.Playlist;
 
+import business.entities.Song;
 import presentation.controller.MainViewController;
 import presentation.controller.ShowPlaylistsController;
 import presentation.render.PlayListRender;
@@ -18,6 +20,7 @@ public class PlaylistView extends JPanel {
     public static final String CREAR_PLAYLIST = "CREAR_PLAYLIST";
     private PlayListRender playListRender;
     private PlaylistManager manager = new PlaylistManager();
+    private SongPlaylistManager songPlaylistManager= new SongPlaylistManager();
     private ActionListener controller;
     private JScrollPane jScrollPane;
     JButton crearPlaylist= new JButton();
@@ -56,6 +59,13 @@ public class PlaylistView extends JPanel {
 
         LinkedList<Playlist> playlistsOfUser = manager.getPlaylistsOfUser(Store.getUser());
         LinkedList<Playlist> playlists= manager.getDataPlaylists();
+//        for(Playlist p:playlists){
+//           LinkedList<Song> songs= songPlaylistManager.ListPlaylistSongs(p.getName());
+//           for(Song s:songs){
+//               songPlaylistManager.InsertNewSongPlaylist(s.getTitle(),p.getName());
+//           }
+//
+//        }
         GridBagLayout gridLayout= new GridBagLayout();
         JSeparator separatorvertical= new JSeparator();
         GridBagConstraints c = new GridBagConstraints();

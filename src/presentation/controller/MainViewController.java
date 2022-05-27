@@ -25,15 +25,16 @@ public class MainViewController implements ActionListener {
     private MainManagerView mainManagerView;
     private PlaylistManager playlistManager;
     private SongPlaylistManager songManager;
-    Playlist parameterPlayList= new Playlist();
-    Song song= new Song();
+    private static Playlist parameterPlayList = new Playlist();
+    Song song = new Song();
+    private static boolean reproducingPlaylist;
 
 
-    public MainViewController (MainMenu menuBarView, MainManagerView mainManagerView) {
+    public MainViewController(MainMenu menuBarView, MainManagerView mainManagerView) {
         this.mainMenu = menuBarView;
         this.mainManagerView = mainManagerView;
         this.playlistManager = new PlaylistManager();
-        this.songManager=new SongPlaylistManager();
+        this.songManager = new SongPlaylistManager();
     }
 
     @Override
@@ -46,31 +47,55 @@ public class MainViewController implements ActionListener {
             mainManagerView.changeView(3, 1);
         } else if (e.getActionCommand().equals(MainMenu.GO_SETTINGS)) {
             mainManagerView.changeView(6, 2);
-        } else if (e.getActionCommand().equals(PlayListRender.EDIT_BUTTON)){
-            parameterPlayList = (Playlist) ((JButton)e.getSource()).getClientProperty( "PLAYLIST" );
+        } else if (e.getActionCommand().equals(PlayListRender.EDIT_BUTTON)) {
+            parameterPlayList = (Playlist) ((JButton) e.getSource()).getClientProperty("PLAYLIST");
             SongListlView.selectedPlaylist = parameterPlayList;
             mainManagerView.changeView(12, 1);
-        }else if(e.getActionCommand().equals(PlaylistView.CREAR_PLAYLIST)){
-            try{
-                String nombrePlaylist=PlaylistView.crearPlaylist();
-                if(playlistManager.existPlaylist(Store.getUser(),nombrePlaylist)){
+        } else if (e.getActionCommand().equals(PlaylistView.CREAR_PLAYLIST)) {
+            try {
+                String nombrePlaylist = PlaylistView.crearPlaylist();
+                if (playlistManager.existPlaylist(Store.getUser(), nombrePlaylist)) {
                     PlaylistView.showErrorPlaylistCreation();
-                }else{
+                } else {
                     playlistManager.createPlaylist(nombrePlaylist, Store.getUser().getName());
                 }
-            }catch (NullPointerException exception){
+            } catch (NullPointerException exception) {
                 exception.printStackTrace();
             }
-        }else if(e.getActionCommand().equals(PlayListRender.DELETE_BUTTON)){
-            parameterPlayList = (Playlist) ((JButton)e.getSource()).getClientProperty( "PLAYLIST_ELIMINAR" );
+        } else if (e.getActionCommand().equals(PlayListRender.DELETE_BUTTON)) {
+            parameterPlayList = (Playlist) ((JButton) e.getSource()).getClientProperty("PLAYLIST_ELIMINAR");
             playlistManager.deletePlaylist(parameterPlayList.getName());
-        }else if(e.getActionCommand().equals(SongListRender.DELETE_BUTTON)){
-            song=(Song) ((JButton)e.getSource()).getClientProperty( "SONG_ELIMINAR" );
-            songManager.deleteSongPlaylistSong(parameterPlayList.getName(),song.getTitle());
-        }else if(e.getActionCommand().equals(PlayListRender.REPRODUCIR_BUTTON)){
-            parameterPlayList = (Playlist) ((JButton)e.getSource()).getClientProperty( "PLAYLIST_REPRODUCIR" );
-
+        } else if (e.getActionCommand().equals(SongListRender.DELETE_BUTTON)) {
+            song = (Song) ((JButton) e.getSource()).getClientProperty("SONG_ELIMINAR");
+            songManager.deleteSongPlaylistSong(parameterPlayList.getName(), song.getTitle());
+        } else if (e.getActionCommand().equals(PlayListRender.REPRODUCIR_BUTTON)) {
+            parameterPlayList = (Playlist) ((JButton) e.getSource()).getClientProperty("PLAYLIST_REPRODUCIR");
+            reproducingPlaylist = true;
+        } else if (e.getActionCommand().equals(SongListRender.UP_BUTTON)) {
+            song = (Song) ((JButton) e.getSource()).getClientProperty("song_subir");
+            songManager.updatePosP(song.getTitle(), parameterPlayList.getName(), 1);
+        } else if (e.getActionCommand().equals(SongListRender.DOWN_BUTTON)) {
+            song = (Song) ((JButton) e.getSource()).getClientProperty("song_bajar");
+            songManager.updatePosP(song.getTitle(), parameterPlayList.getName(), 2);
         }
     }
 
+    public static boolean isReproducingPlaylist() {
+        try {
+            return MainViewController.reproducingPlaylist;
+        } catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+
+    public static void setReproducingPlaylist(boolean playing) {
+        MainViewController.reproducingPlaylist = playing;
+    }
+
+    public static Playlist getReproducingPlaylist() {
+        return parameterPlayList;
+    }
 }
+
+

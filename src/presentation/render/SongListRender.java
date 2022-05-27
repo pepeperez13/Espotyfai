@@ -30,6 +30,11 @@ public class SongListRender extends JPanel {
 
         btSubir.setText("Subir");
         btBajar.setText("Bajar");
+        btSubir.addActionListener(controller);
+        btSubir.putClientProperty( "song_subir", this.song );
+        btBajar.addActionListener(controller);
+        btBajar.putClientProperty( "song_bajar", this.song );
+
         btEliminar.setText("Eliminar");
         btSubir.setSize(100,50);
         btBajar.setSize(100,50);
@@ -78,9 +83,6 @@ public class SongListRender extends JPanel {
         btBajar.setBorderPainted(false);
 
         btEliminar.addActionListener(controller);
-        btSubir.addActionListener(controller);
-        btBajar.addActionListener(controller);
-
         btEliminar.putClientProperty("SONG_ELIMINAR",this.song);
 
         ImageIcon img = new ImageIcon("Images/logo.png");

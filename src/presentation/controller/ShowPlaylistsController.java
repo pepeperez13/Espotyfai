@@ -26,7 +26,7 @@ public class ShowPlaylistsController implements ActionListener {
         if (songPlaylistManager.songExistsInPlaylist(detailedSongView.getSongTitle(), e.getActionCommand())) {
             detailedSongView.showErrorMessage();
         }else{
-            if(SongPlaylistManager.InsertNewSongPlaylist(detailedSongView.getSongTitle(), e.getActionCommand())){
+            if(songPlaylistManager.InsertNewSongPlaylist(detailedSongView.getSongTitle(), e.getActionCommand())){
                 detailedSongView.showOKMessage();
             }else{
                 detailedSongView.showErrorUserMessage();
