@@ -74,7 +74,7 @@ public class SongPlayer implements Runnable{
         //clip.start();
 
         // El thread sigue hasta que se acaba la canción (volverá a empezar otro cuando pasemos a la siguiente canción)
-        while(clip.getMicrosecondPosition()*1.0 < SongPlayerController.getPlayingSong().getSongDurationSeconds(SongPlayerController.getPlayingSong())*1000000) {
+        while(clip.getMicrosecondPosition() < SongPlayerController.getPlayingSong().getSongDurationSeconds(SongPlayerController.getPlayingSong())*1000000) {
             //Sistema solo de prueba para hacer funcionar la reproduccion, en un fururo se controlara mediante la interfaz grafica del sistema.
             System.out.println("Duracion total: "+ SongPlayerController.getPlayingSong().getSongDurationSeconds(SongPlayerController.getPlayingSong())*1000000);
             System.out.println("UBicacion actual: "+ clip.getMicrosecondPosition());

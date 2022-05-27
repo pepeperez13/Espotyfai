@@ -12,7 +12,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../Tercero/DPOO/Práctica 2/mysql-connector-java-8.0.29.jar!/" />
+          <root url="jar://C:/Users/Tercero/DPOO/Práctica 2/mysql-connector-java-8.0.29.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -39,5 +39,6 @@
     <orderEntry type="library" name="mysql-connector-java-8.0.28" level="project" />
     <orderEntry type="library" name="mysql-connector-java-8.0.29" level="project" />
     <orderEntry type="library" name="mysql-connector-java-8.0.281" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-8.0.291" level="project" />
   </component>
 </module>
