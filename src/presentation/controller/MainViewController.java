@@ -1,18 +1,12 @@
 package presentation.controller;
 
-import business.PlaylistManager;
-import business.SongManager;
-import business.SongPlaylistManager;
-import business.Store;
+import business.*;
 import business.entities.Playlist;
 import business.entities.Song;
 import persistance.PlaylistDAO;
 import presentation.render.PlayListRender;
 import presentation.render.SongListRender;
-import presentation.view.MainManagerView;
-import presentation.view.MainMenu;
-import presentation.view.PlaylistView;
-import presentation.view.SongListlView;
+import presentation.view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +29,7 @@ public class MainViewController implements ActionListener {
         this.mainManagerView = mainManagerView;
         this.playlistManager = new PlaylistManager();
         this.songManager = new SongPlaylistManager();
+        reproducingPlaylist = false;
     }
 
     @Override
@@ -70,7 +65,9 @@ public class MainViewController implements ActionListener {
             songManager.deleteSongPlaylistSong(parameterPlayList.getName(), song.getTitle());
         } else if (e.getActionCommand().equals(PlayListRender.REPRODUCIR_BUTTON)) {
             parameterPlayList = (Playlist) ((JButton) e.getSource()).getClientProperty("PLAYLIST_REPRODUCIR");
-            reproducingPlaylist = true;
+            MainViewController.reproducingPlaylist = true;
+            BottomBarPanel.updateSong(parameterPlayList.getSongs().get(0));
+            SongPlayerController.playPlaylist();
         } else if (e.getActionCommand().equals(SongListRender.UP_BUTTON)) {
             song = (Song) ((JButton) e.getSource()).getClientProperty("song_subir");
             songManager.updatePosP(song.getTitle(), parameterPlayList.getName(), 1);
@@ -81,13 +78,8 @@ public class MainViewController implements ActionListener {
     }
 
     public static boolean isReproducingPlaylist() {
-        try {
-            return MainViewController.reproducingPlaylist;
-        } catch (NullPointerException e) {
-            return false;
-        }
+        return MainViewController.reproducingPlaylist;
     }
-
 
     public static void setReproducingPlaylist(boolean playing) {
         MainViewController.reproducingPlaylist = playing;

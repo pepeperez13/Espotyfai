@@ -17,10 +17,6 @@ public class SongPlayer implements Runnable{
     private Thread t;
     private Playlist playlist;
 
-    public SongPlayer (SongPlayerController songPlayerController) {
-
-    }
-
     public void managePlayer (String path, int index, JPanel parentPanel) {
         // Comprobamos si hay algún cambio en la acción recibida
         if (!Objects.equals(this.path, path) || this.index != index) {
@@ -42,10 +38,6 @@ public class SongPlayer implements Runnable{
 
             }
         }
-    }
-
-    public void isPlayingFromPlaylist (boolean playingFromPlaylist, Playlist playlist) {
-
     }
 
     // Abre el fichero de audio que se está reproduciendo y gestiona las excepciones
@@ -71,13 +63,13 @@ public class SongPlayer implements Runnable{
 
     @Override
     public void run() {
-        //clip.start();
+        double curentSongDuration = SongPlayerController.getPlayingSong().getSongDurationSeconds(SongPlayerController.getPlayingSong())*1000000;
 
         // El thread sigue hasta que se acaba la canción (volverá a empezar otro cuando pasemos a la siguiente canción)
-        while(clip.getMicrosecondPosition() < SongPlayerController.getPlayingSong().getSongDurationSeconds(SongPlayerController.getPlayingSong())*1000000) {
+        while(clip.getMicrosecondPosition() < curentSongDuration) {
             //Sistema solo de prueba para hacer funcionar la reproduccion, en un fururo se controlara mediante la interfaz grafica del sistema.
-            System.out.println("Duracion total: "+ SongPlayerController.getPlayingSong().getSongDurationSeconds(SongPlayerController.getPlayingSong())*1000000);
-            System.out.println("UBicacion actual: "+ clip.getMicrosecondPosition());
+            //System.out.println("Duracion total: "+ curentSongDuration);
+            //System.out.println("UBicacion actual: "+ clip.getMicrosecondPosition());
             switch (index) {
                 case (1):
                     clip.start();

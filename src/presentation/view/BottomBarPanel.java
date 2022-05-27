@@ -85,6 +85,16 @@ public class BottomBarPanel extends JPanel {
         repeatPlaylist.setActionCommand("REPEAT_PLAYLIST");
         repeatPlaylist.addActionListener(controller);
 
+
+        songInfo = new JLabel("No song" + " - " + "No artist");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.PAGE_START; //bottom of space
+        c.weightx = 0.5;
+        c.gridwidth = 5;
+        c.gridx = 1;
+        c.gridy = 0;
+        song_player.add(songInfo);
+
         this.add(song_player);
         this.setBackground(new Color(191, 105, 240));
 
@@ -98,25 +108,17 @@ public class BottomBarPanel extends JPanel {
                 song_player.remove(songInfo);
             }
 
-            songInfo = setSongInfo(song.getTitle(), song.getArtist());
-
             song_player.add(songInfo);
+            setSongInfo(song.getTitle(), song.getArtist());
+            songInfo.repaint();
         } catch (NullPointerException e) {
             System.out.println("No hay canción para reproducir. No hace falta mostrar nada");
         }
     }
 
-    public static JLabel setSongInfo (String title, String artist) {
-        JLabel song_info_label = new JLabel(title + " - " + artist);
-
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.anchor = GridBagConstraints.PAGE_START; //bottom of space
-        c.weightx = 0.5;
-        c.gridwidth = 3;
-        c.gridx = 1;
-        c.gridy = 0;
-
-        return song_info_label;
+    public static void setSongInfo (String title, String artist) {
+        songInfo.setText(title + " - " + artist);
+        songInfo.validate();
     }
 
     public static Song getSong () {

@@ -2,6 +2,7 @@ package presentation.controller;
 
 import business.SongManager;
 import business.SongPlayer;
+import business.entities.Playlist;
 import business.entities.Song;
 import presentation.view.BottomBarPanel;
 import presentation.view.DetailedSongView;
@@ -19,8 +20,9 @@ public class SongPlayerController implements ActionListener {
     private static DetailedSongView detailedSongView;
     private MainManagerView mainManagerView;
 
+
     public SongPlayerController(BottomBarPanel bottomBarPanel, DetailedSongView detailedSongView, MainManagerView mainManagerView) {
-        this.songPlayer = new SongPlayer(this);
+        this.songPlayer = new SongPlayer();
         this.bottomBarPanel = bottomBarPanel;
         this.detailedSongView = detailedSongView;
         this.mainManagerView = mainManagerView;
@@ -30,8 +32,12 @@ public class SongPlayerController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             if (e.getActionCommand().equals("PREVIOUS_SONG")) {
-                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1, bottomBarPanel);
-                System.out.println("Anterior");
+                Song song = findSongToReproduce(-1);
+                if (song != null) {
+                    songPlayer.managePlayer(song.getPath(), 1, bottomBarPanel);
+                    BottomBarPanel.updateSong(song);
+                }
+                System.out.println("Previous");
             }
             if (e.getActionCommand().equals("PAUSE_SONG")) {
                 songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 2, bottomBarPanel);
@@ -43,23 +49,12 @@ public class SongPlayerController implements ActionListener {
                 System.out.println("Play");
             }
             if (e.getActionCommand().equals("NEXT_SONG")) {
-                if (MainViewController.isReproducingPlaylist()) {
-                    Song nextSong = MainViewController.getReproducingPlaylist().getSongs().get(BottomBarPanel.getSong().getPosition());
-                    BottomBarPanel.updateSong(nextSong);
-                    detailedSongView.updateSong(nextSong);
-                    songPlayer.managePlayer(nextSong.getPath(), 1, bottomBarPanel);
-                } else {
-                    Song nextSong = null;
-                    for (int i = 0; i < SongManager.ListSongs().size(); i++) {
-                        if (SongManager.ListSongs().get(i).getTitle().equals(BottomBarPanel.getSong().getTitle())) {
-                            nextSong = SongManager.ListSongs().get(i+1);
-                            break;
-                        }
-                    }
-                    BottomBarPanel.updateSong(nextSong);
-                    detailedSongView.updateSong(nextSong);
-                    songPlayer.managePlayer(nextSong.getPath(), 1, bottomBarPanel);
+                Song song = findSongToReproduce(+ 1);
+                if (song != null) {
+                    songPlayer.managePlayer(song.getPath(), 1, bottomBarPanel);
+                    BottomBarPanel.updateSong(song);
                 }
+                //detailedSongView.updateSong(nextSong); Que se actualice solo cuando se le de a ver, si no se queda buscando lyrics
                 System.out.println("Next");
             }
             if (e.getActionCommand().equals("DETAILED_VIEW")) {
@@ -89,12 +84,47 @@ public class SongPlayerController implements ActionListener {
         songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1, detailedSongView);
     }
 
-    public static Song getPlayingSong () {
-        return  BottomBarPanel.getSong();
+    public static void playPlaylist () {
+        Playlist playlist = MainViewController.getReproducingPlaylist();
+        Song song = MainViewController.getReproducingPlaylist().getSongs().get(0);
+        songPlayer.managePlayer(song.getPath(), 1, bottomBarPanel);
     }
 
     public static void pauseSong () {
         songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 2, detailedSongView);
     }
+
+    public static Song getPlayingSong () {
+        return  BottomBarPanel.getSong();
+    }
+
+    private Song findSongToReproduce (int index) {
+        Song song = null;
+
+        try {
+            if (MainViewController.isReproducingPlaylist()) {
+                song = MainViewController.getReproducingPlaylist().getSongs().get(BottomBarPanel.getSong().getPosition() + index);
+                //songPlayer.managePlayer(song.getPath(), 1, bottomBarPanel);
+                //BottomBarPanel.updateSong(song);
+                //detailedSongView.updateSong(nextSong); Que se actualice solo cuando se le de a ver, si no se queda buscando lyrics
+            } else {
+                // Buscamos y guardamos como "song" la siguiente canción a la que se está reproduciendo ahora
+                for (int i = 0; i < SongManager.ListSongs().size(); i++) {
+                    if (SongManager.ListSongs().get(i).getTitle().equals(BottomBarPanel.getSong().getTitle())) {
+                        song = SongManager.ListSongs().get(i + index);
+                        break;
+                    }
+                }
+            }
+            System.out.println("Next");
+        } catch (IndexOutOfBoundsException exception) {
+            // Si nos encontramos en la primera canción (ya sea de la playlist o de las canciones en general) no podemos pasar a la siguiente
+        }
+        return song;
+    }
+
+
+
+
 }
 
