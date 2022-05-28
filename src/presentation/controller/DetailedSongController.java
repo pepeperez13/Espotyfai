@@ -30,8 +30,6 @@ public class DetailedSongController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("ADD_TO_PLAYLIST_COMMAND")) {
-            //ShowPlaylistsFrame showPlaylistsFrame = new ShowPlaylistsFrame(detailedSongView);
-            //showPlaylistsFrame.setVisible(true);
             detailedSongView.showPlaylists();
         }
         if (e.getActionCommand().equals("CLOSE_PANEL_COMMAND")) {
@@ -39,9 +37,9 @@ public class DetailedSongController implements ActionListener {
         }
         if (e.getActionCommand().equals("PLAY_SONG_COMMAND")) {
             System.out.println("PLAY");
+            MainViewController.setReproducingPlaylist(false);
             BottomBarPanel.updateSong(detailedSongView.getSong());
             SongPlayerController.playSong();
-            //SongManager.PlayMusic(detailedSongView.getPath(), 1);
         }
         if (e.getActionCommand().equals("PAUSE_SONG_COMMAND")) {
             System.out.println("PAUSE");

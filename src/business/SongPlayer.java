@@ -1,12 +1,8 @@
 package business;
 
-import business.entities.Playlist;
-import business.entities.Song;
-import presentation.controller.SongPlayerController;
 import presentation.view.BottomBarPanel;
 
 import javax.sound.sampled.*;
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
@@ -70,9 +66,6 @@ public class SongPlayer implements Runnable{
         System.out.println(songDuration);
         // El thread sigue hasta que se acaba la canción (volverá a empezar otro cuando pasemos a la siguiente canción)
         while(clip.getMicrosecondPosition() < songDuration*1000000 || index ==5) {
-            //Sistema solo de prueba para hacer funcionar la reproduccion, en un fururo se controlara mediante la interfaz grafica del sistema.
-            //System.out.println("Duracion total inicial: "+ curentSongDuration);
-            //System.out.println("Duracion total actual: "+ SongPlayerController.getPlayingSong().getSongDurationSeconds(SongPlayerController.getPlayingSong())*1000000);
             this.currentTime = clip.getMicrosecondPosition();
             this.endTime = songDuration*1000000;
             switch (index) {
@@ -92,8 +85,8 @@ public class SongPlayer implements Runnable{
                     clip.close();
                     break;
             }
-            if (currentTime%5000000 == 0) {
-                BottomBarPanel.setValue(this.currentTime);
+            if (currentTime%1000000 == 0) {
+                BottomBarPanel.setValueSlider(this.currentTime);
             }
         }
         clip.close();
@@ -110,7 +103,4 @@ public class SongPlayer implements Runnable{
         return this.endTime;
     }
 
-    /*private void calculateUpdateTime () {
-        int numUpdates = (int) (endTime*1000000/20);
-    }*/
 }

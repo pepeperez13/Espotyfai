@@ -13,6 +13,10 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SongPlayerController implements ActionListener {
     private static SongPlayer songPlayer;
@@ -46,6 +50,7 @@ public class SongPlayerController implements ActionListener {
             if (e.getActionCommand().equals("PLAY_SONG")) {
                 //BottomBarPanel.updateSong(detailedSongView.getSong());
                 songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1, BottomBarPanel.getSong().getSongDurationSeconds());
+                BottomBarPanel.setValueSlider(0);
                 System.out.println("Play");
             }
             if (e.getActionCommand().equals("NEXT_SONG")) {
@@ -85,8 +90,10 @@ public class SongPlayerController implements ActionListener {
     }
 
     public static void playPlaylist () {
-        Playlist playlist = MainViewController.getReproducingPlaylist();
-        Song song = MainViewController.getReproducingPlaylist().getSongs().get(0);
+        List<Song> songsPlaylist = MainViewController.getReproducingPlaylist().getSongs().stream().sorted(Comparator.comparing(Song::getPosition)) .collect(Collectors.toList());
+        Song song = songsPlaylist.get(0);
+        BottomBarPanel.updateSong(song);
+        //Playlist playlist = MainViewController.getReproducingPlaylist();
         songPlayer.managePlayer(song.getPath(), 1, song.getSongDurationSeconds());
     }
 
@@ -103,10 +110,9 @@ public class SongPlayerController implements ActionListener {
 
         try {
             if (MainViewController.isReproducingPlaylist()) {
-                song = MainViewController.getReproducingPlaylist().getSongs().get(BottomBarPanel.getSong().getPosition() + index);
-                //songPlayer.managePlayer(song.getPath(), 1, bottomBarPanel);
-                //BottomBarPanel.updateSong(song);
-                //detailedSongView.updateSong(nextSong); Que se actualice solo cuando se le de a ver, si no se queda buscando lyrics
+                List<Song> playlistSongs = MainViewController.getReproducingPlaylist().getSongs().stream().sorted(Comparator.comparing(Song::getPosition)) .collect(Collectors.toList());
+                song = playlistSongs.get(BottomBarPanel.getSong().getPosition() - 1 + index);
+
             } else {
                 // Buscamos y guardamos como "song" la siguiente canción a la que se está reproduciendo ahora
                 for (int i = 0; i < SongManager.ListSongs().size(); i++) {

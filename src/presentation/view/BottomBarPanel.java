@@ -1,6 +1,5 @@
 package presentation.view;
 
-import business.SongPlayer;
 import business.entities.Song;
 import presentation.controller.SongPlayerController;
 
@@ -112,12 +111,12 @@ public class BottomBarPanel extends JPanel {
         slider.setBackground(new Color(191, 105, 240));
 
         currentTime.setText(String.valueOf(SongPlayerController.getCurrentTime()));
-        endTime.setText(String.valueOf(SongPlayerController.getEndTime()));
-        jSlider.setMaximum((int) (SongPlayerController.getEndTime()));
+        endTime.setText(String.valueOf(SongPlayerController.getEndTime()/1000000));
+        jSlider.setMaximum((int) (SongPlayerController.getEndTime()/1000000));
         jSlider.setValue((int) SongPlayerController.getCurrentTime());
         jSlider.setMajorTickSpacing(10);
         jSlider.setMinorTickSpacing(5);
-        jSlider.setPaintLabels(true);
+        //jSlider.setPaintLabels(true);
 
         add(currentTime, BorderLayout.WEST);
         add(endTime,BorderLayout.EAST);
@@ -151,13 +150,15 @@ public class BottomBarPanel extends JPanel {
         return song;
     }
 
-    public static void setValue (double time) {
-        currentTime.setText(String.valueOf(time));
-        endTime.setText(String.valueOf(SongPlayerController.getEndTime()));
-        jSlider.setValue((int) time);
-        jSlider.setMajorTickSpacing(10);
-        jSlider.setMinorTickSpacing(5);
-        jSlider.setPaintLabels(true);
-        jSlider.repaint();
+    public static void setValueSlider (double time) {
+        double currentTimeSeconds = time/1000000;
+        double endTimeSeconds = SongPlayerController.getEndTime()/1000000;
+        String currentTimeString = String.format("%d:%02d", (int) (currentTimeSeconds % 3600) / 60, (int) currentTimeSeconds%60);
+        String endTimeString = String.format("%d:%02d", (int) (endTimeSeconds % 3600) / 60, (int) endTimeSeconds%60);
+        currentTime.setText(currentTimeString);
+        endTime.setText(endTimeString);
+        jSlider.setMaximum((int) endTimeSeconds);
+        jSlider.setValue((int) currentTimeSeconds);
+
     }
 }
