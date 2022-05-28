@@ -26,9 +26,11 @@ public class SongListlView extends JPanel {
     public static final String ADDSONGPANE = "ADDSONGPANE";
     private JScrollPane jScrollPane;
     public  static Playlist selectedPlaylist;
+    private JComboBox comboSongs;
+    public static LinkedList<Song> allSongs = new LinkedList<>();
 
     public SongListlView(){
-        this.songListController = new SongListController();
+        this.songListController = new SongListController(this);
         this.setBackground(Color.red);
         setSize(1500, 900);
 
@@ -55,14 +57,26 @@ public class SongListlView extends JPanel {
         List<Song> sorted;
         JLabel playlistName= new JLabel();
         JPanel panel = new JPanel();
-        JPanel addSong= new JPanel();
-        addSong.setBackground(Color.white);
+        JPanel addSongPanel= new JPanel();
+        addSongPanel.setBackground(Color.white);
+
+        comboSongs = new JComboBox();
+        for(Song s: allSongs){
+            comboSongs.addItem(s);
+        }
+
         JButton addSongButton= new JButton();
         addSongButton.setText("Add song");
         addSongButton.setBackground(Color.red);
         addSongButton.setActionCommand(ADDSONG);
         addSongButton.addActionListener(songListController);
-        addSong.add(addSongButton);
+        //addSongButton.putClientProperty("song",comboSongs.getSelectedItem());
+        addSongButton.putClientProperty("playlist",selectedPlaylist);
+
+
+        addSongPanel.add(comboSongs);
+        addSongPanel.add(addSongButton);
+
         playlistName.setBackground(Color.white);
         playlistName.setText(""+selectedPlaylist.getName());
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -73,13 +87,28 @@ public class SongListlView extends JPanel {
             sorted = selectedPlaylist.getSongs().stream().sorted(Comparator.comparing(Song::getPosition)) .collect(Collectors.toList());
             for(Song s: sorted){
                 panel.add(new SongListRender(s,selectedPlaylist, songListController));
+
             }
         }catch (NullPointerException e){
             JOptionPane.showMessageDialog(this,"This Playlist is empty");
         }
-        panel.add(addSong);
+        panel.add(addSongPanel);
         jScrollPane.setViewportView(panel);
     }
+
+    public Song getSelectedSongToAdd(){
+        return (Song)comboSongs.getSelectedItem();
+    }
+
+    /**
+     * Metodo que te muestra un mensaje de si la Playlist ya existe
+     */
+    public void showErrorSongAdd() {
+        JPanel panel= new JPanel();
+        JOptionPane.showMessageDialog(panel,"Song already in list");
+    }
+
+
     public  static String showMessageAddSong(LinkedList<Song> songs) {
         JPanel songPanel = new JPanel();
         //showPlaylistsController = new ShowPlaylistsController(this);

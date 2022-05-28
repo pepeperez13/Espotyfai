@@ -18,7 +18,7 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
     private static String password = "";
     private static Connection conn;
 
-    public void InsertDataPlaylist(String name, String owner) {
+    public void InsertDataPlaylist(String name, String owner) throws Exception {
 
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
@@ -35,7 +35,7 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            throw ex;
         }
     }
 

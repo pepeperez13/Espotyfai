@@ -37,7 +37,7 @@ public class PlaylistManager {
         //songPlaylistDAO.DeleteDataSongP(name);
     }
 
-    public void createPlaylist(String name, String owner) {
+    public void createPlaylist(String name, String owner) throws Exception{
         playlistDAO.InsertDataPlaylist(name, owner);
     }
 

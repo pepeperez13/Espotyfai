@@ -1,5 +1,6 @@
 package presentation.view;
 
+import business.SongManager;
 import business.entities.Song;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ import java.io.File;
 import java.util.LinkedList;
 
 public class MainView extends JPanel {
+    private LinkedList<Song> lista_canciones_programa;
 
     public MainView(){
         JTable songs_table;
@@ -21,15 +23,6 @@ public class MainView extends JPanel {
         //System.out.println("\n Hay " +  lista.length + " elementos");
 
         File canciones = carpeta.getAbsoluteFile();
-
-        // Data to be displayed in the JTable
-        String[][] data = {
-                { "1", "As it was", "Harry Styles", "pop-rock", "3,35" },
-                { "2", "As it was", "Harry Styles", "pop-rock", "3,35" },
-                { "3", "As it was", "Harry Styles", "pop-rock", "3,35" },
-                { "4", "As it was", "Harry Styles", "pop-rock", "3,35" },
-
-        };
 
         //Prueba ArrayList Songs
         LinkedList<Song> list_songs = new LinkedList<Song>();
@@ -45,14 +38,30 @@ public class MainView extends JPanel {
         list_songs.add(song4);
         list_songs.add(song5);
 
-        //String[][] table_list_of_songs = list_songs.toArray();
 
+        //Cogemos la lista de las canciones dentro del programa
+        lista_canciones_programa = cargarLista();
+
+        //Pasamos a String[]
+        String[][] lista_string = new String[list_songs.size()][5];
+
+        for (int i = 0; i < lista_canciones_programa.size(); i++) {
+            if (list_songs.get(i) == null) {
+
+            }else {
+                lista_string[i][0] = (lista_canciones_programa.get(i)).getTitle();
+                lista_string[i][1] = (lista_canciones_programa.get(i)).getGenre();
+                lista_string[i][2] = (lista_canciones_programa.get(i)).getAlbum();
+                lista_string[i][3] = (lista_canciones_programa.get(i)).getArtist();
+                lista_string[i][4] = (lista_canciones_programa.get(i)).getOwner();
+            }
+        }
 
         //Columnas
         String[] columnNames = { "Title", "Genre", "Album", "Artist", "Owner" };
 
         // Initializing the JTable
-        songs_table = new JTable(data, columnNames);
+        songs_table = new JTable(lista_string, columnNames);
         JScrollPane scrollPane = new JScrollPane(songs_table);
         //songs_table.setBounds(30, 40, 200, 300);
 
@@ -77,6 +86,14 @@ public class MainView extends JPanel {
         home_panel.add(songs_list, BorderLayout.CENTER);
 
         this.add(home_panel, BorderLayout.CENTER);
+    }
+
+    public LinkedList<Song> cargarLista() {
+        LinkedList<Song> lista_canciones = new LinkedList<>();
+
+        lista_canciones = SongManager.ListSongs();
+
+        return lista_canciones;
     }
 
 }
