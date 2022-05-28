@@ -1,5 +1,6 @@
 package presentation.view;
 
+import business.SongPlayer;
 import business.entities.Song;
 import presentation.controller.SongPlayerController;
 
@@ -12,6 +13,9 @@ public class BottomBarPanel extends JPanel {
     private static JPanel song_player;
     private static GridBagConstraints c;
     private static JLabel songInfo;
+    private static JSlider jSlider =  new JSlider();
+    private static JLabel currentTime =  new JLabel();
+    private static JLabel endTime = new JLabel();
 
     public BottomBarPanel (DetailedSongView detailedSongView, MainManagerView mainManagerView) {
         controller = new SongPlayerController(this, detailedSongView, mainManagerView);
@@ -96,8 +100,30 @@ public class BottomBarPanel extends JPanel {
         song_player.add(songInfo);
 
         this.add(song_player);
+        this.add(configureSlider(), BorderLayout.PAGE_END);
         this.setBackground(new Color(191, 105, 240));
 
+    }
+
+    private JPanel configureSlider () {
+        JPanel slider = new JPanel();
+
+        slider.setLayout(new BorderLayout());
+        slider.setBackground(new Color(191, 105, 240));
+
+        currentTime.setText(String.valueOf(SongPlayerController.getCurrentTime()));
+        endTime.setText(String.valueOf(SongPlayerController.getEndTime()));
+        jSlider.setMaximum((int) (SongPlayerController.getEndTime()));
+        jSlider.setValue((int) SongPlayerController.getCurrentTime());
+        jSlider.setMajorTickSpacing(10);
+        jSlider.setMinorTickSpacing(5);
+        jSlider.setPaintLabels(true);
+
+        add(currentTime, BorderLayout.WEST);
+        add(endTime,BorderLayout.EAST);
+        add(jSlider, BorderLayout.CENTER);
+
+        return slider;
     }
 
     public static void updateSong (Song song) {
@@ -123,5 +149,15 @@ public class BottomBarPanel extends JPanel {
 
     public static Song getSong () {
         return song;
+    }
+
+    public static void setValue (double time) {
+        currentTime.setText(String.valueOf(time));
+        endTime.setText(String.valueOf(SongPlayerController.getEndTime()));
+        jSlider.setValue((int) time);
+        jSlider.setMajorTickSpacing(10);
+        jSlider.setMinorTickSpacing(5);
+        jSlider.setPaintLabels(true);
+        jSlider.repaint();
     }
 }

@@ -2,15 +2,12 @@ package presentation.view;
 
 import business.BuscadorManager;
 import business.SongManager;
-import business.entities.Song;
 import presentation.controller.BuscadorViewController;
-import presentation.controller.ConfMusicController;
 import presentation.controller.DetailedSongController;
 import presentation.controller.MainViewController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.LinkedList;
 
 public class MainManagerView extends JPanel {
     public int numViewCardPanel;

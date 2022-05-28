@@ -181,8 +181,8 @@ public class AddMusicPanelView extends JPanel {
         String path = null;
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("WAV", ".wav");
-        fileChooser.setFileFilter(filter);
+        //FileNameExtensionFilter filter = new FileNameExtensionFilter("WAV", ".wav");
+        //fileChooser.setFileFilter(filter);
 
         int result = fileChooser.showOpenDialog(this);
 

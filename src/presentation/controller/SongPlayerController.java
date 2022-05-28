@@ -123,8 +123,12 @@ public class SongPlayerController implements ActionListener {
         return song;
     }
 
+    public static double getCurrentTime () {
+        return songPlayer.getCurrentTime();
+    }
 
-
-
+    public static double getEndTime () {
+        return songPlayer.getEndTime();
+    }
 }
 
