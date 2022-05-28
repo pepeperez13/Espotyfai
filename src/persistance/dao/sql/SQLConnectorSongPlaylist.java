@@ -16,7 +16,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
 
 
-    public void InsertDataSongP(String title, String name, int pos) {
+    public void InsertDataSongP(String title, String name, int pos) throws Exception {
 
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
@@ -35,7 +35,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+           throw ex;
         }
     }
 

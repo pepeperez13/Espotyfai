@@ -114,4 +114,8 @@ public class Song {
         return String.format("%d:%02d", minutes, seconds);
     }
 
+    @Override
+    public String toString() {
+        return title+ " - "+ artist;
+    }
 }
