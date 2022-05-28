@@ -1,18 +1,27 @@
 package persistance.dao.sql;
 
+import business.entities.Config;
 import business.entities.Song;
+import persistance.ConfigJsonDao;
 import persistance.SongDAO;
 
 import java.sql.*;
 import java.util.LinkedList;
 
 public class SQLConnectorSong implements SongDAO {
-    private static String dbURL = "jdbc:mysql://localhost:3306/espotifai";
-    private static String username = "root";
-    private static String password = "";
+    private static SongDAO songDAO = new SQLConnectorSong();
+    private static String dbURL = songDAO.GetDataBaseData().getDataBaseIP();
+    private static String username = songDAO.GetDataBaseData().getUserName();
+    private static String password = songDAO.GetDataBaseData().getPassword();
     private static Connection conn;
 
-
+    public Config GetDataBaseData(){
+        Config config;
+        ConfigJsonDao configJsonDao = new ConfigJsonDao();
+        config = configJsonDao.readConfig();
+        System.out.println(config);
+        return config;
+    }
 
 
     public void InsertDataSong(String title, String genre, String album, String artist, String path, String owner) {
