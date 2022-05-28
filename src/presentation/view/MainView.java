@@ -17,36 +17,15 @@ public class MainView extends JPanel {
     public MainView(){
         JTable songs_table;
         Song song;
-        //MODEL
-        File carpeta = new File("songs");
-        File[] lista = carpeta.listFiles();
-        //System.out.println("\n Hay " +  lista.length + " elementos");
-
-        File canciones = carpeta.getAbsoluteFile();
-
-        //Prueba ArrayList Songs
-        LinkedList<Song> list_songs = new LinkedList<Song>();
-        Song song1 = new Song("As it was", "Pop", "AsItWas", "Harry Styles", "path", "Aleserra");
-        Song song2 = new Song("Bam Bam", "Pop-Rock", "BAMBAM", "Camila Cabello", "path", "Abraham");
-        Song song3 = new Song("Heat Waves", "Electro-Pop", "HeatWaves", "Glass Animal", "path","Borja");
-        Song song4 = new Song("Pantisyto", "Reggeaton", "ReggeaAlbum", "Feid", "path","Pepe");
-        Song song5 = new Song("Cayo la noche", "Reggeaton - Trap", "Cayo la night", "path","Quevedo, Bad Bunny", "Lachner");
-
-        list_songs.add(song1);
-        list_songs.add(song2);
-        list_songs.add(song3);
-        list_songs.add(song4);
-        list_songs.add(song5);
-
 
         //Cogemos la lista de las canciones dentro del programa
         lista_canciones_programa = cargarLista();
 
         //Pasamos a String[]
-        String[][] lista_string = new String[list_songs.size()][5];
+        String[][] lista_string = new String[lista_canciones_programa.size()][5];
 
         for (int i = 0; i < lista_canciones_programa.size(); i++) {
-            if (list_songs.get(i) == null) {
+            if (lista_canciones_programa.get(i) == null) {
 
             }else {
                 lista_string[i][0] = (lista_canciones_programa.get(i)).getTitle();
