@@ -25,6 +25,7 @@ public class PlaylistManager {
         return playlistDAO.SelectDataPlaylist();
     }
 
+
     public LinkedList<Playlist> getPlaylistsOfUser(User user) {
         return playlistDAO.SelectPlaylistsOfUser(user);
     }

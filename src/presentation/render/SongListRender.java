@@ -1,5 +1,6 @@
 package presentation.render;
 
+import business.Store;
 import business.entities.Playlist;
 import business.entities.Song;
 
@@ -8,6 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Clase que muestra las vista de una Cancion
+ */
 public class SongListRender extends JPanel {
     private JLabel lbIcon = new JLabel();
     private JLabel lbName = new JLabel();
@@ -20,22 +24,35 @@ public class SongListRender extends JPanel {
     public static final String DOWN_BUTTON = "SL_DOWN_BUTTON";
     public static final String DELETE_BUTTON = "SL_DELETE_BUTTON";
     private Song song;
+    private Playlist playlist;
     private JSeparator separator= new JSeparator();
 
-    public SongListRender(Song song, ActionListener controller) {
+    /**
+     *Constructor de la clase
+     * @param song
+     * @param controller
+     */
+    public SongListRender(Song song,Playlist playlist, ActionListener controller) {
         this.song = song;
+        this.playlist = playlist;
         this.controller = controller;
         setLayout(new BorderLayout(5, 5));
         setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
 
         btSubir.setText("Subir");
         btBajar.setText("Bajar");
+        btEliminar.setText("Eliminar");
+
         btSubir.addActionListener(controller);
         btSubir.putClientProperty( "song_subir", this.song );
+        btSubir.putClientProperty( "playlist", this.playlist );
         btBajar.addActionListener(controller);
         btBajar.putClientProperty( "song_bajar", this.song );
+        btBajar.putClientProperty( "playlist", this.playlist );
+        btEliminar.addActionListener(controller);
+        btEliminar.putClientProperty("SONG_ELIMINAR",this.song);
+        btEliminar.putClientProperty( "playlist", this.playlist );
 
-        btEliminar.setText("Eliminar");
         btSubir.setSize(100,50);
         btBajar.setSize(100,50);
         btEliminar.setSize(100,100);
@@ -51,12 +68,21 @@ public class SongListRender extends JPanel {
         gridLayout.setHgap(20);
         gridLayout1.setVgap(20);
         gridLayout1.setHgap(20);
-        panel.add(btSubir);
-        panel.add(btBajar);
         panelText.add(lbName);
-        panelText.add(panel);
+
+        if(isMyPlaylist()){
+            panelText.add(btEliminar);
+        }
         panelText.add(lbAuthor);
-        panelText.add(btEliminar);
+        if(isMyPlaylist()){
+            panel.add(btSubir);
+            panel.add(btBajar);
+        }
+
+
+        panelText.add(panel);
+
+
         panelText.add(separator);
         panelText.add(separator);
 
@@ -82,8 +108,6 @@ public class SongListRender extends JPanel {
         btEliminar.setBorderPainted(false);
         btBajar.setBorderPainted(false);
 
-        btEliminar.addActionListener(controller);
-        btEliminar.putClientProperty("SONG_ELIMINAR",this.song);
 
         ImageIcon img = new ImageIcon("Images/logo.png");
         Image image1 = img.getImage();
@@ -105,6 +129,9 @@ public class SongListRender extends JPanel {
         this.setBackground(Color.white);
 
 
+    }
+    private boolean isMyPlaylist(){
+        return playlist.getOwner().equals(Store.getUser().getName());
     }
 
 }

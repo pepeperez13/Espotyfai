@@ -45,8 +45,19 @@ public class SongPlaylistManager<Public> {
 
 
     }
+    public LinkedList<Song> insertAllSongsinPlaylist(String playlistName){
+        LinkedList<Song> songs = new LinkedList<Song>();
+        songs=ListPlaylistSongs(playlistName);
+        for (Song song : songs) {
+            if(!songExistsInPlaylist(song.getTitle(),playlistName)){
+                InsertNewSongPlaylist(song.getTitle(), playlistName);
+            }
+
+        }
+        return songs;
+    }
     //metodo para quitar o eliminar una cancion de una playlist
-    public static void deleteSongPlaylistSong(String name,String title){
+    public void deleteSongPlaylistSong(String name,String title){
         songPDAO = new SQLConnectorSongPlaylist();
         songPDAO.DeleteDataSongP(name,title);
     }

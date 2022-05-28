@@ -9,13 +9,20 @@ import presentation.view.ManageAccountView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Clase que se encarga del controller de la vista ManageAccount
+ */
 public class ManageAccountController implements ActionListener {
 
     private final UserManager userManager;
     private final ManageAccountView manageAccountView;
     private final InitController initController;
 
-
+    /**
+     * Constructor de la clase
+     * @param manageAccountView
+     * @param initView
+     */
     public ManageAccountController(ManageAccountView manageAccountView, InitView initView) {
         UserDAO userDAO = new SQLConnectorUser();
         this.userManager = new UserManager(userDAO);
@@ -24,8 +31,10 @@ public class ManageAccountController implements ActionListener {
     }
 
 
-
-
+    /**
+     * Metodo que asigna las acciones a cada boton
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()){

@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase que muestra la vista de deslogearse y eliminar cuenta
+ */
 public class ManageAccountView extends JPanel {
 
 
@@ -19,11 +22,19 @@ public class ManageAccountView extends JPanel {
 
     private ManageAccountController manageAccountController;
 
+    /**
+     * Constructor de la vista
+     * @param initView
+     */
     public ManageAccountView(InitView initView) {
          manageAccountController= new ManageAccountController(this,initView);
         createView(manageAccountController);
     }
 
+    /**
+     * Metodo que se encarga de crear la vista
+     * @param manageAccountController controller de la vista
+     */
     public void createView(ManageAccountController manageAccountController){
         ImageIcon logoImage = new ImageIcon("images/fondoBlanco.jpg");
         Image image = logoImage.getImage();
@@ -97,6 +108,10 @@ public class ManageAccountView extends JPanel {
 
 
     }
+
+    /**
+     * Metodo que muestra la opcion de la confirmacion de deslogearse
+     */
     public void showLogoutMessage(){
 
         String[] options = new String[2];
@@ -113,6 +128,10 @@ public class ManageAccountView extends JPanel {
                 break;
         }
     }
+
+    /**
+     * Metodo que muestra la opcion de la confirmacion de eliminar cuenta
+     */
     public void showDeleteMessage(){
         String[] options = new String[2];
         options[0] = "Yes";
