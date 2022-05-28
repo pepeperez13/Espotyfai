@@ -48,16 +48,19 @@ public class MainView extends JPanel {
         //String[][] table_list_of_songs = list_songs.toArray();
 
         //Pasamos a String[]
-        String[][] lista_string = new String[0][];
+        String[][] lista_string = new String[list_songs.size()][5];
 
         for (int i = 0; i < list_songs.size(); i++) {
-            lista_string[i][0] = (list_songs.get(i)).getTitle();
-            lista_string[i][1] = (list_songs.get(i)).getGenre();
-            lista_string[i][2] = (list_songs.get(i)).getAlbum();
-            lista_string[i][3] = (list_songs.get(i)).getArtist();
-            lista_string[i][4] = (list_songs.get(i)).getOwner();
-        }
+            if (list_songs.get(i) == null) {
 
+            }else {
+                lista_string[i][0] = (list_songs.get(i)).getTitle();
+                lista_string[i][1] = (list_songs.get(i)).getGenre();
+                lista_string[i][2] = (list_songs.get(i)).getAlbum();
+                lista_string[i][3] = (list_songs.get(i)).getArtist();
+                lista_string[i][4] = (list_songs.get(i)).getOwner();
+            }
+        }
 
         //Columnas
         String[] columnNames = { "Title", "Genre", "Album", "Artist", "Owner" };
