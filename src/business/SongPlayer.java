@@ -3,6 +3,7 @@ package business;
 import business.entities.Playlist;
 import business.entities.Song;
 import presentation.controller.SongPlayerController;
+import presentation.view.BottomBarPanel;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -16,7 +17,8 @@ public class SongPlayer implements Runnable{
     private Clip clip;
     private Thread t;
     private double songDuration;
-    private Playlist playlist;
+    private double currentTime;
+    private double endTime;
 
     public void managePlayer (String path, int index, double songDuration) {
         // Comprobamos si hay algún cambio en la acción recibida
@@ -63,7 +65,6 @@ public class SongPlayer implements Runnable{
         }
     }
 
-
     @Override
     public void run() {
         System.out.println(songDuration);
@@ -72,6 +73,8 @@ public class SongPlayer implements Runnable{
             //Sistema solo de prueba para hacer funcionar la reproduccion, en un fururo se controlara mediante la interfaz grafica del sistema.
             //System.out.println("Duracion total inicial: "+ curentSongDuration);
             //System.out.println("Duracion total actual: "+ SongPlayerController.getPlayingSong().getSongDurationSeconds(SongPlayerController.getPlayingSong())*1000000);
+            this.currentTime = clip.getMicrosecondPosition();
+            this.endTime = songDuration*1000000;
             switch (index) {
                 case (1):
                     clip.start();
@@ -89,6 +92,9 @@ public class SongPlayer implements Runnable{
                     clip.close();
                     break;
             }
+            if (currentTime%5000000 == 0) {
+                BottomBarPanel.setValue(this.currentTime);
+            }
         }
         clip.close();
         // Si se ha acabado la canción, cambiamos el path, para que si se quiere volver a dar al play, se reproduzca
@@ -96,5 +102,15 @@ public class SongPlayer implements Runnable{
 
     }
 
+    public double getCurrentTime () {
+        return this.currentTime;
+    }
 
+    public double getEndTime () {
+        return this.endTime;
+    }
+
+    /*private void calculateUpdateTime () {
+        int numUpdates = (int) (endTime*1000000/20);
+    }*/
 }
