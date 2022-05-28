@@ -29,7 +29,7 @@ public class PlaylistView extends JPanel {
     private SongPlaylistManager songPlaylistManager= new SongPlaylistManager();
     private ActionListener controller;
     private JScrollPane jScrollPane;
-    JButton crearPlaylist= new JButton();
+    JButton crearPlaylist = new JButton();
 
     /**
      * Constructor de la clase

@@ -26,6 +26,7 @@ public class SongListlView extends JPanel {
     public static final String ADDSONGPANE = "ADDSONGPANE";
     private JScrollPane jScrollPane;
     public  static Playlist selectedPlaylist;
+
     public SongListlView(){
         this.songListController = new SongListController();
         this.setBackground(Color.red);

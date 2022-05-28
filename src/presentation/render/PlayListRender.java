@@ -2,16 +2,12 @@ package presentation.render;
 
 import business.Store;
 import business.entities.Playlist;
-import presentation.controller.PlayListController;
 ;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-/**
- * Clase que muestra las vista de una Playlist
- */
 public class PlayListRender extends JPanel  {
 
     private JLabel lbIcon = new JLabel();
@@ -27,13 +23,8 @@ public class PlayListRender extends JPanel  {
     private JSeparator separator= new JSeparator();
 
 
-    /**
-     * Constructor de la clase
-     * @param playlist Le pasamos la playlist que queremos mostrar
-     * @param mainController Le pasamos el controller
-     */
-    public PlayListRender(Playlist playlist, ActionListener mainController) {
-        ActionListener playListController = new PlayListController();
+
+    public PlayListRender(Playlist playlist, ActionListener controller) {
         this.playlist = playlist;
         setLayout(new BorderLayout(5, 5));
         setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
@@ -89,13 +80,13 @@ public class PlayListRender extends JPanel  {
 
 
 
-        btEditar.addActionListener(mainController);
+        btEditar.addActionListener(controller);
         btEditar.putClientProperty( "PLAYLIST", this.playlist );
 
-        brReproducir.addActionListener(mainController);
+        brReproducir.addActionListener(controller);
         brReproducir.putClientProperty( "PLAYLIST_REPRODUCIR", this.playlist );
 
-        btEliminar.addActionListener(playListController);
+        btEliminar.addActionListener(controller);
         btEliminar.putClientProperty("PLAYLIST_ELIMINAR",this.playlist);
 
         ImageIcon img = new ImageIcon("Images/logo.png");
@@ -121,10 +112,6 @@ public class PlayListRender extends JPanel  {
 
     }
 
-    /**
-     * Metodo que te dice si la playlist es la del usuario
-     * @return devuelve un booleano de si es su playlist
-     */
     private boolean isMyPlaylist(){
         return playlist.getOwner().equals(Store.getUser().getName());
     }

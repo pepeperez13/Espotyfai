@@ -208,7 +208,6 @@ public class DetailedSongView extends JPanel {
         return closeButton;
     }
 
-
     public void updateSong (Song song)  {
         this.song = song;
 

@@ -13,6 +13,7 @@ public class ConfMusicPanelView extends JPanel {
     private JButton jbDel;
     private ConfMusicController confMusicController;
     private final GridBagConstraints gc = new GridBagConstraints();
+
     public ConfMusicPanelView(MainManagerView mainManagerView) {
         confMusicController = new ConfMusicController(mainManagerView);
 
