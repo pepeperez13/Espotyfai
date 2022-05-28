@@ -234,7 +234,7 @@ public class DetailedSongView extends JPanel {
         genreSpecificTitle.setText(song.getGenre());
         albumSpecificTitle.setText(song.getAlbum());
         ownerSpecificTitle.setText(song.getOwner());
-        durationSpecificTitle.setText(song.getSongDurationMinutes(song));
+        durationSpecificTitle.setText(song.getSongDurationMinutes());
         lyricsTextArea.setText(lyricsFetcher.getSongLyrics(song.getArtist(), song.getTitle()));
 
         return generalData;

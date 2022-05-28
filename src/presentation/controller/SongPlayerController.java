@@ -34,25 +34,25 @@ public class SongPlayerController implements ActionListener {
             if (e.getActionCommand().equals("PREVIOUS_SONG")) {
                 Song song = findSongToReproduce(-1);
                 if (song != null) {
-                    songPlayer.managePlayer(song.getPath(), 1, bottomBarPanel);
                     BottomBarPanel.updateSong(song);
+                    songPlayer.managePlayer(song.getPath(), 1,song.getSongDurationSeconds());
                 }
                 System.out.println("Previous");
             }
             if (e.getActionCommand().equals("PAUSE_SONG")) {
-                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 2, bottomBarPanel);
+                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 2, BottomBarPanel.getSong().getSongDurationSeconds());
                 System.out.println("Parar");
             }
             if (e.getActionCommand().equals("PLAY_SONG")) {
                 //BottomBarPanel.updateSong(detailedSongView.getSong());
-                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1, bottomBarPanel);
+                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1, BottomBarPanel.getSong().getSongDurationSeconds());
                 System.out.println("Play");
             }
             if (e.getActionCommand().equals("NEXT_SONG")) {
                 Song song = findSongToReproduce(+ 1);
                 if (song != null) {
-                    songPlayer.managePlayer(song.getPath(), 1, bottomBarPanel);
                     BottomBarPanel.updateSong(song);
+                    songPlayer.managePlayer(song.getPath(), 1, song.getSongDurationSeconds());
                 }
                 //detailedSongView.updateSong(nextSong); Que se actualice solo cuando se le de a ver, si no se queda buscando lyrics
                 System.out.println("Next");
@@ -63,7 +63,7 @@ public class SongPlayerController implements ActionListener {
                 System.out.println("Detalles");
             }
             if (e.getActionCommand().equals("REPEAT_SONG")) {
-                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 5, bottomBarPanel);
+                songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 5, BottomBarPanel.getSong().getSongDurationSeconds());
                 System.out.println("Loop song");
             }
             if (e.getActionCommand().equals("REPEAT_PLAYLIST")) {
@@ -81,17 +81,17 @@ public class SongPlayerController implements ActionListener {
         if (!BottomBarPanel.getSong().getTitle().equals(detailedSongView.getSong().getTitle())) {
             BottomBarPanel.updateSong(detailedSongView.getSong());
         }
-        songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1, detailedSongView);
+        songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1,BottomBarPanel.getSong().getSongDurationSeconds());
     }
 
     public static void playPlaylist () {
         Playlist playlist = MainViewController.getReproducingPlaylist();
         Song song = MainViewController.getReproducingPlaylist().getSongs().get(0);
-        songPlayer.managePlayer(song.getPath(), 1, bottomBarPanel);
+        songPlayer.managePlayer(song.getPath(), 1, song.getSongDurationSeconds());
     }
 
     public static void pauseSong () {
-        songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 2, detailedSongView);
+        songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 2, BottomBarPanel.getSong().getSongDurationSeconds());
     }
 
     public static Song getPlayingSong () {

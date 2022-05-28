@@ -87,12 +87,12 @@ public class Song {
         this.position = position;
     }
 
-    public double getSongDurationSeconds (Song song) {
+    public double getSongDurationSeconds () {
         String error = "";
         AudioFormat format = null;
         long frames = 0;
         try {
-            File file = new File(song.getPath());
+            File file = new File(this.getPath());
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             format = audioStream.getFormat();
             frames = audioStream.getFrameLength();
@@ -107,8 +107,8 @@ public class Song {
         return (frames + 0.0) / format.getFrameRate();
     }
 
-    public String getSongDurationMinutes (Song song) {
-        double time  = getSongDurationSeconds(song);
+    public String getSongDurationMinutes () {
+        double time  = getSongDurationSeconds();
         int minutes = (int) (time / (60));
         int seconds = (int) ((time) % 60);
         return String.format("%d:%02d", minutes, seconds);
