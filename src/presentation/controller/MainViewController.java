@@ -49,6 +49,7 @@ public class MainViewController implements ActionListener {
         } else if (e.getActionCommand().equals(PlayListRender.EDIT_BUTTON)) {
             Playlist playlist = (Playlist) ((JButton) e.getSource()).getClientProperty("PLAYLIST");
             SongListlView.selectedPlaylist = playlist;
+            SongListlView.allSongs = songManager.ListSongs();
             mainManagerView.changeView(12, 1);
         }
         else if (e.getActionCommand().equals(PlayListRender.REPRODUCIR_BUTTON)) {

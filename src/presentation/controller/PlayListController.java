@@ -12,11 +12,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PlayListController implements ActionListener {
+    private  PlaylistView playlistView;
     private PlaylistManager playlistManager;
 
 
-    public PlayListController() {
+    public PlayListController(PlaylistView playlistView) {
         this.playlistManager = new PlaylistManager();
+        this.playlistView = playlistView;
     }
 
     /**
@@ -28,17 +30,28 @@ public class PlayListController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(PlayListRender.DELETE_BUTTON)) {
             Playlist playlist = (Playlist) ((JButton) e.getSource()).getClientProperty("PLAYLIST_ELIMINAR");
-             playlistManager.deletePlaylist(playlist.getName());
+            try{
+                playlistManager.deletePlaylist(playlist.getName());
+                playlistView.bringPlaylists();
+            }catch(Exception exception){
+                exception.printStackTrace();
+            }
+
+
          }else if (e.getActionCommand().equals(PlaylistView.CREAR_PLAYLIST)) {
             try {
                 String nombrePlaylist = PlaylistView.crearPlaylist();
-                if (playlistManager.existPlaylist(Store.getUser(), nombrePlaylist)) {
-                    PlaylistView.showErrorPlaylistCreation();
-                } else {
-                    playlistManager.createPlaylist(nombrePlaylist, Store.getUser().getName());
+                // cancel
+                if(nombrePlaylist == null || nombrePlaylist.trim().isEmpty()){
+
                 }
-            } catch (NullPointerException exception) {
-                exception.printStackTrace();
+                else{
+                    playlistManager.createPlaylist(nombrePlaylist.trim(), Store.getUser().getName());
+                    playlistView.bringPlaylists();
+                }
+
+            } catch (Exception exception) {
+                this.playlistView.showErrorPlaylistCreation();
             }
         }
     }

@@ -24,7 +24,7 @@ public class SongPlaylistManager<Public> {
     private static PlaylistManager playlistManager;
 
 
-    public boolean InsertNewSongPlaylist(String title, String name) {
+    public boolean InsertNewSongPlaylist(String title, String name) throws  Exception{
         boolean exists = false;
         int lastPos = 0;
         playlistManager = new PlaylistManager();
@@ -45,7 +45,7 @@ public class SongPlaylistManager<Public> {
 
 
     }
-    public LinkedList<Song> insertAllSongsinPlaylist(String playlistName){
+    public LinkedList<Song> insertAllSongsinPlaylist(String playlistName) throws  Exception{
         LinkedList<Song> songs = new LinkedList<Song>();
         songs=ListPlaylistSongs(playlistName);
         for (Song song : songs) {

@@ -35,7 +35,7 @@ public class PlaylistView extends JPanel {
      * Constructor de la clase
      */
     public PlaylistView() {
-        this.playListController = new PlayListController();
+        this.playListController = new PlayListController(this);
         this.setBackground(Color.red);
         setSize(1500, 900);
         //setResizable(true);
@@ -56,13 +56,14 @@ public class PlaylistView extends JPanel {
             JPanel panel= new JPanel();
             JButton createPlaylist= new JButton("Create Playlist");
             panel.add(createPlaylist);
-        return JOptionPane.showInputDialog( panel, "Enter the name of the new Playlist", JOptionPane.PLAIN_MESSAGE);
+        String name =  JOptionPane.showInputDialog( panel, "Enter the name of the new Playlist", JOptionPane.PLAIN_MESSAGE);
+        return name;
     }
 
     /**
      * Metodo que te muestra un mensaje de si la Playlist ya existe
      */
-    public static void showErrorPlaylistCreation() {
+    public void showErrorPlaylistCreation() {
         JPanel panel= new JPanel();
         JOptionPane.showMessageDialog(panel,"Playlist already exists");
     }
@@ -110,10 +111,10 @@ public class PlaylistView extends JPanel {
         panelizq.add(jlabelizq);
         panelder.add(jlabelder);
         for(Playlist pu: playlistsOfUser){
-            panelizq.add(new PlayListRender(pu,controller));
+            panelizq.add(new PlayListRender(pu,controller,this.playListController));
         }
         for(Playlist pa: playlists){
-            panelder.add(new PlayListRender(pa,controller));
+            panelder.add(new PlayListRender(pa,controller,this.playListController));
         }
         c.gridx = 0;
         c.gridy = 0;

@@ -15,21 +15,23 @@ public class ShowPlaylistsController implements ActionListener {
     private SongPlaylistManager songPlaylistManager;
 
 
-
-    public ShowPlaylistsController ( DetailedSongView detailedSongView) {
+    public ShowPlaylistsController(DetailedSongView detailedSongView) {
         this.playlistManager = new PlaylistManager();
         this.songPlaylistManager = new SongPlaylistManager();
         this.detailedSongView = detailedSongView;
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (songPlaylistManager.songExistsInPlaylist(detailedSongView.getSongTitle(), e.getActionCommand())) {
             detailedSongView.showErrorMessage();
-        }else{
-            if(songPlaylistManager.InsertNewSongPlaylist(detailedSongView.getSongTitle(), e.getActionCommand())){
+        } else {
+            try {
+                songPlaylistManager.InsertNewSongPlaylist(detailedSongView.getSongTitle(), e.getActionCommand());
                 detailedSongView.showOKMessage();
-            }else{
+            } catch (Exception ex) {
                 detailedSongView.showErrorUserMessage();
+
             }
 
 

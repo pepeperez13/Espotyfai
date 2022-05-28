@@ -24,7 +24,7 @@ public class PlayListRender extends JPanel  {
 
 
 
-    public PlayListRender(Playlist playlist, ActionListener controller) {
+    public PlayListRender(Playlist playlist, ActionListener controller,ActionListener playListController) {
         this.playlist = playlist;
         setLayout(new BorderLayout(5, 5));
         setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
@@ -86,7 +86,7 @@ public class PlayListRender extends JPanel  {
         brReproducir.addActionListener(controller);
         brReproducir.putClientProperty( "PLAYLIST_REPRODUCIR", this.playlist );
 
-        btEliminar.addActionListener(controller);
+        btEliminar.addActionListener(playListController);
         btEliminar.putClientProperty("PLAYLIST_ELIMINAR",this.playlist);
 
         ImageIcon img = new ImageIcon("Images/logo.png");

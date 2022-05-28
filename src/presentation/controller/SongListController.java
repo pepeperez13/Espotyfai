@@ -15,10 +15,10 @@ import java.util.LinkedList;
 public class SongListController implements ActionListener {
 
     private SongPlaylistManager songPlaylistManager;
-
-    public SongListController() {
+    private SongListlView songListlView;
+    public SongListController(SongListlView songListlView) {
         this.songPlaylistManager = new SongPlaylistManager();
-
+        this.songListlView = songListlView;
     }
 
     /**
@@ -31,19 +31,66 @@ public class SongListController implements ActionListener {
         if (e.getActionCommand().equals(SongListRender.DELETE_BUTTON)) {
             Song song = (Song) ((JButton) e.getSource()).getClientProperty("SONG_ELIMINAR");
             Playlist playlist = (Playlist) ((JButton) e.getSource()).getClientProperty("playlist");
-            songPlaylistManager.deleteSongPlaylistSong(playlist.getName(), song.getTitle());
+            try {
+                songPlaylistManager.deleteSongPlaylistSong(playlist.getName(), song.getTitle());
+                playlist.getSongs().remove(song);
+                this.songListlView.loadSongs();
+            }catch (Exception ex){
+
+            }
+
         }else if (e.getActionCommand().equals(SongListRender.UP_BUTTON)) {
             Song song = (Song) ((JButton) e.getSource()).getClientProperty("song_subir");
             Playlist playlist = (Playlist) ((JButton) e.getSource()).getClientProperty("playlist");
-            songPlaylistManager.updatePosP(song.getTitle(), playlist.getName(), 1);
+            try {
+                int pos = song.getPosition();
+                if(pos>1){
+                    songPlaylistManager.updatePosP(song.getTitle(), playlist.getName(), 1);
+
+                    for(Song s: playlist.getSongs()){
+                        if(s.getPosition() == pos-1){
+                            s.setPosition(s.getPosition()+1);
+                        }
+                    }
+                    song.setPosition(pos-1);
+                }
+                this.songListlView.loadSongs();
+            }catch (Exception ex){
+
+            }
         } else if (e.getActionCommand().equals(SongListRender.DOWN_BUTTON)) {
             Song song = (Song) ((JButton) e.getSource()).getClientProperty("song_bajar");
             Playlist playlist = (Playlist) ((JButton) e.getSource()).getClientProperty("playlist");
-            songPlaylistManager.updatePosP(song.getTitle(), playlist.getName(), 2);
+
+            try {
+
+                int pos = song.getPosition();
+                if(pos<playlist.getSongs().size()){
+                    songPlaylistManager.updatePosP(song.getTitle(), playlist.getName(), 2);
+                    for(Song s: playlist.getSongs()){
+                        if(s.getPosition() == pos+1){
+                            s.setPosition(s.getPosition()-1);
+                        }
+                    }
+                    song.setPosition(pos+1);
+                }
+                this.songListlView.loadSongs();
+            }catch (Exception ex){
+
+            }
+
         }else if(e.getActionCommand().equals(SongListlView.ADDSONG)){
-            //LinkedList<Song> songs= SongManager.ListSongs();
-            //String nameCancion=SongListlView.showMessageAddSong(songs);
-            //songPlaylistManager.InsertNewSongPlaylist(nameCancion,parameterPlayList.getName());
+            Song song = this.songListlView.getSelectedSongToAdd();
+            Playlist playlist = (Playlist) ((JButton) e.getSource()).getClientProperty("playlist");
+            if(song!= null && playlist != null){
+                try{
+                    songPlaylistManager.InsertNewSongPlaylist(song.getTitle(),playlist.getName());
+                    SongListlView.selectedPlaylist.getSongs().add(song);
+                    this.songListlView.loadSongs();
+                }catch (Exception ex){
+                    this.songListlView.showErrorSongAdd();
+                }
+            }
         }
     }
 }
