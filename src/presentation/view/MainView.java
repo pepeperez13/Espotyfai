@@ -8,7 +8,6 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.LinkedList;
 
@@ -18,7 +17,6 @@ public class MainView extends JPanel {
     public MainView(){
         JTable songs_table;
         Song song;
-
         //MODEL
         File carpeta = new File("songs");
         File[] lista = carpeta.listFiles();
@@ -45,7 +43,7 @@ public class MainView extends JPanel {
         lista_canciones_programa = cargarLista();
 
         //Pasamos a String[]
-        String[][] lista_string = new String[lista_canciones_programa.size()][5];
+        String[][] lista_string = new String[list_songs.size()][5];
 
         for (int i = 0; i < lista_canciones_programa.size(); i++) {
             if (list_songs.get(i) == null) {
@@ -60,10 +58,12 @@ public class MainView extends JPanel {
         }
 
         //Columnas
-        String[] columnNames = { "Title", "Genre", "Album", "Artist", "Owner" , ""};
+        String[] columnNames = { "Title", "Genre", "Album", "Artist", "Owner" };
 
         // Initializing the JTable
         songs_table = new JTable(lista_string, columnNames);
+        JScrollPane scrollPane = new JScrollPane(songs_table);
+        //songs_table.setBounds(30, 40, 200, 300);
 
         // adding it to JScrollPane
         JScrollPane sp = new JScrollPane(songs_table);
@@ -81,18 +81,12 @@ public class MainView extends JPanel {
 
         songs_list.add(sp, BorderLayout.CENTER);
         songs_list.add(songs_table.getTableHeader(), BorderLayout.NORTH);
-        songs_list.add(sp, BorderLayout.CENTER);
+        songs_list.add(songs_table, BorderLayout.CENTER);
 
         home_panel.add(songs_list, BorderLayout.CENTER);
 
-        this.add(new JScrollPane(songs_list));
         this.add(home_panel, BorderLayout.CENTER);
     }
-
-    /*public void registerController(ActionListener listener) {
-        boton_buscar.addActionListener(listener);
-        details_song_button.addActionListener(listener);
-    }*/
 
     public LinkedList<Song> cargarLista() {
         LinkedList<Song> lista_canciones = new LinkedList<>();
