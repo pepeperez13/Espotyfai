@@ -18,9 +18,6 @@ public class MainView extends JPanel {
         JTable songs_table;
         Song song;
 
-
-
-
         //Cogemos la lista de las canciones dentro del programa
         lista_canciones_programa = cargarLista();
 
@@ -77,6 +74,5 @@ public class MainView extends JPanel {
 
         return lista_canciones;
     }
-
 
 }

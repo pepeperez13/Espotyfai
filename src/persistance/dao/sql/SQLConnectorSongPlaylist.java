@@ -2,6 +2,7 @@ package persistance.dao.sql;
 
 import business.entities.SongPlaylist;
 
+import persistance.SongDAO;
 import persistance.SongPlaylistDAO;
 
 import java.sql.*;
@@ -9,11 +10,11 @@ import java.util.LinkedList;
 
 public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
-    private static String dbURL = "jdbc:mysql://localhost:3306/espotifai";
-    private static String username = "root";
-    private static String password = "";
+    private static SongDAO songDAO = new SQLConnectorSong();
+    private static String dbURL = songDAO.GetDataBaseData().getDataBaseIP();
+    private static String username = songDAO.GetDataBaseData().getUserName();
+    private static String password = songDAO.GetDataBaseData().getPassword();
     private static Connection conn;
-
 
 
     public void InsertDataSongP(String title, String name, int pos) throws Exception {

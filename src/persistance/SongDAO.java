@@ -2,6 +2,7 @@ package persistance;
 
 
 
+import business.entities.Config;
 import business.entities.Song;
 
 import java.util.LinkedList;
@@ -16,4 +17,6 @@ public interface SongDAO {
     public LinkedList<Song> SelectDataSong();
 
     public Song SelectSong(String song);
+
+    public Config GetDataBaseData();
 }
