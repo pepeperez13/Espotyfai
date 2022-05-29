@@ -10,11 +10,17 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Clase que controla la vista del PlaylistView
+ */
 public class PlayListController implements ActionListener {
     private  PlaylistView playlistView;
     private PlaylistManager playlistManager;
 
-
+    /**
+     * Constructor de la clase
+     * @param playlistView
+     */
     public PlayListController(PlaylistView playlistView) {
         this.playlistManager = new PlaylistManager();
         this.playlistView = playlistView;

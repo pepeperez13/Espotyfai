@@ -76,10 +76,19 @@ public class MainViewController implements ActionListener {
 
         }
     }
+
+    /**
+     * Metodo que te devuelve todas las playlists del usuario
+     * @return playlists del usuario
+     */
     public LinkedList<Playlist> getPlaylistsOfUser(){
        return playlistManager.getPlaylistsOfUser(Owner.getUser());
     }
 
+    /**
+     * Metodo que te devuelve todas las playlists
+     * @return todas las playlists
+     */
     public LinkedList<Playlist> getAllPlaylists(){
         return playlistManager.getDataPlaylists();
     }

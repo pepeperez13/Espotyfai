@@ -28,9 +28,10 @@ public class SongListRender extends JPanel {
     private JSeparator separator= new JSeparator();
 
     /**
-     *Constructor de la clase
-     * @param song
-     * @param controller
+     * Constructor de la clase
+     * @param song la cancion que queremos mostrar
+     * @param playlist la playlist a la que pertenece la cancion
+     * @param controller controlador para los botones
      */
     public SongListRender(Song song,Playlist playlist, ActionListener controller) {
         this.song = song;
@@ -130,6 +131,11 @@ public class SongListRender extends JPanel {
 
 
     }
+
+    /**
+     * Metodo que te dice si la playlist es del usuario logeado
+     * @return booleano de si es
+     */
     private boolean isMyPlaylist(){
         return playlist.getOwner().equals(Owner.getUser().getName());
     }

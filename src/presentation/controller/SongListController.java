@@ -12,6 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
+/**
+ * Clase que controla la vista del SongListView
+ */
 public class SongListController implements ActionListener {
 
     private SongPlaylistManager songPlaylistManager;

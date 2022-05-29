@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- *Vista de listar las Canciones
+ *Clase que se encarga de la vista de listar las Canciones
  */
 public class SongListlView extends JPanel {
     private PlaylistManager manager = new PlaylistManager();
@@ -45,8 +45,8 @@ public class SongListlView extends JPanel {
     }
 
     /**
-     *
-     * @param controller
+     *Le paso el controlador del MainViewCOntroller
+     * @param controller le paso el controlador
      */
     public void registerController(ActionListener controller){
         this.mainController = controller;
@@ -100,6 +100,10 @@ public class SongListlView extends JPanel {
         jScrollPane.setViewportView(panel);
     }
 
+    /**
+     * Metodo que te escoge la cancion que quieres anadir
+     * @return la cancion que quieres anadir a la playlist
+     */
     public Song getSelectedSongToAdd(){
         return (Song)comboSongs.getSelectedItem();
     }
@@ -112,7 +116,10 @@ public class SongListlView extends JPanel {
         JOptionPane.showMessageDialog(panel,"Song already in list");
     }
 
-
+    /**
+     * Metodo que te dice si la playlist es del usuario logeado
+     * @return booleano de si es el usuario logeado
+     */
     private boolean isMyPlaylist(){
         return selectedPlaylist.getOwner().equals(Owner.getUser().getName());
     }

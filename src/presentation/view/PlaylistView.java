@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
 /**
- * Vista de listar las Playlist
+ * Clase que se encarga de la vista de listar las Playlist
  */
 public class PlaylistView extends JPanel {
     public static final String CREAR_PLAYLIST = "CREAR_PLAYLIST";
@@ -64,8 +64,8 @@ public class PlaylistView extends JPanel {
     }
 
     /**
-     *
-     * @param controller
+     *Le paso el controlador del MainViewController
+     * @param controller le paso el controlador
      */
     public void registerController(ActionListener controller){
         this.controller = controller;
@@ -73,6 +73,8 @@ public class PlaylistView extends JPanel {
 
     /**
      * Metodo que configura la vista para mostrar las Playlist del User y todas las Playlist
+     * @param playlists todass las playlist que existen
+     * @param playlistsOfUser playlist del usuario
      */
     public void bringPlaylists(LinkedList<Playlist> playlists,LinkedList<Playlist> playlistsOfUser) {
 

@@ -20,8 +20,8 @@ public class ManageAccountController implements ActionListener {
 
     /**
      * Constructor de la clase
-     * @param manageAccountView
-     * @param initView
+     * @param manageAccountView le paso la vista
+     * @param initView para cuando se deslogee pueda ir al inicio
      */
     public ManageAccountController(ManageAccountView manageAccountView, InitView initView) {
         UserDAO userDAO = new SQLConnectorUser();

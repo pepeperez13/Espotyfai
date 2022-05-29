@@ -24,7 +24,7 @@ public class ManageAccountView extends JPanel {
 
     /**
      * Constructor de la vista
-     * @param initView
+     * @param initView para cuando se deslogee pueda ir al inicio
      */
     public ManageAccountView(InitView initView) {
          manageAccountController= new ManageAccountController(this,initView);
