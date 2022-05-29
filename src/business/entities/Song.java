@@ -87,6 +87,10 @@ public class Song {
         this.position = position;
     }
 
+    /**
+     * Metodo que, a traves del path de una cancion, calcula su duracion en segundos
+     * @return duracion de la cancion en segundos
+     */
     public double getSongDurationSeconds () {
         String error = "";
         AudioFormat format = null;
@@ -107,6 +111,10 @@ public class Song {
         return (frames + 0.0) / format.getFrameRate();
     }
 
+    /**
+     * Metodo que, a traves del path de una cancion, calcula su duracion en formato minutos:segundos
+     * @return duracion de la cancion en minutos:segundos
+     */
     public String getSongDurationMinutes () {
         double time  = getSongDurationSeconds();
         int minutes = (int) (time / (60));

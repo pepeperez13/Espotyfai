@@ -12,21 +12,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
+/**
+ * Clase que controla las diferentes acciones que se pueden realizar desde la vista detallada
+ * @author Jose Perez
+ */
 public class DetailedSongController implements ActionListener {
 
     private DetailedSongView detailedSongView;
     private PlaylistManager playlistManager;
-    private PlaylistDAO playlistDAO;
-    private SongManager songManager;
-    private BottomBarPanel bottomBarPanel;
 
+    /**
+     * Constructor de la clase, incializa o asigna otras clases necesarias
+     * @param detailedSongView vista detallada que estará controlando
+     */
     public DetailedSongController(DetailedSongView detailedSongView) {
         this.detailedSongView = detailedSongView;
-        this.playlistDAO = new SQLConnectorPlaylist();
         this.playlistManager = new PlaylistManager();
-        this.songManager = new SongManager();
     }
 
+    /**
+     * Controla los posibles eventos que genera la vista detallada
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("ADD_TO_PLAYLIST_COMMAND")) {
@@ -36,17 +43,20 @@ public class DetailedSongController implements ActionListener {
             detailedSongView.setVisible(false);
         }
         if (e.getActionCommand().equals("PLAY_SONG_COMMAND")) {
-            System.out.println("PLAY");
+            // Si se le da a play desde la vista detallada, seguro que no se está reproduciendo desde playlist
             MainViewController.setReproducingPlaylist(false);
             BottomBarPanel.updateSong(detailedSongView.getSong());
             SongPlayerController.playSong();
         }
         if (e.getActionCommand().equals("PAUSE_SONG_COMMAND")) {
-            System.out.println("PAUSE");
             SongPlayerController.pauseSong();
         }
     }
 
+    /**
+     * Carga las playlist existentes, para poder mostrarlas cuando un usuario quiere añadir una canción a una playlist
+     * @return lista de las playlist existentes
+     */
     public LinkedList<Playlist> getDataPlaylists () {
         return playlistManager.getDataPlaylists();
     }

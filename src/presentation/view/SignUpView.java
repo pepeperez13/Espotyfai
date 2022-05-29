@@ -7,6 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
 
+/**
+ * Clase que se encarga de diseñar y mostrar los campos pata poder registrarse
+ * @author Jose Perez
+ */
 public class SignUpView extends JPanel {
 
     private JTextField nameField;
@@ -18,25 +22,16 @@ public class SignUpView extends JPanel {
     public static final String OTHER = "OTHER_COMMAND";
     public static final String REGISTER_BUTTON = "REGISTER_BUTTON";
     public static final String LOGIN_BUTTON = "LOGIN_BUTTON";
-
     private final SignUpViewController controller;
 
-    /*public static void main (String[] args) {
-        JFrame frame = new JFrame();
-        SignUpView view = new SignUpView();
-        view.setVisible(true);
-        frame.add(view);
-        frame.setVisible(true);
-    }*/
-
+    /**
+     * Método constructor que crea los componentes de la clase e incializa el controller
+     * @param initView clase principal que usará el controlador para cambiar el cardlayout
+     */
     public SignUpView (InitView initView) {
-        //setLocation(0,10);
-
         controller = new SignUpViewController(this, initView);
 
         setSize(1500, 900);
-        //setLayout(new BorderLayout(0, 50));
-
         setLayout(new GridLayout(3, 1));
 
         add(setLogo());
@@ -44,6 +39,10 @@ public class SignUpView extends JPanel {
         add(setEndButtons());
     }
 
+    /**
+     * Método que genera el Jpanel que contiene el logo en la parte superior
+     * @return panel generado
+     */
     private JPanel setLogo () {
 
         ImageIcon logoImage = new ImageIcon("images/logo.png");
@@ -60,13 +59,15 @@ public class SignUpView extends JPanel {
         return panel;
     }
 
+    /**
+     * Método que genere el Jpanel que contiene los Jtextfields para añadir la información
+     * @return panel generado
+     */
     private JPanel introduceInfoPanel () {
         JPanel textIntroPanel = new JPanel();
         textIntroPanel.setLayout(new BoxLayout(textIntroPanel, BoxLayout.Y_AXIS));
         textIntroPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         textIntroPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
-
-
 
         // Añadimos todos los label y textFields
         textIntroPanel.add(setLabelAndField("Username", "User"));
@@ -100,7 +101,12 @@ public class SignUpView extends JPanel {
         return textIntroPanel;
     }
 
-
+    /**
+     * Método que genera, para un label y texto dados, un panel con un "nombre" y un JtextField
+     * @param label etiqueta antes del textfield
+     * @param tField nombre que irá dentro del textfield
+     * @return jpanel creado
+     */
     private JPanel setLabelAndField(String label, String tField) {
         JPanel panel = new JPanel();
 
@@ -142,6 +148,10 @@ public class SignUpView extends JPanel {
         return panel;
     }
 
+    /**
+     * Método que genera los botones de la parte inferior de la pantalla
+     * @return panel creado
+     */
     public JPanel setEndButtons () {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -184,6 +194,14 @@ public class SignUpView extends JPanel {
         return panel;
     }
 
+    /**
+     * Crea y muestra el Joptionpane necesario en caso de haber algúne error en los datos introducidos
+     * @param userExists indica si ya existe el usuario
+     * @param emailExists indica si ya exista el email
+     * @param emailFormatError indica si hay problema con el formato del email
+     * @param passwordFormatError indica si hay problema con el formato de la contraseña
+     * @param confirmationError indica si la contraseña de confirmación no coincide
+     */
     public void showErrorMessage (boolean userExists, boolean emailExists, boolean emailFormatError, boolean passwordFormatError, boolean confirmationError) {
         String message = "";
 
@@ -205,6 +223,10 @@ public class SignUpView extends JPanel {
         JOptionPane.showMessageDialog(this, message, "Following errors were found", JOptionPane.WARNING_MESSAGE);
     }
 
+    /**
+     * Crea unas líneas para mejorar el diseño de la vista
+     * @param g  the <code>Graphics</code> context in which to paint
+     */
     public void paint (Graphics g) {
         super.paintComponents(g);
 
@@ -223,18 +245,34 @@ public class SignUpView extends JPanel {
 
     }
 
+    /**
+     * Retorna el usuario que se haya introducido
+     * @return usuario introducido
+     */
     public String getUserName () {
         return nameField.getText();
     }
 
+    /**
+     * Retorna el email introducido
+     * @return email introducido
+     */
     public String getEmail () {
         return emailField.getText();
     }
 
+    /**
+     * Retorna la contraseña introducida
+     * @return contraseña introducida
+     */
     public String getPassword () {
         return Arrays.toString(passwordField.getPassword());
     }
 
+    /**
+     * Retorna la confirmación de la contraseña
+     * @return confirmación de la contraseña
+     */
     public String getConfirmation () {
         return Arrays.toString(confirmField.getPassword());
     }

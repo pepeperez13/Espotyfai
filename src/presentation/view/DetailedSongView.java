@@ -10,8 +10,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 
+/**
+ * Clase que se encarga de disenar y mostrar los distintos componentes para ver la información detallada de una canción
+ * @author Jose Perez
+ */
 public class DetailedSongView extends JPanel {
 
+    // Somos conscientes que no deberiamos tener la entidad en la vista que la muestra, pero por el diseño del
+    // programa (mejorable) no hemos podido eliminarla
     private Song song;
 
     private JLabel titleAndAuthor;
@@ -24,29 +30,32 @@ public class DetailedSongView extends JPanel {
     private JLabel durationSpecificTitle;
     private JTextArea lyricsTextArea;
 
-
     private static final String ADD_TO_PLAYLIST_COMMAND = "ADD_TO_PLAYLIST_COMMAND";
     private static final String PLAY_SONG_COMMAND = "PLAY_SONG_COMMAND";
     private static final String PAUSE_SONG_COMMAND = "PAUSE_SONG_COMMAND";
     private static final String CLOSE_PANEL_COMMAND = "CLOSE_PANEL_COMMAND";
-    private DetailedSongController controller;
+    private final DetailedSongController controller;
     private ShowPlaylistsController showPlaylistsController;
     private LyricsFetcher lyricsFetcher;
 
-
+    /**
+     * Método constructor que crea los componentes de la clase e incializa otras clases que puedan ser necesarias
+     */
     public DetailedSongView () {
         controller = new DetailedSongController(this);
         lyricsFetcher = new LyricsFetcher();
 
         setLayout(new BorderLayout(0, 50));
 
-        // Creamos y configuramos los componentes de la vista
         configureTitleAndAuthor();
         configureGeneralData();
         add(configureCloseButton(), BorderLayout.SOUTH);
 
     }
 
+    /**
+     * Configura la parte superior de la vista, mostrando titulo y nombre de la cancion
+     */
     private void configureTitleAndAuthor () {
         titleAndAuthor = new JLabel();
         titleAndAuthor.setPreferredSize(new Dimension(100, 60));
@@ -58,6 +67,10 @@ public class DetailedSongView extends JPanel {
         titleAndAuthor.setFocusable(false);
     }
 
+    /**
+     * Configura la parte central de la vista, mostrando toda la información restante y los controles de play/pause y
+     * anadir a playlist
+     */
     private void configureGeneralData () {
         generalData = new JPanel();
         generalData.setLayout(new GridLayout(3, 2));
@@ -71,6 +84,17 @@ public class DetailedSongView extends JPanel {
 
     }
 
+    /*
+     * Pese a que los siguientes 4 metodos 4 paneles con la misma estructura, lo único que cambia es el contenido, he
+     * tenido que hacerlo en 4 metodos diferentes para no tener que crear los componentes de nuevo cada vez que se actualizan
+     * y tenerlos como atributos de la clase. Antes había un método que construía un panel con información que recibía
+     * por parámetros, pero debido a unas recomendaciones del profesor, tuve que cambiarlo, repitiendo así más código
+     */
+
+    /**
+     * Configura el panel del genero de la cancion
+     * @return panel configurado
+     */
     private JPanel configureGenrePanel() {
         // Componentes que deben ser creados, y posteriormente actualizados (nos ahorramos crear nuevos componentes cada
         // vez que se actualizan
@@ -86,6 +110,10 @@ public class DetailedSongView extends JPanel {
         return genreInfoPanel;
     }
 
+    /**
+     * Configura el panel del album de la cancion
+     * @return panel configurado
+     */
     private JPanel configureAlbumPanel() {
         JPanel albumInfoPanel = new JPanel(new GridLayout(1, 2));
         JLabel albumGeneralTitle = new JLabel("Album: ");
@@ -99,6 +127,10 @@ public class DetailedSongView extends JPanel {
         return albumInfoPanel;
     }
 
+    /**
+     * Configura el panel del onwer de la cancion
+     * @return panel configurado
+     */
     private JPanel configureOwnerPanel () {
         JPanel ownerInfoPanel = new JPanel(new GridLayout(1, 2));
         JLabel ownerGeneralTitle = new JLabel("Owner: ");
@@ -113,6 +145,10 @@ public class DetailedSongView extends JPanel {
         return ownerInfoPanel;
     }
 
+    /**
+     * Configura el panel de la duracion de la cancion
+     * @return panel configurado
+     */
     private JPanel configureDurationPanel () {
         JPanel durationInfoPanel = new JPanel(new GridLayout(1, 2));
         JLabel durationGeneralTitle = new JLabel("Duration: ");
@@ -127,6 +163,10 @@ public class DetailedSongView extends JPanel {
         return durationInfoPanel;
     }
 
+    /**
+     * Configura el panel de los lyrics de la cancion
+     * @return panel configurado
+     */
     private JPanel configureLyricsPanel () {
         JPanel lyricsPanel = new JPanel(new GridLayout(1, 2));
 
@@ -147,6 +187,10 @@ public class DetailedSongView extends JPanel {
         return lyricsPanel;
     }
 
+    /**
+     * Configura el panel que contiene los botones para anadir cancion a playlist, play y pause
+     * @return panel configurado
+     */
     private JPanel configureInteractionsPanel () {
         JPanel interactionsGeneralPanel = new JPanel();
         interactionsGeneralPanel.setLayout(new BoxLayout(interactionsGeneralPanel, BoxLayout.Y_AXIS));
@@ -194,6 +238,10 @@ public class DetailedSongView extends JPanel {
         return interactionsGeneralPanel;
     }
 
+    /**
+     * Configura el boton de la parte inferior de la pantalla, que permite cerrar la vista detallada
+     * @return boton configurado
+     */
     private JButton configureCloseButton() {
         closeButton = new JButton("Close song info");
         closeButton.setFont(new Font("Tahoma", Font.BOLD, 22));
@@ -208,6 +256,11 @@ public class DetailedSongView extends JPanel {
         return closeButton;
     }
 
+    /**
+     * Metodo que es llamado cada vez que se necesita actualizar la informacion que se muestra en la vista detallada.
+     * Elimina lo previamente anadido, cambia el texto de los componentes y vuelve a anadir los componentes
+     * @param song nueva cancion que se debe mostrar
+     */
     public void updateSong (Song song)  {
         this.song = song;
 
@@ -216,20 +269,30 @@ public class DetailedSongView extends JPanel {
             remove(generalData);
         }
 
-        titleAndAuthor = updateTitleAndAuthor();
-        generalData = updateGeneralData();
+        titleAndAuthor = updateTitleAndAuthor(song);
+        generalData = updateGeneralData(song);
 
         add(titleAndAuthor, BorderLayout.NORTH);
         add(generalData, BorderLayout.CENTER);
 
     }
 
-    private JLabel updateTitleAndAuthor() {
+    /**
+     * Actualiza el titulo y autor de la cancion a mostrar
+     * @param song cancion a mostrar
+     * @return label actualizado
+     */
+    private JLabel updateTitleAndAuthor(Song song) {
         titleAndAuthor.setText(song.getTitle() + " - " + song.getArtist());
         return titleAndAuthor;
     }
 
-    private JPanel updateGeneralData() {
+    /**
+     * Actualiza la informacion general de la cancion a mostrar
+     * @param song cancion a mostrar
+     * @return panel configurado
+     */
+    private JPanel updateGeneralData(Song song) {
         genreSpecificTitle.setText(song.getGenre());
         albumSpecificTitle.setText(song.getAlbum());
         ownerSpecificTitle.setText(song.getOwner());
@@ -239,27 +302,42 @@ public class DetailedSongView extends JPanel {
         return generalData;
     }
 
+    /**
+     * Muestra optionPane si la cancion que se quiere anadir a una playlist ya esta incluida
+     */
     public void showErrorMessage () {
         String message = "Song is already contained in selected playlist and can not be added again.";
-
         JOptionPane.showMessageDialog(this, message, "Following errors were found", JOptionPane.WARNING_MESSAGE);
     }
 
+    /**
+     * Muestra optionPane si la cancion se ha anadido correctamente a la playlist
+     */
     public void showOKMessage() {
         String message = "Song was added to the playlist successfully.";
-
         JOptionPane.showMessageDialog(this, message, "", JOptionPane.PLAIN_MESSAGE);
     }
+
+    /**
+     * Muestra optionPane si se intenta anadir cancion a una playlist de la que no somos duenos
+     */
     public void showErrorUserMessage() {
         String message = "Cannot add song to a playlist of which you are not the owner.";
-
         JOptionPane.showMessageDialog(this, message, "Following errors were found", JOptionPane.WARNING_MESSAGE);
     }
 
+    /**
+     * Permite obtener el titulo de la cancion que se muestra
+     * @return
+     */
     public String getSongTitle() {
         return song.getTitle();
     }
 
+    /**
+     * Configura un optionPane que muestra las playlist existentes, que se abre en cuando el usuario le da al boton
+     * de "add to playlist"
+     */
     public void showPlaylists () {
         JPanel playlistsPanel = new JPanel();
         showPlaylistsController = new ShowPlaylistsController(this);
@@ -282,6 +360,10 @@ public class DetailedSongView extends JPanel {
         JOptionPane.showMessageDialog(this, playlistsPanel, "Select a playlist to add the song", JOptionPane.PLAIN_MESSAGE);
     }
 
+    /**
+     * Permite obtener la cancion que se esta mostrando
+     * @return cancion que se muestra
+     */
     public Song getSong () {
         return song;
     }

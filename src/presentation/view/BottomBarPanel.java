@@ -6,22 +6,34 @@ import presentation.controller.SongPlayerController;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Clase que disena y configura el panel que contiene toda la informacion y controles de la barra inferior de reproduccion
+ */
 public class BottomBarPanel extends JPanel {
     private SongPlayerController controller;
     private static Song song;
     private static JPanel song_player;
     private static GridBagConstraints c;
     private static JLabel songInfo;
-    private static JSlider jSlider =  new JSlider();
-    private static JLabel currentTime =  new JLabel();
-    private static JLabel endTime = new JLabel();
+    private static JSlider jSlider;
+    private static JLabel currentTime;
+    private static JLabel endTime;
 
+    /**
+     * Metodo constructor que crea y configura todos los componentes que tiene la barra de reporoduccion
+     * @param detailedSongView vista detallada que requiere el controlador del reproductor de musica
+     * @param mainManagerView vista principal que requiere el controlador del reporodcutor de music
+     */
     public BottomBarPanel (DetailedSongView detailedSongView, MainManagerView mainManagerView) {
         controller = new SongPlayerController(this, detailedSongView, mainManagerView);
 
         song_player = new JPanel(new GridBagLayout());
         song_player.setBackground(new Color(191, 105, 240));
         c = new GridBagConstraints();
+
+        /*
+        A continuación, se crean y configuran todos los botones, label y slider que contiene la barra inferior
+         */
 
         JButton back_song = new JButton("<<");
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -99,19 +111,26 @@ public class BottomBarPanel extends JPanel {
         song_player.add(songInfo);
 
 
-
         this.add(song_player);
         this.add(configureSlider());
         this.setBackground(new Color(191, 105, 240));
 
     }
 
+    /**
+     * Metodo que configura el panel que contiene slider de reproduccion y los tiempos total/transcurrido de la cancion
+     * @return panel configurado
+     */
     private JPanel configureSlider () {
+        jSlider =  new JSlider();
+        currentTime =  new JLabel();
+        endTime = new JLabel();
         JPanel slider = new JPanel();
 
         slider.setLayout(new GridLayout(1, 3));
         slider.setBackground(new Color(191, 105, 240));
 
+        // Se configura el slider y los tiempos segun la cancion que se tenga que reproducir
         currentTime.setText(String.valueOf(SongPlayerController.getCurrentTime()));
         endTime.setText(String.valueOf(SongPlayerController.getEndTime()/1000000));
         jSlider.setMaximum((int) (SongPlayerController.getEndTime()/1000000));
@@ -125,6 +144,11 @@ public class BottomBarPanel extends JPanel {
         return slider;
     }
 
+    /**
+     * Metodo que se va a llamar cada vez que se efectue un cambio de canción, con tal de que el panel de reproduccion
+     * actualice toda la informacion que muestra
+     * @param song
+     */
     public static void updateSong (Song song) {
         try {
             BottomBarPanel.song = song;
@@ -141,15 +165,27 @@ public class BottomBarPanel extends JPanel {
         }
     }
 
+    /**
+     * Actualiza el nombre y artista de la cancion
+     * @param title nombre a mostrar
+     * @param artist artista a mostrar
+     */
     public static void setSongInfo (String title, String artist) {
         songInfo.setText(title + " - " + artist);
-        songInfo.validate();
     }
 
+    /**
+     * Permite obtener la cancin que se esta mostrando
+     * @return cancion que se esta mostrando
+     */
     public static Song getSong () {
         return song;
     }
 
+    /**
+     * Metodo que llama el reproductor cada x segundos que actualiza el progresos del slider y de los minutos transucrridos
+     * @param time tiempo de la cancion transcurrido
+     */
     public static void setValueSlider (double time) {
         double currentTimeSeconds = time/1000000;
         double endTimeSeconds = SongPlayerController.getEndTime()/1000000;
@@ -159,6 +195,5 @@ public class BottomBarPanel extends JPanel {
         endTime.setText(endTimeString);
         jSlider.setMaximum((int) endTimeSeconds);
         jSlider.setValue((int) currentTimeSeconds);
-
     }
 }

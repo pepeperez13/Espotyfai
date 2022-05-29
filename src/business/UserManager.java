@@ -30,7 +30,7 @@ public class UserManager {
         byte[] psw = password.getBytes();
         byte[] hash = null;
 
-        // Convertimos la contraseña mediante el algoritmo MD5
+        // Convertimos la contrasena mediante el algoritmo MD5
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             hash = md.digest(psw);
@@ -43,7 +43,7 @@ public class UserManager {
             strBuilder.append(String.format("%02x", b));
         }
         password = strBuilder.toString();
-        System.out.println("La contraseña con el hash es: " + password);
+        System.out.println("La contrasena con el hash es: " + password);
         sql.InsertDataUser(name, email, password);
     }
 

@@ -9,6 +9,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Clase que se encarga de la gestión de los archvos de audio (reproducir, parar, etc.)
+ * @author Jose Perez
+ */
 public class SongPlayer implements Runnable{
     private String path;
     private int index;
@@ -18,6 +22,13 @@ public class SongPlayer implements Runnable{
     private double currentTime;
     private double endTime;
 
+    /**
+     * Método principal y fundamental de esta clase. Es el que se encarga de realizar todas las acciones sobre una canción, iniciando
+     * un thread para poder reproducir las canciones
+     * @param path path de la canción sobre la que se quiere ejecutar una acción
+     * @param index indica que tipo de acción se quiere realizar sobre la canción
+     * @param songDuration duración de la canción, necesaria para pasar a la siguiente canción, barra de progreso...
+     */
     public void managePlayer (String path, int index, double songDuration) {
         // Comprobamos si hay algún cambio en la acción recibida
         if (!Objects.equals(this.path, path) || this.index != index || MainViewController.isReproducingPlaylist()) {
@@ -25,11 +36,11 @@ public class SongPlayer implements Runnable{
             if (index != this.index && Objects.equals(this.path, path)) {
                 this.index = index;
             }
+            // Solo si se reproduce desde playlist, se volverá a empezar una canción, aunque sea la misma que ya se está reproduciendo
             if (!Objects.equals(this.path, path) || MainViewController.isReproducingPlaylist()) {
                 // Si cambia el path, significa que la cancion que se reproducia anteriormente debe pararse
                 if (clip != null) {
                     clip.close();
-                    System.out.println("paradoooo");
                 }
                 this.songDuration = songDuration;
                 this.index = index;
@@ -43,7 +54,9 @@ public class SongPlayer implements Runnable{
         }
     }
 
-    // Abre el fichero de audio que se está reproduciendo y gestiona las excepciones
+    /**
+     * Abre el fichero de audio que se quiere reproducir y gestiona las excepciones
+     */
     private void openFile () {
         String error;
         try {
@@ -63,30 +76,23 @@ public class SongPlayer implements Runnable{
         }
     }
 
+    /**
+     * Método que funciona en un thread separado, encargado de ir leyendo info de la canción mientras se ejecuta para poder mostrar
+     * tiempo transcurrido, y pendiente de cambios en el "index" para realizar la acción requerida
+     */
     @Override
     public void run() {
-        System.out.println(songDuration);
-        // El thread sigue hasta que se acaba la canción (volverá a empezar otro cuando pasemos a la siguiente canción)
+
+        // El thread sigue gracias al bucle hasta que se acaba la canción (volverá a empezar otro cuando pasemos a la siguiente canción)
         while(clip.getMicrosecondPosition() < (songDuration*1000000 - 1000000) || index ==5) {
             this.currentTime = clip.getMicrosecondPosition();
             this.endTime = songDuration*1000000;
             switch (index) {
-                case (1):
-                    clip.start();
-                    break;
-                case (2):
-                    clip.stop();
-                    break;
-                case (3):
-                    clip.setMicrosecondPosition(0);
-                    break;
-                case (5):
-                    clip.loop(Clip.LOOP_CONTINUOUSLY);
-                    break;
-                case (4):
-                    clip.close();
-                    break;
+                case (1) -> clip.start();
+                case (2) -> clip.stop();
+                case (3) -> clip.loop(Clip.LOOP_CONTINUOUSLY);
             }
+            // Actualizamos el valor del slider y progreso cada dos segundos
             if (currentTime%2000000 == 0) {
                 BottomBarPanel.setValueSlider(this.currentTime);
             }
@@ -94,14 +100,23 @@ public class SongPlayer implements Runnable{
         clip.close();
         // Si se ha acabado la canción, cambiamos el path, para que si se quiere volver a dar al play, se reproduzca
         path = "none";
+        // Cuando se acabe la canción, pasamos automáticamente a la siguiente
         SongPlayerController.autoNextSong();
 
     }
 
+    /**
+     * Permite saber a clases externas el tiempo transcurrido de la canción
+     * @return tiempo transcurrido
+     */
     public double getCurrentTime () {
         return this.currentTime;
     }
 
+    /**
+     * Permite saber a clases externas la duración de la canción
+     * @return duración de la canción
+     */
     public double getEndTime () {
         return this.endTime;
     }

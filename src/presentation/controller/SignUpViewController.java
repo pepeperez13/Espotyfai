@@ -4,21 +4,20 @@ import business.Store;
 import business.UserManager;
 import persistance.UserDAO;
 
-
 import persistance.dao.sql.SQLConnectorUser;
 import presentation.view.InitView;
 import presentation.view.SignUpView;
 
-import javax.management.modelmbean.ModelMBean;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
+/**
+ * Clase que controla los diferentes eventos de la vista de Sign Up
+ * @author Jose perez
+ */
 public class SignUpViewController implements ActionListener{
     private static SignUpView view;
     private final UserManager manager;
-    private Store store;
     private boolean userExistsError;
     private boolean emailExistsError;
     private boolean emailFormatError;
@@ -26,6 +25,11 @@ public class SignUpViewController implements ActionListener{
     private boolean passwordConfirmationError;
     private final InitController initController;
 
+    /**
+     * Constructor de la clase que inicializa otras clases necesarias
+     * @param signUpView vista detallada que estará controlando
+     * @param initView vista incial que controla el resto de vistas
+     */
     public SignUpViewController (SignUpView signUpView, InitView initView) {
         view = signUpView;
         UserDAO userDAO = new SQLConnectorUser();
@@ -33,14 +37,16 @@ public class SignUpViewController implements ActionListener{
         initController = new InitController(initView);
     }
 
+    /**
+     * Gestiona, mediante "if" a traves de los action command, las diferentes acciones que deben llevarse a cabo
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(SignUpView.REGISTER_BUTTON)) {
-
             if (checkDataCorrect()) {
                 manager.insertNewUser(view.getUserName(), view.getEmail(), view.getPassword());
-                //store = new Store(manager.getCurrentUser(view.getUserName()));
-                store.setUser(manager.getCurrentUser(view.getUserName()));
+                Store.setUser(manager.getCurrentUser(view.getUserName()));
                 initController.refreshView(3);
             } else {
                 view.showErrorMessage(userExistsError, emailExistsError, emailFormatError, passwordFormatError, passwordConfirmationError);
@@ -51,7 +57,10 @@ public class SignUpViewController implements ActionListener{
 
     }
 
-    // Clase que comprobará que todos los parámetros de login sean correctos
+    /**
+     * Llama a distintos metodos del manager que comprueban si ha habido algún error en los datos introducidos
+     * @return booleano que indica si todos los datos son correctos (true) o no (falso)
+     */
     public boolean checkDataCorrect() {
 
         userExistsError = manager.checkUsernameExistance(view.getUserName());

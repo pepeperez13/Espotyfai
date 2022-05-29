@@ -6,22 +6,25 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Arrays;
 
+/**
+ * Clase que diseña y muestra los componentes que van a permitir al usuario iniciar sesion en el programa
+ * @author Alejandro Serra
+ */
 public class LoginView extends JPanel {
     public static final String INICIO = "INICIO";
     public static final String REGISTRO = "REGISTRO";
-    private JTextField username;
+    private final JTextField username;
 
-    private JPasswordField password;
-    private LoginController loginController;
-    private JLabel success_message;
+    private final JPasswordField password;
+    private final LoginController loginController;
 
+    /**
+     * Metodo constructor que se encarga de asignar y crear clases que la vista pueda necesitar (asi como el controller)
+     * Tambien se crean, organizan y estructuran todos los componentes que requiere la clase
+     * @param initView vista incial que va a permitir, si se incia sesion, cambiar a la nueva vista (desde el controlador)
+     */
     public LoginView (InitView initView) {
 
-        //AJUSTES PRINCIPALES DEL FRAME
-        /*this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600, 450);
-        this.setTitle("Espotifai");
-        this.setLocationRelativeTo(null);*/
         loginController = new LoginController(this, initView);
         this.setLayout(new BorderLayout());
         this.setBackground(new Color(191, 105, 240));
@@ -63,8 +66,6 @@ public class LoginView extends JPanel {
         south.add(signin_button, BorderLayout.CENTER);
         signin_button.addActionListener(loginController);
         signin_button.setActionCommand(INICIO);
-
-        success_message = new JLabel("");
 
         JPanel no_account = new JPanel(new GridBagLayout());
         GridBagConstraints sd = new GridBagConstraints();
@@ -118,9 +119,14 @@ public class LoginView extends JPanel {
         this.add(center, BorderLayout.CENTER);
         this.add(west, BorderLayout.WEST);
         this.add(south, BorderLayout.SOUTH);
-        //this.setVisible(true);
+
     }
 
+    /**
+     * Muestra un optionPane con los posibles errores que se hayan encontrado
+     * @param userExistsError permite saber al optionPane si el usuario no esta registrado
+     * @param passwordError permite saber al optionPane si la contrasena es incorrecta
+     */
     public void showErrorMessage (boolean userExistsError, boolean passwordError) {
         String message = "";
 
@@ -134,10 +140,18 @@ public class LoginView extends JPanel {
         JOptionPane.showMessageDialog(this, message, "Following errors were found", JOptionPane.WARNING_MESSAGE);
     }
 
+    /**
+     * Permite obtener el usuario introducido
+     * @return usuario introducido
+     */
     public String getUserName () {
         return username.getText();
     }
 
+    /**
+     * Permite saber la contrasena introducida
+     * @return contrasena introducida
+     */
     public String getPassword () {
         return Arrays.toString(password.getPassword());
     }
