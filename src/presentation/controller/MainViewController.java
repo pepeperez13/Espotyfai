@@ -54,11 +54,15 @@ public class MainViewController implements ActionListener {
         }
         else if (e.getActionCommand().equals(PlayListRender.REPRODUCIR_BUTTON)) {
             Playlist playlist = (Playlist) ((JButton) e.getSource()).getClientProperty("PLAYLIST_REPRODUCIR");
-            parameterPlayList = playlist;
-            MainViewController.reproducingPlaylist = true;
-            BottomBarPanel.updateSong(playlist.getSongs().get(0));
-            SongPlayerController.playPlaylist();
-            SongPlayerController.setRepeatPlaylist(false);
+
+            if (playlist.getSongs().size() > 0) {
+                parameterPlayList = playlist;
+                MainViewController.reproducingPlaylist = true;
+                BottomBarPanel.updateSong(playlist.getSongs().get(0));
+                SongPlayerController.playPlaylist();
+                SongPlayerController.setRepeatPlaylist(false);
+            }
+
         }
     }
 

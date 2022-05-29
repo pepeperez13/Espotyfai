@@ -23,6 +23,16 @@ public class SongManager<Public> {
     public static void addSong (String title, String Genre, String album, String artist, String path,String owner) {
         songDAO.InsertDataSong(title, Genre, album, artist, path, owner);
     }
+
+    public static boolean checkSongExistance (String title,String path) {
+        LinkedList<Song> songs = ListSongs();
+        for (Song s: songs) {
+            if (s.getTitle().equals(title) || s.getPath().equals(path)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public static LinkedList<Song> ListSongs() {
         songDAO = new SQLConnectorSong();
         LinkedList<Song> songs;

@@ -2,6 +2,7 @@ package presentation.controller;
 
 import business.SongManager;
 import business.Store;
+import business.entities.Song;
 import presentation.view.AddMusicPanelView;
 
 import javax.swing.*;
@@ -21,7 +22,11 @@ public class AddMusicController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (!checkDataCorrect()) {
             if (e.getActionCommand().equals(AddMusicPanelView.ADD_SONG)) {
-                SongManager.addSong(addMusicPanelView.getTitulo(), addMusicPanelView.getGenero(), addMusicPanelView.getAlbum(), addMusicPanelView.getAutor(), addMusicPanelView.getPath(), store.getUser().getName());
+                if (!SongManager.checkSongExistance(addMusicPanelView.getTitulo(), addMusicPanelView.getPath())) {
+                    SongManager.addSong(addMusicPanelView.getTitulo(), addMusicPanelView.getGenero(), addMusicPanelView.getAlbum(), addMusicPanelView.getAutor(), addMusicPanelView.getPath(), store.getUser().getName());
+                }else{
+                    JOptionPane.showMessageDialog(addMusicPanelView, "Song has already been added", "Following errors were found", JOptionPane.ERROR_MESSAGE);
+                }
             }
         } else {
             //mensaje de error;

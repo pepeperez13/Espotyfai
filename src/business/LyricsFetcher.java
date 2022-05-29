@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 
 import javax.imageio.IIOException;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
@@ -15,7 +16,6 @@ public class LyricsFetcher {
 
     public String getSongLyrics (String artist, String song) {
         try {
-
             // Ponemos las frases en formato correcto
             artist = artist.replaceAll(" ", "%20");
             song = song.replaceAll(" ", "%20");
@@ -25,13 +25,17 @@ public class LyricsFetcher {
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.connect();
+            try {
+                connection.connect();
+            } catch (ConnectException e){
+                return"API had an error trying to fetch song lyrics";
+            }
 
             int responseCode = connection.getResponseCode();
 
             if (responseCode != 200) {
                 return "Lyrics for the song could not be found";
-            }else{
+            } else {
                 StringBuilder info = new StringBuilder();
                 Scanner scanner;
                 try {
@@ -53,7 +57,8 @@ public class LyricsFetcher {
                 System.out.println(lyrics);
                 return lyrics;
             }
-
+        } catch (ConnectException e) {
+            e.printStackTrace();
         } catch (Exception e){
             e.printStackTrace();
         }
