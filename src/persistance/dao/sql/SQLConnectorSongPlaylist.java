@@ -61,10 +61,11 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
             System.out.println("Conexion ok");
             //Generamos una sentencia SQL para eliminar canciones dependiendo del titulo de la cancion.
-            String sql = "DELETE FROM song_playlist WHERE SONG_TITLE=?";
+            String sql = "DELETE FROM song_playlist WHERE SONG_TITLE=? AND PLAYLIST_NAME =?";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, title);
+            statement.setString(2,name);
 
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
