@@ -8,13 +8,17 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.io.File;
 import java.util.LinkedList;
 
-
+/**
+ * Clase que muestra las canciones de un usuario en una JTable
+ */
 public class MainView extends JPanel {
     private LinkedList<Song> lista_canciones_programa;
 
+    /**
+     * Constructor que configura un JTable con las canciones
+     */
     public MainView(){
         JTable songs_table;
         Song song;
@@ -68,6 +72,10 @@ public class MainView extends JPanel {
         this.add(home_panel, BorderLayout.CENTER);
     }
 
+    /**
+     * Método que retorna las canciones del sistema
+     * @return LinkedList
+     */
     public LinkedList<Song> cargarLista() {
         LinkedList<Song> lista_canciones = new LinkedList<>();
 
