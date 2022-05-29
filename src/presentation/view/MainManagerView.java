@@ -9,9 +9,12 @@ import presentation.controller.MainViewController;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Clase que contiene los CardLayout que manejan los paneles de configuración u opciones y sus respectivos menús
+ */
 public class MainManagerView extends JPanel {
-    public int numViewCardPanel;
-    public int numViewMenuCardPanel;
+    private int numViewCardPanel;
+    private int numViewMenuCardPanel;
     private BuscadorView buscadorView;
     private BuscadorViewController buscadorViewController;
     private PlaylistView playlistView;

@@ -98,8 +98,10 @@ public class BottomBarPanel extends JPanel {
         c.gridy = 0;
         song_player.add(songInfo);
 
+
+
         this.add(song_player);
-        this.add(configureSlider(), BorderLayout.PAGE_END);
+        this.add(configureSlider());
         this.setBackground(new Color(191, 105, 240));
 
     }
@@ -107,7 +109,7 @@ public class BottomBarPanel extends JPanel {
     private JPanel configureSlider () {
         JPanel slider = new JPanel();
 
-        slider.setLayout(new BorderLayout());
+        slider.setLayout(new GridLayout(1, 3));
         slider.setBackground(new Color(191, 105, 240));
 
         currentTime.setText(String.valueOf(SongPlayerController.getCurrentTime()));
@@ -116,11 +118,9 @@ public class BottomBarPanel extends JPanel {
         jSlider.setValue((int) SongPlayerController.getCurrentTime());
         jSlider.setMajorTickSpacing(10);
         jSlider.setMinorTickSpacing(5);
-        //jSlider.setPaintLabels(true);
+        jSlider.setBackground(new Color(191, 105, 240));
 
-        add(currentTime, BorderLayout.WEST);
-        add(endTime,BorderLayout.EAST);
-        add(jSlider, BorderLayout.CENTER);
+        add(currentTime);add(jSlider);add(endTime);
 
         return slider;
     }

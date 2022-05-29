@@ -11,6 +11,7 @@ import java.awt.*;
 import java.io.File;
 import java.util.LinkedList;
 
+
 public class MainView extends JPanel {
     private LinkedList<Song> lista_canciones_programa;
 

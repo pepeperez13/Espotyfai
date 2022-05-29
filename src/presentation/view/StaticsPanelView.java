@@ -6,8 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 
+/**
+ *Clase que se encarga de dibujar el gráfico con las estadísticas de los géneros musicales que tiene el usuario
+ */
 public class StaticsPanelView extends JPanel {
-
     public static final String KPOP = "K pop";
     public static final String JAZZ = "Jazz";
     public static final String ROCK = "Rock";
@@ -21,8 +23,14 @@ public class StaticsPanelView extends JPanel {
     private final int ESPACIO_VERTTICAL = 60;
     private final int ESPACIO_HORIZONTAL = 320;
     private final int[] contadoresGenero = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    private LinkedList<Song> listaCanciones;
-    public StaticsPanelView (LinkedList<Song> listaCanciones /** De donde vamos a sacar los valores*/) {
+    private final LinkedList<Song> listaCanciones;
+
+    /**
+     * Constructor.
+     * Calcula el número de canciones de cada género musical que tiene el usuario actual.
+     * @param listaCanciones    LinkedList con todas las canciones del usuario actual.
+     */
+    public StaticsPanelView (LinkedList<Song> listaCanciones) {
         this.listaCanciones = listaCanciones;
         //Valor * numeroPixeles/MayorValor
         for (int i = 0; i < listaCanciones.size(); i++) {
@@ -50,6 +58,10 @@ public class StaticsPanelView extends JPanel {
         }
     }
 
+    /**
+     * Dibuja las barras y sus respectivas etiquetas.
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     public void paintComponent (Graphics g) {
         super.paintComponent(g);
@@ -67,8 +79,6 @@ public class StaticsPanelView extends JPanel {
                 }
             }
 
-            //System.out.println(minValue+"minValue"+"\n"+maxValue+"maxValue");
-            //int west = labelFontMetrics.getHeight();
             Dimension d = getSize();
             int clientWidth = d.width - 400;
             int clientHeight = d.height;
