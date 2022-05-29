@@ -21,9 +21,9 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     /**
      * Metodo que inserta los datos de una cancion en la base de datos.
-     * @param title
-     * @param name
-     * @param pos
+     * @param title titulo de la cancion
+     * @param name nombre de la playlist
+     * @param pos posicion de la cancion en la playlist
      * @throws Exception
      */
     public void InsertDataSongP(String title, String name, int pos) throws Exception {
@@ -52,8 +52,8 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     /**
      * Metodo que complementado con DeleteDataSongPpt2 y DeleteDataSong corren la posicion de las canciones posteriores a la eliminada.
-     * @param name
-     * @param title
+     * @param name nombre de la playlist
+     * @param title titulo de la cancion
      */
     public void DeleteDataSongPpt3(String name,String title){
         //Connectamos a la base de datos y controlamos excepciones.
@@ -79,7 +79,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     /**
      * Metodo que complementado con DeleteDataSongPpt3 y DeleteDataSong corren la posicion de las canciones posteriores a la eliminada.
-     * @param pos
+     * @param pos posicion de la cnacion dentro de una playlsit
      */
     public void DeleteDataSongPpt2(int pos){
         //Connectamos a la base de datos y controlamos excepciones.
@@ -105,8 +105,8 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     /**
      * Metodo que se utiliza para quitar una cancion de una playlist especifica.
-     * @param name
-     * @param title
+     * @param name nombre de una playlist
+     * @param title titulo de la cancion
      */
 
     public void DeleteDataSongP(String name,String title){
@@ -151,7 +151,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     /**
      * metodo que solo se utiliza cuando se quiere eliminar la playlist entera de la talbla song playlist
-     * @param name
+     * @param name nombre de la playlist
      */
 
     public void DeleteDataSongPFull(String name){
@@ -177,7 +177,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     /**
      * Metodo que se utiliza para eliminar una cancion de la tabla song playlist.
-     * @param title
+     * @param title titulo de la cancion
      */
     public void DeleteSongPFull(String title){
         //Connectamos a la base de datos y controlamos excepciones.
@@ -201,7 +201,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     /**
      * Metodo que se emplea para seleccionar la informacion de una cancion de una playlist.
-     * @return
+     * @return songsP
      */
     public LinkedList<SongPlaylist> SelectDataSongP(){
         //Creamos una linked list de SongPlaylist
@@ -243,8 +243,8 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     /**
      * Metodo que te permite obtener toda la informacion de una cancion dado el nombre de la cancion.
-     * @param pName
-     * @return
+     * @param pName nombre de la playlist
+     * @return songP linked list con las canciiones de una playlist
      */
 
     public LinkedList<SongPlaylist> SelectSongsP(String pName){
@@ -290,9 +290,9 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     /**
      * Metodo que actualiza la posicion de una cancion en una playlist.
-     * @param title
-     * @param name
-     * @param pos
+     * @param title titulo de la cancion
+     * @param name nombre de la playlist
+     * @param pos posicion de la cancion en la playlist
      * @return
      */
     public LinkedList<SongPlaylist> updatePosP(String title, String name,int pos) {
@@ -324,9 +324,9 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     /**
      * Metodo que obtiene la posicion de una cancion en una playlist.
-     * @param title
-     * @param name
-     * @return
+     * @param title titulo de la cancion
+     * @param name nombre de la playlist
+     * @return pos posicion de la cancion en una playlist
      */
     public int getPosP (String title, String name){
         int pos = 0;
@@ -356,9 +356,9 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     /**
      * Metodo que se utiliza para incrementar en una posicion una cancion en una playlist especifica.
-     * @param name
-     * @param pos
-     * @return
+     * @param name nombre de la cancion
+     * @param pos posicion de la cancion en una playlist
+     * @return posicion nueva posicion de la cancion en la playlist
      */
     public int UpdatePosPExtraU (String name, int pos){
         //Connectamos a la base de datos y controlamos excepciones.
@@ -387,9 +387,9 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     /**
      * Metodo que se utiliza para decrementar en una posicion la posicion de una cancion en una playlist especifica.
-     * @param name
-     * @param pos
-     * @return
+     * @param name nombre de la playlist
+     * @param pos posicion de una cancion en una playlist
+     * @return pos posicion nueva posicion de la cancion en la playlist
      */
     public int UpdatePosPExtraD (String name, int pos){
         //Connectamos a la base de datos y controlamos excepciones.
@@ -419,7 +419,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
     /**
      * Metodo que se emplea para saber cual es la ultima posicion de una playlist.
      * @param name
-     * @return
+     * @return pos posicion nueva posicion de la cancion en la playlist
      */
     public int getLastPos(String name){
         int pos = 0;
@@ -451,11 +451,6 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
         return maxPos;
     }
 
-
-    /**
-     * Method that closes the inner connection to the database. Ideally, users would disconnect after
-     * using the shared instance.
-     */
     /**
      * Metodo que cierra la conexion con la base de datos
      */

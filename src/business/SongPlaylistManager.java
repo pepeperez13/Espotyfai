@@ -22,9 +22,9 @@ public class SongPlaylistManager {
 
     /**
      * Metodo que se emplea para insertar una nueva cancion en una base de datos y se suma una posicion sobre la ultima cancion de la playlist modificada.
-     * @param title
-     * @param name
-     * @return
+     * @param title titulo de la cancion
+     * @param name nombre de la playlisy
+     * @return boolean
      * @throws Exception
      */
     public boolean InsertNewSongPlaylist(String title, String name) throws  Exception{
@@ -53,8 +53,8 @@ public class SongPlaylistManager {
 
     /**
      * Metodo que añade todas las canciones a una playlist
-     * @param playlistName
-     * @return
+     * @param playlistName nombre de la playlist
+     * @return songs
      * @throws Exception
      */
     public LinkedList<Song> insertAllSongsinPlaylist(String playlistName) throws  Exception{
@@ -71,8 +71,8 @@ public class SongPlaylistManager {
 
     /**
      * Metodo para quitar o eliminar una cancion de una playlist
-     * @param name
-     * @param title
+     * @param name nombre de la playlist
+     * @param title titulo de la cancion
      */
 
     public void deleteSongPlaylistSong(String name,String title){
@@ -81,8 +81,8 @@ public class SongPlaylistManager {
     }
     /**
      * Metodo para quitar o eliminar una cancion de una playlist (TESTS)
-     * @param name
-     * @param title
+     * @param name nombre de la playlisy
+     * @param title titulo de la cancion
      */
     public static void deleteSongP(String name, String title){
         songPDAO = new SQLConnectorSongPlaylist();
@@ -91,7 +91,7 @@ public class SongPlaylistManager {
 
     /**
      * Metodo para quitar o eliminar una cancion de una playlist (TESTS 2)
-     * @param pos
+     * @param pos posicion de una cancion en una playlist
      */
     public static void test(int pos){
         songPDAO = new SQLConnectorSongPlaylist();
@@ -101,8 +101,8 @@ public class SongPlaylistManager {
 
     /**
      * Metodo para obtener la ultima posicion de una cancion respecto a una playlist
-     * @param name
-     * @return
+     * @param name nombre de la playlist
+     * @return pos posicion de una cancion en una playlist
      */
     public static int getLastPosition(String name){
         int pos = 0;
@@ -113,8 +113,8 @@ public class SongPlaylistManager {
 
     /**
      * Metodo que te devuelve una linked list de SONG con todas las canciones de una playlist
-     * @param name
-     * @return
+     * @param name nombre de la playlist
+     * @return songs
      */
 
     public  LinkedList<Song> ListPlaylistSongs(String name){
@@ -138,9 +138,9 @@ public class SongPlaylistManager {
 
     /**
      * Metodo que actualiza la posicion de una cancion subiendola o bajandola dependiendo del indice indicado.
-     * @param title
-     * @param name
-     * @param index
+     * @param title titulo de la cancion
+     * @param name nombre de la playlist
+     * @param index indice que indica si se sube una posicion (1) o se baja una posicion (2) en una playlisy
      */
     public void updatePosP(String title, String name, int index){
         LinkedList<SongPlaylist> PSongs2 = null;
@@ -171,9 +171,9 @@ public class SongPlaylistManager {
 
     /**
      * Metodo que verifica si la cancion existe en una playlist.
-     * @param songTitle
-     * @param playlistName
-     * @return
+     * @param songTitle titulo de la cancion
+     * @param playlistName nombre de la playlist
+     * @return boolean
      */
     public boolean songExistsInPlaylist (String songTitle, String playlistName) {
         LinkedList<Song> songs = ListPlaylistSongs(playlistName);

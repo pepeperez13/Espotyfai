@@ -26,8 +26,8 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
 
     /**
      * Metodo que se encarga de insertar en la base de datos los datos de una playlist.
-     * @param name
-     * @param owner
+     * @param name nombre de la playlist
+     * @param owner dueño de la cancion
      * @throws Exception
      */
     public void InsertDataPlaylist(String name, String owner) throws Exception {
@@ -54,9 +54,9 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
 
     /**
      * Metodo que se encarga de actualizar en la base de datos los datos de una playlist.
-     * @param name1
-     * @param owner
-     * @param name2
+     * @param name1 nombre nuevo de la playlist
+     * @param owner dueño nuevo de la playlisy
+     * @param name2 nombre antiguo de la playlist
      */
     public void UpdateDataPlaylist(String name1,String owner, String name2){
         //Connectamos a la base de datos y controlamos excepciones.
@@ -82,7 +82,7 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
 
     /**
      * Metodo que se encarga de insertar en la base de datos los datos de una cancion.
-     * @param name
+     * @param name nombre de la playlist
      */
 
     public void DeleteDataPlaylist(String name){
@@ -112,8 +112,8 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
 
     /**
      * Metodo que se encarga de seleccionar en la base de datos los datos de una playlist de un usuario.
-     * @param user
-     * @return playlists
+     * @param user usuario
+     * @return playlists linked list llenada con las playlist de un usuario
      */
     public LinkedList<Playlist> SelectPlaylistsOfUser(User user)
     {
@@ -175,7 +175,7 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
 
     /**
      * Metodo que se encarga de seleccionar en la base de datos los datos de una playlist.
-     * @return playlists
+     * @return playlists linked list con todos los datos de una playlist
      */
     public LinkedList<Playlist> SelectDataPlaylist(){
         //Creacion de una linked list de playlist

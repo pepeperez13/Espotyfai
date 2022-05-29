@@ -16,9 +16,9 @@ public class SQLConnectorUser implements UserDAO {
 
     /**
      * Metodo que se emplea para insertar en la base de datos los datos de un usuario.
-     * @param user
-     * @param email
-     * @param pass
+     * @param user username
+     * @param email email del usuario
+     * @param pass password del usuario
      */
     public void InsertDataUser(String user, String email, String pass) {
         //Connectamos a la base de datos y controlamos excepciones.
@@ -47,10 +47,10 @@ public class SQLConnectorUser implements UserDAO {
 
     /**
      * Metodo que se utiliza para actualizar en base de datos los datos de un usuario.
-     * @param name1
-     * @param email
-     * @param password
-     * @param name2
+     * @param name1 nombre a actualizar
+     * @param email email del usuario a actualizar
+     * @param password password del usuario a actualizar
+     * @param name2 antiguo username del ususario
      */
 
 
@@ -85,7 +85,7 @@ public class SQLConnectorUser implements UserDAO {
 
     /**
      * Metodo que se emplea para eliminar los datos de un usuario.
-     * @param name
+     * @param name nombre del usuario
      */
 
 
@@ -113,7 +113,7 @@ public class SQLConnectorUser implements UserDAO {
 
     /**
      * Metodo que se utiliza para seleccionar obtener los datos de todos los usuarios.
-     * @return
+     * @return users Linked list con los datos del usuario
      */
     public LinkedList<User> SelectDataUser(){
         String user, emails, pass;

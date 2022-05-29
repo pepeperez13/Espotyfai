@@ -31,12 +31,12 @@ public class SQLConnectorSong implements SongDAO {
 
     /**
      * Metodo que se encarga de insertar en la base de datos los datos de una cancion.
-     * @param title
-     * @param genre
-     * @param album
-     * @param artist
-     * @param path
-     * @param owner
+     * @param title titulo de la cancion
+     * @param genre genero de la cancion
+     * @param album album de la cancion
+     * @param artist artista de la cancion
+     * @param path ruta de la cancion
+     * @param owner dueño de la cancion
      */
     public void InsertDataSong(String title, String genre, String album, String artist, String path, String owner) {
     //Connectamos a la base de datos y controlamos excepciones.
@@ -65,13 +65,13 @@ public class SQLConnectorSong implements SongDAO {
 
     /**
      * Metodo que se encarga de acturlizar en la base de datos los datos de una cancion.
-     * @param title1
-     * @param genre
-     * @param album
-     * @param artist
-     * @param path
-     * @param owner
-     * @param title2
+     * @param title1 titulo nuevo de la cancion
+     * @param genre genero de la cancion
+     * @param album album de la cancion
+     * @param artist artista de la cancion
+     * @param path ruta de la cancion
+     * @param owner dueño de la cancion
+     * @param title2 titulo antiguo de la cancion
      */
 
     public void UpdateDataSong(String title1,String genre,String album, String artist,String path,String owner,String title2){
@@ -105,7 +105,7 @@ public class SQLConnectorSong implements SongDAO {
 
     /**
      * Metodo que se encarga de borrar en la base de datos los datos de una cancion.
-     * @param title
+     * @param title titulo de la cancion
      */
     public void DeleteDataSong(String title){
         //Connectamos a la base de datos y controlamos excepciones.
@@ -131,7 +131,7 @@ public class SQLConnectorSong implements SongDAO {
 
     /**
      * Metodo que selecciona la informacion de la entidad cancion.
-     * @return songs
+     * @return songs linked list llena con la informacion de las canciones del sistema
      */
 
     public LinkedList<Song> SelectDataSong(){
@@ -176,8 +176,8 @@ public class SQLConnectorSong implements SongDAO {
 
     /**
      * Metodo que te permite obtener toda la informacion de una cancion dado el nombre de la cancion.
-     * @param name
-     * @return newSong
+     * @param name nombre de la cancion
+     * @return newSong entidad cancion
      */
     public Song SelectSong(String name){
         Song newSong = null;
