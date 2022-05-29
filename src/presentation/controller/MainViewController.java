@@ -58,6 +58,7 @@ public class MainViewController implements ActionListener {
             MainViewController.reproducingPlaylist = true;
             BottomBarPanel.updateSong(playlist.getSongs().get(0));
             SongPlayerController.playPlaylist();
+            SongPlayerController.setRepeatPlaylist(false);
         }
     }
 

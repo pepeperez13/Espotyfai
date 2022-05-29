@@ -23,6 +23,7 @@ public class SongPlayerController implements ActionListener {
     private static BottomBarPanel bottomBarPanel;
     private static DetailedSongView detailedSongView;
     private MainManagerView mainManagerView;
+    private static boolean repeatPlaylist;
 
 
     public SongPlayerController(BottomBarPanel bottomBarPanel, DetailedSongView detailedSongView, MainManagerView mainManagerView) {
@@ -49,6 +50,7 @@ public class SongPlayerController implements ActionListener {
             }
             if (e.getActionCommand().equals("PLAY_SONG")) {
                 //BottomBarPanel.updateSong(detailedSongView.getSong());
+                MainViewController.setReproducingPlaylist(false);
                 songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1, BottomBarPanel.getSong().getSongDurationSeconds());
                 BottomBarPanel.setValueSlider(0);
                 System.out.println("Play");
@@ -72,6 +74,9 @@ public class SongPlayerController implements ActionListener {
                 System.out.println("Loop song");
             }
             if (e.getActionCommand().equals("REPEAT_PLAYLIST")) {
+                if (MainViewController.isReproducingPlaylist()) {
+                    repeatPlaylist = true;
+                }
 
             }
         } catch (NullPointerException exception) {
@@ -89,11 +94,18 @@ public class SongPlayerController implements ActionListener {
         songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 1,BottomBarPanel.getSong().getSongDurationSeconds());
     }
 
+    public static void autoNextSong () {
+        Song song = findSongToReproduce(+ 1);
+        if (song != null) {
+            BottomBarPanel.updateSong(song);
+            songPlayer.managePlayer(song.getPath(), 1, song.getSongDurationSeconds());
+        }
+    }
+
     public static void playPlaylist () {
         List<Song> songsPlaylist = MainViewController.getReproducingPlaylist().getSongs().stream().sorted(Comparator.comparing(Song::getPosition)) .collect(Collectors.toList());
         Song song = songsPlaylist.get(0);
         BottomBarPanel.updateSong(song);
-        //Playlist playlist = MainViewController.getReproducingPlaylist();
         songPlayer.managePlayer(song.getPath(), 1, song.getSongDurationSeconds());
     }
 
@@ -105,14 +117,22 @@ public class SongPlayerController implements ActionListener {
         return  BottomBarPanel.getSong();
     }
 
-    private Song findSongToReproduce (int index) {
-        Song song = null;
+    public static void setRepeatPlaylist (boolean repeatPlaylist) {
+        SongPlayerController.repeatPlaylist = repeatPlaylist;
+    }
 
+    private static Song findSongToReproduce (int index) {
+        Song song = null;
+        List<Song> playlistSongs = null;
         try {
             if (MainViewController.isReproducingPlaylist()) {
-                List<Song> playlistSongs = MainViewController.getReproducingPlaylist().getSongs().stream().sorted(Comparator.comparing(Song::getPosition)) .collect(Collectors.toList());
-                song = playlistSongs.get(BottomBarPanel.getSong().getPosition() - 1 + index);
-
+                playlistSongs = MainViewController.getReproducingPlaylist().getSongs().stream().sorted(Comparator.comparing(Song::getPosition)) .collect(Collectors.toList());
+                // Si se está reproduciendo una playlist, se quiere repetir, y la canción actual es la última, asignamos la nueva canción como la primera de la lista
+                if (repeatPlaylist && MainViewController.isReproducingPlaylist() && BottomBarPanel.getSong().getPosition() == playlistSongs.size()) {
+                    song = playlistSongs.get(0);
+                } else {
+                    song = playlistSongs.get(BottomBarPanel.getSong().getPosition() - 1 + index);
+                }
             } else {
                 // Buscamos y guardamos como "song" la siguiente canción a la que se está reproduciendo ahora
                 for (int i = 0; i < SongManager.ListSongs().size(); i++) {
@@ -125,6 +145,7 @@ public class SongPlayerController implements ActionListener {
             System.out.println("Next");
         } catch (IndexOutOfBoundsException exception) {
             // Si nos encontramos en la primera canción (ya sea de la playlist o de las canciones en general) no podemos pasar a la siguiente
+
         }
         return song;
     }

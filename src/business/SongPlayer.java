@@ -1,5 +1,7 @@
 package business;
 
+import presentation.controller.MainViewController;
+import presentation.controller.SongPlayerController;
 import presentation.view.BottomBarPanel;
 
 import javax.sound.sampled.*;
@@ -23,7 +25,7 @@ public class SongPlayer implements Runnable{
             if (index != this.index && Objects.equals(this.path, path)) {
                 this.index = index;
             }
-            if (!Objects.equals(this.path, path)) {
+            if (!Objects.equals(this.path, path) /*|| MainViewController.isReproducingPlaylist()*/) {
                 // Si cambia el path, significa que la cancion que se reproducia anteriormente debe pararse
                 if (clip != null) {
                     clip.close();
@@ -65,7 +67,7 @@ public class SongPlayer implements Runnable{
     public void run() {
         System.out.println(songDuration);
         // El thread sigue hasta que se acaba la canción (volverá a empezar otro cuando pasemos a la siguiente canción)
-        while(clip.getMicrosecondPosition() < songDuration*1000000 || index ==5) {
+        while(clip.getMicrosecondPosition() < (songDuration*1000000 - 1000000) || index ==5) {
             this.currentTime = clip.getMicrosecondPosition();
             this.endTime = songDuration*1000000;
             switch (index) {
@@ -85,13 +87,14 @@ public class SongPlayer implements Runnable{
                     clip.close();
                     break;
             }
-            if (currentTime%1000000 == 0) {
+            if (currentTime%2000000 == 0) {
                 BottomBarPanel.setValueSlider(this.currentTime);
             }
         }
         clip.close();
         // Si se ha acabado la canción, cambiamos el path, para que si se quiere volver a dar al play, se reproduzca
         path = "none";
+        SongPlayerController.autoNextSong();
 
     }
 
