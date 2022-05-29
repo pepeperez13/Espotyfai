@@ -84,7 +84,7 @@ public class SongPlayer implements Runnable{
     public void run() {
 
         // El thread sigue gracias al bucle hasta que se acaba la canción (volverá a empezar otro cuando pasemos a la siguiente canción)
-        while(clip.getMicrosecondPosition() < (songDuration*1000000 - 1000000) || index ==5) {
+        while(clip.getMicrosecondPosition() < (songDuration*1000000 - 1000000) || index ==3) {
             this.currentTime = clip.getMicrosecondPosition();
             this.endTime = songDuration*1000000;
             switch (index) {
