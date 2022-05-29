@@ -30,7 +30,7 @@ public class PlayListController implements ActionListener {
             Playlist playlist = (Playlist) ((JButton) e.getSource()).getClientProperty("PLAYLIST_ELIMINAR");
             try{
                 playlistManager.deletePlaylist(playlist.getName());
-                playlistView.bringPlaylists();
+                playlistView.bringPlaylists(playlistManager.getDataPlaylists(),playlistManager.getPlaylistsOfUser(Owner.getUser()));
             }catch(Exception exception){
                 exception.printStackTrace();
             }
@@ -45,7 +45,7 @@ public class PlayListController implements ActionListener {
                 }
                 else{
                     playlistManager.createPlaylist(nombrePlaylist.trim(), Owner.getUser().getName());
-                    playlistView.bringPlaylists();
+                    playlistView.bringPlaylists(playlistManager.getDataPlaylists(),playlistManager.getPlaylistsOfUser(Owner.getUser()));
                 }
 
             } catch (Exception exception) {

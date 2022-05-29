@@ -1,5 +1,7 @@
 package presentation.controller;
 
+import business.Owner;
+import business.PlaylistManager;
 import business.SongManager;
 import business.SongPlaylistManager;
 import business.entities.Playlist;
@@ -12,6 +14,7 @@ import presentation.view.SongListlView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 /**
  * Clase que controla que vistas mostrar según la opción del menu general clickada
@@ -21,6 +24,7 @@ public class MainViewController implements ActionListener {
     private MainMenu mainMenu;
     private MainManagerView mainManagerView;
     private SongManager songManager;
+    private PlaylistManager playlistManager = new PlaylistManager();
     private static Playlist parameterPlayList = new Playlist();
     private static boolean reproducingPlaylist;
     private SongPlaylistManager songPlaylistManager;
@@ -72,7 +76,13 @@ public class MainViewController implements ActionListener {
 
         }
     }
+    public LinkedList<Playlist> getPlaylistsOfUser(){
+       return playlistManager.getPlaylistsOfUser(Owner.getUser());
+    }
 
+    public LinkedList<Playlist> getAllPlaylists(){
+        return playlistManager.getDataPlaylists();
+    }
     /**
      * Método que retorna si está reproduciendo una playlist
      * @return True si se está reproduciendo una playlist

@@ -1,6 +1,8 @@
 package presentation.view;
 
+import business.Owner;
 import business.PlaylistManager;
+
 import business.entities.Playlist;
 import business.entities.Song;
 import presentation.controller.ManageAccountController;
@@ -70,7 +72,6 @@ public class SongListlView extends JPanel {
         addSongButton.setBackground(Color.red);
         addSongButton.setActionCommand(ADDSONG);
         addSongButton.addActionListener(songListController);
-        //addSongButton.putClientProperty("song",comboSongs.getSelectedItem());
         addSongButton.putClientProperty("playlist",selectedPlaylist);
 
 
@@ -92,7 +93,10 @@ public class SongListlView extends JPanel {
         }catch (NullPointerException e){
             JOptionPane.showMessageDialog(this,"This Playlist is empty");
         }
-        panel.add(addSongPanel);
+        if(isMyPlaylist()){
+            panel.add(addSongPanel);
+        }
+
         jScrollPane.setViewportView(panel);
     }
 
@@ -109,26 +113,7 @@ public class SongListlView extends JPanel {
     }
 
 
-    public  static String showMessageAddSong(LinkedList<Song> songs) {
-        JPanel songPanel = new JPanel();
-        //showPlaylistsController = new ShowPlaylistsController(this);
-
-        Box box= Box.createVerticalBox();
-
-
-       /* for (Song song : songs) {
-            JButton button = new JButton(song.getTitle());
-            button.setFont(new Font("Tahoma", Font.PLAIN, 14));
-            button.setAlignmentX(Component.CENTER_ALIGNMENT);
-            button.setFocusable(false);
-            button.setActionCommand(ADDSONGPANE);
-            button.addActionListener(controller);
-            box.add(button);
-        }*/
-
-       /* JScrollPane scroll= new JScrollPane(box);
-        songPanel.add(scroll);
-        JOptionPane.showMessageDialog(this, songPanel, "Select a song you want to add to the playlist", JOptionPane.PLAIN_MESSAGE);*/
-        return null;
+    private boolean isMyPlaylist(){
+        return selectedPlaylist.getOwner().equals(Owner.getUser().getName());
     }
 }

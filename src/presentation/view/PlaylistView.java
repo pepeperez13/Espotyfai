@@ -74,10 +74,9 @@ public class PlaylistView extends JPanel {
     /**
      * Metodo que configura la vista para mostrar las Playlist del User y todas las Playlist
      */
-    public void bringPlaylists() {
+    public void bringPlaylists(LinkedList<Playlist> playlists,LinkedList<Playlist> playlistsOfUser) {
 
-        LinkedList<Playlist> playlistsOfUser = manager.getPlaylistsOfUser(Owner.getUser());
-        LinkedList<Playlist> playlists= manager.getDataPlaylists();
+
 
         GridBagLayout gridLayout= new GridBagLayout();
         JSeparator separatorvertical= new JSeparator();

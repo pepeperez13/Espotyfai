@@ -70,7 +70,7 @@ public class MainManagerView extends JPanel {
         configureMenuCardPanel();
         switch(numCardPanel){
             case 3:
-                this.playlistView.bringPlaylists();
+                this.playlistView.bringPlaylists(mainViewController.getAllPlaylists(),mainViewController.getPlaylistsOfUser());
                 break;
             case 12:
                 this.songListlView.loadSongs();
