@@ -28,7 +28,7 @@ public class BuscadorManager {
 
         int posicion_song = 0;
         boolean found = false;
-        for (int i = 0; i < list_songs.size() || !found; i++) {
+        for (int i = 0; i < list_songs.size() && !found; i++) {
             if (buscador.equals(list_songs.get(i).getTitle())) {
                 posicion_song = i;
                 found = true;

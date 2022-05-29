@@ -1,6 +1,6 @@
 {
   "dataBasePort": 3306,
-  "dataBaseIP": "jdbc:mysql://localhost:3306/espotifay",
+  "dataBaseIP": "jdbc:mysql://localhost:3306/espotifai",
   "dataBaseName": "espotifay",
   "userName": "root",
   "password": ""
