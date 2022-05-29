@@ -1,11 +1,13 @@
 package presentation.view;
-import business.SongManager;
+
 import presentation.controller.AddMusicController;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 
+/**
+ * Clase que contiene la vista de AÑADIR CANCIÓN
+ */
 public class AddMusicPanelView extends JPanel {
     public static final String ADD_SONG = "ADD_SONG";
     private final JTextField textTitulo = new JTextField();
@@ -15,6 +17,9 @@ public class AddMusicPanelView extends JPanel {
     private final JFileChooser fileChooser = new JFileChooser();
     private final GridBagConstraints gc = new GridBagConstraints();
 
+    /**
+     * Constructor de AddMusicPanelView
+     */
     public AddMusicPanelView () {
         setLayout(new GridBagLayout());
         gc.fill = GridBagConstraints.NONE;
@@ -25,6 +30,11 @@ public class AddMusicPanelView extends JPanel {
         configurePanel(addMusicController);
     }
 
+    /**
+     * Método que configura la vista (JLabels, JButtons, JTextFields, ...)
+     * @param addMusicController Recibe el controlador que gestionará la información introducida
+     *                           por el usuario, asi como as acciones sobre los botones
+     */
     private void configurePanel (AddMusicController addMusicController) {
         JLabel labelAdd = new JLabel();
         labelAdd.setText("Añadir canción");
@@ -131,12 +141,26 @@ public class AddMusicPanelView extends JPanel {
 
     }
 
+    /**
+     * Devuelve el string que hay en el TextField
+     * @return String
+     */
     public String getAlbum () {
         return textAlbum.getText();
     }
+
+    /**
+     * Devuelve el string que hay en el TextField
+     * @return String
+     */
     public String getAutor () {
         return textAutor.getText();
     }
+
+    /**
+     * Devuelve el string que ha seleccionado el usuario
+     * @return String
+     */
     public String getGenero () {
         String info = null;
         if (optionGenero.getSelectedItem().equals(StaticsPanelView.KPOP)){
@@ -171,18 +195,30 @@ public class AddMusicPanelView extends JPanel {
         }
         return info;
     }
+
+    /**
+     * Devuelve el string que hay en el TextField
+     * @return String
+     */
     public String getTitulo () {
         return textTitulo.getText();
     }
+
+    /**
+     * Devuelve el string que hay en el TextField
+     * @return String
+     */
     public String getPath () {
         return openFile();
     }
+
+    /**
+     * Método que retorna un String con el archivo seleccionado del dispositivo del usuario actual
+     * @return String Path
+     */
     private String openFile () {
         String path = null;
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-
-        //FileNameExtensionFilter filter = new FileNameExtensionFilter("WAV", ".wav");
-        //fileChooser.setFileFilter(filter);
 
         int result = fileChooser.showOpenDialog(this);
 

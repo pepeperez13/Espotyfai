@@ -6,6 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Clase que contiene la vista de la CONFIGURACIÓN DE LA MUSICA que cotniene las opciones de:
+ * -AÑADIR MÚSICA
+ * -ELIMINAR MÚSICA
+ */
 public class ConfMusicPanelView extends JPanel {
     public static final String GO_ADD_MUSIC = "GO_ADD_MUSIC";
     public static final String GO_DELETE_MUSIC = "GO_DELETE_MUSIC";
@@ -14,6 +19,11 @@ public class ConfMusicPanelView extends JPanel {
     private ConfMusicController confMusicController;
     private final GridBagConstraints gc = new GridBagConstraints();
 
+    /**
+     *Constructor en el que se describe la estructura de la vista
+     * <<Se inicializa el controller de la vista para la interacción con los botones>>
+     * @param mainManagerView
+     */
     public ConfMusicPanelView(MainManagerView mainManagerView) {
         confMusicController = new ConfMusicController(mainManagerView);
 
@@ -50,6 +60,9 @@ public class ConfMusicPanelView extends JPanel {
         add(jbDel, gc);
     }
 
+    /**
+     * Método que conecta la vista con el controlador [View->Controller]
+     */
     public void registerController (ActionListener listener) {
         jbAdd.addActionListener(listener);
         jbDel.addActionListener(listener);

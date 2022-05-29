@@ -9,7 +9,6 @@ import persistance.SongDAO;
 import persistance.UserDAO;
 import persistance.dao.sql.SQLConnectorPlaylist;
 import persistance.dao.sql.SQLConnectorSong;
-import persistance.dao.sql.SQLConnectorUser;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -152,7 +151,7 @@ public class UserManager {
     }
 
     public void deleteUser(){
-        User userToDelete = Store.getUser();
+        User userToDelete = Owner.getUser();
         LinkedList<Playlist> playlists= sqlP.SelectPlaylistsOfUser(userToDelete);
         LinkedList<Song> songs= sqlS.SelectDataSong();
 
@@ -172,8 +171,8 @@ public class UserManager {
 
     }
     public void logout(){
-        User userToLogout = Store.getUser();
+        User userToLogout = Owner.getUser();
         //sql.LogoutUser(userToLogout);
-        Store.setUser(null);
+        Owner.setUser(null);
     }
 }

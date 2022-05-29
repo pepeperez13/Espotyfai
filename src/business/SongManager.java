@@ -13,17 +13,34 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class SongManager<Public> {
+/**
+ * Clase que gestiona la interaccion de las canciones con la base de datos
+ */
+public class SongManager {
 
     private static SongDAO songDAO = new SQLConnectorSong();
 
     private static SongPlaylistDAO songPDAO = new SQLConnectorSongPlaylist();
 
-
+    /**
+     * Método que añade una canción
+     * @param title Título de una canción
+     * @param Genre Género de una canción
+     * @param album Album al que pertenece la canción
+     * @param artist Artista de la canción
+     * @param path Path donde se encuentra la canción
+     * @param owner Usuario que añadió la canción
+     */
     public static void addSong (String title, String Genre, String album, String artist, String path,String owner) {
         songDAO.InsertDataSong(title, Genre, album, artist, path, owner);
     }
 
+    /**
+     * Mira si la cancion existe en la base de datos
+     * @param title Título de la canción
+     * @param path Path donde se encuentra la canción
+     * @return true si la canción existe
+     */
     public static boolean checkSongExistance (String title,String path) {
         LinkedList<Song> songs = ListSongs();
         for (Song s: songs) {
@@ -60,17 +77,6 @@ public class SongManager<Public> {
         songPDAO.DeleteSongPFull(title);
 
     }
-    /*public static LinkedList<Song> SelectSong(String Song) {
-        songDAO = new SQLConnectorSong();
-        LinkedList<Song> song;
-        song = songDAO.SelectDataSong();
-        System.out.println(song);
-        return song;
-    }*/
-
-
-
-
 }
 
 

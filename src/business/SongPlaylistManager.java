@@ -11,10 +11,7 @@ import persistance.dao.sql.SQLConnectorPlaylist;
 import persistance.dao.sql.SQLConnectorSong;
 import persistance.dao.sql.SQLConnectorSongPlaylist;
 
-import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class SongPlaylistManager<Public> {
@@ -35,7 +32,7 @@ public class SongPlaylistManager<Public> {
 
         for(Playlist p: playlists){
             if(p.getName().equals(name)){
-                if(p.getOwner().equals(Store.getUser().getName())){
+                if(p.getOwner().equals(Owner.getUser().getName())){
                     songPDAO.InsertDataSongP(title, name, lastPos +1);
                     return true;
                 }

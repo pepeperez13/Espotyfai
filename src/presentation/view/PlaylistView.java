@@ -2,20 +2,15 @@ package presentation.view;
 
 import business.PlaylistManager;
 import business.SongPlaylistManager;
-import business.Store;
+import business.Owner;
 import business.entities.Playlist;
 
-import business.entities.Song;
-import presentation.controller.MainViewController;
 import presentation.controller.PlayListController;
-import presentation.controller.ShowPlaylistsController;
-import presentation.controller.SongListController;
 import presentation.render.PlayListRender;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -81,7 +76,7 @@ public class PlaylistView extends JPanel {
      */
     public void bringPlaylists() {
 
-        LinkedList<Playlist> playlistsOfUser = manager.getPlaylistsOfUser(Store.getUser());
+        LinkedList<Playlist> playlistsOfUser = manager.getPlaylistsOfUser(Owner.getUser());
         LinkedList<Playlist> playlists= manager.getDataPlaylists();
 
         GridBagLayout gridLayout= new GridBagLayout();

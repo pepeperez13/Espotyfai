@@ -1,6 +1,6 @@
 package presentation.controller;
 
-import business.Store;
+import business.Owner;
 import business.UserManager;
 import persistance.UserDAO;
 
@@ -45,7 +45,7 @@ public class   LoginController implements ActionListener {
         if (e.getActionCommand().equals(LoginView.INICIO)) {
             // SI los datos son correctos, se actualiza el store y se pasa a la vista principal. En caso contrario, mensaje de error
             if (checkDataCorrect()) {
-                Store.setUser(manager.getCurrentUser(loginView.getUserName()));
+                Owner.setUser(manager.getCurrentUser(loginView.getUserName()));
                 initController.refreshView(3);
             } else {
                 loginView.showErrorMessage(userExistsError, passwordConfirmationError);

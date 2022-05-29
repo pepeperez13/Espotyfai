@@ -1,12 +1,19 @@
 package presentation.view;
 
-import presentation.controller.SideBarController;
+import presentation.controller.ConfigMenuController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class ConfigMenu extends JPanel {
+/**
+ * Menú lateral que contiene las siguientes opciones:
+ * -INICIO
+ * -CONFIGURACIÓN DE LA MÚSICA
+ * -CONFIGURACIÓN DEL USUARIO
+ * -ESTADÍSTICAS
+ */
+public class ConfigMenuView extends JPanel {
     public static final String GO_INICIO = "GO_INICIO";
     public static final String GO_CONFIG_MUSIC = "GO_CONFIG_MUSIC";
     public static final String GO_CONFIG_USER = "GO_CONFIG_USER";
@@ -15,12 +22,17 @@ public class ConfigMenu extends JPanel {
     private JButton jbconfMusic;
     private JButton jbconfUsuario;
     private JButton jbconfEstadisticas;
-    private SideBarController sideBarController;
+    private ConfigMenuController configMenuController;
     private final GridBagConstraints constraint = new GridBagConstraints();
 
-    public ConfigMenu (MainManagerView mainManagerView) {
+    /**
+     *Constructor en el que se describe la estructura del menú
+     * <<Se inicializa el controller de la vista para la interacción con los botones>>
+     * @param mainManagerView
+     */
+    public ConfigMenuView(MainManagerView mainManagerView) {
 
-        sideBarController = new SideBarController(this, mainManagerView);
+        configMenuController = new ConfigMenuController(mainManagerView);
 
         setBackground(new Color(191, 105, 240));
         setLayout(new GridBagLayout());
@@ -99,8 +111,12 @@ public class ConfigMenu extends JPanel {
         constraint.gridy = 2;
         add(groupBotones, constraint);
 
-        registerController(sideBarController);
+        registerController(configMenuController);
     }
+
+    /**
+     * Método que conecta la vista con el controlador [View->Controller]
+     */
     private void registerController(ActionListener listener) {
         jbInicio.addActionListener(listener);
         jbconfUsuario.addActionListener(listener);

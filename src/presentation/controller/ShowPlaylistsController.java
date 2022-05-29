@@ -1,8 +1,6 @@
 package presentation.controller;
 
-import business.PlaylistManager;
 import business.SongPlaylistManager;
-import business.Store;
 import presentation.view.DetailedSongView;
 
 import java.awt.event.ActionEvent;

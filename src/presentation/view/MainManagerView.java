@@ -22,7 +22,7 @@ public class MainManagerView extends JPanel {
     private DetailedSongView detailedSongView;
     private DetailedSongController detailedSongController;
     private MainMenu mainMenu;
-    private ConfigMenu configMenu;
+    private ConfigMenuView configMenuView;
     private ManageAccountView manageAccountView;
     private ConfMusicPanelView confMusicPanelView;
     private StaticsPanelView staticsPanel;
@@ -36,14 +36,16 @@ public class MainManagerView extends JPanel {
     private BottomBarPanel bottomBarPanel;
     private MainViewController mainViewController;
 
+    /**
+     * Constructor de la vista general del programa
+     * @param initView es la Vista principal
+     */
     public MainManagerView(InitView initView) {
         this.setLayout(new BorderLayout());
-        //this.setBackground(Color.PINK);
-        //this.setOpaque(true);
 
         mainMenu = new MainMenu(this);
         mainViewController= new MainViewController(mainMenu,this);
-        configMenu = new ConfigMenu(this);
+        configMenuView = new ConfigMenuView(this);
         detailedSongView = new DetailedSongView();
         bottomBarPanel = new BottomBarPanel(detailedSongView, this);
         manageAccountView = new ManageAccountView(initView);
@@ -55,6 +57,12 @@ public class MainManagerView extends JPanel {
         add(bottomBarPanel, BorderLayout.SOUTH);
 
     }
+
+    /**
+     * Método que se encarga de decirle a los CardLayout la vista que tiene que mostrar
+     * @param numCardPanel Indica una de las vistas de las opciones
+     * @param numMenuPanel Indica uno de los dos menus
+     */
     public void changeView(int numCardPanel, int numMenuPanel) {
         numViewCardPanel = numCardPanel;
         numViewMenuCardPanel = numMenuPanel;
@@ -74,6 +82,10 @@ public class MainManagerView extends JPanel {
         c2.show(menuCardPanel, String.valueOf(numViewMenuCardPanel));
     }
 
+    /**
+     * Método que inicializa las vistas de las distintas opciones del programa
+     * @return
+     */
     private JPanel configureCardPanel () {
         cardPanel.setLayout(c);
 
@@ -110,11 +122,15 @@ public class MainManagerView extends JPanel {
         return cardPanel;
     }
 
+    /**
+     * Método que configura el CardLayout de los menus
+     * @return
+     */
     private JPanel configureMenuCardPanel () {
         menuCardPanel.setLayout(c2);
 
         menuCardPanel.add(mainMenu, "1");
-        menuCardPanel.add(configMenu, "2");
+        menuCardPanel.add(configMenuView, "2");
 
         return menuCardPanel;
     }

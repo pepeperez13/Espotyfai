@@ -1,11 +1,10 @@
 package presentation.controller;
 
 import business.PlaylistManager;
-import business.Store;
+import business.Owner;
 import business.entities.Playlist;
 import presentation.render.PlayListRender;
 import presentation.view.PlaylistView;
-import presentation.view.SongListlView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,8 +21,7 @@ public class PlayListController implements ActionListener {
     }
 
     /**
-     * Invoked when an action occurs.
-     *
+     * Gestiona, mediante "if" a traves de los action command, las diferentes acciones que deben llevarse a cabo
      * @param e the event to be processed
      */
     @Override
@@ -46,7 +44,7 @@ public class PlayListController implements ActionListener {
 
                 }
                 else{
-                    playlistManager.createPlaylist(nombrePlaylist.trim(), Store.getUser().getName());
+                    playlistManager.createPlaylist(nombrePlaylist.trim(), Owner.getUser().getName());
                     playlistView.bringPlaylists();
                 }
 

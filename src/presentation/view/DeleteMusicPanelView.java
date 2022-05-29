@@ -1,16 +1,23 @@
 package presentation.view;
-import presentation.controller.ConfMusicController;
+
 import presentation.controller.DeleteMusicController;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Clase que contiene la vista que se encarga de eliminar una canción del usuario actual
+ */
 public class DeleteMusicPanelView extends JPanel {
     private GridBagConstraints gc = new GridBagConstraints();
     private JTextField nameSong = new JTextField();
-    public static final String DELETE = "DELETE";
+    public static final String DELETE = "DELETE"; //Constante que también usa el controlador de esta vista
     private DeleteMusicController deleteMusicController;
 
+    /**
+     *Constructor en el que se describe la estructura de la vista "Eliminar canción"
+     * <<Se inicializa el controller de la vista para la interacción con los botones>>
+     */
     public DeleteMusicPanelView () {
         deleteMusicController = new DeleteMusicController(this);
 
@@ -64,6 +71,10 @@ public class DeleteMusicPanelView extends JPanel {
         add(mensaje, gc);
     }
 
+    /**
+     * Retorna el
+     * @return String Nombre de la cancion introducida por el usuario
+     */
     public String getNameSong() {
         return nameSong.getText();
     }

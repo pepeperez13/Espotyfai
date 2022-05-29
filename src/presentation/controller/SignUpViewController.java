@@ -1,6 +1,6 @@
 package presentation.controller;
 
-import business.Store;
+import business.Owner;
 import business.UserManager;
 import persistance.UserDAO;
 
@@ -46,7 +46,7 @@ public class SignUpViewController implements ActionListener{
         if (e.getActionCommand().equals(SignUpView.REGISTER_BUTTON)) {
             if (checkDataCorrect()) {
                 manager.insertNewUser(view.getUserName(), view.getEmail(), view.getPassword());
-                Store.setUser(manager.getCurrentUser(view.getUserName()));
+                Owner.setUser(manager.getCurrentUser(view.getUserName()));
                 initController.refreshView(3);
             } else {
                 view.showErrorMessage(userExistsError, emailExistsError, emailFormatError, passwordFormatError, passwordConfirmationError);
@@ -61,7 +61,7 @@ public class SignUpViewController implements ActionListener{
      * Llama a distintos metodos del manager que comprueban si ha habido algún error en los datos introducidos
      * @return booleano que indica si todos los datos son correctos (true) o no (falso)
      */
-    public boolean checkDataCorrect() {
+    private boolean checkDataCorrect() {
 
         userExistsError = manager.checkUsernameExistance(view.getUserName());
 

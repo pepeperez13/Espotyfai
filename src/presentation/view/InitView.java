@@ -5,16 +5,22 @@ import presentation.controller.InitController;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Clase que contiene el único JFrame del programa e inicializa las siguientes vistas:
+ * -REGISTRO
+ * -INICIO DE SESIÓN
+ * -VISTA PRINCIPAL
+ */
 public class InitView extends JFrame {
     private final CardLayout cardLayout = new CardLayout();
     JPanel content = new JPanel();
-    //private final SignUpViewController signUpViewController = new SignUpViewController();
-    //private final LoginController loginController = new LoginController();
-
     private InitController initController;
 
+    /**
+     * Constructor que configura el JFrame
+     */
     public InitView () {
-        setTitle("SPOTIFAI");
+        setTitle("ESPOTIFY");
         setLayout(new BorderLayout());
 
         initController = new InitController(this);
@@ -28,6 +34,10 @@ public class InitView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    /**
+     * Método que configura el CardLayout
+     * @return JPanel
+     */
     private JPanel setView () {
         MainManagerView mainManagerView = new MainManagerView(this);
         SignUpView signUpView = new SignUpView(this);
@@ -42,6 +52,10 @@ public class InitView extends JFrame {
         return content;
     }
 
+    /**
+     * Método que muestra el panel que indica su controlador
+     * @param num Identificador de la vista
+     */
     public void changeView (int num) {
         cardLayout.show(content, String.valueOf(num));
     }

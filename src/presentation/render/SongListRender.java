@@ -1,6 +1,6 @@
 package presentation.render;
 
-import business.Store;
+import business.Owner;
 import business.entities.Playlist;
 import business.entities.Song;
 
@@ -131,7 +131,7 @@ public class SongListRender extends JPanel {
 
     }
     private boolean isMyPlaylist(){
-        return playlist.getOwner().equals(Store.getUser().getName());
+        return playlist.getOwner().equals(Owner.getUser().getName());
     }
 
 }

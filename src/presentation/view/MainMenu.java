@@ -6,6 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Menú lateral que contiene las siguientes opciones:
+ * -INICIO
+ * -BUSCADOR CANCIÓN
+ * -LISTAS DE REPRODUCCIÓN
+ * -CONFIGURACIÓN
+ */
 public class MainMenu extends JPanel {
     public static final String GO_INICIO = "GO_INICIO";
     public static final String GO_BUSCADOR = "GO_BUSCADOR";
@@ -18,6 +25,11 @@ public class MainMenu extends JPanel {
     private GridBagConstraints constraint = new GridBagConstraints();
     private MainViewController mainViewController;
 
+    /**
+     *Constructor en el que se describe la estructura del menú
+     * <<Se inicializa el controller de la vista para la interacción con los botones>>
+     * @param mainManagerView
+     */
     public MainMenu (MainManagerView mainManagerView) {
         mainViewController = new MainViewController(this, mainManagerView);
 
@@ -103,8 +115,11 @@ public class MainMenu extends JPanel {
 
         registerController(mainViewController);
 
-        //reproductor_panel = reproductorBarView.ReproductorBarView();
     }
+
+    /**
+     * Método que conecta la vista con el controlador [View->Controller]
+     */
     private void registerController(ActionListener listener) {
         jbconfMusic.addActionListener(listener);
         jbconfBuscar.addActionListener(listener);
