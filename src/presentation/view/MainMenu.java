@@ -46,7 +46,7 @@ public class MainMenu extends JPanel {
         logoApp.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         jbconfMusic = new JButton();
-        jbconfMusic.setText("Inicio");
+        jbconfMusic.setText("Home");
         jbconfMusic.setFont(new Font("Arial", Font.BOLD, 18));
         jbconfMusic.setForeground(new Color(255, 255, 255));
         jbconfMusic.setBackground(new Color(191, 105, 240));
@@ -54,7 +54,7 @@ public class MainMenu extends JPanel {
         jbconfMusic.setActionCommand(GO_INICIO);
 
         jbconfBuscar = new JButton();
-        jbconfBuscar.setText("Buscar música");
+        jbconfBuscar.setText("Search music");
         jbconfBuscar.setFont(new Font("Arial", Font.BOLD, 18));
         jbconfBuscar.setForeground(new Color(255, 255, 255));
         jbconfBuscar.setBackground(new Color(191, 105, 240));
@@ -63,7 +63,7 @@ public class MainMenu extends JPanel {
         //jbconfMusic.addActionListener(this);
 
         jbconfListas = new JButton();
-        jbconfListas.setText("Mis Listas");
+        jbconfListas.setText("PlayLists");
         jbconfListas.setFont(new Font("Arial", Font.BOLD, 18));
         jbconfListas.setForeground(new Color(255, 255, 255));
         jbconfListas.setBackground(new Color(191, 105, 240));

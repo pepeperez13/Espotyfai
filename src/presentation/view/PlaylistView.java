@@ -101,7 +101,7 @@ public class PlaylistView extends JPanel {
         panelder.setBackground(Color.cyan);
         panelizq.setLayout(new BoxLayout(panelizq,BoxLayout.Y_AXIS));
         panelder.setLayout(new BoxLayout(panelder,BoxLayout.Y_AXIS));
-        crearPlaylist.setText("Crear Playlist");
+        crearPlaylist.setText("Create Playlist");
         crearPlaylist.setActionCommand(CREAR_PLAYLIST);
         crearPlaylist.addActionListener(playListController);
         panelizq.add(jlabelizq);

@@ -2,6 +2,7 @@ package presentation.view;
 
 import business.SongManager;
 import business.entities.Song;
+import presentation.controller.SongsTableController;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -13,13 +14,14 @@ import java.util.LinkedList;
 /**
  * Clase que muestra las canciones de un usuario en una JTable
  */
-public class MainView extends JPanel {
+public class SongsTableView extends JPanel {
     private LinkedList<Song> lista_canciones_programa;
+    private SongsTableController songsTableController;
 
     /**
      * Constructor que configura un JTable con las canciones
      */
-    public MainView(){
+    public SongsTableView (MainManagerView mainManagerView, DetailedSongView detailedSongView){
         JTable songs_table;
         Song song;
 
@@ -46,6 +48,8 @@ public class MainView extends JPanel {
 
         // Initializing the JTable
         songs_table = new JTable(lista_string, columnNames);
+        songsTableController = new SongsTableController(songs_table, mainManagerView, detailedSongView);
+        songs_table.getSelectionModel().addListSelectionListener(songsTableController);
         JScrollPane scrollPane = new JScrollPane(songs_table);
         //songs_table.setBounds(30, 40, 200, 300);
 

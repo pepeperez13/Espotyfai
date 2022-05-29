@@ -83,9 +83,6 @@ public class AddMusicPanelView extends JPanel {
         optionGenero.addItem(StatisticsPanelView.REGGAETON);
         optionGenero.addItem(StatisticsPanelView.REGGAE);
         optionGenero.addItem(StatisticsPanelView.LATIN);
-        /*textGenero.setName("Género musical");
-        textGenero.setPreferredSize(new Dimension(200 , 20));
-        textGenero.setBorder(BorderFactory.createLineBorder(Color.GRAY));*/
 
         JLabel labelAutor = new JLabel();
         labelAutor.setText("Autor");
@@ -120,9 +117,6 @@ public class AddMusicPanelView extends JPanel {
         gc.gridx = 0;
         gc.gridy = 5;
         add(labelFichero, gc);
-        //gc.gridx = 0;
-        //gc.gridy = 6;
-        //add(uploadIcon, gc);
         gc.gridx = 1;
         gc.gridy = 2;
         add(labelGenero, gc);

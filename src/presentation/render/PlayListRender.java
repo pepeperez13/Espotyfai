@@ -22,7 +22,7 @@ public class PlayListRender extends JPanel  {
     public static final String EDIT_BUTTON = "PL_EDIT_BUTTON";
     public static final String DELETE_BUTTON = "PL_DELETE_BUTTON";
     public static final String REPRODUCIR_BUTTON = "REPRODUCIR_BUTTON";
-    private Playlist playlist = null;
+    private Playlist playlist;
     private JSeparator separator= new JSeparator();
 
 

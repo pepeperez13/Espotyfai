@@ -47,7 +47,7 @@ public class ConfigMenuView extends JPanel {
         logoApp.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         jbInicio = new JButton();
-        jbInicio.setText("Inicio");
+        jbInicio.setText("Home");
         jbInicio.setFont(new Font("Arial", Font.BOLD, 18));
         jbInicio.setForeground(new Color(255, 255, 255));
         jbInicio.setBackground(new Color(191, 105, 240));
@@ -55,7 +55,7 @@ public class ConfigMenuView extends JPanel {
         jbInicio.setActionCommand(GO_INICIO);
 
         jbconfMusic = new JButton();
-        jbconfMusic.setText("Gestionar música");
+        jbconfMusic.setText("Manage music");
         jbconfMusic.setFont(new Font("Arial", Font.BOLD, 18));
         jbconfMusic.setForeground(new Color(255, 255, 255));
         jbconfMusic.setBackground(new Color(191, 105, 240));
@@ -64,7 +64,7 @@ public class ConfigMenuView extends JPanel {
         //jbconfMusic.addActionListener(this);
 
         jbconfUsuario = new JButton();
-        jbconfUsuario.setText("Gestionar cuenta");
+        jbconfUsuario.setText("Manage account");
         jbconfUsuario.setFont(new Font("Arial", Font.BOLD, 18));
         jbconfUsuario.setForeground(new Color(255, 255, 255));
         jbconfUsuario.setBackground(new Color(191, 105, 240));
@@ -73,7 +73,7 @@ public class ConfigMenuView extends JPanel {
         //jbconfUsuario.addActionListener(this);
 
         jbconfEstadisticas = new JButton();
-        jbconfEstadisticas.setText("Mis estadísticas");
+        jbconfEstadisticas.setText("My statistics");
         jbconfEstadisticas.setFont(new Font("Arial", Font.BOLD, 18));
         jbconfEstadisticas.setForeground(new Color(255, 255, 255));
         jbconfEstadisticas.setBackground(new Color(191, 105, 240));
