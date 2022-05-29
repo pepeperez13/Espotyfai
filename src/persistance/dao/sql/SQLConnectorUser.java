@@ -14,11 +14,18 @@ public class SQLConnectorUser implements UserDAO {
     private static String password = songDAO.GetDataBaseData().getPassword();
     private static Connection conn;
 
+    /**
+     * Metodo que se emplea para insertar en la base de datos los datos de un usuario.
+     * @param user
+     * @param email
+     * @param pass
+     */
     public void InsertDataUser(String user, String email, String pass) {
-
+        //Connectamos a la base de datos y controlamos excepciones.
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
+            //Generamos una sentencia sql para insertar en la tabla user sus parametros
             String sql = "INSERT INTO user (USER_NAME,USER_EMAIL,USER_PASSWORD) VALUES (?, ?, ?)";
 
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -38,15 +45,22 @@ public class SQLConnectorUser implements UserDAO {
     }
 
 
-
-
+    /**
+     * Metodo que se utiliza para actualizar en base de datos los datos de un usuario.
+     * @param name1
+     * @param email
+     * @param password
+     * @param name2
+     */
 
 
 
     public void UpdateDataUser(String name1, String email,String password,String name2){
+        //Connectamos a la base de datos y controlamos excepciones.
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
+            //Generamos un statement sql para actualizar la tabla user dependiendo del username
             String sql = "UPDATE user SET USER_NAME=?,USER_EMAIL=?,USER_PASSWORD = ? WHERE USER_NAME=?";
 
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -69,13 +83,18 @@ public class SQLConnectorUser implements UserDAO {
     }
 
 
-
+    /**
+     * Metodo que se emplea para eliminar los datos de un usuario.
+     * @param name
+     */
 
 
     public void DeleteDataUser(String name){
+        //Connectamos a la base de datos y controlamos excepciones.
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
             System.out.println("Successful connection...");
+            //Generamos un statement sql para eliminar dependiendo del username
             String sql = "DELETE FROM user WHERE USER_NAME = ?";
 
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -91,15 +110,24 @@ public class SQLConnectorUser implements UserDAO {
         }
 
     }
+
+    /**
+     * Metodo que se utiliza para seleccionar obtener los datos de todos los usuarios.
+     * @return
+     */
     public LinkedList<User> SelectDataUser(){
         String user, emails, pass;
+        //Creamos linkedlists de user
         LinkedList<User> users = new LinkedList<>();
+        //Connectamos a la base de datos y controlamos excepciones.
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
-            System.out.println("Successful connection...");
+            System.out.println("Conexion ok");
+            //Generamos statement sql para seleccionar de la tabla user.
             String sql = "SELECT * FROM user";
             PreparedStatement statement = conn.prepareStatement(sql);
             ResultSet rs = statement.executeQuery(sql);
+            //blucle para ir llenando la linked list con la informacion extraida de la base de datos
             while (rs.next())
             {
 
@@ -109,8 +137,7 @@ public class SQLConnectorUser implements UserDAO {
                 User newUser = new User(user, emails, pass);
                 users.add(newUser);
 
-                // print the results
-                System.out.format("%s, %s, %s\n", user,emails,pass);
+
             }
             statement.close();
             return users;
@@ -125,16 +152,15 @@ public class SQLConnectorUser implements UserDAO {
 
 
 
+
     /**
-     * Method that closes the inner connection to the database. Ideally, users would disconnect after
-     * using the shared instance.
+     * Metodo que cierra la conexion con la base de datos
      */
     public void disconnect(){
         try {
             conn.close();
         } catch (SQLException e) {
-            System.err.println("Problem when closing the connection --> " + e.getSQLState() + " (" + e.getMessage() + ")");
+            System.err.println("Error al cerrar la conexion: "+e.getSQLState()+"("+e.getMessage() + ")");
         }
     }
-
 }

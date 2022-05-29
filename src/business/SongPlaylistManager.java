@@ -20,12 +20,20 @@ public class SongPlaylistManager<Public> {
     private static SongDAO songDAO;
     private static PlaylistManager playlistManager;
 
-
+    /**
+     * Metodo que se emplea para insertar una nueva cancion en una base de datos y se suma una posicion sobre la ultima cancion de la playlist modificada.
+     * @param title
+     * @param name
+     * @return
+     * @throws Exception
+     */
     public boolean InsertNewSongPlaylist(String title, String name) throws  Exception{
         boolean exists = false;
         int lastPos = 0;
         playlistManager = new PlaylistManager();
         songPDAO = new SQLConnectorSongPlaylist();
+        //Creaccion de una linked list de playlist
+        //Llamamos a un metodo de playlist manager que nos da la informacion de una playlist
         LinkedList<Playlist> playlists = playlistManager.getDataPlaylists();
 
         lastPos = songPDAO.getLastPos(name);
@@ -42,6 +50,13 @@ public class SongPlaylistManager<Public> {
 
 
     }
+
+    /**
+     * Metodo que añade todas las canciones a una playlist
+     * @param playlistName
+     * @return
+     * @throws Exception
+     */
     public LinkedList<Song> insertAllSongsinPlaylist(String playlistName) throws  Exception{
         LinkedList<Song> songs = new LinkedList<Song>();
         songs=ListPlaylistSongs(playlistName);
@@ -53,22 +68,42 @@ public class SongPlaylistManager<Public> {
         }
         return songs;
     }
-    //metodo para quitar o eliminar una cancion de una playlist
+
+    /**
+     * Metodo para quitar o eliminar una cancion de una playlist
+     * @param name
+     * @param title
+     */
+
     public void deleteSongPlaylistSong(String name,String title){
         songPDAO = new SQLConnectorSongPlaylist();
         songPDAO.DeleteDataSongP(name,title);
     }
+    /**
+     * Metodo para quitar o eliminar una cancion de una playlist (TESTS)
+     * @param name
+     * @param title
+     */
     public static void deleteSongP(String name, String title){
         songPDAO = new SQLConnectorSongPlaylist();
         songPDAO.DeleteDataSongPpt3(title,name);
     }
+
+    /**
+     * Metodo para quitar o eliminar una cancion de una playlist (TESTS 2)
+     * @param pos
+     */
     public static void test(int pos){
         songPDAO = new SQLConnectorSongPlaylist();
         songPDAO.DeleteDataSongPpt2(pos);
 
     }
 
-
+    /**
+     * Metodo para obtener la ultima posicion de una cancion respecto a una playlist
+     * @param name
+     * @return
+     */
     public static int getLastPosition(String name){
         int pos = 0;
         songPDAO = new SQLConnectorSongPlaylist();
@@ -76,13 +111,11 @@ public class SongPlaylistManager<Public> {
         return pos;
     }
 
-
-
-
-   /* public void updateSongPlaylist(String title1,String name, String title2){
-        songPDAO = new SQLConnectorSongPlaylist();
-        songPDAO.UpdateDataSongP(title1,name,title2);
-    }*/
+    /**
+     * Metodo que te devuelve una linked list de SONG con todas las canciones de una playlist
+     * @param name
+     * @return
+     */
 
     public  LinkedList<Song> ListPlaylistSongs(String name){
         songPDAO = new SQLConnectorSongPlaylist();
@@ -102,6 +135,13 @@ public class SongPlaylistManager<Public> {
 
         return songs;
     }
+
+    /**
+     * Metodo que actualiza la posicion de una cancion subiendola o bajandola dependiendo del indice indicado.
+     * @param title
+     * @param name
+     * @param index
+     */
     public void updatePosP(String title, String name, int index){
         LinkedList<SongPlaylist> PSongs2 = null;
         songPDAO = new SQLConnectorSongPlaylist();
@@ -129,6 +169,12 @@ public class SongPlaylistManager<Public> {
 
     }
 
+    /**
+     * Metodo que verifica si la cancion existe en una playlist.
+     * @param songTitle
+     * @param playlistName
+     * @return
+     */
     public boolean songExistsInPlaylist (String songTitle, String playlistName) {
         LinkedList<Song> songs = ListPlaylistSongs(playlistName);
         boolean exists = false;

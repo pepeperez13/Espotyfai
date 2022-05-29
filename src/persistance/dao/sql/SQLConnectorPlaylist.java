@@ -12,6 +12,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+/**
+ * The type Sql connector playlist.
+ */
 public class SQLConnectorPlaylist implements PlaylistDAO {
 
     private static SongDAO songDAO = new SQLConnectorSong();
@@ -20,11 +23,19 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
     private static String password = songDAO.GetDataBaseData().getPassword();
     private static Connection conn;
 
-    public void InsertDataPlaylist(String name, String owner) throws Exception {
 
+    /**
+     * Metodo que se encarga de insertar en la base de datos los datos de una playlist.
+     * @param name
+     * @param owner
+     * @throws Exception
+     */
+    public void InsertDataPlaylist(String name, String owner) throws Exception {
+        //Connectamos a la base de datos y controlamos excepciones.
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
-            System.out.println("Successful connection...");
+            System.out.println("Conexion ok");
+            //Generacion de un statement sql para inertar datos en la tabla playlist
             String sql = "INSERT INTO playlist (PLAYLIST_NAME,PLAYLIST_OWNER) VALUES (?, ?)";
 
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -33,7 +44,7 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
 
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("A new playlist was inserted successfully!");
+
             }
 
         } catch (SQLException ex) {
@@ -41,10 +52,18 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
         }
     }
 
+    /**
+     * Metodo que se encarga de actualizar en la base de datos los datos de una playlist.
+     * @param name1
+     * @param owner
+     * @param name2
+     */
     public void UpdateDataPlaylist(String name1,String owner, String name2){
+        //Connectamos a la base de datos y controlamos excepciones.
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
-            System.out.println("Successful connection...");
+            System.out.println("Conexion ok");
+            //Generacion de un statement sql para actualizar la tabla playlist.
             String sql = "UPDATE playlist SET PLAYLIST_NAME=?,PLAYLIST_OWNER=? WHERE PLAYLIST_NAME= ?";
 
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -61,16 +80,22 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
         }
     }
 
+    /**
+     * Metodo que se encarga de insertar en la base de datos los datos de una cancion.
+     * @param name
+     */
+
     public void DeleteDataPlaylist(String name){
+        //Connectamos a la base de datos y controlamos excepciones.
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
-            System.out.println("Successful connection...");
-
+            System.out.println("Conexion ok");
+            //Generacion de un statement SQL que elimina datos de la tabla song_playlisy dependiendo del nombre de la playlist.
             String sqlDeleteRelationships = "DELETE FROM song_playlist WHERE PLAYLIST_NAME= ?";
             PreparedStatement stDelRelationship = conn.prepareStatement(sqlDeleteRelationships);
             stDelRelationship.setString(1,name);
             stDelRelationship.executeUpdate();
-
+            //Generacion de un statement sql para eliminar datos de la tabla playlisy dependeindeo del nombre de la playlist.
             String sql = "DELETE FROM playlist WHERE PLAYLIST_NAME=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, name);
@@ -85,16 +110,22 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
         }
     }
 
-
+    /**
+     * Metodo que se encarga de seleccionar en la base de datos los datos de una playlist de un usuario.
+     * @param user
+     * @return playlists
+     */
     public LinkedList<Playlist> SelectPlaylistsOfUser(User user)
     {
+        //Creacion de una linked list de playlists
         LinkedList<Playlist> playlists = new LinkedList<>();
         String owner = user.getName();
         String playlistname = "";
-
+        //Connectamos a la base de datos y controlamos excepciones.
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
-            System.out.println("Successful connection...");
+            System.out.println("Conexion ok");
+            //Generacion de un statement sql que selecciona de la tabla playlist dependiendo del owner
             String sql = "SELECT * FROM PLAYLIST WHERE PLAYLIST_OWNER = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1,owner);
@@ -142,17 +173,24 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
         }
     }
 
+    /**
+     * Metodo que se encarga de seleccionar en la base de datos los datos de una playlist.
+     * @return playlists
+     */
     public LinkedList<Playlist> SelectDataPlaylist(){
+        //Creacion de una linked list de playlist
         LinkedList<Playlist> playlists = new LinkedList<>();
         String name;
         String owner;
-
+        //Connectamos a la base de datos y controlamos excepciones.
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
-            System.out.println("Successful connection...");
+            System.out.println("Conexion ok");
+            //Generacion de un statement sql que selecciona de la tabla playlist.
             String sql = "SELECT * FROM PLAYLIST";
             PreparedStatement statement = conn.prepareStatement(sql);
             ResultSet rs = statement.executeQuery(sql);
+            //bucle que rellena la linked list
             while (rs.next())
             {
                 name = rs.getString("PLAYLIST_NAME");
@@ -169,8 +207,9 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
             for(Playlist p: playlists){
                 ArrayList<Song> songs= new ArrayList<>();
                 p.setSongs(songs);
+
                 sql = "SELECT * FROM song_playlist WHERE PLAYLIST_NAME = ?";
-                 statement = conn.prepareStatement(sql);
+                statement = conn.prepareStatement(sql);
                 statement.setString(1,p.getName());
                 rs = statement.executeQuery();
                 while (rs.next())
@@ -193,14 +232,13 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
     }
 
     /**
-     * Method that closes the inner connection to the database. Ideally, users would disconnect after
-     * using the shared instance.
+     * Metodo que cierra la conexion con la base de datos
      */
     public void disconnect(){
         try {
             conn.close();
         } catch (SQLException e) {
-            System.err.println("Problem when closing the connection --> " + e.getSQLState() + " (" + e.getMessage() + ")");
+            System.err.println("Error al cerrar la conexion: "+e.getSQLState()+"("+e.getMessage() + ")");
         }
     }
 }

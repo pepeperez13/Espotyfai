@@ -30,17 +30,32 @@ public class PlaylistManager {
         return playlistDAO.SelectPlaylistsOfUser(user);
     }
 
-
+    /**
+     * Metodo que se utiliza para eliminar una playlist.
+     * @param name
+     */
     public void deletePlaylist(String name) {
         playlistDAO = new SQLConnectorPlaylist();
         playlistDAO.DeleteDataPlaylist(name);
         //songPlaylistDAO.DeleteDataSongP(name);
     }
 
+    /**
+     * Metodo que se utiliza para crear una nueva playlisy.
+     * @param name
+     * @param owner
+     * @throws Exception
+     */
     public void createPlaylist(String name, String owner) throws Exception{
         playlistDAO.InsertDataPlaylist(name, owner);
     }
 
+    /**
+     * Metodo que comprueba si existe una playlist.
+     * @param user
+     * @param nombrePlaylist
+     * @return
+     */
     public boolean existPlaylist(User user, String nombrePlaylist) {
         playlistDAO = new SQLConnectorPlaylist();
         LinkedList<Playlist> playlists = playlistDAO.SelectPlaylistsOfUser(user);
