@@ -65,30 +65,8 @@ public class Song {
         return path;
     }
 
-
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public void setAlbum(String album) {
-        this.album = album;
-    }
-
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
-
     public void setOwner(String owner) {
         this.owner = owner;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 
     public int getPosition() {

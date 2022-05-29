@@ -14,7 +14,7 @@ import persistance.dao.sql.SQLConnectorSongPlaylist;
 import java.util.LinkedList;
 
 
-public class SongPlaylistManager<Public> {
+public class SongPlaylistManager {
     private static SongPlaylistDAO songPDAO;
     private static PlaylistDAO playlistDAO;
     private static SongDAO songDAO;

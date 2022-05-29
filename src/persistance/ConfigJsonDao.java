@@ -6,14 +6,22 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-
+/**
+ * Clase que obtiene la configuracion de la base de datos
+ */
 public class ConfigJsonDao {
     private static final String route = "files/config.json";
     private static final Path path = Path.of(route);
 
+    /**
+     * Constructor de la clase
+     */
     public ConfigJsonDao() {
     }
 
+    /**
+     * Metodo que obtiene la configuracion de la base de datos
+     */
     public Config readConfig(){
         Config config = new Config();
         try{

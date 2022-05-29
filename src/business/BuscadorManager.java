@@ -5,11 +5,17 @@ import business.entities.Song;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ * Clase que se encarga de buscar entre las canciones existentes
+ */
 public class BuscadorManager {
-    private Song song;
-    private SongManager songManager;
     //private Conexion conexion;
 
+    /**
+     * Método que se encarga de buscar entre las canciones existentes
+     * @param song_name Nombre de la cancion
+     * @return Song Cancion requerida
+     */
     public Song buscarCancion (String song_name) {
         LinkedList<Song> list_songs = SongManager.ListSongs();
 
