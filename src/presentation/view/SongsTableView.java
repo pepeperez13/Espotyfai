@@ -23,7 +23,8 @@ public class SongsTableView extends JPanel {
      */
     public SongsTableView (MainManagerView mainManagerView, DetailedSongView detailedSongView){
         JTable songs_table;
-        Song song;
+
+        this.setBackground(new Color(255, 255, 255));
 
         //Cogemos la lista de las canciones dentro del programa
         lista_canciones_programa = cargarLista();
@@ -48,10 +49,10 @@ public class SongsTableView extends JPanel {
 
         // Initializing the JTable
         songs_table = new JTable(lista_string, columnNames);
+        songs_table.setBackground(new Color(255, 255,255));
+        //songs_table.setPreferredSize(new Dimension(1200, 600));
         songsTableController = new SongsTableController(songs_table, mainManagerView, detailedSongView);
         songs_table.getSelectionModel().addListSelectionListener(songsTableController);
-        JScrollPane scrollPane = new JScrollPane(songs_table);
-        //songs_table.setBounds(30, 40, 200, 300);
 
         // adding it to JScrollPane
         JScrollPane sp = new JScrollPane(songs_table);

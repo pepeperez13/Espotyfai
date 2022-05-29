@@ -77,10 +77,15 @@ public class SongManager {
 
         return songs;
     }
-    public static void DeleteSong(String title){
-        songDAO.DeleteDataSong(title);
-        songPDAO.DeleteSongPFull(title);
-
+    public static boolean DeleteSong(String title){
+        for (Song song: ListSongs()) {
+            if (song.getTitle().equals(title)) {
+                songDAO.DeleteDataSong(title);
+                songPDAO.DeleteSongPFull(title);
+                return true;
+            }
+        }
+        return false;
     }
 }
 

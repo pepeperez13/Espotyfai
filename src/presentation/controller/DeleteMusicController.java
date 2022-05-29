@@ -30,17 +30,30 @@ public class DeleteMusicController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(DeleteMusicPanelView.DELETE)) {
-            if (!BottomBarPanel.getSong().getTitle().equals(deleteMusicPanelView.getNameSong())) {
-                if (deleteMusicPanelView.getNameSong() != null) {
-                    SongManager.DeleteSong(deleteMusicPanelView.getNameSong());
-                    JOptionPane.showMessageDialog(deleteMusicPanelView, "DELETE SUCCESSFULLY", "", JOptionPane.INFORMATION_MESSAGE);
+
+            if (BottomBarPanel.getSong() != null) {
+                if (!BottomBarPanel.getSong().getTitle().equals(deleteMusicPanelView.getNameSong())) {
+                    if (deleteMusicPanelView.getNameSong() != null) {
+
+                        if (SongManager.DeleteSong(deleteMusicPanelView.getNameSong())) {
+                            JOptionPane.showMessageDialog(deleteMusicPanelView, "DELETE SUCCESSFULLY", "", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(deleteMusicPanelView, "DELETE UNSUCCESSFULLY", "", JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(deleteMusicPanelView, "COMPLETE THE FIELD", "Following errors were found", JOptionPane.WARNING_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(deleteMusicPanelView, "COMPLETE THE FIELD", "Following errors were found", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(deleteMusicPanelView, "SONG IS PLAYING", "Following errors were found", JOptionPane.WARNING_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(deleteMusicPanelView, "SONG IS PLAYING", "Following errors were found", JOptionPane.WARNING_MESSAGE);
+                if (SongManager.DeleteSong(deleteMusicPanelView.getNameSong())) {
+                    JOptionPane.showMessageDialog(deleteMusicPanelView, "DELETE SUCCESSFULLY", "", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(deleteMusicPanelView, "DELETE UNSUCCESSFULLY", "", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
-
         }
     }
 }

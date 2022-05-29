@@ -65,7 +65,7 @@ public class StatisticsPanelView extends JPanel {
     @Override
     public void paintComponent (Graphics g) {
         super.paintComponent(g);
-        if (listaCanciones == null) {
+        if (listaCanciones == null || listaCanciones.size() == 0) {
             JOptionPane.showMessageDialog(this, "NO SONGS", "Following errors were found", JOptionPane.WARNING_MESSAGE);
         } else {
             double minValue = 0;
