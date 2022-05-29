@@ -1,5 +1,8 @@
 package business.entities;
 
+/**
+ *Esta clase representa los datos de la configuracion de la base de datos
+ */
 public class Config {
 
     private int dataBasePort;

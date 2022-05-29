@@ -8,6 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Clase que muestra la vista de una playlist
+ */
 public class PlayListRender extends JPanel  {
 
     private JLabel lbIcon = new JLabel();
@@ -23,7 +26,12 @@ public class PlayListRender extends JPanel  {
     private JSeparator separator= new JSeparator();
 
 
-
+    /**
+     * constructor de la clase
+     * @param playlist playlist que queremos mostrar
+     * @param controller controlador de la vista para asignar acciones a los botones
+     * @param playListController controlador para asignar acciones a los botones
+     */
     public PlayListRender(Playlist playlist, ActionListener controller,ActionListener playListController) {
         this.playlist = playlist;
         setLayout(new BorderLayout(5, 5));
@@ -111,7 +119,10 @@ public class PlayListRender extends JPanel  {
 
 
     }
-
+    /**
+     * Metodo que te dice si la playlist es del usuario logeado
+     * @return booleano de si es
+     */
     private boolean isMyPlaylist(){
         return playlist.getOwner().equals(Owner.getUser().getName());
     }

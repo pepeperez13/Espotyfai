@@ -7,6 +7,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Clase que representa una cancion
+ */
 public class Song {
     private String title;
     private String genre;
@@ -16,6 +19,15 @@ public class Song {
     private String path;
     private int position;
 
+    /**
+     * Constructor de la clase
+     * @param title titulo de la cancion
+     * @param genre genero de la cancion
+     * @param album album de la cancion
+     * @param artist artista de la cancion
+     * @param path ruta de la cancion
+     * @param owner dueño de la cancion
+     */
     public Song(String title, String genre, String album, String artist, String path, String owner) {
         this.title = title;
         this.genre = genre;
