@@ -73,16 +73,16 @@ public class AddMusicPanelView extends JPanel {
         labelGenero.setText("Género musical");
         labelGenero.setFont(new Font("Arial", Font.BOLD, 18));
 
-        optionGenero.addItem(StaticsPanelView.KPOP);
-        optionGenero.addItem(StaticsPanelView.JAZZ);
-        optionGenero.addItem(StaticsPanelView.ROCK);
-        optionGenero.addItem(StaticsPanelView.ELECTRONIC);
-        optionGenero.addItem(StaticsPanelView.METAL);
-        optionGenero.addItem(StaticsPanelView.HIPHOP);
-        optionGenero.addItem(StaticsPanelView.POP);
-        optionGenero.addItem(StaticsPanelView.REGGAETON);
-        optionGenero.addItem(StaticsPanelView.REGGAE);
-        optionGenero.addItem(StaticsPanelView.LATIN);
+        optionGenero.addItem(StatisticsPanelView.KPOP);
+        optionGenero.addItem(StatisticsPanelView.JAZZ);
+        optionGenero.addItem(StatisticsPanelView.ROCK);
+        optionGenero.addItem(StatisticsPanelView.ELECTRONIC);
+        optionGenero.addItem(StatisticsPanelView.METAL);
+        optionGenero.addItem(StatisticsPanelView.HIPHOP);
+        optionGenero.addItem(StatisticsPanelView.POP);
+        optionGenero.addItem(StatisticsPanelView.REGGAETON);
+        optionGenero.addItem(StatisticsPanelView.REGGAE);
+        optionGenero.addItem(StatisticsPanelView.LATIN);
         /*textGenero.setName("Género musical");
         textGenero.setPreferredSize(new Dimension(200 , 20));
         textGenero.setBorder(BorderFactory.createLineBorder(Color.GRAY));*/
@@ -163,34 +163,34 @@ public class AddMusicPanelView extends JPanel {
      */
     public String getGenero () {
         String info = null;
-        if (optionGenero.getSelectedItem().equals(StaticsPanelView.KPOP)){
+        if (optionGenero.getSelectedItem().equals(StatisticsPanelView.KPOP)){
             info = (String) optionGenero.getSelectedItem();
         }
-        if (optionGenero.getSelectedItem().equals(StaticsPanelView.JAZZ)) {
+        if (optionGenero.getSelectedItem().equals(StatisticsPanelView.JAZZ)) {
             info = (String) optionGenero.getSelectedItem();
         }
-        if (optionGenero.getSelectedItem().equals(StaticsPanelView.ROCK)) {
+        if (optionGenero.getSelectedItem().equals(StatisticsPanelView.ROCK)) {
             info = (String) optionGenero.getSelectedItem();
         }
-        if (optionGenero.getSelectedItem().equals(StaticsPanelView.ELECTRONIC)){
+        if (optionGenero.getSelectedItem().equals(StatisticsPanelView.ELECTRONIC)){
             info = (String) optionGenero.getSelectedItem();
         }
-        if (optionGenero.getSelectedItem().equals(StaticsPanelView.METAL)) {
+        if (optionGenero.getSelectedItem().equals(StatisticsPanelView.METAL)) {
             info = (String) optionGenero.getSelectedItem();
         }
-        if (optionGenero.getSelectedItem().equals(StaticsPanelView.HIPHOP)) {
+        if (optionGenero.getSelectedItem().equals(StatisticsPanelView.HIPHOP)) {
             info = (String) optionGenero.getSelectedItem();
         }
-        if (optionGenero.getSelectedItem().equals(StaticsPanelView.POP)){
+        if (optionGenero.getSelectedItem().equals(StatisticsPanelView.POP)){
             info = (String) optionGenero.getSelectedItem();
         }
-        if (optionGenero.getSelectedItem().equals(StaticsPanelView.REGGAETON)) {
+        if (optionGenero.getSelectedItem().equals(StatisticsPanelView.REGGAETON)) {
             info = (String) optionGenero.getSelectedItem();
         }
-        if (optionGenero.getSelectedItem().equals(StaticsPanelView.REGGAE)) {
+        if (optionGenero.getSelectedItem().equals(StatisticsPanelView.REGGAE)) {
             info = (String) optionGenero.getSelectedItem();
         }
-        if (optionGenero.getSelectedItem().equals(StaticsPanelView.LATIN)) {
+        if (optionGenero.getSelectedItem().equals(StatisticsPanelView.LATIN)) {
             info = (String) optionGenero.getSelectedItem();
         }
         return info;

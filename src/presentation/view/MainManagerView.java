@@ -25,7 +25,7 @@ public class MainManagerView extends JPanel {
     private ConfigMenuView configMenuView;
     private ManageAccountView manageAccountView;
     private ConfMusicPanelView confMusicPanelView;
-    private StaticsPanelView staticsPanel;
+    private StatisticsPanelView staticsPanel;
     private AddMusicPanelView addMusicPanel;
     private DeleteMusicPanelView deleteMusicPanel;
     private JPanel cardPanel = new JPanel();
@@ -103,7 +103,7 @@ public class MainManagerView extends JPanel {
         deleteMusicPanel = new DeleteMusicPanelView();
         mainView= new MainView();
 
-        staticsPanel= new StaticsPanelView(SongManager.ListSongs());
+        staticsPanel= new StatisticsPanelView(SongManager.ListSongs());
         addMusicPanel = new AddMusicPanelView();
 
         cardPanel.add(mainView, "1");

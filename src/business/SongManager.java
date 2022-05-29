@@ -50,6 +50,11 @@ public class SongManager {
         }
         return false;
     }
+
+    /**
+     * Método que devuelve una LinkedList con las canciones cargadas
+     * @return LinkedList canciones
+     */
     public static LinkedList<Song> ListSongs() {
         songDAO = new SQLConnectorSong();
         LinkedList<Song> songs;

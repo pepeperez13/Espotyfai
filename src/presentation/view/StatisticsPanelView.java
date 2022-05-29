@@ -9,7 +9,7 @@ import java.util.LinkedList;
 /**
  *Clase que se encarga de dibujar el gráfico con las estadísticas de los géneros musicales que tiene el usuario
  */
-public class StaticsPanelView extends JPanel {
+public class StatisticsPanelView extends JPanel {
     public static final String KPOP = "K pop";
     public static final String JAZZ = "Jazz";
     public static final String ROCK = "Rock";
@@ -30,7 +30,7 @@ public class StaticsPanelView extends JPanel {
      * Calcula el número de canciones de cada género musical que tiene el usuario actual.
      * @param listaCanciones    LinkedList con todas las canciones del usuario actual.
      */
-    public StaticsPanelView (LinkedList<Song> listaCanciones) {
+    public StatisticsPanelView(LinkedList<Song> listaCanciones) {
         this.listaCanciones = listaCanciones;
         //Valor * numeroPixeles/MayorValor
         for (int i = 0; i < listaCanciones.size(); i++) {
