@@ -26,7 +26,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
      * @param pos posicion de la cancion en la playlist
      * @throws Exception
      */
-    public void InsertDataSongP(String title, String name, int pos) throws Exception {
+    public void InsertDataSongP(String title, String name, int pos) {
         //Connectamos a la base de datos y controlamos excepciones.
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
@@ -46,7 +46,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
 
         } catch (SQLException ex) {
-           throw ex;
+            ex.printStackTrace();
         }
     }
 

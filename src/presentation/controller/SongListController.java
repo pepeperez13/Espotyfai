@@ -85,7 +85,7 @@ public class SongListController implements ActionListener {
         }else if(e.getActionCommand().equals(SongListlView.ADDSONG)){
             Song song = this.songListlView.getSelectedSongToAdd();
             Playlist playlist = (Playlist) ((JButton) e.getSource()).getClientProperty("playlist");
-            if(song!= null && playlist != null){
+            if(song!= null && playlist != null && !songPlaylistManager.songExistsInPlaylist(song.getTitle(), playlist.getName())){
                 try{
                     songPlaylistManager.InsertNewSongPlaylist(song.getTitle(),playlist.getName());
                     SongListlView.selectedPlaylist.getSongs().add(song);
@@ -93,6 +93,8 @@ public class SongListController implements ActionListener {
                 }catch (Exception ex){
                     this.songListlView.showErrorSongAdd();
                 }
+            } else {
+                this.songListlView.showErrorSongAdd();
             }
         }
     }

@@ -33,13 +33,13 @@ public class ShowPlaylistsController implements ActionListener {
         if (songPlaylistManager.songExistsInPlaylist(detailedSongView.getSongTitle(), e.getActionCommand())) {
             detailedSongView.showErrorMessage();
         } else {
-            try {
-                songPlaylistManager.InsertNewSongPlaylist(detailedSongView.getSongTitle(), e.getActionCommand());
+            if(songPlaylistManager.InsertNewSongPlaylist(detailedSongView.getSongTitle(), e.getActionCommand())) {
                 detailedSongView.showOKMessage();
-            } catch (Exception ex) {
+            }else {
                 // Si no somos el propietario de una playlist, no se pueden añadir canciones
                 detailedSongView.showErrorUserMessage();
             }
+
         }
     }
 }

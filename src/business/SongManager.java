@@ -1,17 +1,12 @@
 package business;
 import business.entities.Song;
-import business.entities.SongPlaylist;
+
 import persistance.SongDAO;
 import persistance.SongPlaylistDAO;
 import persistance.dao.sql.SQLConnectorSong;
 import persistance.dao.sql.SQLConnectorSongPlaylist;
 
-import javax.sound.sampled.*;
-import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 /**
  * Clase que gestiona la interaccion de las canciones con la base de datos

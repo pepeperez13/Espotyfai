@@ -197,20 +197,28 @@ public class UserManager {
      */
     public void deleteUser(){
         User userToDelete = Owner.getUser();
-        LinkedList<Playlist> playlists= sqlP.SelectPlaylistsOfUser(userToDelete);
+        LinkedList<Playlist> userPlaylists= sqlP.SelectPlaylistsOfUser(userToDelete);
         LinkedList<Song> songs= sqlS.SelectDataSong();
+        LinkedList<Playlist> generalPlaylists = sqlP.SelectDataPlaylist();
 
-        for (Playlist playlist : playlists) {
+
+        for (Playlist playlist : userPlaylists) {
                 sqlP.DeleteDataPlaylist(playlist.getName());
         }
 
         for (Song song : songs) {
+            // Para cada cancion del usuario que se borra, debemos eliminarla del resto de playlist que la contienen
             if (song.getOwner().equals(userToDelete.getName())) {
+                for (Playlist playlist: generalPlaylists) {
+                    for (int i = 0; i < playlist.getSongs().size(); i++) {
+                        if (playlist.getSongs().get(i).getTitle().equals(song.getTitle())) {
+                            SongPlaylistManager.deleteSongP(song.getTitle(), playlist.getName());
+                        }
+                    }
+                }
                 sqlS.DeleteDataSong(song.getTitle());
-
             }
         }
-
         sql.DeleteDataUser(userToDelete.getName());
 
 

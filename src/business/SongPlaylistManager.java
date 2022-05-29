@@ -27,7 +27,7 @@ public class SongPlaylistManager {
      * @return boolean
      * @throws Exception
      */
-    public boolean InsertNewSongPlaylist(String title, String name) throws  Exception{
+    public boolean InsertNewSongPlaylist(String title, String name){
         boolean exists = false;
         int lastPos = 0;
         playlistManager = new PlaylistManager();

@@ -78,4 +78,5 @@ public class DeleteMusicPanelView extends JPanel {
     public String getNameSong() {
         return nameSong.getText();
     }
+
 }

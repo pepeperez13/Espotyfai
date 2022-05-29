@@ -5,7 +5,7 @@ import business.entities.SongPlaylist;
 import java.util.LinkedList;
 
 public interface SongPlaylistDAO {
-     void InsertDataSongP(String title, String name, int pos) throws Exception;
+     void InsertDataSongP(String title, String name, int pos) ;
 
      //public void UpdateDataSongP(String title1,String name,String title2);
 
