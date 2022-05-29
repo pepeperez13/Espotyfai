@@ -20,12 +20,12 @@ public class SongPlayer implements Runnable{
 
     public void managePlayer (String path, int index, double songDuration) {
         // Comprobamos si hay algún cambio en la acción recibida
-        if (!Objects.equals(this.path, path) || this.index != index) {
+        if (!Objects.equals(this.path, path) || this.index != index || MainViewController.isReproducingPlaylist()) {
             // Si sólo se ha cambiado el index (diferente acción sobre la misma canción)
             if (index != this.index && Objects.equals(this.path, path)) {
                 this.index = index;
             }
-            if (!Objects.equals(this.path, path) /*|| MainViewController.isReproducingPlaylist()*/) {
+            if (!Objects.equals(this.path, path) || MainViewController.isReproducingPlaylist()) {
                 // Si cambia el path, significa que la cancion que se reproducia anteriormente debe pararse
                 if (clip != null) {
                     clip.close();
