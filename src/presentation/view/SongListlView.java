@@ -20,19 +20,18 @@ import java.util.stream.Collectors;
  *Clase que se encarga de la vista de listar las Canciones
  */
 public class SongListlView extends JPanel {
+
     private PlaylistManager manager = new PlaylistManager();
-    private SongListRender songListRender;
     private ActionListener mainController;
     private ActionListener songListController;
     public static final String ADDSONG = "ADDSONG";
-    public static final String ADDSONGPANE = "ADDSONGPANE";
     private JScrollPane jScrollPane;
-    public  static Playlist selectedPlaylist;
+    private Playlist selectedPlaylist;
     private JComboBox comboSongs;
-    public static LinkedList<Song> allSongs = new LinkedList<>();
+    private LinkedList<Song> allSongs = new LinkedList<>();
 
-    public SongListlView(){
-        this.songListController = new SongListController(this);
+    public SongListlView (MainManagerView mainManagerView){
+        this.songListController = new SongListController(this, mainManagerView);
         this.setBackground(Color.red);
         setSize(1500, 900);
 
@@ -42,6 +41,18 @@ public class SongListlView extends JPanel {
         jScrollPane = new JScrollPane();
         this.add(jScrollPane);
         //this.controller.setSongListRender(songListRender);
+    }
+
+    public void setPlayList (Playlist playlist) {
+        this.selectedPlaylist = playlist;
+    }
+
+    public Playlist getSelectedPlaylist () {
+        return this.selectedPlaylist;
+    }
+
+    public void setAllSongs (LinkedList<Song> list) {
+        this.allSongs = list;
     }
 
     /**

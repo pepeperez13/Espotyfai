@@ -1,6 +1,7 @@
 package presentation.controller;
 
 import business.PlaylistManager;
+import presentation.controller.SongListController;
 import business.SongManager;
 import business.entities.Playlist;
 import persistance.PlaylistDAO;
@@ -44,7 +45,7 @@ public class DetailedSongController implements ActionListener {
         }
         if (e.getActionCommand().equals("PLAY_SONG_COMMAND")) {
             // Si se le da a play desde la vista detallada, seguro que no se está reproduciendo desde playlist
-            MainViewController.setReproducingPlaylist(false);
+            SongListController.setReproducingPlaylist(false);
             BottomBarPanel.updateSong(detailedSongView.getSong());
             SongPlayerController.playSong();
         }

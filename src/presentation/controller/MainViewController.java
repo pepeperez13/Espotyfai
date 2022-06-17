@@ -22,29 +22,32 @@ import java.util.LinkedList;
 public class MainViewController implements ActionListener {
 
     private MainMenu mainMenu;
+    //private SongListlView view;
     private MainManagerView mainManagerView;
-    private SongManager songManager;
-    private PlaylistManager playlistManager = new PlaylistManager();
-    private static Playlist parameterPlayList = new Playlist();
-    private static boolean reproducingPlaylist;
-    private SongPlaylistManager songPlaylistManager;
+    //private SongManager songManager;
+    //private PlaylistManager playlistManager = new PlaylistManager();
+    //private static Playlist parameterPlayList = new Playlist();
+    static boolean reproducingPlaylist;
+    //private SongPlaylistManager songPlaylistManager;
 
     /**
      * Constructor
-     * @param menuBarView vista del MENU GENERAL
+     *
+     * @param menuBarView     vista del MENU GENERAL
      * @param mainManagerView vista principal
      */
     public MainViewController(MainMenu menuBarView, MainManagerView mainManagerView) {
         this.mainMenu = menuBarView;
         this.mainManagerView = mainManagerView;
 
-        this.songManager= new SongManager();
-        this.songPlaylistManager = new SongPlaylistManager();
+        //this.songManager= new SongManager();
+        //this.songPlaylistManager = new SongPlaylistManager();
 
     }
 
     /**
      * Gestiona, mediante "if" a traves de los action command, las diferentes acciones que deben llevarse a cabo
+     *
      * @param e the event to be processed
      */
     @Override
@@ -57,10 +60,15 @@ public class MainViewController implements ActionListener {
             mainManagerView.changeView(3, 1);
         } else if (e.getActionCommand().equals(MainMenu.GO_SETTINGS)) {
             mainManagerView.changeView(6, 2);
-        } else if (e.getActionCommand().equals(PlayListRender.EDIT_BUTTON)) {
+        }
+    }
+}
+        /*else if (e.getActionCommand().equals(PlayListRender.EDIT_BUTTON)) {
             Playlist playlist = (Playlist) ((JButton) e.getSource()).getClientProperty("PLAYLIST");
-            SongListlView.selectedPlaylist = playlist;
-            SongListlView.allSongs = songManager.ListSongs();
+            //SongListlView.selectedPlaylist = playlist;
+            view.setPlayList(playlist);
+            //SongListlView.allSongs = songManager.ListSongs();
+            view.setAllSongs(SongManager.ListSongs());
             mainManagerView.changeView(12, 1);
         }
         else if (e.getActionCommand().equals(PlayListRender.REPRODUCIR_BUTTON)) {
@@ -81,7 +89,7 @@ public class MainViewController implements ActionListener {
      * Metodo que te devuelve todas las playlists del usuario
      * @return playlists del usuario
      */
-    public LinkedList<Playlist> getPlaylistsOfUser(){
+    /*public LinkedList<Playlist> getPlaylistsOfUser(){
        return playlistManager.getPlaylistsOfUser(Owner.getUser());
     }
 
@@ -89,14 +97,14 @@ public class MainViewController implements ActionListener {
      * Metodo que te devuelve todas las playlists
      * @return todas las playlists
      */
-    public LinkedList<Playlist> getAllPlaylists(){
+    /*public LinkedList<Playlist> getAllPlaylists(){
         return playlistManager.getDataPlaylists();
     }
     /**
      * Método que retorna si está reproduciendo una playlist
      * @return True si se está reproduciendo una playlist
      */
-    public static boolean isReproducingPlaylist() {
+    /*public static boolean isReproducingPlaylist() {
         return MainViewController.reproducingPlaylist;
     }
 
@@ -104,7 +112,7 @@ public class MainViewController implements ActionListener {
      *Método que recibe un boolean que indica si se esta reproduciendo una playlist
      * @return void
      */
-    public static void setReproducingPlaylist(boolean playing) {
+    /*public static void setReproducingPlaylist(boolean playing) {
         MainViewController.reproducingPlaylist = playing;
     }
 
@@ -112,9 +120,9 @@ public class MainViewController implements ActionListener {
      * Método que indica que playlist que se está reproduciendo
      * @return Playlist Playlist que se esta reproduciendo
      */
-    public static Playlist getReproducingPlaylist() {
+    /*public static Playlist getReproducingPlaylist() {
         return parameterPlayList;
-    }
-}
+    }*/
+//}
 
 

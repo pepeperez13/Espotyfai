@@ -5,6 +5,7 @@ import business.SongManager;
 import presentation.controller.BuscadorViewController;
 import presentation.controller.DetailedSongController;
 import presentation.controller.MainViewController;
+import presentation.controller.SongListController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,11 +45,12 @@ public class MainManagerView extends JPanel {
         this.setLayout(new BorderLayout());
 
         mainMenu = new MainMenu(this);
-        mainViewController= new MainViewController(mainMenu,this);
+        //mainViewController= new MainViewController(mainMenu,this);
         configMenuView = new ConfigMenuView(this);
         detailedSongView = new DetailedSongView();
         bottomBarPanel = new BottomBarPanel(detailedSongView, this);
         manageAccountView = new ManageAccountView(initView);
+        mainViewController= new MainViewController(mainMenu,this);
         cardPanel = configureCardPanel();
         menuCardPanel = configureMenuCardPanel();
 
@@ -70,7 +72,7 @@ public class MainManagerView extends JPanel {
         configureMenuCardPanel();
         switch(numCardPanel){
             case 3:
-                this.playlistView.bringPlaylists(mainViewController.getAllPlaylists(),mainViewController.getPlaylistsOfUser());
+                this.playlistView.bringPlaylists(SongListController.getAllPlaylists(),SongListController.getPlaylistsOfUser());
                 break;
             case 12:
                 this.songListlView.loadSongs();
@@ -91,7 +93,7 @@ public class MainManagerView extends JPanel {
 
         buscadorView = new BuscadorView();
         playlistView = new PlaylistView();
-        songListlView= new SongListlView();
+        songListlView= new SongListlView(this);
 
 
         detailedSongController = new DetailedSongController(detailedSongView);
