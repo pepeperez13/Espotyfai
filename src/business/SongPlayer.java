@@ -95,7 +95,8 @@ public class SongPlayer implements Runnable{
             }
             // Actualizamos el valor del slider y progreso cada dos segundos
             if (currentTime%2000000 == 0) {
-                BottomBarPanel.setValueSlider(this.currentTime);
+                SongPlayerController.setCurrentTime2S(this.currentTime);
+                BottomBarPanel.repaintSlider();
             }
         }
         clip.close();

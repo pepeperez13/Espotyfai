@@ -134,7 +134,6 @@ public class BottomBarPanel extends JPanel {
         currentTime.setText(String.valueOf(SongPlayerController.getCurrentTime()));
         endTime.setText(String.valueOf(SongPlayerController.getEndTime()/1000000));
         jSlider.setMaximum((int) (SongPlayerController.getEndTime()/1000000));
-        jSlider.setValue((int) SongPlayerController.getCurrentTime());
         jSlider.setMajorTickSpacing(10);
         jSlider.setMinorTickSpacing(5);
         jSlider.setBackground(new Color(191, 105, 240));
@@ -184,10 +183,9 @@ public class BottomBarPanel extends JPanel {
 
     /**
      * Metodo que llama el reproductor cada x segundos que actualiza el progresos del slider y de los minutos transucrridos
-     * @param time tiempo de la cancion transcurrido
      */
-    public static void setValueSlider (double time) {
-        double currentTimeSeconds = time/1000000;
+    public static void repaintSlider () {
+        double currentTimeSeconds = SongPlayerController.getValueSlider()/1000000;
         double endTimeSeconds = SongPlayerController.getEndTime()/1000000;
         String currentTimeString = String.format("%d:%02d", (int) (currentTimeSeconds % 3600) / 60, (int) currentTimeSeconds%60);
         String endTimeString = String.format("%d:%02d", (int) (endTimeSeconds % 3600) / 60, (int) endTimeSeconds%60);
