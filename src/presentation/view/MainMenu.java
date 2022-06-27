@@ -31,7 +31,7 @@ public class MainMenu extends JPanel {
      * @param mainManagerView
      */
     public MainMenu (MainManagerView mainManagerView) {
-        mainViewController = new MainViewController(this, mainManagerView);
+        mainViewController = new MainViewController(mainManagerView);
 
         setBackground(new Color(191, 105, 240));
         setLayout(new GridBagLayout());

@@ -219,20 +219,5 @@ public class SQLConnectorSong implements SongDAO {
 
     }
 
-
-
-
-
-
-    /**
-     * Metodo que cierra la conexion con la base de datos
-     */
-    public void disconnect(){
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            System.err.println("Error al cerrar la conexion: "+e.getSQLState()+"("+e.getMessage() + ")");
-        }
-    }
 }
 

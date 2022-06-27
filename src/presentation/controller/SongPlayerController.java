@@ -77,7 +77,7 @@ public class SongPlayerController implements ActionListener {
                 songPlayer.managePlayer(BottomBarPanel.getSong().getPath(), 3, BottomBarPanel.getSong().getSongDurationSeconds());
             }
             if (e.getActionCommand().equals("REPEAT_PLAYLIST")) {
-                if (MainViewController.isReproducingPlaylist()) {
+                if (PlayListController.isReproducingPlaylist()) {
                     repeatPlaylist = true;
                 }
             }
@@ -113,7 +113,7 @@ public class SongPlayerController implements ActionListener {
      * Método que se llama cuando desde la vista de las playlist, se le da al play a una
      */
     public static void playPlaylist () {
-        List<Song> songsPlaylist = MainViewController.getReproducingPlaylist().getSongs().stream().sorted(Comparator.comparing(Song::getPosition)) .collect(Collectors.toList());
+        List<Song> songsPlaylist = PlayListController.getReproducingPlaylist().getSongs().stream().sorted(Comparator.comparing(Song::getPosition)) .collect(Collectors.toList());
         Song song = songsPlaylist.get(0);
         BottomBarPanel.updateSong(song);
         songPlayer.managePlayer(song.getPath(), 1, song.getSongDurationSeconds());
@@ -144,11 +144,11 @@ public class SongPlayerController implements ActionListener {
         Song song = null;
         List<Song> playlistSongs = null;
         try {
-            if (MainViewController.isReproducingPlaylist()) {
+            if (PlayListController.isReproducingPlaylist()) {
                 // Obtenemos las canciones de la playlist actual, ordenadas según su posicion
-                playlistSongs = MainViewController.getReproducingPlaylist().getSongs().stream().sorted(Comparator.comparing(Song::getPosition)) .collect(Collectors.toList());
+                playlistSongs = PlayListController.getReproducingPlaylist().getSongs().stream().sorted(Comparator.comparing(Song::getPosition)) .collect(Collectors.toList());
                 // Si se está reproduciendo una playlist, se quiere repetir, y la canción actual es la última, asignamos la nueva canción como la primera de la lista
-                if (repeatPlaylist && MainViewController.isReproducingPlaylist() && BottomBarPanel.getSong().getPosition() == playlistSongs.size()) {
+                if (repeatPlaylist && PlayListController.isReproducingPlaylist() && BottomBarPanel.getSong().getPosition() == playlistSongs.size()) {
                     song = playlistSongs.get(0);
                 } else {
                     // Asignamos la nueva canción como la que hay en la posición actual, + index (que valdrá +1 o -1) según si

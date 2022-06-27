@@ -151,32 +151,6 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
     }
 
     /**
-     * metodo que solo se utiliza cuando se quiere eliminar la playlist entera de la talbla song playlist
-     * @param name nombre de la playlist
-     */
-
-    public void DeleteDataSongPFull(String name){
-        //Connectamos a la base de datos y controlamos excepciones.
-        //se selecciona la fila en la que operaremos
-        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
-
-            System.out.println("Conexion ok");
-            //Generamos una sentencia sql para eliminar dependiendo del nombre de la playlisy
-            String sql = "DELETE FROM song_playlist WHERE PLAYLIST_NAME=?";
-
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, name);
-
-            int rowsDeleted = statement.executeUpdate();
-
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
-    /**
      * Metodo que se utiliza para eliminar una cancion de la tabla song playlist.
      * @param title titulo de la cancion
      */
@@ -225,8 +199,6 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
                 SongPlaylist newSong = new SongPlaylist(title, name, pos);
                 songsP.add(newSong);
-
-
 
             }
 
@@ -452,16 +424,6 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
         return maxPos;
     }
 
-    /**
-     * Metodo que cierra la conexion con la base de datos
-     */
-    public void disconnect(){
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            System.err.println("Error al cerrar la conexion: "+e.getSQLState()+"("+e.getMessage() + ")");
-        }
-    }
 
 
 }

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  *Clase que se encarga de la vista de listar las Canciones
  */
 public class SongListlView extends JPanel {
-    private PlaylistManager manager = new PlaylistManager();
+
     private SongListController songListController;
     public static final String ADDSONG = "ADDSONG";
     private JScrollPane jScrollPane;
@@ -34,22 +34,13 @@ public class SongListlView extends JPanel {
         setSize(1500, 900);
 
         this.setLayout(new BorderLayout());
-        //this.setBorder(new EmptyBorder(10, 10, 10, 10));
+
         // create list book and set to scrollpane and add to panel
         jScrollPane = new JScrollPane();
         this.add(jScrollPane);
-        //this.controller.setSongListRender(songListRender);
+
     }
 
-    /*
-    /**
-     *Le paso el controlador del MainViewCOntroller
-     * @param controller le paso el controlador
-     *
-    public void registerController(ActionListener controller){
-        this.mainController = controller;
-    }
-    */
 
     /**
      * Metodo que configura la vista para mostrar las canciones de una playlist

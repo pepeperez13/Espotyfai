@@ -51,23 +51,6 @@ public class SongPlaylistManager {
 
     }
 
-    /**
-     * Metodo que añade todas las canciones a una playlist
-     * @param playlistName nombre de la playlist
-     * @return songs
-     * @throws Exception
-     */
-    public LinkedList<Song> insertAllSongsinPlaylist(String playlistName) throws  Exception{
-        LinkedList<Song> songs = new LinkedList<Song>();
-        songs=ListPlaylistSongs(playlistName);
-        for (Song song : songs) {
-            if(!songExistsInPlaylist(song.getTitle(),playlistName)){
-                InsertNewSongPlaylist(song.getTitle(), playlistName);
-            }
-
-        }
-        return songs;
-    }
 
     /**
      * Metodo para quitar o eliminar una cancion de una playlist
@@ -89,27 +72,6 @@ public class SongPlaylistManager {
         songPDAO.DeleteDataSongPpt3(title,name);
     }
 
-    /**
-     * Metodo para quitar o eliminar una cancion de una playlist (TESTS 2)
-     * @param pos posicion de una cancion en una playlist
-     */
-    public static void test(int pos){
-        songPDAO = new SQLConnectorSongPlaylist();
-        songPDAO.DeleteDataSongPpt2(pos);
-
-    }
-
-    /**
-     * Metodo para obtener la ultima posicion de una cancion respecto a una playlist
-     * @param name nombre de la playlist
-     * @return pos posicion de una cancion en una playlist
-     */
-    public static int getLastPosition(String name){
-        int pos = 0;
-        songPDAO = new SQLConnectorSongPlaylist();
-        pos  = songPDAO.getLastPos(name);
-        return pos;
-    }
 
     /**
      * Metodo que te devuelve una linked list de SONG con todas las canciones de una playlist
@@ -154,8 +116,10 @@ public class SongPlaylistManager {
                 System.out.println(pos);
 
 
-                songPDAO.UpdatePosPExtraU(name,pos);
-                songPDAO.updatePosP(title,name,pos - 1);
+                if (pos != 1) {
+                    songPDAO.UpdatePosPExtraU(name, pos);
+                    songPDAO.updatePosP(title, name, pos - 1);
+                }
                 break;
             case (2):
                 pos = songPDAO.getPosP(title,name);

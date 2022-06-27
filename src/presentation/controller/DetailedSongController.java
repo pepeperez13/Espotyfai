@@ -44,7 +44,7 @@ public class DetailedSongController implements ActionListener {
         }
         if (e.getActionCommand().equals("PLAY_SONG_COMMAND")) {
             // Si se le da a play desde la vista detallada, seguro que no se está reproduciendo desde playlist
-            MainViewController.setReproducingPlaylist(false);
+            PlayListController.setReproducingPlaylist(false);
             BottomBarPanel.updateSong(detailedSongView.getSong());
             SongPlayerController.playSong();
         }

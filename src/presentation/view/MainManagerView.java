@@ -5,6 +5,7 @@ import business.SongManager;
 import presentation.controller.BuscadorViewController;
 import presentation.controller.DetailedSongController;
 import presentation.controller.MainViewController;
+import presentation.controller.PlayListController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,7 +45,7 @@ public class MainManagerView extends JPanel {
         this.setLayout(new BorderLayout());
 
         mainMenu = new MainMenu(this);
-        mainViewController= new MainViewController(mainMenu,this);
+        mainViewController= new MainViewController(this);
         configMenuView = new ConfigMenuView(this);
         detailedSongView = new DetailedSongView();
         bottomBarPanel = new BottomBarPanel(detailedSongView, this);
@@ -70,7 +71,7 @@ public class MainManagerView extends JPanel {
         configureMenuCardPanel();
         switch(numCardPanel){
             case 3:
-                this.playlistView.bringPlaylists(mainViewController.getAllPlaylists(),mainViewController.getPlaylistsOfUser());
+                this.playlistView.bringPlaylists(PlayListController.getAllPlaylists(), PlayListController.getPlaylistsOfUser());
                 break;
             case 12:
                 this.songListlView.loadSongs();
@@ -90,7 +91,7 @@ public class MainManagerView extends JPanel {
         cardPanel.setLayout(c);
 
         buscadorView = new BuscadorView();
-        playlistView = new PlaylistView();
+        playlistView = new PlaylistView(this);
         songListlView= new SongListlView();
 
 
@@ -98,7 +99,6 @@ public class MainManagerView extends JPanel {
         buscadorViewController = new BuscadorViewController(buscadorView, new BuscadorManager(), detailedSongView, this);
         confMusicPanelView = new ConfMusicPanelView(this);
         buscadorView.registerController(buscadorViewController);
-        playlistView.registerController(mainViewController);
         deleteMusicPanel = new DeleteMusicPanelView();
         songsTableView = new SongsTableView(this, detailedSongView);
 

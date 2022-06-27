@@ -1,10 +1,6 @@
 package presentation.view;
 
-import business.PlaylistManager;
-import business.SongPlaylistManager;
-import business.Owner;
 import business.entities.Playlist;
-
 import presentation.controller.PlayListController;
 import presentation.render.PlayListRender;
 
@@ -18,26 +14,20 @@ import java.util.LinkedList;
  */
 public class PlaylistView extends JPanel {
     public static final String CREAR_PLAYLIST = "CREAR_PLAYLIST";
-    private PlayListRender playListRender;
     private ActionListener playListController;
-    private PlaylistManager manager = new PlaylistManager();
-    private SongPlaylistManager songPlaylistManager= new SongPlaylistManager();
-    private ActionListener controller;
     private JScrollPane jScrollPane;
     JButton crearPlaylist = new JButton();
 
     /**
      * Constructor de la clase
      */
-    public PlaylistView() {
-        this.playListController = new PlayListController(this);
+    public PlaylistView (MainManagerView mainManagerView) {
+        this.playListController = new PlayListController(this, mainManagerView);
         this.setBackground(Color.red);
         setSize(1500, 900);
-        //setResizable(true);
-        //setLocationRelativeTo(null);
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         this.setLayout(new BorderLayout());
-        //this.setBorder(new EmptyBorder(10, 10, 10, 10));
+
         // create list book and set to scrollpane and add to panel
         jScrollPane= new JScrollPane();
         this.add(jScrollPane);
@@ -63,13 +53,6 @@ public class PlaylistView extends JPanel {
         JOptionPane.showMessageDialog(panel,"Playlist already exists");
     }
 
-    /**
-     *Le paso el controlador del MainViewController
-     * @param controller le paso el controlador
-     */
-    public void registerController(ActionListener controller){
-        this.controller = controller;
-    }
 
     /**
      * Metodo que configura la vista para mostrar las Playlist del User y todas las Playlist
@@ -77,8 +60,6 @@ public class PlaylistView extends JPanel {
      * @param playlistsOfUser playlist del usuario
      */
     public void bringPlaylists(LinkedList<Playlist> playlists,LinkedList<Playlist> playlistsOfUser) {
-
-
 
         GridBagLayout gridLayout= new GridBagLayout();
         JSeparator separatorvertical= new JSeparator();
@@ -107,10 +88,10 @@ public class PlaylistView extends JPanel {
         panelizq.add(jlabelizq);
         panelder.add(jlabelder);
         for(Playlist pu: playlistsOfUser){
-            panelizq.add(new PlayListRender(pu,controller,this.playListController));
+            panelizq.add(new PlayListRender(pu, this.playListController));
         }
         for(Playlist pa: playlists){
-            panelder.add(new PlayListRender(pa,controller,this.playListController));
+            panelder.add(new PlayListRender(pa, this.playListController));
         }
         c.gridx = 0;
         c.gridy = 0;

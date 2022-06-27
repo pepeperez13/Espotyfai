@@ -29,10 +29,9 @@ public class PlayListRender extends JPanel  {
     /**
      * constructor de la clase
      * @param playlist playlist que queremos mostrar
-     * @param controller controlador de la vista para asignar acciones a los botones
      * @param playListController controlador para asignar acciones a los botones
      */
-    public PlayListRender(Playlist playlist, ActionListener controller,ActionListener playListController) {
+    public PlayListRender(Playlist playlist, ActionListener playListController) {
         this.playlist = playlist;
         setLayout(new BorderLayout(5, 5));
         setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
@@ -87,11 +86,11 @@ public class PlayListRender extends JPanel  {
         brReproducir.setBorderPainted(false);
 
 
-
-        btEditar.addActionListener(controller);
+        btEditar.addActionListener(playListController);
         btEditar.putClientProperty( "PLAYLIST", this.playlist );
 
-        brReproducir.addActionListener(controller);
+
+        brReproducir.addActionListener(playListController);
         brReproducir.putClientProperty( "PLAYLIST_REPRODUCIR", this.playlist );
 
         btEliminar.addActionListener(playListController);

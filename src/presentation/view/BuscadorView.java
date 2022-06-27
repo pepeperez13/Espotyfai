@@ -18,21 +18,12 @@ public class BuscadorView extends JPanel {
     private JLabel info_title_song, info_artist_song, info_genre_song, info_album_song, info_owner_song;
     private JLabel mensaje_resultados;
     private JTextField buscador_text_field;
-    private JPanel cardPanel = new JPanel();
-    private DetailedSongView detailedSongView;
-    private DetailedSongController detailedSongController;
-    private CardLayout c = new CardLayout();
 
     public BuscadorView () {
         //AJUSTES PRINCIPALES DEL FRAME
-        /*this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setMaximumSize(new Dimension(1500, 900));
-        this.setMinimumSize(new Dimension(900, 500));
-        this.setTitle("Espotifai - Buscar");
-        this.setLocationRelativeTo(null);*/
+
         this.setLayout(new BorderLayout());
         this.setBackground(Color.PINK.brighter());
-        //this.setOpaque(true);
 
         JPanel panel_buscador_general = new JPanel(new BorderLayout(2, 1));
         JPanel barra_buscador_panel = new JPanel(new GridBagLayout());
@@ -192,13 +183,6 @@ public class BuscadorView extends JPanel {
         return buscador_text_field.getText();
     }
 
-    private void mostrarInformacionCancion (Song cancion_encontrada) {
-        info_title_song.setText(cancion_encontrada.getTitle());
-        info_artist_song.setText(cancion_encontrada.getArtist());
-        info_album_song.setText(cancion_encontrada.getAlbum());
-        info_genre_song.setText(cancion_encontrada.getGenre());
-        info_owner_song.setText(cancion_encontrada.getOwner());
-    }
 
     public void setSearch(Song cancion_encontrada) {
         if (cancion_encontrada == null) {
