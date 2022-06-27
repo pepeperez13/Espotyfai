@@ -54,7 +54,7 @@ public class PlaylistManager {
      * @param name  Nombre de la playlist
      * @param owner Nombre del usuario que ha creado la playlist
      */
-    public void createPlaylist(String name, String owner) throws Exception{
+    public void createPlaylist(String name, String owner) {
         playlistDAO.InsertDataPlaylist(name, owner);
     }
 }

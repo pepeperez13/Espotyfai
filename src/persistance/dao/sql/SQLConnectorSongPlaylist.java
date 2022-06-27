@@ -24,7 +24,6 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
      * @param title titulo de la cancion
      * @param name nombre de la playlist
      * @param pos posicion de la cancion en la playlist
-     * @throws Exception
      */
     public void InsertDataSongP(String title, String name, int pos) {
         //Connectamos a la base de datos y controlamos excepciones.
@@ -39,11 +38,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
             statement.setString(2, name);
             statement.setInt(3, pos);
 
-
-
-
             int rowsInserted = statement.executeUpdate();
-
 
         } catch (SQLException ex) {
             ex.printStackTrace();

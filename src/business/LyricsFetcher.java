@@ -3,11 +3,8 @@ package business;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.*;
 import java.util.Scanner;
 
 /**
@@ -24,23 +21,25 @@ public class LyricsFetcher {
      * @return String con el formato correcto de los lyrics obtenidos
      */
     public String getSongLyrics (String artist, String song) {
+        // Ponemos las frases en formato correcto
+        artist = artist.replaceAll(" ", "%20");
+        song = song.replaceAll(" ", "%20");
+
+        // Añadimos a la url de la API los datos restante para que pueda encontra los lyrics
+        String urlString = genericURL + artist + "/" + song;
+
+
         try {
-            // Ponemos las frases en formato correcto
-            artist = artist.replaceAll(" ", "%20");
-            song = song.replaceAll(" ", "%20");
-
-            // Añadimos a la url de la API los datos restante para que pueda encontra los lyrics
-            String urlString = genericURL + artist + "/" + song;
-
-            URL url = new URL(urlString);
+            URL url;
+            url = new URL(urlString);
 
             // Intentamos establecer conexion
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             try {
                 connection.connect();
-            } catch (ConnectException e){
-                return"API had an error trying to fetch song lyrics";
+            } catch (ConnectException e) {
+                return "API had an error trying to fetch song lyrics";
             }
 
             int responseCode = connection.getResponseCode();
@@ -50,12 +49,9 @@ public class LyricsFetcher {
                 return "Lyrics for the song could not be found";
             } else {
                 StringBuilder info = new StringBuilder();
-                Scanner scanner;
-                try {
-                    scanner = new Scanner(url.openStream());
-                } catch (IOException e) {
-                    return "API had an error trying to fetch song lyrics";
-                }
+                Scanner scanner = new Scanner(url.openStream());
+
+                // Leemos toda la info de la api y montamos un string
                 while (scanner.hasNext()) {
                     info.append(scanner.nextLine());
                 }
@@ -72,12 +68,11 @@ public class LyricsFetcher {
                 System.out.println(lyrics);
                 return lyrics;
             }
-        } catch (ConnectException e) {
-            e.printStackTrace();
-        } catch (Exception e){
-            e.printStackTrace();
+        } catch (IOException e) {
+            // Todas las posibles excepciones ProtocolException y MalformedUrlExcepcion son subclases de IOException,
+            // por lo que podemos hacer un catch de solo IOExcepcion
+            return "API had an error trying to fetch song lyrics";
         }
-        return  "Lyrics for the song could not be found.";
     }
 
 }

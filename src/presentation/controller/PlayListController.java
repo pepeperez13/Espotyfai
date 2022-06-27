@@ -43,28 +43,17 @@ public class PlayListController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(PlayListRender.DELETE_BUTTON)) {
             Playlist playlist = (Playlist) ((JButton) e.getSource()).getClientProperty("PLAYLIST_ELIMINAR");
-            try{
-                playlistManager.deletePlaylist(playlist.getName());
-                playlistView.bringPlaylists(playlistManager.getDataPlaylists(),playlistManager.getPlaylistsOfUser(Owner.getUser()));
-            }catch(Exception exception){
-                exception.printStackTrace();
-            }
+            playlistManager.deletePlaylist(playlist.getName());
+            playlistView.bringPlaylists(playlistManager.getDataPlaylists(),playlistManager.getPlaylistsOfUser(Owner.getUser()));
 
          }else if (e.getActionCommand().equals(PlaylistView.CREAR_PLAYLIST)) {
-            try {
-                String nombrePlaylist = PlaylistView.crearPlaylist();
-                // cancel
-                if(nombrePlaylist == null || nombrePlaylist.trim().isEmpty()){
-
-                }
-                else{
-                    playlistManager.createPlaylist(nombrePlaylist.trim(), Owner.getUser().getName());
-                    playlistView.bringPlaylists(playlistManager.getDataPlaylists(),playlistManager.getPlaylistsOfUser(Owner.getUser()));
-                }
-
-            } catch (Exception exception) {
-                this.playlistView.showErrorPlaylistCreation();
+            String nombrePlaylist = PlaylistView.crearPlaylist();
+            // cancel
+            if (nombrePlaylist != null && !nombrePlaylist.trim().isEmpty()){
+                playlistManager.createPlaylist(nombrePlaylist.trim(), Owner.getUser().getName());
+                playlistView.bringPlaylists(playlistManager.getDataPlaylists(),playlistManager.getPlaylistsOfUser(Owner.getUser()));
             }
+
         }
         else if (e.getActionCommand().equals(PlayListRender.EDIT_BUTTON)) {
             Playlist playlist = (Playlist) ((JButton) e.getSource()).getClientProperty("PLAYLIST");

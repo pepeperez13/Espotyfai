@@ -28,9 +28,8 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
      * Metodo que se encarga de insertar en la base de datos los datos de una playlist.
      * @param name nombre de la playlist
      * @param owner dueño de la cancion
-     * @throws Exception
      */
-    public void InsertDataPlaylist(String name, String owner) throws Exception {
+    public void InsertDataPlaylist(String name, String owner) {
         //Connectamos a la base de datos y controlamos excepciones.
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
@@ -43,12 +42,9 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
             statement.setString(2, owner);
 
             int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-
-            }
 
         } catch (SQLException ex) {
-            throw ex;
+            ex.printStackTrace();
         }
     }
 

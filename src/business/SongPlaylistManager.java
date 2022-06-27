@@ -25,10 +25,9 @@ public class SongPlaylistManager {
      * @param title titulo de la cancion
      * @param name nombre de la playlisy
      * @return boolean
-     * @throws Exception
+
      */
     public boolean InsertNewSongPlaylist(String title, String name){
-        boolean exists = false;
         int lastPos = 0;
         playlistManager = new PlaylistManager();
         songPDAO = new SQLConnectorSongPlaylist();

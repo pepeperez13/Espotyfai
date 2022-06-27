@@ -8,7 +8,7 @@ import java.util.LinkedList;
 
 public interface PlaylistDAO {
 
-     void InsertDataPlaylist(String name,String owner) throws Exception;
+     void InsertDataPlaylist(String name,String owner);
 
      void DeleteDataPlaylist(String name);
 
