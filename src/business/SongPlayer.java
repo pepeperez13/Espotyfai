@@ -2,7 +2,6 @@ package business;
 
 import presentation.controller.MainViewController;
 import presentation.controller.SongPlayerController;
-import presentation.view.BottomBarPanel;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -94,7 +93,7 @@ public class SongPlayer implements Runnable{
             }
             // Actualizamos el valor del slider y progreso cada dos segundos
             if (currentTime%2000000 == 0) {
-                BottomBarPanel.setValueSlider(this.currentTime);
+                SongPlayerController.setValueSlider(this.currentTime);
             }
         }
         clip.close();

@@ -188,5 +188,9 @@ public class SongPlayerController implements ActionListener {
     public static double getEndTime () {
         return songPlayer.getEndTime();
     }
+
+    public static void setValueSlider (double time) {
+        BottomBarPanel.setValueSlider(time);
+    }
 }
 
