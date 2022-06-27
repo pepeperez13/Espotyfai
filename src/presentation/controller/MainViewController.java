@@ -59,8 +59,8 @@ public class MainViewController implements ActionListener {
             mainManagerView.changeView(6, 2);
         } else if (e.getActionCommand().equals(PlayListRender.EDIT_BUTTON)) {
             Playlist playlist = (Playlist) ((JButton) e.getSource()).getClientProperty("PLAYLIST");
-            SongListlView.selectedPlaylist = playlist;
-            SongListlView.allSongs = songManager.ListSongs();
+            SongListlView.setSelectedPlaylist(playlist);
+            SongListlView.setAllSongs(songManager.ListSongs());
             mainManagerView.changeView(12, 1);
         }
         else if (e.getActionCommand().equals(PlayListRender.REPRODUCIR_BUTTON)) {
@@ -115,6 +115,8 @@ public class MainViewController implements ActionListener {
     public static Playlist getReproducingPlaylist() {
         return parameterPlayList;
     }
+
+
 }
 
 

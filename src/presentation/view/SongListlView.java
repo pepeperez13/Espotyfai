@@ -21,15 +21,12 @@ import java.util.stream.Collectors;
  */
 public class SongListlView extends JPanel {
     private PlaylistManager manager = new PlaylistManager();
-    private SongListRender songListRender;
-    private ActionListener mainController;
-    private ActionListener songListController;
+    private SongListController songListController;
     public static final String ADDSONG = "ADDSONG";
-    public static final String ADDSONGPANE = "ADDSONGPANE";
     private JScrollPane jScrollPane;
-    public  static Playlist selectedPlaylist;
+    private static Playlist selectedPlaylist;
     private JComboBox comboSongs;
-    public static LinkedList<Song> allSongs = new LinkedList<>();
+    private static LinkedList<Song> allSongs = new LinkedList<>();
 
     public SongListlView(){
         this.songListController = new SongListController(this);
@@ -44,13 +41,15 @@ public class SongListlView extends JPanel {
         //this.controller.setSongListRender(songListRender);
     }
 
+    /*
     /**
      *Le paso el controlador del MainViewCOntroller
      * @param controller le paso el controlador
-     */
+     *
     public void registerController(ActionListener controller){
         this.mainController = controller;
     }
+    */
 
     /**
      * Metodo que configura la vista para mostrar las canciones de una playlist
@@ -122,5 +121,17 @@ public class SongListlView extends JPanel {
      */
     private boolean isMyPlaylist(){
         return selectedPlaylist.getOwner().equals(Owner.getUser().getName());
+    }
+
+    public static Playlist getSelectedPlaylist () {
+        return SongListlView.selectedPlaylist;
+    }
+
+    public static void setSelectedPlaylist (Playlist playlist) {
+        SongListlView.selectedPlaylist = playlist;
+    }
+
+    public static void setAllSongs (LinkedList<Song> songs) {
+        SongListlView.allSongs = songs;
     }
 }

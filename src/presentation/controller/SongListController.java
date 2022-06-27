@@ -19,6 +19,7 @@ public class SongListController implements ActionListener {
 
     private SongPlaylistManager songPlaylistManager;
     private SongListlView songListlView;
+
     public SongListController(SongListlView songListlView) {
         this.songPlaylistManager = new SongPlaylistManager();
         this.songListlView = songListlView;
@@ -88,7 +89,7 @@ public class SongListController implements ActionListener {
             if(song!= null && playlist != null && !songPlaylistManager.songExistsInPlaylist(song.getTitle(), playlist.getName())){
                 try{
                     songPlaylistManager.InsertNewSongPlaylist(song.getTitle(),playlist.getName());
-                    SongListlView.selectedPlaylist.getSongs().add(song);
+                    SongListlView.getSelectedPlaylist().getSongs().add(song);
                     this.songListlView.loadSongs();
                 }catch (Exception ex){
                     this.songListlView.showErrorSongAdd();

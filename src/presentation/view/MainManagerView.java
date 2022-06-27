@@ -99,7 +99,6 @@ public class MainManagerView extends JPanel {
         confMusicPanelView = new ConfMusicPanelView(this);
         buscadorView.registerController(buscadorViewController);
         playlistView.registerController(mainViewController);
-        songListlView.registerController(mainViewController);
         deleteMusicPanel = new DeleteMusicPanelView();
         songsTableView = new SongsTableView(this, detailedSongView);
 
