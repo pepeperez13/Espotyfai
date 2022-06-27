@@ -54,6 +54,7 @@ public class SignUpViewController implements ActionListener{
         } else if (e.getActionCommand().equals(SignUpView.LOGIN_BUTTON)) {
             initController.refreshView(2);
         }
+
     }
 
     /**
