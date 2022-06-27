@@ -23,7 +23,6 @@ public class SongPlayerController implements ActionListener {
     private static BottomBarPanel bottomBarPanel;
     private static DetailedSongView detailedSongView;
     private MainManagerView mainManagerView;
-    private static double currentTime2S;
     private static boolean repeatPlaylist;
 
     /**
@@ -37,18 +36,6 @@ public class SongPlayerController implements ActionListener {
         SongPlayerController.bottomBarPanel = bottomBarPanel;
         SongPlayerController.detailedSongView = detailedSongView;
         this.mainManagerView = mainManagerView;
-    }
-
-    public static double getCurrentTime() {
-        return songPlayer.getCurrentTime();
-    }
-
-    public static void setCurrentTime2S(double currentTime) {
-        currentTime2S = currentTime;
-    }
-
-    public static double getValueSlider () {
-        return currentTime2S;
     }
 
     /**
@@ -184,6 +171,14 @@ public class SongPlayerController implements ActionListener {
             // Si nos encontramos en la primera canción (ya sea de la playlist o de las canciones en general) no podemos pasar a la siguiente
         }
         return song;
+    }
+
+    /**
+     * Permite saber a otras partes del programa el tiempo de reproducción transcurrido de la canción actual
+     * @return tiempo transcurrido
+     */
+    public static double getCurrentTime () {
+        return songPlayer.getCurrentTime();
     }
 
     /**
