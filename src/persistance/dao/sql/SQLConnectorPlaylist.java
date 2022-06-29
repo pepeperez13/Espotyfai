@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * The type Sql connector playlist.
+ * Clase que contiene todos los metodos para acceder y modificar la información de la base de datos de Playlists
  */
 public class SQLConnectorPlaylist implements PlaylistDAO {
 
@@ -21,8 +21,6 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
     private static String dbURL = songDAO.GetDataBaseData().getDataBaseIP();
     private static String username = songDAO.GetDataBaseData().getUserName();
     private static String password = songDAO.GetDataBaseData().getPassword();
-    private static Connection conn;
-
 
     /**
      * Metodo que se encarga de insertar en la base de datos los datos de una playlist.
@@ -48,39 +46,11 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
         }
     }
 
-    /**
-     * Metodo que se encarga de actualizar en la base de datos los datos de una playlist.
-     * @param name1 nombre nuevo de la playlist
-     * @param owner dueño nuevo de la playlisy
-     * @param name2 nombre antiguo de la playlist
-     */
-    public void UpdateDataPlaylist(String name1,String owner, String name2){
-        //Connectamos a la base de datos y controlamos excepciones.
-        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
-
-            System.out.println("Conexion ok");
-            //Generacion de un statement sql para actualizar la tabla playlist.
-            String sql = "UPDATE playlist SET PLAYLIST_NAME=?,PLAYLIST_OWNER=? WHERE PLAYLIST_NAME= ?";
-
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, name1);
-            statement.setString(2, owner);
-            statement.setString(3, name2);
-
-            int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated > 0) {
-                System.out.println("An existing playlist was updated successfully!");
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
 
     /**
      * Metodo que se encarga de insertar en la base de datos los datos de una cancion.
      * @param name nombre de la playlist
      */
-
     public void DeleteDataPlaylist(String name){
         //Connectamos a la base de datos y controlamos excepciones.
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
@@ -159,8 +129,6 @@ public class SQLConnectorPlaylist implements PlaylistDAO {
                 statement.close();
 
             }
-
-
 
             return playlists;
         } catch (SQLException throwables) {

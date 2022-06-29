@@ -8,12 +8,15 @@ import persistance.SongDAO;
 import java.sql.*;
 import java.util.LinkedList;
 
+
+/**
+ * Clase que contiene todos los metodos para acceder y modificar la información de la base de datos de Song
+ */
 public class SQLConnectorSong implements SongDAO {
     private static SongDAO songDAO = new SQLConnectorSong();
     private static String dbURL = songDAO.GetDataBaseData().getDataBaseIP();
     private static String username = songDAO.GetDataBaseData().getUserName();
     private static String password = songDAO.GetDataBaseData().getPassword();
-    private static Connection conn;
 
     /**
      * Metodo que se encarga de obtener de el archivo JSON los parametros de necesarios que identifican a la base de datos.
@@ -63,45 +66,6 @@ public class SQLConnectorSong implements SongDAO {
         }
     }
 
-    /**
-     * Metodo que se encarga de acturlizar en la base de datos los datos de una cancion.
-     * @param title1 titulo nuevo de la cancion
-     * @param genre genero de la cancion
-     * @param album album de la cancion
-     * @param artist artista de la cancion
-     * @param path ruta de la cancion
-     * @param owner dueño de la cancion
-     * @param title2 titulo antiguo de la cancion
-     */
-
-    public void UpdateDataSong(String title1,String genre,String album, String artist,String path,String owner,String title2){
-        //Connectamos a la base de datos y controlamos excepciones.
-        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
-
-            System.out.println("Conexion ok");
-            //Creamos una sentencia sql y marcamos las columnas que queremos actualizar.
-            String sql = "UPDATE song SET SONG_TITLE=?,SONG_GENRE=?,SONG_ALBUM = ?,SONG_ARTIST = ?,SONG_PATH = ?,SONG_OWNER = ? WHERE SONG_TITLE=?";
-
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, title1);
-            statement.setString(2, genre);
-            statement.setString(3, album);
-            statement.setString(4, artist);
-            statement.setString(5, path);
-            statement.setString(6, owner);
-            statement.setString(7, title2);
-
-
-            int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated > 0) {
-                System.out.println("An existing song was updated successfully!");
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-    }
 
     /**
      * Metodo que se encarga de borrar en la base de datos los datos de una cancion.
@@ -214,8 +178,6 @@ public class SQLConnectorSong implements SongDAO {
             throwables.printStackTrace();
             return null;
         }
-
-
 
     }
 

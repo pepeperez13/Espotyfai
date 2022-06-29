@@ -42,8 +42,6 @@ public class AddMusicController implements ActionListener {
             //mensaje de error;
             JOptionPane.showMessageDialog(addMusicPanelView, "COMPLETE ALL FIELDS", "Following errors were found", JOptionPane.WARNING_MESSAGE);
         }
-
-
     }
 
     /**

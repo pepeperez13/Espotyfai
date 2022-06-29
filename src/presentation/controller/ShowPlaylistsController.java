@@ -17,7 +17,7 @@ public class ShowPlaylistsController implements ActionListener {
 
     /**
      * Método constructor que inicaliza o enlaza las clases necesarias para este controlador
-     * @param detailedSongView
+     * @param detailedSongView vista detallada que se esta mostrando
      */
     public ShowPlaylistsController(DetailedSongView detailedSongView) {
         this.songPlaylistManager = new SongPlaylistManager();

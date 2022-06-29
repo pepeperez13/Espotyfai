@@ -28,7 +28,7 @@ public class MainMenu extends JPanel {
     /**
      *Constructor en el que se describe la estructura del menú
      * <<Se inicializa el controller de la vista para la interacción con los botones>>
-     * @param mainManagerView
+     * @param mainManagerView manager de la vista principal
      */
     public MainMenu (MainManagerView mainManagerView) {
         mainViewController = new MainViewController(mainManagerView);
@@ -60,7 +60,6 @@ public class MainMenu extends JPanel {
         jbconfBuscar.setBackground(new Color(191, 105, 240));
         jbconfBuscar.setBorderPainted(false);
         jbconfBuscar.setActionCommand(GO_BUSCADOR);
-        //jbconfMusic.addActionListener(this);
 
         jbconfListas = new JButton();
         jbconfListas.setText("PlayLists");
@@ -69,7 +68,6 @@ public class MainMenu extends JPanel {
         jbconfListas.setBackground(new Color(191, 105, 240));
         jbconfListas.setBorderPainted(false);
         jbconfListas.setActionCommand(GO_MISLISTAS);
-        //jbconfUsuario.addActionListener(this);
 
         jbconfSettings = new JButton();
         jbconfSettings.setText("Settings");
@@ -78,8 +76,6 @@ public class MainMenu extends JPanel {
         jbconfSettings.setBackground(new Color(191, 105, 240));
         jbconfSettings.setBorderPainted(false);
         jbconfSettings.setActionCommand(GO_SETTINGS);
-        //jbconfUsuario.addActionListener(this);
-
 
         JSeparator separator1 = new JSeparator();
         separator1.setOrientation(SwingConstants.HORIZONTAL);

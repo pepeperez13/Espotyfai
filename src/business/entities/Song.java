@@ -37,42 +37,66 @@ public class Song {
         this.path = path;
     }
 
-    public Song() {
-
-    }
-
+    /**
+     * Obtiene el titulo de la cancion
+     * @return titulo de la cancion
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Obtiene el genero de la cancion
+     * @return genero de la cancion
+     */
     public String getGenre() {
         return genre;
     }
 
+    /**
+     * Obtiene el album al que pertenece la cancion
+     * @return album al que pertenece la cancion
+     */
     public String getAlbum() {
         return album;
     }
 
+    /**
+     * Obtiene el artista de la cancion
+     * @return artista de la cancion
+     */
     public String getArtist() {
         return artist;
     }
 
+    /**
+     * Obtiene quien es el dueno de la cancion
+     * @return dueno de la cancion
+     */
     public String getOwner() {
         return owner;
     }
 
+    /**
+     * Obtiene el path donde se encuentra guardado la cancion
+     * @return path donde se encuentra guardado la cancion
+     */
     public String getPath() {
         return path;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
+    /**
+     * Obtiene la posicion de la cancion en la base de datos
+     * @return posicion de la cancion en la base de datos
+     */
     public int getPosition() {
         return position;
     }
 
+    /**
+     * Establece la posicion de la cancion
+     * @param position posicion en la que se va a encontrar la cancion
+     */
     public void setPosition(int position) {
         this.position = position;
     }
@@ -112,6 +136,10 @@ public class Song {
         return String.format("%d:%02d", minutes, seconds);
     }
 
+    /**
+     * Obtiene en forma de string algunos datos de la cancion
+     * @return String con info
+     */
     @Override
     public String toString() {
         return title+ " - "+ artist;

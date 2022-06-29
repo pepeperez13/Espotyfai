@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.LinkedList;
 
 /**
- * Clase que gestiona la informacion de los usuarios
+ * Clase que gestiona las interaccion de las usuarios con la base de datos
  */
 public class UserManager {
     private UserDAO sql;
@@ -23,8 +23,8 @@ public class UserManager {
     private SongDAO sqlS;
 
     /**
-     * Metodo que se utiliza para eliminar una playlist.
-     * @param sql
+     * Constructor de la clase
+     * @param sql dao de los usuarios
      */
     public UserManager (UserDAO sql) {
         this.sql = sql;
@@ -193,7 +193,7 @@ public class UserManager {
     }
 
     /**
-     * Metodo que elimina un usuario
+     * Metodo que elimina un usuario junto con toda su respectiva informacion
      */
     public void deleteUser(){
         User userToDelete = Owner.getUser();

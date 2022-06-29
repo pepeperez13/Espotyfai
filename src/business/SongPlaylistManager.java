@@ -13,7 +13,9 @@ import persistance.dao.sql.SQLConnectorSongPlaylist;
 
 import java.util.LinkedList;
 
-
+/**
+ * Clase que gestiona la interaccion de las relaciones entre playlist y canciones con la base de datos
+ */
 public class SongPlaylistManager {
     private static SongPlaylistDAO songPDAO;
     private static PlaylistDAO playlistDAO;
@@ -46,8 +48,6 @@ public class SongPlaylistManager {
             }
         }
         return false;
-
-
     }
 
 
@@ -56,11 +56,11 @@ public class SongPlaylistManager {
      * @param name nombre de la playlist
      * @param title titulo de la cancion
      */
-
     public void deleteSongPlaylistSong(String name,String title){
         songPDAO = new SQLConnectorSongPlaylist();
         songPDAO.DeleteDataSongP(name,title);
     }
+
     /**
      * Metodo para quitar o eliminar una cancion de una playlist (TESTS)
      * @param name nombre de la playlisy
@@ -71,13 +71,11 @@ public class SongPlaylistManager {
         songPDAO.DeleteDataSongPpt3(title,name);
     }
 
-
     /**
      * Metodo que te devuelve una linked list de SONG con todas las canciones de una playlist
      * @param name nombre de la playlist
-     * @return songs
+     * @return songs lista de canciones leidas
      */
-
     public  LinkedList<Song> ListPlaylistSongs(String name){
         songPDAO = new SQLConnectorSongPlaylist();
         songDAO = new SQLConnectorSong();
@@ -89,9 +87,7 @@ public class SongPlaylistManager {
         PSongs = songPDAO.SelectSongsP(name);
         for(int i = 0; i < PSongs.size(); i++) {
             System.out.println(PSongs.get(i).getTitle());
-
             songs.add(songDAO.SelectSong(PSongs.get(i).getTitle())) ;
-
         }
 
         return songs;
@@ -114,7 +110,6 @@ public class SongPlaylistManager {
                 pos = songPDAO.getPosP(title,name);
                 System.out.println(pos);
 
-
                 if (pos != 1) {
                     songPDAO.UpdatePosPExtraU(name, pos);
                     songPDAO.updatePosP(title, name, pos - 1);
@@ -136,7 +131,7 @@ public class SongPlaylistManager {
      * Metodo que verifica si la cancion existe en una playlist.
      * @param songTitle titulo de la cancion
      * @param playlistName nombre de la playlist
-     * @return boolean
+     * @return boolean true si la cancion existe en dicha playlist, false si no existe
      */
     public boolean songExistsInPlaylist (String songTitle, String playlistName) {
         LinkedList<Song> songs = ListPlaylistSongs(playlistName);

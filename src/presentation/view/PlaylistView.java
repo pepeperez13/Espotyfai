@@ -41,18 +41,8 @@ public class PlaylistView extends JPanel {
             JPanel panel= new JPanel();
             JButton createPlaylist= new JButton("Create Playlist");
             panel.add(createPlaylist);
-        String name =  JOptionPane.showInputDialog( panel, "Enter the name of the new Playlist", JOptionPane.PLAIN_MESSAGE);
-        return name;
+        return JOptionPane.showInputDialog( panel, "Enter the name of the new Playlist", JOptionPane.PLAIN_MESSAGE);
     }
-
-    /**
-     * Metodo que te muestra un mensaje de si la Playlist ya existe
-     */
-    public void showErrorPlaylistCreation() {
-        JPanel panel= new JPanel();
-        JOptionPane.showMessageDialog(panel,"Playlist already exists");
-    }
-
 
     /**
      * Metodo que configura la vista para mostrar las Playlist del User y todas las Playlist
@@ -111,6 +101,5 @@ public class PlaylistView extends JPanel {
         panel.setBackground(Color.white);
         this.jScrollPane.setViewportView(panel);
     }
-
 
 }

@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.LinkedList;
 
 /**
- * The type Sql connector song playlist.
+ * Clase que contiene todos los metodos para acceder y modificar la información de la base de datos de SongPlaylists
  */
 public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
@@ -17,7 +17,6 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
     private static String dbURL = songDAO.GetDataBaseData().getDataBaseIP();
     private static String username = songDAO.GetDataBaseData().getUserName();
     private static String password = songDAO.GetDataBaseData().getPassword();
-    private static Connection conn;
 
     /**
      * Metodo que inserta los datos de una cancion en la base de datos.
@@ -169,55 +168,17 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
     }
 
-    /**
-     * Metodo que se emplea para seleccionar la informacion de una cancion de una playlist.
-     * @return songsP
-     */
-    public LinkedList<SongPlaylist> SelectDataSongP(){
-        //Creamos una linked list de SongPlaylist
-        LinkedList<SongPlaylist> songsP = new LinkedList<>();
-        //Connectamos a la base de datos y controlamos excepciones.
-        try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
-            System.out.println("Conexion ok");
-            //Generamos una sentencia sql que selecciona de la tabla song playlist
-            String sql = "SELECT * FROM songs_playlist";
-            PreparedStatement statement = conn.prepareStatement(sql);
-            ResultSet rs = statement.executeQuery(sql);
-            //Bucle que va llenando la linked list.
-            while (rs.next())
-            {
-                String title = rs.getString("SONG_TITLE");
-                String name = rs.getString("PLAYLIST_NAME");
-                int pos = rs.getInt("POS");
-
-
-                SongPlaylist newSong = new SongPlaylist(title, name, pos);
-                songsP.add(newSong);
-
-            }
-
-            statement.close();
-            return songsP;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
-        }
-
-
-
-
-    }
 
     /**
      * Metodo que te permite obtener toda la informacion de una cancion dado el nombre de la cancion.
      * @param pName nombre de la playlist
-     * @return songP linked list con las canciiones de una playlist
+     * @return songP linked list con las canciones de una playlist
      */
-
     public LinkedList<SongPlaylist> SelectSongsP(String pName){
         //Creamos una linked list de SongPlaylist
         LinkedList<SongPlaylist> songP = new LinkedList<>();
+        //Connectamos a la base de datos y controlamos excepciones.
         //Connectamos a la base de datos y controlamos excepciones.
         try (Connection conn = DriverManager.getConnection(dbURL, username, password)) {
 
@@ -252,8 +213,6 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
             return null;
         }
 
-
-
     }
 
     /**
@@ -261,7 +220,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
      * @param title titulo de la cancion
      * @param name nombre de la playlist
      * @param pos posicion de la cancion en la playlist
-     * @return
+     * @return lista de las SongPlaylist con el nuevo orden
      */
     public LinkedList<SongPlaylist> updatePosP(String title, String name,int pos) {
         //Creamos una linked list de Song Playlist
@@ -277,10 +236,7 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
             statement.setString(2, title);
             statement.setString(3, name);
 
-
-
             int rowsUpdated = statement.executeUpdate();
-
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -342,14 +298,11 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
             statement.setString(3, name);
             System.out.println("Up");
 
-
             int rowsUpdated = statement.executeUpdate();
-
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return pos;
     }
 
@@ -373,20 +326,17 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
             statement.setString(3, name);
             System.out.println("Down");
 
-
             int rowsUpdated = statement.executeUpdate();
-
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return pos;
     }
 
     /**
      * Metodo que se emplea para saber cual es la ultima posicion de una playlist.
-     * @param name
+     * @param name nombre de la playlist
      * @return pos posicion nueva posicion de la cancion en la playlist
      */
     public int getLastPos(String name){
@@ -418,8 +368,6 @@ public class SQLConnectorSongPlaylist implements SongPlaylistDAO {
 
         return maxPos;
     }
-
-
 
 }
 

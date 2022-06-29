@@ -14,10 +14,13 @@ import java.awt.event.ActionListener;
  * Clase que controla la vista del SongListView
  */
 public class SongListController implements ActionListener {
-
     private SongPlaylistManager songPlaylistManager;
     private SongListlView songListlView;
 
+    /**
+     * Constructor de la clase
+     * @param songListlView vista que muestra la lista de las canciones de una playlist
+     */
     public SongListController(SongListlView songListlView) {
         this.songPlaylistManager = new SongPlaylistManager();
         this.songListlView = songListlView;
@@ -25,7 +28,6 @@ public class SongListController implements ActionListener {
 
     /**
      * Invoked when an action occurs.
-     *
      * @param e the event to be processed
      */
     @Override

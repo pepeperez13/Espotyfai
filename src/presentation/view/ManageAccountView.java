@@ -11,8 +11,6 @@ import java.awt.event.ActionEvent;
  * Clase que muestra la vista de deslogearse y eliminar cuenta
  */
 public class ManageAccountView extends JPanel {
-
-
     public static final String LOGOUT_BUTTON = "LOGOUT_BUTTON";
     public static final String DELETE_ACCOUNT_BUTTON = "DELETE_ACCOUNT_BUTTON";
     public static final String YES_BUTTON_LOGOUT="YES_BUTTON_LOGOUT";
@@ -70,16 +68,11 @@ public class ManageAccountView extends JPanel {
         deleteButton.addActionListener(manageAccountController);
 
 
-
         JPanel panelbox= new JPanel();
         JPanel p = new JPanel();
         GridLayout gridLayout= new GridLayout(2,2);
         p.setLayout(gridLayout);
         panelbox.setLayout(new BoxLayout(panelbox,BoxLayout.Y_AXIS));
-//        JPanel blanco= new JPanel();
-//        blanco.setBackground(Color.black);
-//        blanco.setMinimumSize(new Dimension(500,500));
-//        blanco.setSize(5000,5000);
 
         gridLayout.setVgap(30);
         gridLayout.setHgap(30);

@@ -147,7 +147,7 @@ public class BottomBarPanel extends JPanel {
     /**
      * Metodo que se va a llamar cada vez que se efectue un cambio de canción, con tal de que el panel de reproduccion
      * actualice toda la informacion que muestra
-     * @param song
+     * @param song cancion que se quiere mostrar en el bottombar
      */
     public static void updateSong (Song song) {
         try {

@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.LinkedList;
 
 /**
- * Clase que muestra las canciones de un usuario en una JTable
+ * Clase que muestra las canciones disponibles en una jtable
  */
 public class SongsTableView extends JPanel {
     private LinkedList<Song> lista_canciones_programa;

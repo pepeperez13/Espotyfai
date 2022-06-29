@@ -8,7 +8,7 @@ import persistance.dao.sql.SQLConnectorSongPlaylist;
 import java.util.LinkedList;
 
 /**
- * Clase que gestiona las playlist
+ * Clase que gestiona las interaccion de las playlist con la base de datos
  */
 public class PlaylistManager {
 
@@ -19,8 +19,8 @@ public class PlaylistManager {
      * Constructor. Inicia los DAOs
      */
     public PlaylistManager() {
-        this.playlistDAO = new SQLConnectorPlaylist();
-        this.songPlaylistDAO = new SQLConnectorSongPlaylist();
+        playlistDAO = new SQLConnectorPlaylist();
+        songPlaylistDAO = new SQLConnectorSongPlaylist();
     }
 
     /**

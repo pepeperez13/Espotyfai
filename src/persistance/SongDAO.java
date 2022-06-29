@@ -8,15 +8,13 @@ import business.entities.Song;
 import java.util.LinkedList;
 
 public interface SongDAO {
-    public void InsertDataSong(String title,String genre,String album, String artist,String path,String owner);
+    void InsertDataSong(String title,String genre,String album, String artist,String path,String owner);
 
-    public void DeleteDataSong(String title);
+    void DeleteDataSong(String title);
 
-    public void UpdateDataSong(String title1,String genre,String album, String artist,String path,String owner,String title2);
+    LinkedList<Song> SelectDataSong();
 
-    public LinkedList<Song> SelectDataSong();
+    Song SelectSong(String song);
 
-    public Song SelectSong(String song);
-
-    public Config GetDataBaseData();
+    Config GetDataBaseData();
 }

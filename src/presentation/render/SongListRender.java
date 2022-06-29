@@ -3,6 +3,7 @@ package presentation.render;
 import business.Owner;
 import business.entities.Playlist;
 import business.entities.Song;
+import presentation.controller.SongListController;
 
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Clase que muestra las vista de una Cancion
+ * Clase que muestra las vista de las canciones en una playlist
  */
 public class SongListRender extends JPanel {
     private JLabel lbIcon = new JLabel();
@@ -19,7 +20,7 @@ public class SongListRender extends JPanel {
     private JButton btSubir = new JButton();
     private JButton btBajar = new JButton();
     private JButton btEliminar = new JButton();
-    private ActionListener controller;
+    private SongListController controller;
     public static final String UP_BUTTON = "SL_UP_BUTTON";
     public static final String DOWN_BUTTON = "SL_DOWN_BUTTON";
     public static final String DELETE_BUTTON = "SL_DELETE_BUTTON";
@@ -33,7 +34,7 @@ public class SongListRender extends JPanel {
      * @param playlist la playlist a la que pertenece la cancion
      * @param controller controlador para los botones
      */
-    public SongListRender(Song song,Playlist playlist, ActionListener controller) {
+    public SongListRender(Song song,Playlist playlist, SongListController controller) {
         this.song = song;
         this.playlist = playlist;
         this.controller = controller;

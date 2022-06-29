@@ -115,8 +115,6 @@ public class PlayListRender extends JPanel  {
         lbIcon.setOpaque(true);
         this.setBackground(Color.white);
 
-
-
     }
     /**
      * Metodo que te dice si la playlist es del usuario logeado

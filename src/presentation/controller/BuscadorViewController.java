@@ -9,14 +9,23 @@ import presentation.view.DetailedSongView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Clase que controla los eventos de la vista del buscador de canciones
+ */
 public class BuscadorViewController implements ActionListener {
     private final BuscadorManager buscadorManager;
     private final BuscadorView buscadorView;
     private MainManagerView mainManagerView;
     private DetailedSongView detailedSongView;
-    private Song song;
     private Song cancion_encontrada;
 
+    /**
+     * Constrcutor de la clase
+     * @param buscadorView vista que se controla
+     * @param buscadorManager manager dedicado
+     * @param detailedSongView vista detallada, a la que se accede tras buscar una cancion
+     * @param mainManagerView mainmanager para poder acceder al cardpanel
+     */
     public BuscadorViewController(BuscadorView buscadorView, BuscadorManager buscadorManager, DetailedSongView detailedSongView, MainManagerView mainManagerView) {
         this.buscadorManager = buscadorManager;
         this.buscadorView = buscadorView;
@@ -24,6 +33,10 @@ public class BuscadorViewController implements ActionListener {
         this.mainManagerView = mainManagerView;
     }
 
+    /**
+     * Gestiona los eventos que ocurren en la vista
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(buscadorView.SEARCH_SONG)) {

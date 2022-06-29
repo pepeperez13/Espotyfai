@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Clase que se encarga de buscar entre las canciones existentes
  */
 public class BuscadorManager {
-    //private Conexion conexion;
+
 
     /**
      * Método que se encarga de buscar entre las canciones existentes

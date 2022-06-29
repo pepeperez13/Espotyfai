@@ -27,7 +27,7 @@ public class PlayListController implements ActionListener {
 
     /**
      * Constructor de la clase
-     * @param playlistView
+     * @param playlistView vista de las playlist
      */
     public PlayListController(PlaylistView playlistView, MainManagerView mainManagerView) {
         this.playlistManager = new PlaylistManager();
@@ -100,7 +100,6 @@ public class PlayListController implements ActionListener {
 
     /**
      *Método que recibe un boolean que indica si se esta reproduciendo una playlist
-     * @return void
      */
     public static void setReproducingPlaylist(boolean playing) {
         reproducingPlaylist = playing;

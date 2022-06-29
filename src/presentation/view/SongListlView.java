@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- *Clase que se encarga de la vista de listar las Canciones
+ *Clase que se encarga de la vista de listar las Canciones de una playlist
  */
 public class SongListlView extends JPanel {
 
@@ -28,6 +28,9 @@ public class SongListlView extends JPanel {
     private JComboBox comboSongs;
     private static LinkedList<Song> allSongs = new LinkedList<>();
 
+    /**
+     * Constructor de la clase que inicializa los componentes fundamentales
+     */
     public SongListlView(){
         this.songListController = new SongListController(this);
         this.setBackground(Color.red);

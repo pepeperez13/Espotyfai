@@ -15,11 +15,10 @@ import java.awt.event.ActionListener;
  * Clase que controla todos los posibles eventos generados desde la vista del login
  * @author Jose Perez
  */
-public class   LoginController implements ActionListener {
+public class LoginController implements ActionListener {
 
     private final LoginView loginView;
     private final UserManager manager;
-
     private boolean userExistsError;
     private boolean passwordConfirmationError;
     private final InitController initController;

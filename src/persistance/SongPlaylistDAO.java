@@ -5,22 +5,26 @@ import business.entities.SongPlaylist;
 import java.util.LinkedList;
 
 public interface SongPlaylistDAO {
-     void InsertDataSongP(String title, String name, int pos) ;
 
-     //public void UpdateDataSongP(String title1,String name,String title2);
-
-     LinkedList<SongPlaylist> SelectDataSongP();
+     void InsertDataSongP(String title, String name, int pos);
 
      LinkedList<SongPlaylist> SelectSongsP(String name);
-     public int getLastPos(String name);
-     public int UpdatePosPExtraD (String name, int pos);
-     public int UpdatePosPExtraU (String name, int pos);
-     public int getPosP (String title, String name);
-     public LinkedList<SongPlaylist> updatePosP(String title, String name,int pos);
-     public void DeleteSongPFull(String title);
-     public void DeleteDataSongP(String name,String title);
-     public void DeleteDataSongPpt2(int pos);
-     public void DeleteDataSongPpt3(String name,String title);
+
+     int getLastPos(String name);
+
+     int UpdatePosPExtraD (String name, int pos);
+
+     int UpdatePosPExtraU (String name, int pos);
+
+     int getPosP (String title, String name);
+
+     LinkedList<SongPlaylist> updatePosP(String title, String name,int pos);
+
+     void DeleteSongPFull(String title);
+
+     void DeleteDataSongP(String name,String title);
+
+     void DeleteDataSongPpt3(String name,String title);
 
 
 

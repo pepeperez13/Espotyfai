@@ -1,7 +1,6 @@
 package presentation.view;
 
 import business.entities.Song;
-import presentation.controller.DetailedSongController;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -10,6 +9,9 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Clase que configura los elementos de la vista del buscador de canciones
+ */
 public class BuscadorView extends JPanel {
     public static final String SEARCH_SONG = "SEARCH_SONG";
     public static final String DETAIL_SONG = "DETAIL_SONG";
@@ -19,6 +21,9 @@ public class BuscadorView extends JPanel {
     private JLabel mensaje_resultados;
     private JTextField buscador_text_field;
 
+    /**
+     * Constructor de la vista del buscador de canciones
+     */
     public BuscadorView () {
         //AJUSTES PRINCIPALES DEL FRAME
 

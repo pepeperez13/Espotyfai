@@ -28,7 +28,7 @@ public class ConfigMenuView extends JPanel {
     /**
      *Constructor en el que se describe la estructura del menú
      * <<Se inicializa el controller de la vista para la interacción con los botones>>
-     * @param mainManagerView
+     * @param mainManagerView manager de la vista principal
      */
     public ConfigMenuView(MainManagerView mainManagerView) {
 
@@ -61,7 +61,6 @@ public class ConfigMenuView extends JPanel {
         jbconfMusic.setBackground(new Color(191, 105, 240));
         jbconfMusic.setBorderPainted(false);
         jbconfMusic.setActionCommand(GO_CONFIG_MUSIC);
-        //jbconfMusic.addActionListener(this);
 
         jbconfUsuario = new JButton();
         jbconfUsuario.setText("Manage account");
@@ -70,7 +69,6 @@ public class ConfigMenuView extends JPanel {
         jbconfUsuario.setBackground(new Color(191, 105, 240));
         jbconfUsuario.setBorderPainted(false);
         jbconfUsuario.setActionCommand(GO_CONFIG_USER);
-        //jbconfUsuario.addActionListener(this);
 
         jbconfEstadisticas = new JButton();
         jbconfEstadisticas.setText("My statistics");
@@ -79,7 +77,6 @@ public class ConfigMenuView extends JPanel {
         jbconfEstadisticas.setBackground(new Color(191, 105, 240));
         jbconfEstadisticas.setBorderPainted(false);
         jbconfEstadisticas.setActionCommand(GO_STATICS);
-        //jbconfEstadisticas.addActionListener(this);
 
         JSeparator separator1 = new JSeparator();
         separator1.setOrientation(SwingConstants.HORIZONTAL);

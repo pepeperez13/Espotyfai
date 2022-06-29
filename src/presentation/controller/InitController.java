@@ -2,6 +2,9 @@ package presentation.controller;
 
 import presentation.view.InitView;
 
+/**
+ * Clase que controla lo que se usa como vista (frame) principal del programa
+ */
 public class InitController {
     private int numView;
     private InitView initView;

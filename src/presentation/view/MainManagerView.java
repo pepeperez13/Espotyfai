@@ -123,7 +123,7 @@ public class MainManagerView extends JPanel {
 
     /**
      * Método que configura el CardLayout de los menus
-     * @return
+     * @return nuevo panel configurado
      */
     private JPanel configureMenuCardPanel () {
         menuCardPanel.setLayout(c2);

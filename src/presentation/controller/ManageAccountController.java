@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
  * Clase que se encarga del controller de la vista ManageAccount
  */
 public class ManageAccountController implements ActionListener {
-
     private final UserManager userManager;
     private final ManageAccountView manageAccountView;
     private final InitController initController;
@@ -30,10 +29,9 @@ public class ManageAccountController implements ActionListener {
         initController= new InitController(initView);
     }
 
-
     /**
      * Metodo que asigna las acciones a cada boton
-     * @param e
+     * @param e evento
      */
     @Override
     public void actionPerformed(ActionEvent e) {

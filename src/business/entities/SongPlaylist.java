@@ -20,10 +20,19 @@ public class SongPlaylist {
         this.playlistName = playlistName;
         this.pos = pos;
     }
+
+    /**
+     * Obtiene el titula de la cancion
+     * @return titulo de la cancion
+     */
     public String getTitle() {
         return songTitle;
     }
 
+    /**
+     * Obtiene el nombre de una playlist
+     * @return nombre de la playlist
+     */
     public String getName() {
         return playlistName;
     }

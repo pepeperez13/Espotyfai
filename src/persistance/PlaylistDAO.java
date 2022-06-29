@@ -14,8 +14,6 @@ public interface PlaylistDAO {
 
      LinkedList<Playlist> SelectPlaylistsOfUser(User user);
 
-     void UpdateDataPlaylist(String name1,String owner, String name2);
-
      LinkedList<Playlist> SelectDataPlaylist();
 
 }
