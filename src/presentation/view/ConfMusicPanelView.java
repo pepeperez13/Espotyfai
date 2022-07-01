@@ -21,7 +21,7 @@ public class ConfMusicPanelView extends JPanel {
 
     /**
      *Constructor en el que se describe la estructura de la vista
-     * <<Se inicializa el controller de la vista para la interacción con los botones>>
+     * Se inicializa el controller de la vista para la interacción con los botones
      * @param mainManagerView
      */
     public ConfMusicPanelView(MainManagerView mainManagerView) {

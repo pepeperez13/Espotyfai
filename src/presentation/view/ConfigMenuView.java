@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
  * -INICIO
  * -CONFIGURACIÓN DE LA MÚSICA
  * -CONFIGURACIÓN DEL USUARIO
- * -ESTADÍSTICAS
+ * -ESTADISTICAS
  */
 public class ConfigMenuView extends JPanel {
     public static final String GO_INICIO = "GO_INICIO";
@@ -27,7 +27,7 @@ public class ConfigMenuView extends JPanel {
 
     /**
      *Constructor en el que se describe la estructura del menú
-     * <<Se inicializa el controller de la vista para la interacción con los botones>>
+     * Se inicializa el controller de la vista para la interacción con los botones
      * @param mainManagerView manager de la vista principal
      */
     public ConfigMenuView(MainManagerView mainManagerView) {

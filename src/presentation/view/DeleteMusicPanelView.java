@@ -16,7 +16,7 @@ public class DeleteMusicPanelView extends JPanel {
 
     /**
      *Constructor en el que se describe la estructura de la vista "Eliminar canción"
-     * <<Se inicializa el controller de la vista para la interacción con los botones>>
+     * Se inicializa el controller de la vista para la interacción con los botones
      */
     public DeleteMusicPanelView () {
         deleteMusicController = new DeleteMusicController(this);

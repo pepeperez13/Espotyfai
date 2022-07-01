@@ -27,7 +27,7 @@ public class MainMenu extends JPanel {
 
     /**
      *Constructor en el que se describe la estructura del menú
-     * <<Se inicializa el controller de la vista para la interacción con los botones>>
+     * Se inicializa el controller de la vista para la interacción con los botones
      * @param mainManagerView manager de la vista principal
      */
     public MainMenu (MainManagerView mainManagerView) {
