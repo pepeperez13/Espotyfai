@@ -189,6 +189,10 @@ public class SongPlayerController implements ActionListener {
         return songPlayer.getEndTime();
     }
 
+    /**
+     * Actualiza la posicion del slider de reproduccion
+     * @param time tiempo actual
+     */
     public static void setValueSlider (double time) {
         BottomBarPanel.setValueSlider(time);
     }
